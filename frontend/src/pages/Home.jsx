@@ -6,8 +6,9 @@ const VideoContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
+  padding: 2rem;
 `
 
 const StyledH1 = styled.h1`
