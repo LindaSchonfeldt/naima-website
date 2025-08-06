@@ -1,31 +1,27 @@
 import styled from 'styled-components'
-import { Video } from '../components/Video'
 
-const VideoContainer = styled.div`
+import { Carousel } from '../components/Carousel'
+import { homeCarouselItems } from '../data/carouselData'
+
+const HeroSection = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
-  align-items: left;
-  justify-content: left;
+  align-items: center;
+  justify-content: flex-start;
   padding: 2rem;
 `
 
 const StyledH1 = styled.h1`
-  font-size: 4rem;
-  color: black;
-  text-align: left;
-  z-index: 2;
-`
-
-const StyledVideo = styled(Video)`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
+  font-size: 4rem;
+  color: var(--text-color);
+  text-align: left;
+  z-index: 10;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
 `
 
 const CursiveText = styled.span`
@@ -34,12 +30,19 @@ const CursiveText = styled.span`
 
 const Home = () => {
   return (
-    <VideoContainer>
-      <StyledVideo src='/path/to/video.mp4' autoPlay loop muted />
+    <HeroSection>
+      <Carousel
+        items={homeCarouselItems}
+        autoPlay={true}
+        autoPlayInterval={5000}
+        showArrows={true}
+        showIndicators={true}
+        slidesToShow={1}
+      />
       <StyledH1>
         Fika with <CursiveText>benefits</CursiveText>
       </StyledH1>
-    </VideoContainer>
+    </HeroSection>
   )
 }
 

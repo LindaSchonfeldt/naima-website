@@ -1,6 +1,7 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
 import { media } from '../styles/media'
 
 const StyledNav = styled.nav`
@@ -9,7 +10,9 @@ const StyledNav = styled.nav`
   justify-content: center;
   padding: 1rem;
   background: white;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   ${media.md} {
     justify-content: space-between;
