@@ -89,6 +89,7 @@ const Indicator = styled.button`
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
+  background: ${(props) => (props.active ? '#333' : '#ccc')};
 
   &:hover {
     background: #666;

@@ -1,4 +1,7 @@
-export const theme = {
+//Purpose: Centralized design tokens, accessible via props.theme
+//Maintainability: Change theme.js to update entire app
+
+const theme = {
   colors: {
     primary: '#2563eb',
     secondary: '#7c3aed',
@@ -7,15 +10,23 @@ export const theme = {
     text: {
       primary: '#1e293b',
       secondary: '#64748b',
-      muted: '#94a3b8'
+      muted: '#94a3b8',
+      hero: '#ffffff'
     },
     border: '#e2e8f0',
     error: '#ef4444',
     success: '#10b981'
   },
   fonts: {
-    primary: "'Poppins', sans-serif",
-    secondary: "'Inter', sans-serif"
+    primary: "'Arial', sans-serif",
+    secondary: "'Inter', sans-serif",
+    weights: {
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700
+    }
   },
   spacing: {
     xs: '0.25rem',
@@ -26,9 +37,11 @@ export const theme = {
     xxl: '3rem'
   },
   breakpoints: {
-    sm: '576px', // Small devices (landscape phones)
-    md: '768px', // Medium devices (tablets)
-    lg: '992px', // Large devices (desktops)
-    xl: '1200px' // Extra large devices (large desktops)
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
   }
 }
+
+export default theme

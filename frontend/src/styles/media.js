@@ -1,4 +1,6 @@
-import { theme } from './theme'
+//Purpose: Reusable media query helpers using theme breakpoints
+
+import theme from './theme' // Changed from { theme }
 
 export const media = {
   sm: `@media (min-width: ${theme.breakpoints.sm})`,

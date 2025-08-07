@@ -1,17 +1,17 @@
 export const homeCarouselItems = [
   {
     id: 1,
-    image: '/public/blueberry.jpg',
+    image: '/blueberry.jpg',
     alt: 'The Blueberry Fika'
   },
   {
     id: 2,
-    image: '/public/orange.jpg',
+    image: '/orange.jpg',
     alt: 'Wellness retreat activities'
   },
   {
     id: 3,
-    image: '/public/sparkles.jpg',
+    image: '/sparkles.jpg',
     alt: 'Community gathering'
   }
 ]

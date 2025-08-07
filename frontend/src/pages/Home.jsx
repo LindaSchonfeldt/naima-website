@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import { Carousel } from '../components/Carousel'
 import { homeCarouselItems } from '../data/carouselData'
+import theme from '../styles/theme'
 
 const HeroSection = styled.div`
   position: relative;
@@ -16,12 +17,15 @@ const HeroSection = styled.div`
 const StyledH1 = styled.h1`
   position: absolute;
   font-size: 4rem;
-  color: var(--text-color);
+  color: ${(props) =>
+    props.hero ? '#ffffff' : props.theme.colors.text.primary};
   text-align: left;
   z-index: 10;
   left: 2rem;
   top: 50%;
   transform: translateY(-50%);
+  font-family: ${(props) => props.theme.fonts.primary};
+  font-weight: ${(props) => props.theme.fonts.weights.bold};
 `
 
 const CursiveText = styled.span`
@@ -39,7 +43,7 @@ const Home = () => {
         showIndicators={true}
         slidesToShow={1}
       />
-      <StyledH1>
+      <StyledH1 hero>
         Fika with <CursiveText>benefits</CursiveText>
       </StyledH1>
     </HeroSection>
