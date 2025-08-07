@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../styles/media'
 
 import { Carousel } from '../components/Carousel'
 import { homeCarouselItems } from '../data/carouselData'
@@ -15,15 +16,38 @@ const StyledHero = styled.section`
 
 const StyledH1 = styled.h1`
   position: absolute;
-  font-size: 4rem;
+  font-size: 2rem;
   color: ${(props) => props.theme.colors.text.hero};
   text-align: left;
   z-index: 10;
-  left: 2rem;
-  top: 50%;
+  left: 1rem;
+  top: 3rem;
   transform: translateY(-50%);
   font-family: ${(props) => props.theme.fonts.primary};
   font-weight: ${(props) => props.theme.fonts.weights.bold};
+
+  ${media.sm} {
+    font-size: 2.5rem;
+    left: 2rem;
+  }
+
+  ${media.md} {
+    font-size: 3rem;
+    left: 3rem;
+  }
+
+  ${media.lg} {
+    font-size: 4rem;
+    left: 4rem;
+  }
+
+  ${media.xl} {
+    font-size: 5rem;
+  }
+
+  ${media.xxl} {
+    font-size: 6rem;
+  }
 `
 
 const CursiveText = styled.span`
@@ -31,11 +55,12 @@ const CursiveText = styled.span`
 `
 
 export const Hero = ({
+  title = 'Fika with benefits',
+  subtitle = null,
   carouselItems = homeCarouselItems,
-  showCarousel = true,
-  ...props
+  showCarousel = true
 }) => {
-  console.log('Hero rendering with items:', carouselItems) // Debug log
+  console.log('Hero rendering with items:', carouselItems)
 
   return (
     <StyledHero>

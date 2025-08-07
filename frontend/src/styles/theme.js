@@ -37,10 +37,13 @@ const theme = {
     xxl: '3rem'
   },
   breakpoints: {
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
+    xs: '320px', // Extra small phones
+    sm: '576px', // Small phones (landscape)
+    md: '768px', // Tablets (portrait)
+    lg: '992px', // Tablets (landscape) / Small laptops
+    xl: '1200px', // Desktop
+    xxl: '1400px', // Large desktop
+    xxxl: '1920px' // Extra large desktop
   },
   layout: {
     navHeight: '80px',
