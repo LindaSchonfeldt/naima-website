@@ -4,24 +4,25 @@ import { Logo } from '../components/Logo'
 
 const StyledSocialProof = styled.section`
   background: ${(props) => props.theme.colors.surface};
-  padding: 3rem 0;
+  padding: 1rem 0;
   width: 100%;
   overflow: hidden;
 `
 
 const Container = styled.div`
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
 `
 
 const SectionTitle = styled.h2`
   font-size: 1.2rem;
-  text-align: center;
+  text-align: left;
   color: ${(props) => props.theme.colors.text.secondary};
   font-family: ${(props) => props.theme.fonts.primary};
   font-weight: ${(props) => props.theme.fonts.weights.normal};
-  margin-bottom: 2rem;
-  text-transform: uppercase;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+  text-transform: lowercase;
   letter-spacing: 2px;
 `
 
