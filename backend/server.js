@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
+const instagramRoutes = require('./routes/instagram')
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/final-project'
 mongoose.connect(mongoUrl)
@@ -16,6 +17,8 @@ app.get('/', (req, res) => {
   res.send('Hello Naima!')
 })
 
+// Use the Instagram routes
+app.use('/api/instagram', instagramRoutes)
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)

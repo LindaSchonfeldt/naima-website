@@ -52,6 +52,16 @@ const theme = {
       fontWeight: 400,
       fontSize: '0.875rem',
       lineHeight: 1.4
+    },
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 900, // heavy weight
+      lineHeight: 1.2
+    },
+    h2: {
+      fontSize: '1.5rem',
+      fontWeight: 700,
+      lineHeight: 1.2
     }
   },
   spacing: {
