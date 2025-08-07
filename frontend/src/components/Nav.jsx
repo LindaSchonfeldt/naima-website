@@ -13,6 +13,7 @@ const StyledNav = styled.nav`
   position: sticky;
   top: 0;
   z-index: 100;
+  height: ${(props) => props.theme.layout?.navHeight || '80px'};
 
   ${media.md} {
     justify-content: space-between;

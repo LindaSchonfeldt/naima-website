@@ -41,6 +41,10 @@ const theme = {
     md: '768px',
     lg: '992px',
     xl: '1200px'
+  },
+  layout: {
+    navHeight: '80px',
+    heroHeight: 'calc(100vh - 80px)'
   }
 }
 
