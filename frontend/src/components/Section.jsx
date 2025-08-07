@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { media } from '../styles/media'
 
 const StyledSection = styled.section`
-  padding: 4rem 2rem;
+  padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.xl};
 
   ${media.md} {
-    padding: 6rem 4rem;
+    padding: 6rem ${(props) => props.theme.spacing.xxl};
   }
 
   ${(props) =>

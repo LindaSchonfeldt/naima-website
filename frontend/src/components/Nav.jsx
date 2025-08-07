@@ -8,27 +8,29 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background: white;
+  padding: ${(props) => props.theme.spacing.md};
+  background: ${(props) => props.theme.colors.background};
   position: sticky;
   top: 0;
   z-index: 100;
   height: ${(props) => props.theme.layout?.navHeight || '80px'};
+  border-bottom: 1px solid ${(props) => props.theme.colors.border};
 
   ${media.md} {
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: ${(props) => props.theme.spacing.md} ${(props) => props.theme.spacing.xl};
   }
 `
 
 const Logo = styled(Link)`
   font-size: 1.5rem;
-  font-weight: bold;
+  font-family: ${(props) => props.theme.fonts.heading};
+  font-weight: ${(props) => props.theme.fonts.weights.bold};
   text-decoration: none;
-  color: #333;
+  color: ${(props) => props.theme.colors.text.primary};
 
   &:hover {
-    color: #555;
+    color: ${(props) => props.theme.colors.primary};
   }
 `
 
@@ -39,7 +41,7 @@ const HamburgerButton = styled.button`
   cursor: pointer;
   padding: 0;
   position: absolute;
-  left: 1rem;
+  left: ${(props) => props.theme.spacing.md};
 
   ${media.md} {
     display: none;
@@ -49,8 +51,8 @@ const HamburgerButton = styled.button`
     display: block;
     width: 25px;
     height: 3px;
-    background: #333;
-    margin: 5px 0;
+    background: ${(props) => props.theme.colors.text.primary};
+    margin: ${(props) => props.theme.spacing.xs} 0;
     transition: 0.3s;
   }
 `
@@ -60,26 +62,28 @@ const Links = styled.div`
 
   ${media.md} {
     display: flex;
-    gap: 0.5rem;
+    gap: ${(props) => props.theme.spacing.sm};
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 
   ${media.lg} {
-    gap: 2rem;
+    gap: ${(props) => props.theme.spacing.xl};
   }
 
   a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    padding: 0.5rem;
+    color: ${(props) => props.theme.colors.text.primary};
+    font-family: ${(props) => props.theme.fonts.body};
+    font-weight: ${(props) => props.theme.fonts.weights.medium};
+    padding: ${(props) => props.theme.spacing.sm};
     border-radius: 4px;
     transition: background-color 0.2s;
 
     &:hover {
-      background: #f5f5f5;
+      background: ${(props) => props.theme.colors.surface};
+      color: ${(props) => props.theme.colors.primary};
     }
   }
 `

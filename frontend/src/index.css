@@ -1,5 +1,40 @@
 /*Purpose: Font imports only*/
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Heading Font - Arca Majora */
+@font-face {
+  font-family: 'Arca Majora';
+  src: url('/fonts/arcamajora3-bold.woff2') format('woff2'),
+    url('/fonts/arcamajora3-bold.woff') format('woff');
+  font-weight: 700; /* Bold for headings */
+  font-style: normal;
+  font-display: swap;
+}
 
-/* Remove all other styles - let theme handle everything */
+@font-face {
+  font-family: 'Arca Majora';
+  src: url('/fonts/arcamajora3-heavy.woff2') format('woff2'),
+    url('/fonts/arcamajora3-heavy.woff') format('woff');
+  font-weight: 900; /* Heavy for emphasis */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body Font - Neuzeit */
+@font-face {
+  font-family: 'Neuzeit S LT Std';
+  src: url('/fonts/neuzeit_s_lt_std_book.woff2') format('woff2'),
+    url('/fonts/neuzeit_s_lt_std_book.woff') format('woff');
+  font-weight: 400; /* Regular for body text */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Add more Neuzeit weights if you have them */
+@font-face {
+  font-family: 'Neuzeit S LT Std';
+  src: url('/fonts/neuzeit_s_lt_std_medium.woff2') format('woff2'),
+    url('/fonts/neuzeit_s_lt_std_medium.woff') format('woff');
+  font-weight: 500; /* Medium weight */
+  font-style: normal;
+  font-display: swap;
+}

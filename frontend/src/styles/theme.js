@@ -18,14 +18,40 @@ const theme = {
     success: '#10b981'
   },
   fonts: {
-    primary: "'Arial', sans-serif",
-    secondary: "'Inter', sans-serif",
+    // Semantic font naming
+    heading: "'Arca Majora', sans-serif", // For h1, h2, h3, etc.
+    body: "'Neuzeit S LT Std', sans-serif", // For paragraphs, text
+
+    // Alternative: Keep primary/secondary but assign semantically
+    primary: "'Arca Majora', sans-serif", // Headings
+    secondary: "'Neuzeit S LT Std', sans-serif", // Body text
+
     weights: {
       light: 300,
       normal: 400,
       medium: 500,
       semibold: 600,
-      bold: 700
+      bold: 700,
+      heavy: 900 // For Arca Majora Heavy
+    }
+  },
+  typography: {
+    // Define typography scales
+    heading: {
+      fontFamily: "'Arca Majora', sans-serif",
+      fontWeight: 700,
+      lineHeight: 1.2
+    },
+    body: {
+      fontFamily: "'Neuzeit S LT Std', sans-serif",
+      fontWeight: 400,
+      lineHeight: 1.6
+    },
+    caption: {
+      fontFamily: "'Neuzeit S LT Std', sans-serif",
+      fontWeight: 400,
+      fontSize: '0.875rem',
+      lineHeight: 1.4
     }
   },
   spacing: {

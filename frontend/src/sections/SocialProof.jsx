@@ -4,7 +4,7 @@ import { Logo } from '../components/Logo'
 
 const StyledSocialProof = styled.section`
   background: ${(props) => props.theme.colors.surface};
-  padding: 1rem 0;
+  padding: ${(props) => props.theme.spacing.md} 0;
   width: 100%;
   overflow: hidden;
 `
@@ -18,10 +18,10 @@ const SectionTitle = styled.h2`
   font-size: 1.2rem;
   text-align: left;
   color: ${(props) => props.theme.colors.text.secondary};
-  font-family: ${(props) => props.theme.fonts.primary};
+  font-family: ${(props) => props.theme.fonts.heading};
   font-weight: ${(props) => props.theme.fonts.weights.normal};
-  margin-left: 2rem;
-  margin-bottom: 0.5rem;
+  margin-left: ${(props) => props.theme.spacing.xl};
+  margin-bottom: ${(props) => props.theme.spacing.sm};
   text-transform: lowercase;
   letter-spacing: 2px;
 `
@@ -48,11 +48,11 @@ const LogoTrack = styled.div`
 
 const LogoGrid = styled.div`
   display: flex;
-  width: 50%; /* Half of track width */
+  width: 50%;
   justify-content: space-around;
   align-items: center;
-  gap: 4rem;
-  padding: 0 2rem;
+  gap: ${(props) => props.theme.spacing.xxl};
+  padding: 0 ${(props) => props.theme.spacing.xl};
 `
 
 const LogoItem = styled.div`

@@ -11,7 +11,7 @@ const StyledHero = styled.section`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 2rem;
+  padding: ${(props) => props.theme.spacing.xl};
 `
 
 const StyledH1 = styled.h1`
@@ -20,20 +20,20 @@ const StyledH1 = styled.h1`
   color: ${(props) => props.theme.colors.text.hero};
   text-align: left;
   z-index: 10;
-  left: 1rem;
-  top: 2rem;
+  left: ${(props) => props.theme.spacing.md};
+  top: ${(props) => props.theme.spacing.xl};
   transform: none;
-  font-family: ${(props) => props.theme.fonts.primary};
-  font-weight: ${(props) => props.theme.fonts.weights.bold};
+  font-family: ${(props) => props.theme.fonts.heading};
+  font-weight: ${(props) => props.theme.fonts.weights.heavy};
 
   ${media.sm} {
     font-size: 2.5rem;
-    left: 2rem;
+    left: ${(props) => props.theme.spacing.xl};
   }
 
   ${media.md} {
     font-size: 3rem;
-    left: 3rem;
+    left: ${(props) => props.theme.spacing.xxl};
   }
 
   ${media.lg} {

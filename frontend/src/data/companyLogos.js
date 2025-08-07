@@ -15,7 +15,19 @@ export const companyLogos = [
   {
     id: 3,
     name: '7-Eleven',
-    logo: '/logos/7-eleven.svg',
+    logo: '/logos/7eleven.svg',
     alt: '7-Eleven'
+  },
+  {
+    id: 4,
+    name: 'Strawberry',
+    logo: '/logos/strawberry.svg',
+    alt: 'Strawberry'
+  },
+  {
+    id: 5,
+    name: 'Johan & Nyström',
+    logo: '/logos/johannystrom.png',
+    alt: 'Johan & Nyström'
   }
 ]
