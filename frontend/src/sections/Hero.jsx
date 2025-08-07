@@ -21,8 +21,8 @@ const StyledH1 = styled.h1`
   text-align: left;
   z-index: 10;
   left: 1rem;
-  top: 3rem;
-  transform: translateY(-50%);
+  top: 2rem;
+  transform: none;
   font-family: ${(props) => props.theme.fonts.primary};
   font-weight: ${(props) => props.theme.fonts.weights.bold};
 

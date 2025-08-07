@@ -2,14 +2,20 @@
 export const companyLogos = [
   {
     id: 1,
-    name: 'Spotify',
-    logo: '/assets/logos/spotify.svg',
-    alt: 'Spotify logo'
+    name: 'Yasuragi',
+    logo: '/logos/yasuragi.svg',
+    alt: 'Yasuragi'
   },
   {
     id: 2,
-    name: 'Klarna',
-    logo: '/assets/logos/klarna.svg',
-    alt: 'Klarna logo'
+    name: 'Radisson Hotels',
+    logo: '/logos/radisson.svg',
+    alt: 'Radisson Hotels'
+  },
+  {
+    id: 3,
+    name: '7-Eleven',
+    logo: '/logos/7-eleven.svg',
+    alt: '7-Eleven'
   }
 ]

@@ -15,7 +15,7 @@ const CarouselContainer = styled.div`
 const CarouselTrack = styled.div`
   display: flex;
   transition: transform 0.3s ease-in-out;
-  transform: translateX(-${(props) => props.currentSlide * 100}%);
+  transform: translateX(-${(props) => props.$currentSlide * 100}%);
 `
 
 const CarouselItem = styled.div`
@@ -24,13 +24,13 @@ const CarouselItem = styled.div`
 
   ${media.md} {
     min-width: ${(props) =>
-      props.slidesToShow ? `${100 / props.slidesToShow}%` : '100%'};
+      props.$slidesToShow ? `${100 / props.$slidesToShow}%` : '100%'};
   }
 `
 
 const CarouselImage = styled.img`
   width: 100%;
-  height: 100vh;
+  height: 100%; // ✅ Changed from 100vh to 100%
   object-fit: cover;
   display: block;
 `
@@ -89,7 +89,7 @@ const Indicator = styled.button`
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
-  background: ${(props) => (props.active ? '#333' : '#ccc')};
+  background: ${(props) => (props.$active ? '#333' : '#ccc')};
 
   &:hover {
     background: #666;
@@ -147,9 +147,9 @@ export const Carousel = ({
 
   return (
     <CarouselContainer>
-      <CarouselTrack currentSlide={currentSlide}>
+      <CarouselTrack $currentSlide={currentSlide}>
         {items.map((item, index) => (
-          <CarouselItem key={item.id || index} slidesToShow={slidesToShow}>
+          <CarouselItem key={item.id || index} $slidesToShow={slidesToShow}>
             <CarouselImage src={item.image} alt={item.alt} />
             {item.text && <CarouselText>{item.text}</CarouselText>}
           </CarouselItem>
@@ -172,7 +172,7 @@ export const Carousel = ({
           {Array.from({ length: maxSlides }).map((_, index) => (
             <Indicator
               key={index}
-              active={index === currentSlide}
+              $active={index === currentSlide}
               onClick={() => goToSlide(index)}
             />
           ))}
