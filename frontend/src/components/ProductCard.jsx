@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { Button } from './Button'
-
 const StyledProductCard = styled.div`
   text-align: left;
 `
@@ -31,7 +29,7 @@ const ProductPrice = styled.span`
   margin-bottom: ${(props) => props.theme.spacing.sm};
 `
 
-export const ProductCard = ({ product, onOrder }) => {
+export const ProductCard = ({ product }) => {
   return (
     <StyledProductCard>
       <ProductImage src={product.image} alt={product.name} />
