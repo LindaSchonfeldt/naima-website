@@ -1,12 +1,17 @@
 import styled, { keyframes } from 'styled-components'
 import { companyLogos } from '../data/companyLogos'
 import { Logo } from '../components/Logo'
+import { media } from '../styles/media'
 
 const StyledSocialProof = styled.section`
   background: ${(props) => props.theme.colors.surface};
-  padding: ${(props) => props.theme.spacing.md} 0;
+  padding: ${(props) => props.theme.spacing.sm} 0;
   width: 100%;
   overflow: hidden;
+
+  ${media.md} {
+    padding: ${(props) => props.theme.spacing.md} 0;
+  }
 `
 
 const Container = styled.div`
@@ -20,10 +25,15 @@ const SectionTitle = styled.h2`
   color: ${(props) => props.theme.colors.text.secondary};
   font-family: ${(props) => props.theme.fonts.heading};
   font-weight: ${(props) => props.theme.fonts.weights.normal};
-  margin-left: ${(props) => props.theme.spacing.xl};
+  margin-left: ${(props) => props.theme.spacing.sm};
   margin-bottom: ${(props) => props.theme.spacing.sm};
   text-transform: lowercase;
   letter-spacing: 2px;
+
+  ${media.md} {
+    font-size: 1.5rem;
+    margin-left: ${(props) => props.theme.spacing.md};
+  }
 `
 
 // Rolling animation keyframes

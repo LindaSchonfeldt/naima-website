@@ -18,7 +18,8 @@ const StyledNav = styled.nav`
 
   ${media.md} {
     justify-content: space-between;
-    padding: ${(props) => props.theme.spacing.md} ${(props) => props.theme.spacing.xl};
+    padding: ${(props) => props.theme.spacing.md}
+      ${(props) => props.theme.spacing.xl};
   }
 `
 
@@ -69,6 +70,10 @@ const Links = styled.div`
   }
 
   ${media.lg} {
+    gap: ${(props) => props.theme.spacing.lg};
+  }
+
+  ${media.xl} {
     gap: ${(props) => props.theme.spacing.xl};
   }
 
@@ -102,6 +107,7 @@ export const Nav = () => {
       <Logo to='/'>naima</Logo>
 
       <Links>
+        <Link to='/shop'>Shop</Link>
         <Link to='/findus'>Find us</Link>
         <Link to='/ourstory'>Our story</Link>
         <Link to='/contactus'>Contact us</Link>

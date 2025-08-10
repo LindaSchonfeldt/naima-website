@@ -3,11 +3,20 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
+  /* Remove default styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   /* Base typography */
   body {
     font-family: ${(props) => props.theme.fonts.body};
     font-weight: ${(props) => props.theme.fonts.weights.normal};
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Heading styles */
@@ -19,8 +28,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-weight: ${(props) =>
-      props.theme.fonts.weights.heavy}; /* Use Heavy for h1 */
+    font-weight: ${(props) => props.theme.fonts.weights.heavy};
   }
 
   /* Body text */
@@ -28,11 +36,24 @@ const GlobalStyles = createGlobalStyle`
     font-family: ${(props) => props.theme.fonts.body};
   }
 
-  /* Remove default styles */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  /* Links */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Button reset */
+  button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  /* Image optimization */
+  img {
+    max-width: 100%;
+    height: auto;
   }
 `
 
