@@ -1,3 +1,4 @@
+import { FeaturedFika } from '../sections/FeaturedFika'
 import { Hero } from '../sections/Hero'
 import { InstagramGrid } from '../sections/InstagramGrid'
 import { SocialProof } from '../sections/SocialProof'
@@ -8,7 +9,7 @@ const Home = () => {
       {/* Full-width, no container */}
       <Hero />
       <SocialProof />
-      {/* Content sections that need padding/max-width */}
+      <FeaturedFika />
       <InstagramGrid />
     </>
   )

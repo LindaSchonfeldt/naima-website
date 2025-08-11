@@ -2,12 +2,13 @@ import styled from 'styled-components'
 
 import { ProductCard } from '../components/ProductCard'
 import { SectionTitle } from '../components/SectionTitle'
+import mockProducts from '../data/mockProducts'
 import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
   padding: ${(props) => props.theme.spacing.xl};
   background-color: ${(props) => props.theme.colors.surface};
-  text-align: center;
+  text-align: left;
 `
 
 const Description = styled.p`
@@ -31,6 +32,15 @@ const FeaturedGrid = styled.div`
 `
 
 export const FeaturedFika = () => {
+  // Feature specific products by ID
+  const featuredProducts = mockProducts.filter(
+    (product) => product.id === 5 || product.id === 6
+  )
+
+  const handleOrder = (product) => {
+    console.log('Ordering featured product:', product)
+  }
+
   return (
     <StyledFeaturedFika>
       <SectionTitle>Featured Treats</SectionTitle>
@@ -39,14 +49,13 @@ export const FeaturedFika = () => {
         traditional Swedish fika culture with modern superfoods.
       </Description>
       <FeaturedGrid>
-        <ProductCard>
-          <h3>Blueberry Bliss Balls</h3>
-          <p>Antioxidant-rich Nordic blueberries meet raw cacao</p>
-        </ProductCard>
-        <ProductCard>
-          <h3>Golden Turmeric Cookies</h3>
-          <p>Anti-inflammatory spices in a traditional Swedish cookie</p>
-        </ProductCard>
+        {featuredProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onOrder={handleOrder}
+          />
+        ))}
       </FeaturedGrid>
     </StyledFeaturedFika>
   )
