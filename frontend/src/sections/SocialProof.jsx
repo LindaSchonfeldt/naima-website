@@ -1,7 +1,8 @@
+import { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { Logo } from '../components/Logo'
-import { companyLogos } from '../data/companyLogos'
+import usePartnerStore from '../stores/usePartnerStore'
 import { media } from '../styles/media'
 
 const StyledSocialProof = styled.section`
@@ -82,28 +83,66 @@ const LogoItem = styled.div`
 `
 
 export const SocialProof = () => {
+  const { servedAtPartners, loading, error, fetchServedAtPartners } =
+    usePartnerStore()
+
+  useEffect(() => {
+    if (servedAtPartners.length === 0) {
+      fetchServedAtPartners()
+    }
+  }, [servedAtPartners.length, fetchServedAtPartners])
+
+  if (loading) {
+    return (
+      <StyledSocialProof>
+        <Container>
+          <SectionTitle>Served at</SectionTitle>
+          <div style={{ textAlign: 'center', padding: '2rem' }}>
+            Loading partners...
+          </div>
+        </Container>
+      </StyledSocialProof>
+    )
+  }
+
+  if (error || !servedAtPartners.length) {
+    return (
+      <StyledSocialProof>
+        <Container>
+          <SectionTitle>Served at</SectionTitle>
+          <div style={{ textAlign: 'center', padding: '2rem' }}>
+            Partner information coming soon...
+          </div>
+        </Container>
+      </StyledSocialProof>
+    )
+  }
+
   return (
     <StyledSocialProof>
       <Container>
         <SectionTitle>Served at</SectionTitle>
         <LogoTrack>
           <LogoGrid>
-            {companyLogos.map((company) => (
-              <LogoItem key={company.id}>
-                <Logo src={company.logo} alt={company.alt}>
-                  {company.name}
-                </Logo>
+            {servedAtPartners.map((partner) => (
+              <LogoItem key={partner._id}>
+                <Logo
+                  logo={partner.logo?.url}
+                  name={partner.name}
+                  alt={partner.logo?.alt || partner.name}
+                />
               </LogoItem>
             ))}
           </LogoGrid>
 
-          {/* Duplicate for seamless loop */}
           <LogoGrid>
-            {companyLogos.map((company) => (
-              <LogoItem key={`${company.id}-duplicate`}>
-                <Logo src={company.logo} alt={company.alt}>
-                  {company.name}
-                </Logo>
+            {servedAtPartners.map((partner) => (
+              <LogoItem key={`${partner._id}-duplicate`}>
+                <Logo
+                  logo={partner.logo?.url}
+                  name={partner.name}
+                  alt={partner.logo?.alt || partner.name}
+                />
               </LogoItem>
             ))}
           </LogoGrid>

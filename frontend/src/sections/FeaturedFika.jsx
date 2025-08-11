@@ -1,8 +1,9 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 
 import { ProductCard } from '../components/ProductCard'
 import { SectionTitle } from '../components/SectionTitle'
-import mockProducts from '../data/mockProducts'
+import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
@@ -30,14 +31,48 @@ const FeaturedGrid = styled.div`
   }
 `
 
+const LoadingMessage = styled.p`
+  grid-column: 1 / -1;
+  text-align: center;
+  color: ${(props) => props.theme.colors.text.secondary};
+`
+
+const ErrorMessage = styled.p`
+  grid-column: 1 / -1;
+  text-align: center;
+  color: ${(props) => props.theme.colors.status.error};
+`
+
 export const FeaturedFika = () => {
-  // Feature specific products by ID
-  const featuredProducts = mockProducts.filter(
-    (product) => product.id === 5 || product.id === 6
-  )
+  const { featuredProducts, loading, error, fetchFeaturedProducts } =
+    useProductStore()
+
+  useEffect(() => {
+    if (featuredProducts.length === 0) {
+      fetchFeaturedProducts()
+    }
+  }, [featuredProducts.length, fetchFeaturedProducts])
 
   const handleOrder = (product) => {
     console.log('Ordering featured product:', product)
+  }
+
+  if (loading) {
+    return (
+      <StyledFeaturedFika>
+        <LoadingMessage>Loading featured treats...</LoadingMessage>
+      </StyledFeaturedFika>
+    )
+  }
+
+  if (error) {
+    return (
+      <StyledFeaturedFika>
+        <ErrorMessage>
+          Failed to load featured treats. Please try again later.
+        </ErrorMessage>
+      </StyledFeaturedFika>
+    )
   }
 
   return (
@@ -47,15 +82,19 @@ export const FeaturedFika = () => {
         Every bite tells a story of wellness. Our handcrafted treats combine
         traditional Swedish fika culture with modern superfoods.
       </Description>
-      <FeaturedGrid>
-        {featuredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onOrder={handleOrder}
-          />
-        ))}
-      </FeaturedGrid>
+      {featuredProducts.length > 0 ? (
+        <FeaturedGrid>
+          {featuredProducts.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              onOrder={() => handleOrder(product)}
+            />
+          ))}
+        </FeaturedGrid>
+      ) : (
+        <LoadingMessage>No featured products available.</LoadingMessage>
+      )}
     </StyledFeaturedFika>
   )
 }

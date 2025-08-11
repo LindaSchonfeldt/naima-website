@@ -1,16 +1,35 @@
+import { useEffect } from 'react'
+
 import { PageContainer } from '../components/PageContainer'
 import { Products } from '../sections/Products'
-import mockProducts from '../data/mockProducts'
+import useProductStore from '../stores/useProductStore'
 
 const Shop = () => {
+  const { products, loading, error, filters, fetchProducts, setFilters } =
+    useProductStore()
+
+  useEffect(() => {
+    fetchProducts(filters)
+  }, [filters, fetchProducts])
+
   const handleOrder = (product) => {
     console.log('Ordering:', product)
-    // Add order logic here
+  }
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters)
   }
 
   return (
     <PageContainer>
-      <Products products={mockProducts} onOrder={handleOrder} />
+      <Products
+        products={products}
+        loading={loading}
+        error={error}
+        onOrder={handleOrder}
+        onFilterChange={handleFilterChange}
+        filters={filters}
+      />
     </PageContainer>
   )
 }

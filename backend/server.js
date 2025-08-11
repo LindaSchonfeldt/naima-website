@@ -3,6 +3,10 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
+// Import routes
+import productRoutes from './routes/products.js'
+import partnerRoutes from './routes/partners.js'
+
 // Load environment variables
 dotenv.config()
 
@@ -37,6 +41,10 @@ app.use(
 )
 
 app.use(express.json())
+
+// API Routes
+app.use('/api/products', productRoutes)
+app.use('/api/partners', partnerRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello Naima!')
