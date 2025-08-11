@@ -1,20 +1,18 @@
 import { FaInstagram } from 'react-icons/fa'
 import { FaFacebook } from 'react-icons/fa'
 import { FaYoutube } from 'react-icons/fa'
-import { FaXTwitter } from 'react-icons/fa6'
 import { FaTiktok } from 'react-icons/fa6'
 import styled from 'styled-components'
 
 import { SectionTitle } from '../components/SectionTitle'
 import { media } from '../styles/media'
 
-// ✅ Define social media links
+// Define social media links
 const socialLinks = [
   { icon: FaFacebook, url: 'https://facebook.com', label: 'Facebook' },
   { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram' },
-  { icon: FaXTwitter, url: 'https://twitter.com', label: 'Twitter' },
-  { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' },
-  { icon: FaTiktok, url: 'https://tiktok.com', label: 'TikTok' }
+  { icon: FaTiktok, url: 'https://tiktok.com', label: 'TikTok' },
+  { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' }
 ]
 
 const StyledFooter = styled.footer`
