@@ -19,7 +19,7 @@ const StyledNav = styled.nav`
   ${media.md} {
     justify-content: space-between;
     padding: ${(props) => props.theme.spacing.md}
-      ${(props) => props.theme.spacing.xl};
+      ${(props) => props.theme.spacing.md};
   }
 `
 
@@ -66,7 +66,9 @@ const Links = styled.div`
     gap: ${(props) => props.theme.spacing.sm};
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%; /* ✅ Add vertical centering */
+    transform: translate(-50%, -50%); /* ✅ Center both horizontally and vertically */
+    white-space: nowrap;
   }
 
   ${media.lg} {
@@ -85,6 +87,7 @@ const Links = styled.div`
     padding: ${(props) => props.theme.spacing.sm};
     border-radius: 4px;
     transition: background-color 0.2s;
+    white-space: nowrap;
 
     &:hover {
       background: ${(props) => props.theme.colors.surface};

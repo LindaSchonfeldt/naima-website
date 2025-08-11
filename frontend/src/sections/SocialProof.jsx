@@ -1,13 +1,15 @@
 import styled, { keyframes } from 'styled-components'
-import { companyLogos } from '../data/companyLogos'
+
 import { Logo } from '../components/Logo'
+import { companyLogos } from '../data/companyLogos'
 import { media } from '../styles/media'
 
 const StyledSocialProof = styled.section`
   background: ${(props) => props.theme.colors.surface};
-  padding: ${(props) => props.theme.spacing.sm} 0;
   width: 100%;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 
   ${media.md} {
     padding: ${(props) => props.theme.spacing.md} 0;
@@ -25,7 +27,7 @@ const SectionTitle = styled.h2`
   color: ${(props) => props.theme.colors.text.secondary};
   font-family: ${(props) => props.theme.fonts.heading};
   font-weight: ${(props) => props.theme.fonts.weights.normal};
-  margin-left: ${(props) => props.theme.spacing.sm};
+  margin-left: ${(props) => props.theme.spacing.md};
   margin-bottom: ${(props) => props.theme.spacing.sm};
   text-transform: lowercase;
   letter-spacing: 2px;

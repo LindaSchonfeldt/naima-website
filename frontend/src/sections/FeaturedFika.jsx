@@ -6,24 +6,23 @@ import mockProducts from '../data/mockProducts'
 import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
-  padding: ${(props) => props.theme.spacing.xl};
   background-color: ${(props) => props.theme.colors.surface};
   text-align: left;
+  margin: ${(props) => props.theme.spacing.md};
 `
 
 const Description = styled.p`
-  max-width: 600px;
-  margin: 0 auto ${(props) => props.theme.spacing.lg};
   color: ${(props) => props.theme.colors.text.secondary};
   line-height: 1.6;
   font-size: 1.1rem;
+  margin: ${(props) => props.theme.spacing.md} 0;
 `
 
 const FeaturedGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${(props) => props.theme.spacing.lg};
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
 
   ${media.md} {

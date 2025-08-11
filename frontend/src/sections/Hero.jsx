@@ -1,39 +1,53 @@
 import styled from 'styled-components'
-import { media } from '../styles/media'
 
 import { Carousel } from '../components/Carousel'
 import { homeCarouselItems } from '../data/carouselData'
+import { media } from '../styles/media'
 
 const StyledHero = styled.section`
   position: relative;
   width: 100%;
-  height: ${(props) => props.theme.layout?.heroHeight || 'calc(100vh - 80px)'};
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: ${(props) => props.theme.spacing.xl};
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* ✅ Prevent content from spilling outside */
+
+  ${media.sm} {
+    height: 70vh;
+  }
+
+  ${media.md} {
+    height: ${(props) =>
+      props.theme.layout?.heroHeight || 'calc(100vh - 80px)'};
+    padding: ${(props) => props.theme.spacing.xl};
+  }
 `
 
 const StyledH1 = styled.h1`
   position: absolute;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: ${(props) => props.theme.colors.text.hero};
   text-align: left;
   z-index: 10;
-  left: ${(props) => props.theme.spacing.md};
-  top: ${(props) => props.theme.spacing.xl};
+  left: ${(props) => props.theme.spacing.sm};
+  top: ${(props) => props.theme.spacing.md};
   transform: none;
   font-family: ${(props) => props.theme.fonts.heading};
   font-weight: ${(props) => props.theme.fonts.weights.heavy};
 
   ${media.sm} {
-    font-size: 2.5rem;
-    left: ${(props) => props.theme.spacing.xl};
+    font-size: 2rem;
+    left: ${(props) => props.theme.spacing.md};
+    top: ${(props) => props.theme.spacing.lg};
   }
 
   ${media.md} {
     font-size: 3rem;
-    left: ${(props) => props.theme.spacing.xxl};
+    left: ${(props) => props.theme.spacing.xl};
+    top: ${(props) => props.theme.spacing.xl};
   }
 
   ${media.lg} {
@@ -83,7 +97,7 @@ export const Hero = ({
           title
         )}
         {subtitle && (
-          <div style={{ fontSize: '1.5rem', marginTop: '1rem' }}>
+          <div style={{ fontSize: '1rem', marginTop: '0.5rem' }}>
             {subtitle}
           </div>
         )}

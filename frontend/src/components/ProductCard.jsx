@@ -6,14 +6,8 @@ const StyledProductCard = styled.div`
   text-align: left;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-
     /* Show button on hover */
     .hover-button {
       opacity: 1;
@@ -27,6 +21,8 @@ const ProductImage = styled.img`
   height: 350px;
   object-fit: cover;
 `
+
+const ProductContent = styled.div``
 
 const ProductTitle = styled.h3`
   font-size: 24px;
@@ -81,15 +77,9 @@ export const ProductCard = ({ product, onOrder }) => {
         </ProductInformation>
       </ProductContent>
 
-      {onOrder && (
-        <HoverButton
-          className='hover-button'
-          onClick={() => onOrder(product)}
-          variant='hover'
-        >
-          Add to Cart
-        </HoverButton>
-      )}
+      <Button variant='hover' className='hover-button' onClick={onOrder}>
+        Order Now
+      </Button>
     </StyledProductCard>
   )
 }

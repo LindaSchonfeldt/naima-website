@@ -16,11 +16,13 @@ const CarouselTrack = styled.div`
   display: flex;
   transition: transform 0.3s ease-in-out;
   transform: translateX(-${(props) => props.$currentSlide * 100}%);
+  height: 100%;
 `
 
 const CarouselItem = styled.div`
   min-width: 100%;
   position: relative;
+  height: 100%;
 
   ${media.md} {
     min-width: ${(props) =>
@@ -30,7 +32,7 @@ const CarouselItem = styled.div`
 
 const CarouselImage = styled.img`
   width: 100%;
-  height: 100%; // ✅ Changed from 100vh to 100%
+  height: 100%;
   object-fit: cover;
   display: block;
 `
@@ -76,10 +78,14 @@ const Navigation = styled.div`
 `
 
 const Indicators = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1rem;
+  z-index: 10;
 `
 
 const Indicator = styled.button`

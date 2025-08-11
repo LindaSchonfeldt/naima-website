@@ -1,38 +1,71 @@
 import styled from 'styled-components'
 
+// Define all button variants in objects
+const buttonVariants = {
+  primary: {
+    background: (theme) => theme.colors.primary,
+    color: 'white',
+    border: 'none',
+    opacity: '1',
+    transform: 'translateY(0)',
+    hoverBackground: (theme) => theme.colors.secondary
+  },
+  secondary: {
+    background: 'transparent',
+    color: (theme) => theme.colors.primary,
+    border: (theme) => `2px solid ${theme.colors.primary}`,
+    opacity: '1',
+    transform: 'translateY(0)',
+    hoverBackground: (theme) => theme.colors.primary
+  },
+  hover: {
+    background: (theme) => theme.colors.primary,
+    color: 'white',
+    border: 'none',
+    opacity: '0',
+    transform: 'translateY(10px)',
+    hoverBackground: (theme) => theme.colors.secondary
+  }
+}
+
+const buttonSizes = {
+  small: '0.9rem',
+  medium: '1rem',
+  large: '1.1rem'
+}
+
 const StyledButton = styled.button`
-  background-color: ${(props) => {
-    if (props.variant === 'secondary') return 'transparent'
-    if (props.variant === 'hover') return props.theme.colors.primary
-    return props.theme.colors.primary
-  }};
-  color: ${(props) => {
-    if (props.variant === 'secondary') return props.theme.colors.primary
-    if (props.variant === 'hover') return 'white'
-    return 'white'
-  }};
-  border: ${(props) =>
-    props.variant === 'secondary'
-      ? `2px solid ${props.theme.colors.primary}`
-      : 'none'};
+  /* Get variant styles */
+  background-color: ${({ variant, theme }) =>
+    typeof buttonVariants[variant].background === 'function'
+      ? buttonVariants[variant].background(theme)
+      : buttonVariants[variant].background};
+
+  color: ${({ variant, theme }) =>
+    typeof buttonVariants[variant].color === 'function'
+      ? buttonVariants[variant].color(theme)
+      : buttonVariants[variant].color};
+
+  border: ${({ variant, theme }) =>
+    typeof buttonVariants[variant].border === 'function'
+      ? buttonVariants[variant].border(theme)
+      : buttonVariants[variant].border};
+
+  opacity: ${({ variant }) => buttonVariants[variant].opacity};
+  transform: ${({ variant }) => buttonVariants[variant].transform};
+
+  /* Common styles */
   padding: ${(props) => props.theme.spacing.sm}
     ${(props) => props.theme.spacing.lg};
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: ${(props) => (props.size === 'large' ? '1.1rem' : '1rem')};
-
-  /* Hover variant specific styles */
-  opacity: ${(props) => (props.variant === 'hover' ? '0' : '1')};
-  transform: ${(props) =>
-    props.variant === 'hover' ? 'translateY(10px)' : 'translateY(0)'};
+  font-size: ${({ size }) => buttonSizes[size]};
 
   &:hover {
-    background-color: ${(props) =>
-      props.variant === 'secondary'
-        ? props.theme.colors.primary
-        : props.theme.colors.secondary};
+    background-color: ${({ variant, theme }) =>
+      buttonVariants[variant].hoverBackground(theme)};
     color: white;
     transform: translateY(-1px);
   }
