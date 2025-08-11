@@ -3,54 +3,60 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-// Import routes
-import productRoutes from './routes/products.js'
-import partnerRoutes from './routes/partners.js'
+// Import your routes
+import productRoutes from './routes/productRoutes.js'
+import partnerRoutes from './routes/partnerRoutes.js'
 
-// Load environment variables
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/naima-website'
-const port = process.env.PORT || 8080
-const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+const mongoUrl = process.env.MONGO_URL
+const port = process.env.PORT || 3001
 
-// Connect to MongoDB with better error handling
+// Connect to MongoDB
 mongoose
   .connect(mongoUrl, {
-    dbName: 'naima-website' // Specify your database name
+    dbName: 'naima-website'
   })
   .then(() => {
-    console.log('Connected to MongoDB Atlas')
+    console.log('✅ Connected to MongoDB Atlas')
   })
   .catch((error) => {
-    console.error('MongoDB connection error:', error)
+    console.error('❌ MongoDB connection error:', error)
   })
-
-mongoose.Promise = Promise
 
 const app = express()
 
 // CORS configuration
 app.use(
   cors({
-    origin: [frontendUrl, 'http://localhost:3000'],
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'http://127.0.0.1:5173'
+    ],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
   })
 )
 
 app.use(express.json())
 
-// API Routes
+// Add logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`)
+  next()
+})
+
+// Register routes
 app.use('/api/products', productRoutes)
 app.use('/api/partners', partnerRoutes)
 
 app.get('/', (req, res) => {
-  res.send('Hello Naima!')
+  res.json({ message: 'Naima API is running!' })
 })
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
-  console.log(`Environment: ${process.env.NODE_ENV}`)
+  console.log(`🚀 Server running on http://localhost:${port}`)
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`)
 })

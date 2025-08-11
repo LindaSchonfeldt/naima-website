@@ -302,11 +302,11 @@ const seedProducts = async () => {
       name: 'Limited Edition Treats',
       description:
         'Straciatella & Coal / Matcha & Lime / Semla / Chocolate & Saffron / Lingonberry & Gingerbread and more variants depending on season and collaboration. Contact us for more information',
-      price: 0, // Price varies by variant
+      price: 0,
       category: 'limited',
       images: [
         {
-          url: '/images/limited.webp',
+          url: '/images/limited.webp', // ✅ Already correct
           alt: 'Limited Edition Treats',
           isPrimary: true
         }
@@ -334,31 +334,34 @@ const seedPartners = async () => {
     {
       name: 'Yasuragi',
       type: 'served_at',
-      logo: { url: null, alt: 'Yasuragi' },
+      logo: { url: '/images/partners/yasuragi.svg', alt: 'Yasuragi' }, // ✅ Add actual logo
       isActive: true
     },
     {
       name: 'Radisson Hotels',
       type: 'served_at',
-      logo: { url: null, alt: 'Radisson Hotels' },
+      logo: { url: '/images/partners/radisson.svg', alt: 'Radisson Hotels' }, // ✅ Add actual logo
       isActive: true
     },
     {
       name: '7-Eleven',
       type: 'served_at',
-      logo: { url: null, alt: '7-Eleven' },
+      logo: { url: '/images/partners/7eleven.svg', alt: '7-Eleven' }, // ✅ Add actual logo
       isActive: true
     },
     {
       name: 'Strawberry',
       type: 'served_at',
-      logo: { url: null, alt: 'Strawberry' },
+      logo: { url: '/images/partners/strawberry.svg', alt: 'Strawberry' }, // ✅ Add actual logo
       isActive: true
     },
     {
       name: 'Johan & Nyström',
       type: 'served_at',
-      logo: { url: null, alt: 'Johan & Nyström' },
+      logo: {
+        url: '/images/partners/johan-nystrom.png',
+        alt: 'Johan & Nyström'
+      }, // ✅ Add actual logo
       isActive: true
     },
     {

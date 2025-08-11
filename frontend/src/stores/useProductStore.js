@@ -39,19 +39,21 @@ const useProductStore = create(
 
       // Fetch featured products
       fetchFeaturedProducts: async () => {
+        console.log('🔍 Fetching featured products...') // ✅ Add debug log
         set({ loading: true, error: null })
         try {
           const data = await api.products.getFeatured()
+          console.log('✅ Featured products received:', data) // ✅ Add debug log
           set({
             featuredProducts: data,
             loading: false
           })
         } catch (error) {
+          console.error('❌ Failed to fetch featured products:', error) // ✅ Add debug log
           set({
             error: error.message,
             loading: false
           })
-          console.error('Failed to fetch featured products:', error)
         }
       },
 

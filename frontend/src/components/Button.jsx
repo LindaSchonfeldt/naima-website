@@ -1,6 +1,38 @@
 import styled from 'styled-components'
 
-// Define all button variants in objects
+const StyledButton = styled.button`
+  /* Use $variant instead of variant */
+  background-color: ${({ theme, $variant }) =>
+    $variant === 'primary' ? theme.colors.primary : 'transparent'};
+
+  color: ${({ theme, $variant }) =>
+    $variant === 'primary' ? theme.colors.white : theme.colors.primary};
+
+  border: 2px solid ${({ theme }) => theme.colors.primary};
+
+  /* Common styles */
+  padding: ${(props) => props.theme.spacing.sm}
+    ${(props) => props.theme.spacing.lg};
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: ${({ size }) => buttonSizes[size]};
+
+  &:hover {
+    background-color: ${({ variant, theme }) =>
+      buttonVariants[variant].hoverBackground(theme)};
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+`
+
 const buttonVariants = {
   primary: {
     background: (theme) => theme.colors.primary,
@@ -34,57 +66,14 @@ const buttonSizes = {
   large: '1.1rem'
 }
 
-const StyledButton = styled.button`
-  /* Get variant styles */
-  background-color: ${({ variant, theme }) =>
-    typeof buttonVariants[variant].background === 'function'
-      ? buttonVariants[variant].background(theme)
-      : buttonVariants[variant].background};
-
-  color: ${({ variant, theme }) =>
-    typeof buttonVariants[variant].color === 'function'
-      ? buttonVariants[variant].color(theme)
-      : buttonVariants[variant].color};
-
-  border: ${({ variant, theme }) =>
-    typeof buttonVariants[variant].border === 'function'
-      ? buttonVariants[variant].border(theme)
-      : buttonVariants[variant].border};
-
-  opacity: ${({ variant }) => buttonVariants[variant].opacity};
-  transform: ${({ variant }) => buttonVariants[variant].transform};
-
-  /* Common styles */
-  padding: ${(props) => props.theme.spacing.sm}
-    ${(props) => props.theme.spacing.lg};
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: ${({ size }) => buttonSizes[size]};
-
-  &:hover {
-    background-color: ${({ variant, theme }) =>
-      buttonVariants[variant].hoverBackground(theme)};
-    color: white;
-    transform: translateY(-1px);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-`
-
 export const Button = ({
   children,
   variant = 'primary',
-  size = 'medium',
+  className,
   ...props
 }) => {
   return (
-    <StyledButton variant={variant} size={size} {...props}>
+    <StyledButton $variant={variant} className={className} {...props}>
       {children}
     </StyledButton>
   )

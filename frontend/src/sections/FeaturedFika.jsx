@@ -7,7 +7,7 @@ import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
-  background-color: ${(props) => props.theme.colors.surface};
+  background-color: ${(props) => props.theme.colors.background};
   text-align: left;
   margin: ${(props) => props.theme.spacing.md};
 `

@@ -6,7 +6,6 @@ import { SocialProof } from '../sections/SocialProof'
 const Home = () => {
   return (
     <>
-      {/* Full-width, no container */}
       <Hero />
       <SocialProof />
       <FeaturedFika />

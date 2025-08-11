@@ -1,9 +1,14 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
+
+console.log('🌐 API Base URL:', API_BASE) // ✅ Add this debug log
 
 // Generic API function with error handling
 const apiRequest = async (url, options = {}) => {
+  const fullUrl = `${API_BASE}${url}`
+  console.log('📡 Making API request to:', fullUrl) // ✅ Add debug log
+
   try {
-    const response = await fetch(`${API_BASE}${url}`, {
+    const response = await fetch(fullUrl, {
       headers: {
         'Content-Type': 'application/json',
         ...options.headers
@@ -11,13 +16,17 @@ const apiRequest = async (url, options = {}) => {
       ...options
     })
 
+    console.log('📡 Response status:', response.status) // ✅ Add debug log
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    return await response.json()
+    const data = await response.json()
+    console.log('📡 Response data:', data) // ✅ Add debug log
+    return data
   } catch (error) {
-    console.error(`API request failed for ${url}:`, error)
+    console.error(`❌ API request failed for ${url}:`, error)
     throw error
   }
 }

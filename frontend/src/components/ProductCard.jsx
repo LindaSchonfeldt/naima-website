@@ -66,18 +66,43 @@ export const ProductCard = ({ product, onOrder }) => {
     return <div>No product data</div>
   }
 
+  // ✅ Get image from the database structure
+  const getProductImage = () => {
+    if (product.primaryImage?.url) return product.primaryImage.url
+    if (product.images?.[0]?.url) return product.images[0].url
+    return '/images/placeholder.jpg' // Fallback
+  }
+
+  const getImageAlt = () => {
+    if (product.primaryImage?.alt) return product.primaryImage.alt
+    if (product.images?.[0]?.alt) return product.images[0].alt
+    return product.name
+  }
+
   return (
     <StyledProductCard>
-      <ProductImage src={product.image} alt={product.name} />
+      <ProductImage
+        src={getProductImage()}
+        alt={getImageAlt()}
+        onError={(e) => {
+          e.target.src = '/images/placeholder.jpg' // Fallback if image fails
+        }}
+      />
       <ProductContent>
         <ProductTitle>{product.name}</ProductTitle>
         <ProductInformation>
           <ProductDescription>{product.description}</ProductDescription>
-          <ProductPrice>${product.price}</ProductPrice>
+          <ProductPrice>
+            {product.formattedPrice || `$${product.price}`}
+          </ProductPrice>
         </ProductInformation>
       </ProductContent>
 
-      <Button variant='hover' className='hover-button' onClick={onOrder}>
+      <Button
+        variant='hover'
+        className='hover-button'
+        onClick={() => onOrder(product)}
+      >
         Order Now
       </Button>
     </StyledProductCard>
