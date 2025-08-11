@@ -1,16 +1,29 @@
+import { FaInstagram } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
+import { FaYoutube } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
+import { FaTiktok } from 'react-icons/fa6'
 import styled from 'styled-components'
 
 import { SectionTitle } from '../components/SectionTitle'
-import { SocialIcon } from '../components/SocialIcon'
 import { media } from '../styles/media'
+
+// ✅ Define social media links
+const socialLinks = [
+  { icon: FaFacebook, url: 'https://facebook.com', label: 'Facebook' },
+  { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram' },
+  { icon: FaXTwitter, url: 'https://twitter.com', label: 'Twitter' },
+  { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' },
+  { icon: FaTiktok, url: 'https://tiktok.com', label: 'TikTok' }
+]
 
 const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: ${(props) => props.theme.spacing.md};
-  margin-top: auto; /* Push footer to bottom */
-  min-height: auto; /* Allow footer to grow based on content */
+  margin-top: auto;
+  min-height: auto;
   background-color: ${(props) => props.theme.colors.primary};
   color: white;
   text-align: left;
@@ -58,6 +71,23 @@ const SocialIconsContainer = styled.div`
   }
 `
 
+// ✅ Create styled React Icons
+const SocialIconLink = styled.a`
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  padding: ${(props) => props.theme.spacing.xs};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.secondary};
+    transform: scale(1.1);
+  }
+`
+
 export const Footer = () => {
   return (
     <StyledFooter>
@@ -69,12 +99,18 @@ export const Footer = () => {
         <FooterSection></FooterSection>
         <FooterSection>
           <SocialIconsContainer>
-            <SocialIcon icon='/icons/facebook.svg' url='https://facebook.com' />
-            <SocialIcon
-              icon='/icons/instagram.svg'
-              url='https://instagram.com'
-            />
-            <SocialIcon icon='/icons/twitter.svg' url='https://twitter.com' />
+            {/* ✅ Map over social links */}
+            {socialLinks.map(({ icon: Icon, url, label }) => (
+              <SocialIconLink
+                key={label}
+                href={url}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label={label}
+              >
+                <Icon />
+              </SocialIconLink>
+            ))}
           </SocialIconsContainer>
         </FooterSection>
       </FooterContent>
