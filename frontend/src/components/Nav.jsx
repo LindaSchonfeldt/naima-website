@@ -66,8 +66,11 @@ const Links = styled.div`
     gap: ${(props) => props.theme.spacing.sm};
     position: absolute;
     left: 50%;
-    top: 50%; /* ✅ Add vertical centering */
-    transform: translate(-50%, -50%); /* ✅ Center both horizontally and vertically */
+    top: 50%; /* ✅ Center vertically */
+    transform: translate(
+      -50%,
+      -50%
+    ); /* ✅ Center both horizontally and vertically */
     white-space: nowrap;
   }
 
