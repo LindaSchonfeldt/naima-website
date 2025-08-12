@@ -80,5 +80,13 @@ export const api = {
     getCatering: async () => {
       return apiRequest('/partners/catering')
     }
+  },
+
+  // Orders API
+  orders: {
+    // Get all orders
+    getAll: async () => {
+      return apiRequest('/orders')
+    }
   }
 }

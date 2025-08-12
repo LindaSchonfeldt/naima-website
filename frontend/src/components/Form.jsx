@@ -3,25 +3,53 @@ import { media } from '../styles/media'
 import { Button } from './Button'
 import { useForm } from 'react-hook-form'
 
-const StyledOrderForm = styled.form`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
   max-width: 600px;
   margin: 0 auto;
 
+  input,
+  textarea {
+    padding: ${(props) => props.theme.spacing.sm};
+    border: 1px solid ${(props) => props.theme.colors.border};
+    font-size: 1rem;
+  }
+
   ${media.sm} {
     padding: ${(props) => props.theme.spacing.lg};
   }
 `
+const StyledH2 = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: ${(props) => props.theme.spacing.md};
+  text-align: center;
+  color: ${(props) => props.theme.colors.text.primary};
+`
 
-export const OrderForm = () => {
+export const Form = ({ title = 'Order Your Fika' }) => {
   const { register, handleSubmit, formState } = useForm()
-  const onSubmit = (data) => console.log(data)
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) throw new Error('Failed to submit order')
+      // Optionally handle success (show message, reset form, etc.)
+      reset()
+      alert('Order submitted!')
+    } catch (error) {
+      alert(error.message)
+    }
+  }
 
   return (
-    <StyledOrderForm onSubmit={handleSubmit(onSubmit)}>
-      <h2>Order Your Fika</h2>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledH2>{title}</StyledH2>
       <input
         type='text'
         placeholder='Name'
@@ -41,6 +69,6 @@ export const OrderForm = () => {
       <Button type='submit' disabled={formState.isSubmitting}>
         {formState.isSubmitting ? 'Submitting...' : 'Submit Order'}
       </Button>
-    </StyledOrderForm>
+    </StyledForm>
   )
 }

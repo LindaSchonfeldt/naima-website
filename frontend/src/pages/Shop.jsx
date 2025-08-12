@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { PageContainer } from '../components/PageContainer'
 import { Products } from '../sections/Products'
 import useProductStore from '../stores/useProductStore'
+import { Form } from '../components/Form'
 
 const Shop = () => {
   const { products, loading, error, filters, fetchProducts, setFilters } =
@@ -30,6 +31,7 @@ const Shop = () => {
         onFilterChange={handleFilterChange}
         filters={filters}
       />
+      <Form />
     </PageContainer>
   )
 }
