@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 
 const orderSchema = new mongoose.Schema({
   customer: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' }, // Reference
-  // ...other fields
   name: { type: String, required: true },
   email: { type: String, required: true },
   address: { type: String },

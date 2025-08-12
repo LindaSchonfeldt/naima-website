@@ -1,5 +1,5 @@
 import express from 'express'
-import Order from '../models/Order.js' // Adjust path to your Order model
+import Order from '../models/Order.js'
 import Customer from '../models/Customer.js'
 
 const router = express.Router()
@@ -30,6 +30,7 @@ router.post('/orders', async (req, res) => {
   }
 })
 
+// Get all orders with customer details
 router.get('/orders', async (req, res) => {
   try {
     const orders = await Order.find().populate('customer')

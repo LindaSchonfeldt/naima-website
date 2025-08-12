@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Cart } from './Cart'
+import { HamburgerMenu } from './HamburgerMenu'
 
 import { media } from '../styles/media'
 
 const StyledNav = styled.nav`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: ${(props) => props.theme.spacing.md};
   background: ${(props) => props.theme.colors.background};
   position: sticky;
@@ -32,29 +35,6 @@ const Logo = styled(Link)`
 
   &:hover {
     color: ${(props) => props.theme.colors.primary};
-  }
-`
-
-const HamburgerButton = styled.button`
-  display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  position: absolute;
-  left: ${(props) => props.theme.spacing.md};
-
-  ${media.md} {
-    display: none;
-  }
-
-  span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: ${(props) => props.theme.colors.text.primary};
-    margin: ${(props) => props.theme.spacing.xs} 0;
-    transition: 0.3s;
   }
 `
 
@@ -99,19 +79,37 @@ const Links = styled.div`
   }
 `
 
+const NavSection = styled.div`
+  display: flex;
+  align-items: center;
+
+  &.left {
+    flex: 0 0 auto;
+  }
+  &.center {
+    flex: 1 1 0%;
+    justify-content: center;
+  }
+  &.right {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+`
+
 export const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <StyledNav>
-      <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </HamburgerButton>
-
-      <Logo to='/'>naima</Logo>
-
+      <NavSection className='left'>
+        <HamburgerMenu />
+      </NavSection>
+      <NavSection className='center'>
+        <Logo to='/'>naima</Logo>
+      </NavSection>
+      <NavSection className='right'>
+        <Cart />
+      </NavSection>
       <Links>
         <Link to='/shop'>Shop</Link>
         <Link to='/findus'>Find us</Link>
