@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../styles/media'
 
 import { Button } from './Button'
 
@@ -11,7 +12,7 @@ const StyledProductCard = styled.div`
     /* Show button on hover */
     .hover-button {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0) !important;
     }
   }
 `
@@ -22,13 +23,24 @@ const ProductImage = styled.img`
   object-fit: cover;
 `
 
-const ProductContent = styled.div``
+const ProductContent = styled.div`
+  padding: ${(props) => props.theme.spacing.sm};
+
+  ${media.md} {
+    padding: ${(props) => props.theme.spacing.md};
+  }
+`
 
 const ProductTitle = styled.h3`
   font-size: 24px;
   font-weight: 600;
   margin: 0 0 ${(props) => props.theme.spacing.sm} 0;
   color: ${(props) => props.theme.colors.text.primary};
+
+  ${media.md} {
+    font-size: 28px;
+    margin: 0 0 ${(props) => props.theme.spacing.md} 0;
+  }
 `
 
 const ProductInformation = styled.div`
@@ -50,15 +62,13 @@ const ProductPrice = styled.span`
   margin-bottom: ${(props) => props.theme.spacing.md};
 `
 
-const HoverButton = styled(Button)`
+const ButtonContainer = styled.div`
   position: absolute;
   bottom: ${(props) => props.theme.spacing.md};
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 2;
+  transform: translateX(-50%);
   width: calc(100% - ${(props) => props.theme.spacing.lg});
+  z-index: 2;
 `
 
 export const ProductCard = ({ product, onOrder }) => {
@@ -66,11 +76,10 @@ export const ProductCard = ({ product, onOrder }) => {
     return <div>No product data</div>
   }
 
-  // ✅ Get image from the database structure
   const getProductImage = () => {
     if (product.primaryImage?.url) return product.primaryImage.url
     if (product.images?.[0]?.url) return product.images[0].url
-    return '/images/placeholder.jpg' // Fallback
+    return '/images/placeholder.png'
   }
 
   const getImageAlt = () => {
@@ -84,8 +93,10 @@ export const ProductCard = ({ product, onOrder }) => {
       <ProductImage
         src={getProductImage()}
         alt={getImageAlt()}
+        loading='lazy'
         onError={(e) => {
-          e.target.src = '/images/placeholder.jpg' // Fallback if image fails
+          console.log('Image failed to load:', e.target.src)
+          e.target.src = '/images/placeholder.jpg'
         }}
       />
       <ProductContent>
@@ -98,13 +109,16 @@ export const ProductCard = ({ product, onOrder }) => {
         </ProductInformation>
       </ProductContent>
 
-      <Button
-        variant='hover'
-        className='hover-button'
-        onClick={() => onOrder(product)}
-      >
-        Order Now
-      </Button>
+      {/* ✅ Use Button component with hover variant and positioning container */}
+      <ButtonContainer>
+        <Button
+          variant='hover'
+          className='hover-button'
+          onClick={() => onOrder(product)}
+        >
+          Order Now
+        </Button>
+      </ButtonContainer>
     </StyledProductCard>
   )
 }

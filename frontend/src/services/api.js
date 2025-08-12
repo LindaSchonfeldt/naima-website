@@ -1,11 +1,9 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
 
-console.log('🌐 API Base URL:', API_BASE) // ✅ Add this debug log
-
-// Generic API function with error handling
+// ✅ Add generic get method
 const apiRequest = async (url, options = {}) => {
   const fullUrl = `${API_BASE}${url}`
-  console.log('📡 Making API request to:', fullUrl) // ✅ Add debug log
+  console.log('📡 Making API request to:', fullUrl)
 
   try {
     const response = await fetch(fullUrl, {
@@ -16,14 +14,14 @@ const apiRequest = async (url, options = {}) => {
       ...options
     })
 
-    console.log('📡 Response status:', response.status) // ✅ Add debug log
+    console.log('📡 Response status:', response.status)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const data = await response.json()
-    console.log('📡 Response data:', data) // ✅ Add debug log
+    console.log('📡 Response data:', data)
     return data
   } catch (error) {
     console.error(`❌ API request failed for ${url}:`, error)
@@ -32,6 +30,9 @@ const apiRequest = async (url, options = {}) => {
 }
 
 export const api = {
+  // ✅ Generic get method
+  get: apiRequest,
+
   // Products API
   products: {
     // Get all products with optional filters

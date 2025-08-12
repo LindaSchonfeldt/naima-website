@@ -13,7 +13,7 @@ const useProductStore = create(
       error: null,
       filters: {},
 
-      // Actions
+      // Actions - Add useCallback equivalent for Zustand
       setLoading: (loading) => set({ loading }),
       setError: (error) => set({ error }),
       setFilters: (filters) => set({ filters }),
@@ -39,21 +39,31 @@ const useProductStore = create(
 
       // Fetch featured products
       fetchFeaturedProducts: async () => {
-        console.log('🔍 Fetching featured products...') // ✅ Add debug log
+        const state = get()
+
+        // Prevent multiple simultaneous calls
+        if (state.loading) {
+          console.log('🔍 Already loading products, skipping...')
+          return state.featuredProducts // Return existing data
+        }
+
+        if (state.featuredProducts.length > 0) {
+          console.log('🔍 Products already loaded, skipping...')
+          return state.featuredProducts // Return existing data
+        }
+
+        console.log('🔍 Starting to fetch featured products...')
         set({ loading: true, error: null })
+
         try {
-          const data = await api.products.getFeatured()
-          console.log('✅ Featured products received:', data) // ✅ Add debug log
-          set({
-            featuredProducts: data,
-            loading: false
-          })
+          const data = await api.products.getFeatured() // ✅ Use correct API method
+          console.log('✅ Products fetched successfully:', data)
+          set({ featuredProducts: data, loading: false })
+          return data
         } catch (error) {
-          console.error('❌ Failed to fetch featured products:', error) // ✅ Add debug log
-          set({
-            error: error.message,
-            loading: false
-          })
+          console.error('❌ Error fetching products:', error)
+          set({ error: error.message, loading: false })
+          throw error
         }
       },
 

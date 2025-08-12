@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { media } from '../styles/media'
@@ -101,9 +101,9 @@ const Indicator = styled.button`
     background: #666;
   }
 `
-
+// Uses its own internal (local) state, independent on Zustand stores
 export const Carousel = ({
-  items,
+  items = [],
   autoPlay = false,
   autoPlayInterval = 3000,
   showArrows = true,
@@ -111,58 +111,58 @@ export const Carousel = ({
   slidesToShow = 1
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const maxSlides = Math.ceil(items.length / slidesToShow)
 
-  // Auto-play functionality
-  useEffect(() => {
-    if (autoPlay) {
-      const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % maxSlides)
-      }, autoPlayInterval)
+  // ✅ Memoize items to prevent unnecessary re-renders
+  const memoizedItems = useMemo(() => items, [items])
 
-      return () => clearInterval(interval)
-    }
-  }, [autoPlay, autoPlayInterval, maxSlides])
+  // ✅ Memoize navigation functions
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % memoizedItems.length)
+  }, [memoizedItems.length])
 
-  const goToSlide = (index) => {
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => 
+      prev === 0 ? memoizedItems.length - 1 : prev - 1
+    )
+  }, [memoizedItems.length])
+
+  const goToSlide = useCallback((index) => {
     setCurrentSlide(index)
-  }
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % maxSlides)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + maxSlides) % maxSlides)
-  }
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') prevSlide()
-      if (e.key === 'ArrowRight') nextSlide()
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  if (!items || items.length === 0) {
-    return <div>No items to display</div>
+  // ✅ Optimize autoplay effect
+  useEffect(() => {
+    if (!autoPlay || memoizedItems.length <= 1) return
+
+    const interval = setInterval(nextSlide, autoPlayInterval)
+    return () => clearInterval(interval)
+  }, [autoPlay, autoPlayInterval, nextSlide, memoizedItems.length])
+
+  // ✅ Early return if no items
+  if (!memoizedItems || memoizedItems.length === 0) {
+    return <div>Loading carousel...</div>
   }
 
   return (
     <CarouselContainer>
       <CarouselTrack $currentSlide={currentSlide}>
-        {items.map((item, index) => (
+        {memoizedItems.map((item, index) => (
           <CarouselItem key={item.id || index} $slidesToShow={slidesToShow}>
-            <CarouselImage src={item.image} alt={item.alt} />
+            <CarouselImage
+              src={item.image}
+              alt={item.alt}
+              loading={index === 0 ? 'eager' : 'lazy'} // ✅ Load first image immediately
+              onError={(e) => {
+                console.warn('Carousel image failed to load:', e.target.src)
+                e.target.style.display = 'none'
+              }}
+            />
             {item.text && <CarouselText>{item.text}</CarouselText>}
           </CarouselItem>
         ))}
       </CarouselTrack>
 
-      {showArrows && items.length > 1 && (
+      {showArrows && memoizedItems.length > 1 && (
         <>
           <Navigation className='prev' onClick={prevSlide}>
             ‹
@@ -173,9 +173,9 @@ export const Carousel = ({
         </>
       )}
 
-      {showIndicators && items.length > 1 && (
+      {showIndicators && memoizedItems.length > 1 && (
         <Indicators>
-          {Array.from({ length: maxSlides }).map((_, index) => (
+          {memoizedItems.map((_, index) => (
             <Indicator
               key={index}
               $active={index === currentSlide}

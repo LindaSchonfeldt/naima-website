@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import { ProductCard } from '../components/ProductCard'
@@ -7,73 +7,108 @@ import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
-  background-color: ${(props) => props.theme.colors.background};
-  text-align: left;
-  margin: ${(props) => props.theme.spacing.md};
+  background: ${(props) => props.theme.colors.background || '#f9f9f9'};
+  padding: 4rem 2rem;
 `
 
 const Description = styled.p`
-  color: ${(props) => props.theme.colors.text.secondary};
-  line-height: 1.6;
+  text-align: left;
   font-size: 1.1rem;
-  margin: ${(props) => props.theme.spacing.md} 0;
+  color: #666;
+  margin: ${(props) => props.theme.spacing.sm};
+  line-height: 1.6;
+
+  ${media.md} {
+    margin: 1rem ${(props) => props.theme.spacing.md} 2rem;
+  }
 `
 
 const FeaturedGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: ${(props) => props.theme.spacing.lg};
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
 
   ${media.md} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 `
 
-const LoadingMessage = styled.p`
-  grid-column: 1 / -1;
+const LoadingMessage = styled.div`
   text-align: center;
-  color: ${(props) => props.theme.colors.text.secondary};
+  padding: 2rem;
+  color: #666;
 `
 
-const ErrorMessage = styled.p`
-  grid-column: 1 / -1;
+const ErrorMessage = styled.div`
   text-align: center;
-  color: ${(props) => props.theme.colors.status.error};
+  padding: 2rem;
+  color: #d32f2f;
+  background: #ffebee;
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 600px;
 `
 
 export const FeaturedFika = () => {
   const { featuredProducts, loading, error, fetchFeaturedProducts } =
     useProductStore()
+  const hasFetched = useRef(false)
 
   useEffect(() => {
-    if (featuredProducts.length === 0) {
-      fetchFeaturedProducts()
+    // ✅ More defensive checking
+    if (
+      !hasFetched.current &&
+      (!featuredProducts || featuredProducts.length === 0)
+    ) {
+      // ✅ Wrap in try-catch
+      try {
+        fetchFeaturedProducts()
+        hasFetched.current = true
+      } catch (err) {
+        console.error('❌ Error in FeaturedFika useEffect:', err)
+      }
     }
-  }, [featuredProducts.length, fetchFeaturedProducts])
+  }, [fetchFeaturedProducts]) // ✅ Add fetchFeaturedProducts to dependencies
 
-  const handleOrder = (product) => {
-    console.log('Ordering featured product:', product)
-  }
+  const handleOrder = useCallback((product) => {
+    alert(`Order placed for ${product?.name || 'Unknown product'}!`)
+  }, [])
 
-  if (loading) {
+  // ✅ Loading state
+  if (loading && (!featuredProducts || featuredProducts.length === 0)) {
     return (
       <StyledFeaturedFika>
-        <LoadingMessage>Loading featured treats...</LoadingMessage>
+        <SectionTitle>Featured Treats</SectionTitle>
+        <LoadingMessage>Loading featured products...</LoadingMessage>
       </StyledFeaturedFika>
     )
   }
 
+  // ✅ Error state
   if (error) {
     return (
       <StyledFeaturedFika>
+        <SectionTitle>Featured Treats</SectionTitle>
         <ErrorMessage>
-          Failed to load featured treats. Please try again later.
+          Error loading products: {error}
+          <br />
+          <button
+            onClick={() => {
+              hasFetched.current = false
+              fetchFeaturedProducts()
+            }}
+          >
+            Try Again
+          </button>
         </ErrorMessage>
       </StyledFeaturedFika>
     )
   }
+
+  // ✅ Safe array check
+  const safeProducts = Array.isArray(featuredProducts) ? featuredProducts : []
 
   return (
     <StyledFeaturedFika>
@@ -82,13 +117,14 @@ export const FeaturedFika = () => {
         Every bite tells a story of wellness. Our handcrafted treats combine
         traditional Swedish fika culture with modern superfoods.
       </Description>
-      {featuredProducts.length > 0 ? (
+
+      {safeProducts.length > 0 ? (
         <FeaturedGrid>
-          {featuredProducts.map((product) => (
+          {safeProducts.map((product) => (
             <ProductCard
-              key={product._id}
+              key={product?._id || Math.random()} // ✅ Fallback key
               product={product}
-              onOrder={() => handleOrder(product)}
+              onOrder={handleOrder}
             />
           ))}
         </FeaturedGrid>

@@ -74,7 +74,10 @@ export const Hero = ({
   carouselItems = homeCarouselItems,
   showCarousel = true
 }) => {
-  console.log('Hero rendering with items:', carouselItems)
+  // ✅ Prevent rendering if no items
+  if (!carouselItems || carouselItems.length === 0) {
+    return <div>Loading hero content...</div>
+  }
 
   return (
     <StyledHero>

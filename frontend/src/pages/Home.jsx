@@ -7,9 +7,9 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <SocialProof />
-      <FeaturedFika />
-      <InstagramGrid />
+      {/* <SocialProof /> */}
+      {/* <FeaturedFika /> */}
+      {/* <InstagramGrid /> */}
     </>
   )
 }

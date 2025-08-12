@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { Logo } from '../components/Logo'
@@ -85,37 +85,23 @@ const LogoItem = styled.div`
 export const SocialProof = () => {
   const { servedAtPartners, loading, error, fetchServedAtPartners } =
     usePartnerStore()
+  const hasFetched = useRef(false)
 
   useEffect(() => {
-    if (servedAtPartners.length === 0) {
+    // ✅ ONLY fetch once, period
+    if (!hasFetched.current) {
+      console.log('🏢 SocialProof: Fetching partners (ONCE)')
       fetchServedAtPartners()
+      hasFetched.current = true
     }
-  }, [servedAtPartners.length, fetchServedAtPartners])
+  }, []) // ✅ Empty dependency array - crucial!
 
-  if (loading) {
-    return (
-      <StyledSocialProof>
-        <Container>
-          <SectionTitle>Served at</SectionTitle>
-          <div style={{ textAlign: 'center', padding: '2rem' }}>
-            Loading partners...
-          </div>
-        </Container>
-      </StyledSocialProof>
-    )
+  if (loading && servedAtPartners.length === 0) {
+    return <div>Loading partners...</div>
   }
 
-  if (error || !servedAtPartners.length) {
-    return (
-      <StyledSocialProof>
-        <Container>
-          <SectionTitle>Served at</SectionTitle>
-          <div style={{ textAlign: 'center', padding: '2rem' }}>
-            Partner information coming soon...
-          </div>
-        </Container>
-      </StyledSocialProof>
-    )
+  if (error) {
+    return <div>Error loading partners: {error}</div>
   }
 
   return (

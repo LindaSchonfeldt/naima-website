@@ -7,7 +7,7 @@
     <title>Naima - Fika with Benefits</title>
 
     <!-- Preload most critical font first -->
-    <link
+    <!--     <link
       rel="preload"
       href="/fonts/arcamajora3-heavy.woff2"
       as="font"
@@ -28,10 +28,12 @@
       as="font"
       type="font/woff2"
       crossorigin
-    />
+    /> -->
   </head>
   <body>
+    <!-- ✅ This is required for React to render! -->
     <div id="root"></div>
+    <!-- ✅ This loads your React app -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
