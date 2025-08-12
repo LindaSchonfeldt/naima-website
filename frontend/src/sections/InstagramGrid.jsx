@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const StyledInstagramGrid = styled.section`
   display: grid;
@@ -27,9 +28,14 @@ const mockPosts = Array.from({ length: 12 }, (_, i) => ({
 }))
 
 export const InstagramGrid = () => {
+  const breakpoint = useBreakpoint()
+  let postCount = 12
+  if (breakpoint === 'tablet') postCount = 8
+  if (breakpoint === 'mobile') postCount = 4
+
   return (
     <StyledInstagramGrid>
-      {mockPosts.map((post) => (
+      {mockPosts.slice(0, postCount).map((post) => (
         <a
           key={post.id}
           href={post.permalink}

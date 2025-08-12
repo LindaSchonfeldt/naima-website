@@ -11,7 +11,7 @@ import OurStory from './pages/OurStory'
 import RetreatClub from './pages/RetreatClub'
 import Shop from './pages/Shop'
 import { Footer } from './sections/Footer'
-// import GlobalStyles from './styles/GlobalStyles' // ❌ Temporarily disable
+import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
 
 const AppContainer = styled.div`
@@ -27,7 +27,7 @@ const MainContent = styled.main`
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* <GlobalStyles /> */} {/* ❌ Temporarily disable */}
+      <GlobalStyles />
       <Router>
         {/* <ErrorBoundary> */} {/* ❌ Temporarily disable */}
         <AppContainer>

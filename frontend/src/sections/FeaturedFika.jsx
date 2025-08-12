@@ -8,7 +8,6 @@ import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
   background: ${(props) => props.theme.colors.background || '#f9f9f9'};
-  padding: 4rem 2rem;
 `
 
 const Description = styled.p`
@@ -125,6 +124,7 @@ export const FeaturedFika = () => {
               key={product?._id || Math.random()} // ✅ Fallback key
               product={product}
               onOrder={handleOrder}
+              variant={'featured'}
             />
           ))}
         </FeaturedGrid>

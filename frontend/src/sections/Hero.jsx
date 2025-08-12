@@ -28,7 +28,7 @@ const StyledHero = styled.section`
 
 const StyledH1 = styled.h1`
   position: absolute;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: ${(props) => props.theme.colors.text.hero};
   text-align: left;
   z-index: 10;
@@ -39,13 +39,13 @@ const StyledH1 = styled.h1`
   font-weight: ${(props) => props.theme.fonts.weights.heavy};
 
   ${media.sm} {
-    font-size: 2rem;
+    font-size: 3rem;
     left: ${(props) => props.theme.spacing.md};
     top: ${(props) => props.theme.spacing.lg};
   }
 
   ${media.md} {
-    font-size: 3rem;
+    font-size: 4rem;
     left: ${(props) => props.theme.spacing.xl};
     top: ${(props) => props.theme.spacing.xl};
   }

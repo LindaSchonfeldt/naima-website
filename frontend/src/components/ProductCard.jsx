@@ -7,6 +7,7 @@ const StyledProductCard = styled.div`
   text-align: left;
   position: relative;
   overflow: hidden;
+  ${({ $variant }) => $variant === 'featured' && css``}
 
   &:hover {
     /* Show button on hover */
@@ -71,7 +72,7 @@ const ButtonContainer = styled.div`
   z-index: 2;
 `
 
-export const ProductCard = ({ product, onOrder }) => {
+export const ProductCard = ({ product, onOrder, variant }) => {
   if (!product) {
     return <div>No product data</div>
   }

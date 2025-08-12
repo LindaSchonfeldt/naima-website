@@ -11,7 +11,7 @@ const StyledSectionTitle = styled.h2`
   margin-bottom: ${(props) => props.theme.spacing.md};
   text-align: ${(props) =>
     props.$align || 'left'}; /* Use $align instead of align */
-  font-size: 1.5rem;
+  font-size: 2rem;
 
   ${media.md} {
     margin-left: ${(props) => props.theme.spacing.md};
@@ -19,7 +19,7 @@ const StyledSectionTitle = styled.h2`
   }
 
   ${media.lg} {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 `
 
