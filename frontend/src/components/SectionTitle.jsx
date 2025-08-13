@@ -7,14 +7,12 @@ const StyledSectionTitle = styled.h2`
   font-weight: ${(props) => props.theme.typography.heading.fontWeight};
   line-height: ${(props) => props.theme.typography.heading.lineHeight};
   color: inherit;
-  margin-left: ${(props) => props.theme.spacing.sm};
   margin-bottom: ${(props) => props.theme.spacing.md};
   text-align: ${(props) =>
     props.$align || 'left'}; /* Use $align instead of align */
   font-size: 2rem;
 
   ${media.md} {
-    margin-left: ${(props) => props.theme.spacing.md};
     font-size: 2rem;
   }
 

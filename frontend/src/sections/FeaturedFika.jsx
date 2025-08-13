@@ -10,15 +10,22 @@ const StyledFeaturedFika = styled.section`
   background: ${(props) => props.theme.colors.background || '#f9f9f9'};
 `
 
+const InfoSection = styled.div`
+  text-align: left;
+  margin: ${(props) => props.theme.spacing.sm};
+
+  ${media.md} {
+    margin: ${(props) => props.theme.spacing.md};
+`
+
 const Description = styled.p`
   text-align: left;
   font-size: 1.1rem;
   color: #666;
-  margin: ${(props) => props.theme.spacing.sm};
   line-height: 1.6;
 
   ${media.md} {
-    margin: 1rem ${(props) => props.theme.spacing.md} 2rem;
+    margin-bottom: 2rem;
   }
 `
 
@@ -89,7 +96,9 @@ export const FeaturedFika = () => {
   if (error) {
     return (
       <StyledFeaturedFika>
-        <SectionTitle>Featured Treats</SectionTitle>
+        <InfoSection>
+          <SectionTitle>Featured Treats</SectionTitle>
+        </InfoSection>
         <ErrorMessage>
           Error loading products: {error}
           <br />
@@ -111,11 +120,13 @@ export const FeaturedFika = () => {
 
   return (
     <StyledFeaturedFika>
-      <SectionTitle>Featured Treats</SectionTitle>
-      <Description>
-        Every bite tells a story of wellness. Our handcrafted treats combine
-        traditional Swedish fika culture with modern superfoods.
-      </Description>
+      <InfoSection>
+        <SectionTitle>Featured Treats</SectionTitle>
+        <Description>
+          Every bite tells a story of wellness. Our handcrafted treats combine
+          traditional Swedish fika culture with modern superfoods.
+        </Description>
+      </InfoSection>
 
       {safeProducts.length > 0 ? (
         <FeaturedGrid>

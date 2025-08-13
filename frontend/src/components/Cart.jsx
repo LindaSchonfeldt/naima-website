@@ -40,7 +40,7 @@ const CartMenu = styled.div`
     right: 0; // Anchor to the right
     width: 400px; // Fixed width for desktop
     height: 100vh; // Full height
-    top: 80; // Cover from top
+    top: 80; // Cover below the nav
     border-radius: 0;
     justify-content: flex-start;
     align-items: flex-start;
