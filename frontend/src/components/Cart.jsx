@@ -1,6 +1,8 @@
 import { TiShoppingCart } from 'react-icons/ti'
 import styled from 'styled-components'
+
 import { useCartStore } from '../stores/useCartStore'
+import { media } from '../styles/media'
 
 const CartIcon = styled(TiShoppingCart)`
   font-size: 2rem;
@@ -11,6 +13,9 @@ const CartIcon = styled(TiShoppingCart)`
   &:hover {
     color: ${(props) => props.theme.colors.secondary};
   }
+
+  ${media.md} {
+  font-size: 1.5rem;
 `
 const CartMenu = styled.div`
   position: fixed;
@@ -29,6 +34,11 @@ const CartMenu = styled.div`
   overflow-y: auto;
   justify-content: center;
   align-items: center;
+
+  ${media.md} {
+    width: 400px;
+    left: calc(50% - 200px);
+  }
 `
 
 export const Cart = () => {

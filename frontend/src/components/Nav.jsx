@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Cart } from './Cart'
-import { HamburgerMenu } from './HamburgerMenu'
 
 import { media } from '../styles/media'
+import { Cart } from './Cart'
+import { HamburgerMenu } from './HamburgerMenu'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -68,12 +68,11 @@ const Links = styled.div`
     font-family: ${(props) => props.theme.fonts.body};
     font-weight: ${(props) => props.theme.fonts.weights.medium};
     padding: ${(props) => props.theme.spacing.sm};
+    font-size: 14px;
     border-radius: 4px;
-    transition: background-color 0.2s;
     white-space: nowrap;
 
     &:hover {
-      background: ${(props) => props.theme.colors.surface};
       color: ${(props) => props.theme.colors.primary};
     }
   }
@@ -85,14 +84,31 @@ const NavSection = styled.div`
 
   &.left {
     flex: 0 0 auto;
+    order: 1;
   }
   &.center {
     flex: 1 1 0%;
     justify-content: center;
+    order: 2;
   }
   &.right {
     flex: 0 0 auto;
     justify-content: flex-end;
+    order: 3;
+  }
+
+  ${media.md} {
+    &.left {
+      order: 1;
+    }
+    &.center {
+      order: 1; /* Move center section to the left */
+      justify-content: flex-start;
+      flex: 1 1 auto;
+    }
+    &.right {
+      order: 2;
+    }
   }
 `
 
