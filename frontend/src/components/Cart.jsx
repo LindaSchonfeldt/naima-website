@@ -36,8 +36,14 @@ const CartMenu = styled.div`
   align-items: center;
 
   ${media.md} {
-    width: 400px;
-    left: calc(50% - 200px);
+    left: auto; // Remove left anchor
+    right: 0; // Anchor to the right
+    width: 400px; // Fixed width for desktop
+    height: 100vh; // Full height
+    top: 80; // Cover from top
+    border-radius: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 `
 
