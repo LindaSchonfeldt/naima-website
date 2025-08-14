@@ -13,6 +13,8 @@ const StyledForm = styled.form`
 
   input,
   textarea {
+    width: 100%;
+    font-family: 'Neuzeit S LT Std Medium', sans-serif;
     padding: ${(props) => props.theme.spacing.sm};
     border: 1px solid ${(props) => props.theme.colors.border};
     font-size: 1rem;
@@ -62,7 +64,7 @@ export const Form = ({ title = 'Order Your Fika' }) => {
         {...register('email', { required: true })}
       />
       <input type='text' placeholder='Address' {...register('address')} />
-      <input type='number' placeholder='Phone Number' {...register('phone')} />
+      <input type='text' placeholder='Phone Number' {...register('phone')} />
       <textarea
         placeholder='Special Instructions'
         {...register('instructions')}

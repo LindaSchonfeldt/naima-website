@@ -103,6 +103,10 @@ const CartMenu = styled.div`
   }
 `
 
+const MenuContent = styled.div`
+  width: 100%;
+`
+
 const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -159,7 +163,7 @@ export const Cart = () => {
         <CartMenu
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the cart
         >
-          <div>
+          <MenuContent>
             <CartHeader>
               <StyledH2>Your Cart</StyledH2>
               <button onClick={closeCart} aria-label='Close cart'>
@@ -213,7 +217,7 @@ export const Cart = () => {
                 Proceed to Order Form
               </Button>
             )}
-          </div>
+          </MenuContent>
         </CartMenu>
       </CartMenuOverlay>
     </>

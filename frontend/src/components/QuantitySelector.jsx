@@ -10,14 +10,16 @@ const StyledQuantitySelector = styled.div`
   button {
     background: none;
     color: ${(props) => props.theme.colors.text.primary};
-    border: none;
-    padding: ${(props) => props.theme.spacing.xs};
+    border: 1px solid black;
+    padding: ${(props) => props.theme.spacing.xs}
+      ${(props) => props.theme.spacing.sm};
     border-radius: 4px;
     cursor: pointer;
   }
 
   span {
     font-size: 1rem;
+    font-family: 'Neuzeit S LT Std Medium', sans-serif;
     color: ${(props) => props.theme.colors.text.primary};
   }
 `
