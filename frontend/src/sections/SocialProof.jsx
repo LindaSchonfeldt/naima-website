@@ -88,21 +88,15 @@ export const SocialProof = () => {
   const hasFetched = useRef(false)
 
   useEffect(() => {
-    // ✅ ONLY fetch once, period
     if (!hasFetched.current) {
-      console.log('🏢 SocialProof: Fetching partners (ONCE)')
       fetchServedAtPartners()
       hasFetched.current = true
     }
-  }, []) // ✅ Empty dependency array - crucial!
+  }, [])
 
-  if (loading && servedAtPartners.length === 0) {
+  if (loading && servedAtPartners.length === 0)
     return <div>Loading partners...</div>
-  }
-
-  if (error) {
-    return <div>Error loading partners: {error}</div>
-  }
+  if (error) return <div>Error loading partners: {error}</div>
 
   return (
     <StyledSocialProof>
@@ -120,7 +114,7 @@ export const SocialProof = () => {
               </LogoItem>
             ))}
           </LogoGrid>
-
+          {/* Duplicate grid for animation */}
           <LogoGrid>
             {servedAtPartners.map((partner) => (
               <LogoItem key={`${partner._id}-duplicate`}>

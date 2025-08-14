@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { media } from '../styles/media'
+import { useCartStore } from '../stores/useCartStore'
 
 import { Button } from './Button'
 
@@ -73,6 +74,8 @@ const ButtonContainer = styled.div`
 `
 
 export const ProductCard = ({ product, onOrder, variant }) => {
+  const addToCart = useCartStore((state) => state.addToCart)
+
   if (!product) {
     return <div>No product data</div>
   }
@@ -115,9 +118,9 @@ export const ProductCard = ({ product, onOrder, variant }) => {
         <Button
           variant='hover'
           className='hover-button'
-          onClick={() => onOrder(product)}
+          onClick={() => addToCart(product)}
         >
-          Order Now
+          Add to Cart
         </Button>
       </ButtonContainer>
     </StyledProductCard>

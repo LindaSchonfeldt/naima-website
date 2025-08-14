@@ -47,8 +47,27 @@ const CartMenu = styled.div`
   }
 `
 
+const CartItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: ${(props) => props.theme.spacing.sm};
+`
+const CartItemName = styled.span`
+  font-size: 1rem;
+  color: ${(props) => props.theme.colors.text.primary};
+`
+
+const StyledImg = styled.img`
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 8px;
+`
+
 export const Cart = () => {
-  const { isOpen, toggleCart, closeCart } = useCartStore()
+  const { isOpen, items, toggleCart, closeCart, removeFromCart, clearCart } =
+    useCartStore()
 
   return (
     <>
@@ -57,7 +76,28 @@ export const Cart = () => {
         <CartMenu>
           <div>
             <h2>Your Cart</h2>
-            {/* Cart items go here */}
+            {items.length === 0 ? (
+              <p>Your cart is empty.</p>
+            ) : (
+              items.map((item) => {
+                const primaryImage = item.images?.find((img) => img.isPrimary)
+
+                return (
+                  <CartItem key={item._id}>
+                    {primaryImage && (
+                      <StyledImg
+                        src={primaryImage.url}
+                        alt={primaryImage.alt || item.name}
+                      />
+                    )}
+                    {item.name} - {item.formattedPrice || `$${item.price}`}
+                    <button onClick={() => removeFromCart(item._id)}>
+                      Remove
+                    </button>
+                  </CartItem>
+                )
+              })
+            )}
             <button onClick={closeCart}>Close</button>
           </div>
         </CartMenu>

@@ -3,13 +3,13 @@ export const companyLogos = [
   {
     id: 1,
     name: 'Yasuragi',
-    logo: null, // ✅ Will show text instead of missing SVG
+    logo: '/public/partners/yasuragi.svg',
     alt: 'Yasuragi'
   },
   {
     id: 2,
     name: 'Radisson Hotels',
-    logo: null, // ✅ Will show text instead of missing SVG
+    logo: '/public/partners/radisson.svg',
     alt: 'Radisson Hotels'
   },
   {
