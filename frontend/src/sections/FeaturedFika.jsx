@@ -16,6 +16,7 @@ const InfoSection = styled.div`
 
   ${media.md} {
     margin: ${(props) => props.theme.spacing.md};
+  }
 `
 
 const Description = styled.p`
