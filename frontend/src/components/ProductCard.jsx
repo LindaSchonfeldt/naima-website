@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import { media } from '../styles/media'
-import { useCartStore } from '../stores/useCartStore'
 
+import { useCartStore } from '../stores/useCartStore'
+import { media } from '../styles/media'
 import { Button } from './Button'
 
 const StyledProductCard = styled.div`
@@ -67,8 +67,6 @@ const ProductPrice = styled.span`
 const ButtonContainer = styled.div`
   position: absolute;
   bottom: ${(props) => props.theme.spacing.md};
-  left: 50%;
-  transform: translateX(-50%);
   width: calc(100% - ${(props) => props.theme.spacing.lg});
   z-index: 2;
 `

@@ -1,14 +1,15 @@
+import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
+
 import { media } from '../styles/media'
 import { Button } from './Button'
-import { useForm } from 'react-hook-form'
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
   max-width: 600px;
-  margin: 0 auto;
+  margin: 2rem auto;
 
   input,
   textarea {
