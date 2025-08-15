@@ -8,15 +8,11 @@ const StyledProductCard = styled.div`
   text-align: left;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: ${(props) => props.theme.spacing.md};
   ${({ $variant }) => $variant === 'featured' && css``}
-
-  &:hover {
-    /* Show button on hover */
-    .hover-button {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0) !important;
-    }
-  }
 `
 
 const ProductImage = styled.img`
@@ -61,14 +57,14 @@ const ProductPrice = styled.span`
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
   display: block;
-  margin-bottom: ${(props) => props.theme.spacing.md};
+  margin-bottom: ${(props) => props.theme.spacing.sm};
 `
 
 const ButtonContainer = styled.div`
-  position: absolute;
-  bottom: ${(props) => props.theme.spacing.md};
-  width: calc(100% - ${(props) => props.theme.spacing.lg});
-  z-index: 2;
+  width: 100%;
+  margin-top: auto; // pushes the button to the bottom if you want
+  display: flex;
+  justify-content: flex-start;
 `
 
 export const ProductCard = ({ product, onOrder, variant }) => {
@@ -111,13 +107,8 @@ export const ProductCard = ({ product, onOrder, variant }) => {
         </ProductInformation>
       </ProductContent>
 
-      {/* ✅ Use Button component with hover variant and positioning container */}
       <ButtonContainer>
-        <Button
-          variant='hover'
-          className='hover-button'
-          onClick={() => addToCart(product)}
-        >
+        <Button variant='primary' onClick={() => addToCart(product)}>
           Add to Cart
         </Button>
       </ButtonContainer>

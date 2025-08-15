@@ -23,14 +23,6 @@ const buttonVariants = {
     transform: 'translateY(0)',
     hoverBackground: (theme) => theme.colors.primary
   },
-  hover: {
-    background: (theme) => theme.colors.primary,
-    color: 'white',
-    border: 'none',
-    opacity: '0',
-    transform: 'translateY(0)',
-    hoverBackground: (theme) => theme.colors.secondary
-  },
   icon: {
     background: 'transparent',
     color: (theme) => theme.colors.primary,

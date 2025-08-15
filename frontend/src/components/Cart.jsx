@@ -71,12 +71,11 @@ const CartMenuOverlay = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 1999;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 `
 
 const CartMenu = styled.div`
   position: fixed;
-  top: 80px;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -96,7 +95,7 @@ const CartMenu = styled.div`
     right: 0; // Anchor to the right
     width: 350px; // Fixed width for desktop
     height: 100vh; // Full height
-    top: 80; // Cover below the nav
+    top: 0; // Align with the top of the viewport
     border-radius: 0;
     justify-content: flex-start;
     align-items: flex-start;
