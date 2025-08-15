@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
-import { FeaturedImg } from '../components/FeaturedImg'
+import { FeaturedProduct } from '../components/FeaturedProduct'
 import { SectionTitle } from '../components/SectionTitle'
 import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
@@ -125,8 +125,8 @@ export const FeaturedFika = () => {
       {safeProducts.length > 0 ? (
         <FeaturedGrid>
           {safeProducts.map((product) => (
-            <FeaturedImg
-              key={product?._id || Math.random()} // ✅ Fallback key
+            <FeaturedProduct
+              key={product?._id || Math.random()}
               product={product}
             />
           ))}

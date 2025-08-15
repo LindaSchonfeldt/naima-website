@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const StyledFeaturedImg = styled.div`
+const StyledFeaturedProduct = styled.div`
   position: relative; // Add this!
   width: 100%;
   height: 100%;
@@ -26,7 +26,11 @@ const ImageOverlay = styled.div`
   justify-content: flex-end;
 `
 
-export const FeaturedImg = ({ product }) => {
+export const FeaturedProduct = ({ product }) => {
+  if (!product) {
+    return <div>No product data</div>
+  }
+
   const getProductImage = (product) => {
     if (product.primaryImage?.url) return product.primaryImage.url
     if (product.images?.[0]?.url) return product.images[0].url
@@ -43,12 +47,12 @@ export const FeaturedImg = ({ product }) => {
   const imageAlt = getImageAlt(product)
 
   return (
-    <StyledFeaturedImg>
+    <StyledFeaturedProduct>
       <ProductImage src={imageSrc} alt={imageAlt} />
       <ImageOverlay>
         <h3 style={{ margin: 0 }}>{product.name}</h3>
         <p style={{ margin: 0 }}>{product.info || product.description}</p>
       </ImageOverlay>
-    </StyledFeaturedImg>
+    </StyledFeaturedProduct>
   )
 }
