@@ -23,13 +23,11 @@ const buttonVariants = {
     transform: 'translateY(0)',
     hoverBackground: (theme) => theme.colors.primary
   },
-  hover: {
-    background: (theme) => theme.colors.primary,
-    color: 'white',
+  icon: {
+    background: 'transparent',
+    color: (theme) => theme.colors.primary,
     border: 'none',
-    opacity: '0',
-    transform: 'translateY(0)',
-    hoverBackground: (theme) => theme.colors.secondary
+    hoverBackground: 'none'
   }
 }
 
@@ -78,17 +76,31 @@ const StyledButton = styled.button`
   font-size: ${({ size = 'medium' }) => buttonSizes[size]};
 
   &:hover {
-    /* ✅ Fix: Safely access hoverBackground */
-    background-color: ${({ theme, $variant = 'primary' }) => {
+    ${({ $variant = 'primary', theme }) => {
+      if ($variant === 'icon') {
+        return `
+          background-color: transparent;
+          color: ${
+            typeof buttonVariants.icon.color === 'function'
+              ? buttonVariants.icon.color(theme)
+              : buttonVariants.icon.color
+          };
+          opacity: 1;
+          transform: none;
+        `
+      }
       const variant = buttonVariants[$variant] || buttonVariants.primary
-      return typeof variant.hoverBackground === 'function'
-        ? variant.hoverBackground(theme)
-        : variant.hoverBackground || theme.colors.primary
-    }};
-
-    color: white;
-    opacity: 1;
-    transform: translateY(-1px);
+      return `
+        background-color: ${
+          typeof variant.hoverBackground === 'function'
+            ? variant.hoverBackground(theme)
+            : variant.hoverBackground || theme.colors.primary
+        };
+        color: white;
+        opacity: 1;
+        transform: translateY(-1px);
+      `
+    }}
   }
 
   &:disabled {

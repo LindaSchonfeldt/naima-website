@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 // import ErrorBoundary from './components/ErrorBoundary' // ❌ Temporarily disable
 import { Nav } from './components/Nav'
+import Checkout from './pages/Checkout'
 import ContactUs from './pages/ContactUs'
 import FindUs from './pages/FindUs'
 import Home from './pages/Home'
@@ -40,6 +41,7 @@ function App() {
               <Route path='/ourstory' element={<OurStory />} />
               <Route path='/contactus' element={<ContactUs />} />
               <Route path='/retreatclub' element={<RetreatClub />} />
+              <Route path='/checkout' element={<Checkout />} />
             </Routes>
           </MainContent>
           <Footer />

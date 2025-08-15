@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
-import { ProductCard } from '../components/ProductCard'
+import { FeaturedProduct } from '../components/FeaturedProduct'
 import { SectionTitle } from '../components/SectionTitle'
 import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
@@ -33,8 +33,6 @@ const Description = styled.p`
 const FeaturedGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
   margin: 0 auto;
 
   ${media.md} {
@@ -78,10 +76,6 @@ export const FeaturedFika = () => {
       }
     }
   }, [fetchFeaturedProducts]) // ✅ Add fetchFeaturedProducts to dependencies
-
-  const handleOrder = useCallback((product) => {
-    alert(`Order placed for ${product?.name || 'Unknown product'}!`)
-  }, [])
 
   // ✅ Loading state
   if (loading && (!featuredProducts || featuredProducts.length === 0)) {
@@ -132,11 +126,9 @@ export const FeaturedFika = () => {
       {safeProducts.length > 0 ? (
         <FeaturedGrid>
           {safeProducts.map((product) => (
-            <ProductCard
-              key={product?._id || Math.random()} // ✅ Fallback key
+            <FeaturedProduct
+              key={product?._id || Math.random()}
               product={product}
-              onOrder={handleOrder}
-              variant={'featured'}
             />
           ))}
         </FeaturedGrid>
