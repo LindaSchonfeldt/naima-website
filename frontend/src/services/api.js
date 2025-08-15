@@ -87,6 +87,17 @@ export const api = {
     // Get all orders
     getAll: async () => {
       return apiRequest('/orders')
+    },
+
+    // Submit a new order
+    submitOrder: async (data) => {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) throw new Error('Failed to submit order')
+      return response.json()
     }
   }
 }

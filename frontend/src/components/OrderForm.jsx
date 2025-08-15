@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { media } from '../styles/media'
 import { Button } from './Button'
+import { submitOrder } from '../services/api'
 
 const StyledForm = styled.form`
   display: flex;
@@ -32,17 +33,11 @@ const StyledH2 = styled.h2`
 `
 
 export const OrderForm = ({ title = 'Order Your Fika' }) => {
-  const { register, handleSubmit, formState } = useForm()
+  const { register, handleSubmit, formState, reset } = useForm()
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      if (!response.ok) throw new Error('Failed to submit order')
-      // Optionally handle success (show message, reset form, etc.)
+      await submitOrder(data)
       reset()
       alert('Order submitted!')
     } catch (error) {
@@ -51,7 +46,12 @@ export const OrderForm = ({ title = 'Order Your Fika' }) => {
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSubmit(onSubmit)()
+      }}
+    >
       <StyledH2>{title}</StyledH2>
       <input
         type='text'
