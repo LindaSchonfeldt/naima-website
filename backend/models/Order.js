@@ -15,6 +15,7 @@ const orderSchema = new mongoose.Schema({
       price: Number
     }
   ],
+  totalCost: { type: Number },
   createdAt: { type: Date, default: Date.now }
 })
 

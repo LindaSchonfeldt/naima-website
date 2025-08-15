@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -9,8 +10,8 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
-  max-width: 600px;
-  margin: 2rem auto;
+  min-width: 350px;
+  max-width: 800px;
 
   input,
   textarea {
@@ -22,32 +23,43 @@ const StyledForm = styled.form`
   }
 
   ${media.sm} {
-    padding: ${(props) => props.theme.spacing.lg};
   }
 `
 const StyledH2 = styled.h2`
   font-size: 1.5rem;
   margin-bottom: ${(props) => props.theme.spacing.md};
-  text-align: center;
+  text-align: flex-start;
   color: ${(props) => props.theme.colors.text.primary};
 `
 
-export const OrderForm = ({
-  cartItems,
-  title = 'Order Your Fika',
-  ...props
-}) => {
+const FeedbackMessage = styled.div`
+  text-align: flex-start;
+  color: ${(props) => props.theme.colors.text.success};
+  margin: ${(props) => props.theme.spacing.md} 0;
+`
+
+export const OrderForm = ({ cartItems, title = '', ...props }) => {
   const { register, handleSubmit, formState, reset } = useForm()
+  const [success, setSuccess] = useState(false)
 
   const onSubmit = async (data) => {
     const orderData = { ...data, items: cartItems }
     try {
       await api.orders.submitOrder(orderData)
       reset()
-      alert('Order submitted!')
+      setSuccess(true)
     } catch (error) {
-      alert(error.message)
+      setSuccess(false)
     }
+  }
+
+  if (success) {
+    return (
+      <FeedbackMessage>
+        <h2>Thank you for your order!</h2>
+        <p>We have received your order and will process it soon.</p>
+      </FeedbackMessage>
+    )
   }
 
   return (
@@ -68,7 +80,11 @@ export const OrderForm = ({
         placeholder='Email'
         {...register('email', { required: true })}
       />
-      <input type='text' placeholder='Address' {...register('address')} />
+      <input
+        type='text'
+        placeholder='Delivery address'
+        {...register('address')}
+      />
       <input type='text' placeholder='Phone Number' {...register('phone')} />
       <textarea
         placeholder='Special Instructions'

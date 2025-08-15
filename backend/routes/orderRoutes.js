@@ -1,6 +1,7 @@
 import express from 'express'
-import Order from '../models/Order.js'
+
 import Customer from '../models/Customer.js'
+import Order from '../models/Order.js'
 
 const router = express.Router()
 
@@ -20,10 +21,15 @@ router.post('/', async (req, res) => {
       await customer.save()
     }
 
+    // Calculate totalCost from items
+    const items = req.body.items || []
+    const totalCost = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
     // Create order with reference to customer
     const order = new Order({
       ...req.body,
-      customer: customer._id
+      customer: customer._id,
+      totalCost
     })
     await order.save()
     res.status(201).json({ message: 'Order received!', order })
