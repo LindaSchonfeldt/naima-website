@@ -5,7 +5,7 @@ import { PageContainer } from "../components/PageContainer";
 const MissionSection = styled(PageContainer)`
   display: flex;
   flex-direction: column;
-  gap: ${({theme}) => theme.spacing.xxl};
+  gap: ${({theme}) => theme.spacing.lg};
 `
 export const Row = styled.div`
   display: grid;
@@ -40,9 +40,21 @@ export const Media = styled.div`
   }
 `
 export const Img = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
+`
+
+export const Hashtag = styled.h2`
+  grid-column: 1/-1;
+  justify-self: center;
+  text-align: center;
+  font-size: clamp(2rem, 9vw, 6rem);
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-weight: ${({ theme }) => theme.fonts.weights.heavy};
+  margin: ${({ theme }) => theme.spacing.xl} 0 ${({ theme }) => theme.spacing.lg};
 `
 
 export const AboutMission = () => {
@@ -65,6 +77,9 @@ export const AboutMission = () => {
           <h2>OUR MISSION</h2>
           <p>To help people feel better through the food they eat.</p>
         </Text>
+      </Row>
+      <Row>
+        <Hashtag>#thefutureoffika</Hashtag>
       </Row>
     </MissionSection>
   )
