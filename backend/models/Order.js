@@ -1,12 +1,20 @@
 import mongoose from 'mongoose'
 
 const orderSchema = new mongoose.Schema({
-  customer: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' }, // Reference
+  customer: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' },
   name: { type: String, required: true },
   email: { type: String, required: true },
   address: { type: String },
   phone: { type: String },
   instructions: { type: String },
+  items: [
+    {
+      productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+      name: String,
+      quantity: Number,
+      price: Number
+    }
+  ],
   createdAt: { type: Date, default: Date.now }
 })
 

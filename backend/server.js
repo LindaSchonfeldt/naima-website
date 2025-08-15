@@ -1,11 +1,12 @@
 import cors from 'cors'
+import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
 
-// Import your routes
-import productRoutes from './routes/productRoutes.js'
+import customerRoutes from './routes/customerRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
 import partnerRoutes from './routes/partnerRoutes.js'
+import productRoutes from './routes/productRoutes.js'
 
 dotenv.config()
 
@@ -51,6 +52,8 @@ app.use((req, res, next) => {
 // Register routes
 app.use('/api/products', productRoutes)
 app.use('/api/partners', partnerRoutes)
+app.use('/api/orders', orderRoutes)
+app.use('/api/customers', customerRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'Naima API is running!' })

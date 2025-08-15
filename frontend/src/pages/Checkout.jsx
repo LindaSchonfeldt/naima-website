@@ -111,7 +111,7 @@ const Checkout = () => {
           $
         </h3>
       </StyledTotal>
-      <StyledForm />
+      <StyledForm cartItems={items} />
       <p>
         By placing an order, you agree to our{' '}
         <StyledLink href='/terms' target='_blank' rel='noopener noreferrer'>

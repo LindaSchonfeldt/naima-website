@@ -32,12 +32,17 @@ const StyledH2 = styled.h2`
   color: ${(props) => props.theme.colors.text.primary};
 `
 
-export const OrderForm = ({ title = 'Order Your Fika' }) => {
+export const OrderForm = ({
+  cartItems,
+  title = 'Order Your Fika',
+  ...props
+}) => {
   const { register, handleSubmit, formState, reset } = useForm()
 
   const onSubmit = async (data) => {
+    const orderData = { ...data, items: cartItems }
     try {
-      await api.orders.submitOrder(data)
+      await api.orders.submitOrder(orderData)
       reset()
       alert('Order submitted!')
     } catch (error) {

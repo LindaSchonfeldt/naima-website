@@ -91,7 +91,7 @@ export const api = {
 
     // Submit a new order
     submitOrder: async (data) => {
-      const response = await fetch('/api/orders', {
+      const response = await fetch(`${API_BASE}/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

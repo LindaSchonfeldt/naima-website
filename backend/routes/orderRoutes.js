@@ -4,7 +4,9 @@ import Customer from '../models/Customer.js'
 
 const router = express.Router()
 
-router.post('/orders', async (req, res) => {
+// Create a new order
+// This will also create a customer if they don't exist
+router.post('/', async (req, res) => {
   try {
     // Find or create customer
     let customer = await Customer.findOne({ email: req.body.email })
@@ -31,7 +33,7 @@ router.post('/orders', async (req, res) => {
 })
 
 // Get all orders with customer details
-router.get('/orders', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const orders = await Order.find().populate('customer')
     res.json(orders)
