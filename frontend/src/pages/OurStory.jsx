@@ -1,11 +1,12 @@
-import { PageContainer } from '../components/PageContainer'
+import { AboutFounder } from '../sections/AboutFounder'
+import { AboutMission } from '../sections/AboutMission'
 
 const OurStory = () => {
   return (
-    <PageContainer>
-      <h1>Our Story</h1>
-      <p>About Naima...</p>
-    </PageContainer>
+    <>
+    <AboutFounder />
+    <AboutMission />
+    </>
   )
 }
 

@@ -68,7 +68,8 @@ const StyledButton = styled.button`
   }};
 
   /* Common styles */
-  padding: ${(props) => props.theme.spacing.sm}
+  padding: 
+    ${(props) => props.theme.spacing.sm},
     ${(props) => props.theme.spacing.lg};
   border-radius: 8px;
   font-weight: 600;
