@@ -31,7 +31,7 @@ const StyledH2 = styled.h2`
   color: ${(props) => props.theme.colors.text.primary};
 `
 
-export const Form = ({ title = 'Order Your Fika' }) => {
+export const OrderForm = ({ title = 'Order Your Fika' }) => {
   const { register, handleSubmit, formState } = useForm()
 
   const onSubmit = async (data) => {

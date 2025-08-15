@@ -1,7 +1,7 @@
 import { MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
 
-import { Form } from '../components/Form'
+import { OrderForm } from '../components/OrderForm'
 import { PageContainer } from '../components/PageContainer'
 import { QuantitySelector } from '../components/QuantitySelector'
 import { useCartStore } from '../stores/useCartStore'
@@ -62,7 +62,7 @@ const StyledTotal = styled.div`
   margin-top: 20px;
 `
 
-const StyledForm = styled(Form)`
+const StyledForm = styled(OrderForm)`
   margin-top: ${(props) => props.theme.spacing.md};
 `
 
