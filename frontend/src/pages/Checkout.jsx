@@ -1,11 +1,10 @@
-import { MdDelete } from 'react-icons/md'
-import styled from 'styled-components'
-
 import { OrderForm } from '../components/OrderForm'
 import { PageContainer } from '../components/PageContainer'
 import { QuantitySelector } from '../components/QuantitySelector'
 import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
+import { MdDelete } from 'react-icons/md'
+import styled from 'styled-components'
 
 const StyledH2 = styled.h2`
   font-size: 1.5rem;
