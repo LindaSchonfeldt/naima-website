@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
+import { api } from '../services/api'
 import { media } from '../styles/media'
 import { Button } from './Button'
-import { submitOrder } from '../services/api'
 
 const StyledForm = styled.form`
   display: flex;
@@ -37,7 +37,7 @@ export const OrderForm = ({ title = 'Order Your Fika' }) => {
 
   const onSubmit = async (data) => {
     try {
-      await submitOrder(data)
+      await api.orders.submitOrder(data)
       reset()
       alert('Order submitted!')
     } catch (error) {
