@@ -99,5 +99,19 @@ export const api = {
       if (!response.ok) throw new Error('Failed to submit order')
       return response.json()
     }
+  },
+
+  // Companies API
+  companies: {
+    // Login method
+    login: async (data) => {
+      const response = await fetch(`${API_BASE}/companies/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) throw new Error('Login failed')
+      return response.json()
+    }
   }
 }

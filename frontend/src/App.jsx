@@ -5,11 +5,12 @@ import styled from 'styled-components'
 // import ErrorBoundary from './components/ErrorBoundary' // ❌ Temporarily disable
 import { Nav } from './components/Nav'
 import Checkout from './pages/Checkout'
+import CompanyPortal from './pages/CompanyPortal'
 import ContactUs from './pages/ContactUs'
 import FindUs from './pages/FindUs'
 import Home from './pages/Home'
 import OurStory from './pages/OurStory'
-import RetreatClub from './pages/RetreatClub'
+import ReTreatClub from './pages/ReTreatClub'
 import Shop from './pages/Shop'
 import { Footer } from './sections/Footer'
 import GlobalStyles from './styles/GlobalStyles'
@@ -39,9 +40,10 @@ function App() {
               <Route path='/shop' element={<Shop />} />
               <Route path='/findus' element={<FindUs />} />
               <Route path='/ourstory' element={<OurStory />} />
+              <Route path='/retreatclub' element={<ReTreatClub />} />
               <Route path='/contactus' element={<ContactUs />} />
-              <Route path='/retreatclub' element={<RetreatClub />} />
               <Route path='/checkout' element={<Checkout />} />
+              <Route path='/company' element={<CompanyPortal />} />
             </Routes>
           </MainContent>
           <Footer />

@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
 
+import companyRoutes from './routes/companyRoutes.js'
 import customerRoutes from './routes/customerRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import partnerRoutes from './routes/partnerRoutes.js'
@@ -54,6 +55,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/partners', partnerRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/customers', customerRoutes)
+app.use('/api/companies', companyRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'Naima API is running!' })

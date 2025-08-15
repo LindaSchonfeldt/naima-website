@@ -1,3 +1,4 @@
+import { Button } from './Button'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -5,7 +6,6 @@ import styled from 'styled-components'
 import { api } from '../services/api'
 import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
-import { Button } from './Button'
 
 const StyledForm = styled.form`
   display: flex;
