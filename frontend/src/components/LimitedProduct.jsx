@@ -14,4 +14,11 @@ export const LimitedProduct = ({ product }) => {
   if (!product) {
     return <div>No product data</div>
   }
+  return (
+    <StyledLimitedProduct>
+      <h3>{product.name}</h3>
+      <p>{product.description}</p>
+      {/* Add more product details as needed */}
+    </StyledLimitedProduct>
+  )
 }
