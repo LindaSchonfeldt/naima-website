@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { media } from '../styles/media'
 
-const StyledSectionTitle = styled.h2`
+const StyledPageTitle = styled.h1`
   font-family: ${(props) => props.theme.typography.heading.fontFamily};
   font-weight: ${(props) => props.theme.typography.heading.fontWeight};
   line-height: ${(props) => props.theme.typography.heading.lineHeight};
@@ -21,6 +21,6 @@ const StyledSectionTitle = styled.h2`
   }
 `
 
-export const SectionTitle = ({ children, align }) => {
-  return <StyledSectionTitle $align={align}>{children}</StyledSectionTitle>
+export const PageTitle = ({ children, align }) => {
+  return <StyledPageTitle $align={align}>{children}</StyledPageTitle>
 }

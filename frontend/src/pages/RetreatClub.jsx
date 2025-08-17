@@ -1,12 +1,12 @@
 import { CompanyLogin } from '../components/CompanyLogin'
 import { PageContainer } from '../components/PageContainer'
 import styled from 'styled-components'
-import { SectionTitle } from '../components/SectionTitle'
+import { PageTitle } from '../components/PageTitle'
 
 const RetreatClub = () => {
   return (
     <PageContainer>
-      <SectionTitle>Re:treat Club</SectionTitle>
+      <PageTitle>Re:treat Club</PageTitle>
       <p>Join our retreat club...</p>
       <CompanyLogin />
     </PageContainer>

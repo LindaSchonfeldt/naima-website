@@ -1,10 +1,12 @@
+import { MdDelete } from 'react-icons/md'
+import styled from 'styled-components'
+
 import { OrderForm } from '../components/OrderForm'
 import { PageContainer } from '../components/PageContainer'
+import { PageTitle } from '../components/PageTitle'
 import { QuantitySelector } from '../components/QuantitySelector'
 import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
-import { MdDelete } from 'react-icons/md'
-import styled from 'styled-components'
 
 const StyledH2 = styled.h2`
   font-size: 1.5rem;
@@ -40,29 +42,36 @@ const StyledIntro = styled.div`
 const CheckoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: ${(props) => props.theme.spacing.md};
 
 ${media.md} {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 2rem; 
+  gap: 4rem; 
   margin: 0;
 `
 
 const CartItems = styled.div`
-  flex: 2;
-  min-width: 350px;
-  max-width: 400px;
-  min-height: 300px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  padding: ${(props) => props.theme.spacing.md};
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: ${(props) => props.theme.spacing.sm};
+  width: 100%;
+  max-width: 100%; // Mobile-first: full width
+  min-height: 300px;
+  padding: ${(props) => props.theme.spacing.sm};
   border: 1px solid ${(props) => props.theme.colors.border};
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text.primary};
+
+  ${media.md} {
+    max-width: 400px;
+    padding: ${(props) => props.theme.spacing.md};
+  }
 `
 
 const ItemDetails = styled.div`
@@ -92,9 +101,8 @@ const StyledTotal = styled.div`
 `
 
 const StyledForm = styled(OrderForm)`
-  flex: 1;
   width: 100%;
-  max-width: 800px;
+  max-width: 100%; // Mobile-first: full width
 
   ${media.md} {
     max-width: 800px;
@@ -108,7 +116,7 @@ const Checkout = () => {
   return (
     <PageContainer>
       <StyledIntro>
-        <StyledH2>Order Your Fika</StyledH2>
+        <PageTitle>Order Your Fika</PageTitle>
         <p>
           By submitting this form you are placing an order for the items below.
         </p>

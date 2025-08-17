@@ -1,4 +1,3 @@
-import { Button } from './Button'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -6,13 +5,16 @@ import styled from 'styled-components'
 import { api } from '../services/api'
 import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
+import { Button } from './Button'
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
-  min-width: 350px;
-  max-width: 800px;
+  width: 100%;
+  max-width: 400px; // Mobile-first: max width
+  margin: 0 auto; // Center horizontally
+  padding: ${(props) => props.theme.spacing.sm};
 
   input,
   textarea {
@@ -21,9 +23,12 @@ const StyledForm = styled.form`
     padding: ${(props) => props.theme.spacing.sm};
     border: 1px solid ${(props) => props.theme.colors.border};
     font-size: 1rem;
+    box-sizing: border-box;
   }
 
-  ${media.sm} {
+  ${media.md} {
+    max-width: 800px;
+    padding: ${(props) => props.theme.spacing.md};
   }
 `
 const StyledH2 = styled.h2`

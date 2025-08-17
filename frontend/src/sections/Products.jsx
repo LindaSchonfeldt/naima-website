@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { ProductCard } from '../components/ProductCard'
-import { SectionTitle } from '../components/SectionTitle'
+import { PageTitle } from '../components/PageTitle'
 import { media } from '../styles/media'
 
 const StyledProducts = styled.section`
@@ -43,7 +43,7 @@ export const Products = ({ products = [], onOrder }) => {
   if (!products || products.length === 0) {
     return (
       <StyledProducts>
-        <SectionTitle>Fika Selection</SectionTitle>
+        <PageTitle>Fika Selection</PageTitle>
         <p>No products available at the moment.</p>
       </StyledProducts>
     )
@@ -51,7 +51,7 @@ export const Products = ({ products = [], onOrder }) => {
 
   return (
     <StyledProducts>
-      <SectionTitle>Fika Selection</SectionTitle>
+      <PageTitle>Fika Selection</PageTitle>
       <StyledProductsGrid>
         {products.map((product) => (
           <ProductCard key={product._id} product={product} onOrder={onOrder} />
