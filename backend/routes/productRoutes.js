@@ -4,7 +4,10 @@ import {
   getAllProducts,
   getFeaturedProducts,
   getProductById,
-  getProductsByCategory
+  getProductsByCategory,
+  createProduct,
+  updateProduct,
+  deleteProduct
 } from '../controllers/productControllers.js'
 import { authenticate, authorize } from '../middleware/auth.js'
 
