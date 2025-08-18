@@ -12,11 +12,12 @@ export const registerCompany = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10)
     const company = new Company({
-      name,
-      email,
+      name: req.body.name,
+      email: req.body.email,
       password: hashedPassword,
-      address,
-      contactPerson
+      address: req.body.address,
+      contactPerson: req.body.contactPerson,
+      role: 'company' // Set role explicitly
     })
     await company.save()
     res.status(201).json({ message: 'Company registered!' })
