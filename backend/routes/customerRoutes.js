@@ -5,18 +5,22 @@ import {
   deleteCustomerById,
   getAllCustomers,
   getCustomerById,
-  getOrdersForCustomer,
   updateCustomerById
 } from '../controllers/customerControllers.js'
+import { authenticate, authorize } from '../middleware/auth.js'
 
 const router = express.Router()
 
 // Admin routes
-router.get('/', getAllCustomers)
-router.get('/:id', getCustomerById)
-router.post('/', createCustomer)
-router.put('/:id', updateCustomerById)
-router.delete('/:id', deleteCustomerById)
-router.get('/:id/orders', getOrdersForCustomer)
+router.get('/', authenticate, authorize(['admin']), getAllCustomers)
+router.get('/:id', authenticate, authorize(['admin']), getCustomerById)
+router.post('/', authenticate, authorize(['admin']), createCustomer)
+router.put(
+  '/:id',
+  authenticate,
+  authorize(['admin', 'company']),
+  updateCustomerById
+)
+router.delete('/:id', authenticate, authorize(['admin']), deleteCustomerById)
 
 export default router

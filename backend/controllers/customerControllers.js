@@ -39,6 +39,18 @@ export const createCustomer = async (req, res) => {
 // Update customer by ID
 export const updateCustomerById = async (req, res) => {
   try {
+    // If the user is a company, check if they own this customer profile
+    if (req.user.role === 'company') {
+      const customer = await Customer.findById(req.params.id)
+      if (!customer) {
+        return res.status(404).json({ message: 'Customer not found' })
+      }
+      // Only allow update if the company owns this customer profile
+      if (String(customer.company) !== String(req.user.companyId)) {
+        return res.status(403).json({ message: 'Forbidden: Not your profile' })
+      }
+    }
+
     const customer = await Customer.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
@@ -60,16 +72,6 @@ export const deleteCustomerById = async (req, res) => {
       return res.status(404).json({ message: 'Customer not found' })
     }
     res.json({ message: 'Customer deleted' })
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-  }
-}
-
-// Get all orders for a customer
-export const getOrdersForCustomer = async (req, res) => {
-  try {
-    const orders = await Order.find({ customer: req.params.id })
-    res.json(orders)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
