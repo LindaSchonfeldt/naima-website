@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import Company from '../models/Company.js'
+import Customer from '../models/Customer.js'
 
 // Register a new company
 export const registerCompany = async (req, res) => {
@@ -12,15 +13,26 @@ export const registerCompany = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10)
     const company = new Company({
-      name: req.body.name,
-      email: req.body.email,
+      name,
+      email,
       password: hashedPassword,
-      address: req.body.address,
-      contactPerson: req.body.contactPerson,
+      address,
+      contactPerson,
       role: 'company' // Set role explicitly
     })
     await company.save()
-    res.status(201).json({ message: 'Company registered!' })
+
+    // Create linked customer profile
+    const customer = new Customer({
+      name,
+      email,
+      address,
+      phone: req.body.phone,
+      company: company._id // Link to company
+    })
+    await customer.save()
+
+    res.status(201).json({ message: 'Company registered!', company, customer })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
@@ -38,5 +50,52 @@ export const loginCompany = async (req, res) => {
   const token = jwt.sign({ companyId: company._id }, process.env.JWT_SECRET, {
     expiresIn: '1d'
   })
-  res.json({ token, company: { name: company.name, email: company.email } })
+  const customer = await Customer.findOne({ company: company._id })
+  res.json({ token, company, customer })
+}
+
+// Get all companies
+export const getAllCompanies = async (req, res) => {
+  try {
+    const companies = await Company.find()
+    res.json(companies)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+// Get a single company by ID
+export const getCompanyById = async (req, res) => {
+  try {
+    const company = await Company.findById(req.params.id)
+    if (!company) return res.status(404).json({ error: 'Company not found' })
+    res.json(company)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+// Update a company's details
+export const updateCompany = async (req, res) => {
+  try {
+    const company = await Company.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
+    if (!company) return res.status(404).json({ error: 'Company not found' })
+    res.json(company)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+// Delete a company
+export const deleteCompany = async (req, res) => {
+  try {
+    const company = await Company.findByIdAndDelete(req.params.id)
+    if (!company) return res.status(404).json({ error: 'Company not found' })
+    res.json({ message: 'Company deleted successfully' })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 }

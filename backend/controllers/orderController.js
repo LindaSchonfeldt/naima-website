@@ -48,3 +48,57 @@ export const getAllOrders = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+
+// Get order by ID with customer details
+export const getOrderById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id).populate('customer')
+    if (!order) return res.status(404).json({ error: 'Order not found' })
+    res.json(order)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+// Update an order
+export const updateOrder = async (req, res) => {
+  try {
+    const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
+    if (!order) return res.status(404).json({ error: 'Order not found' })
+    res.json(order)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+// Delete an order
+export const deleteOrder = async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id)
+    if (!order) return res.status(404).json({ error: 'Order not found' })
+    res.json({ message: 'Order deleted' })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+// Get all orders for a customer
+export const getOrdersForCustomer = async (req, res) => {
+  try {
+    const orders = await Order.find({ customer: req.params.id })
+    res.json(orders)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+// Middleware to check if the user is an admin
+export const isAdmin = (req, res, next) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'Forbidden' })
+  }
+  next()
+}
