@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import styled from 'styled-components'
 
 import { PageContainer } from '../components/PageContainer'
 import { Products } from '../sections/Products'

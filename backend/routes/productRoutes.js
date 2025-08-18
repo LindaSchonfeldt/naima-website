@@ -1,13 +1,13 @@
 import express from 'express'
 
 import {
+  createProduct,
+  deleteProduct,
   getAllProducts,
   getFeaturedProducts,
   getProductById,
   getProductsByCategory,
-  createProduct,
-  updateProduct,
-  deleteProduct
+  updateProduct
 } from '../controllers/productControllers.js'
 import { authenticate, authorize } from '../middleware/auth.js'
 

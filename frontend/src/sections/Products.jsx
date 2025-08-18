@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { ProductCard } from '../components/ProductCard'
 import { PageTitle } from '../components/PageTitle'
+import { ProductCard } from '../components/ProductCard'
 import { media } from '../styles/media'
 
 const StyledProducts = styled.section`
@@ -20,9 +20,10 @@ const StyledProducts = styled.section`
 `
 
 const StyledProductsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: ${(props) => props.theme.spacing.lg};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: ${(props) => props.theme.spacing.sm};
   max-width: 1200px;
 
   /* Start centering immediately, not just at xs */
@@ -30,7 +31,8 @@ const StyledProductsGrid = styled.div`
     margin: 0;
   }
 
-  ${media.sm} {
+  ${media.lg} {
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 

@@ -143,7 +143,7 @@ const StyledImg = styled.img`
 `
 
 export const Cart = () => {
-  const { isOpen, items, closeCart, toggleCart, removeFromCart } =
+  const { isOpen, items, closeCart, toggleCart, removeFromCart, addToCart } =
     useCartStore()
 
   if (!isOpen)
@@ -183,9 +183,17 @@ export const Cart = () => {
                       />
                     )}
                     <CartItemInfo>
-                      <CartItemName>{item.name}</CartItemName>{' '}
+                      <CartItemName>{item.name}</CartItemName>
+                      {item.selectedSize && (
+                        <span style={{ fontSize: '0.9rem', color: '#666' }}>
+                          Size: {item.selectedSize.packaging} (
+                          {item.selectedSize.weight}g)
+                        </span>
+                      )}
                       <CartItemPrice>
-                        {item.formattedPrice || `$${item.price}`}{' '}
+                        {item.selectedSize?.price
+                          ? `$${item.selectedSize.price}`
+                          : item.formattedPrice || `$${item.price}`}
                       </CartItemPrice>
                     </CartItemInfo>
 

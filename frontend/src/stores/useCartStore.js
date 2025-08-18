@@ -9,7 +9,7 @@ export const useCartStore = create(
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
-      addToCart: (product) =>
+      addToCart: (product, selectedSize) =>
         set((state) => {
           const existing = state.items.find((item) => item._id === product._id)
           if (existing) {
@@ -23,7 +23,7 @@ export const useCartStore = create(
             }
           }
           return {
-            items: [...state.items, { ...product, quantity: 1 }],
+            items: [...state.items, { ...product, quantity: 1, selectedSize }],
             isOpen: true
           }
         }),

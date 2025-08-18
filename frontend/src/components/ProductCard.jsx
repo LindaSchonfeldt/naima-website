@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components'
 
 import { useCartStore } from '../stores/useCartStore'
+import { useProductSelectionStore } from '../stores/useProductSelectionStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
+import { DropdownMenu } from './DropdownMenu'
 
 const StyledProductCard = styled.div`
   text-align: left;
@@ -69,6 +71,12 @@ const ButtonContainer = styled.div`
 
 export const ProductCard = ({ product, onOrder, variant }) => {
   const addToCart = useCartStore((state) => state.addToCart)
+  const selectedSize = useProductSelectionStore(
+    (state) => state.selectedSizes[product._id]
+  )
+  const setSelectedSize = useProductSelectionStore(
+    (state) => state.setSelectedSize
+  )
 
   if (!product) {
     return <div>No product data</div>
@@ -86,6 +94,11 @@ export const ProductCard = ({ product, onOrder, variant }) => {
     return product.name
   }
 
+  const sizeOptions = product.sizes.map((size) => ({
+    label: `${size.packaging} (${size.weight}g)`,
+    value: size._id || size.id
+  }))
+
   return (
     <StyledProductCard>
       <ProductImage
@@ -102,13 +115,27 @@ export const ProductCard = ({ product, onOrder, variant }) => {
         <ProductInformation>
           <ProductDescription>{product.description}</ProductDescription>
           <ProductPrice>
-            {product.formattedPrice || `$${product.price}`}
+            {selectedSize?.price
+              ? `$${selectedSize.price}`
+              : product.formattedPrice || `$${product.price}`}
           </ProductPrice>
         </ProductInformation>
       </ProductContent>
-
+      <DropdownMenu
+        options={sizeOptions}
+        value={selectedSize?._id || selectedSize?.id}
+        onChange={(val) => {
+          const size = product.sizes.find((s) => (s._id || s.id) === val)
+          setSelectedSize(product._id, size)
+        }}
+      />
       <ButtonContainer>
-        <Button variant='primary' onClick={() => addToCart(product)}>
+        <Button
+          variant='primary'
+          onClick={() =>
+            addToCart({ ...product, selectedSize, price: selectedSize.price })
+          }
+        >
           Add to Cart
         </Button>
       </ButtonContainer>

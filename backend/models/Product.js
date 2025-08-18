@@ -68,7 +68,11 @@ const sizeSchema = new mongoose.Schema(
     packaging: {
       type: String,
       required: true
-    }
+    },
+    price: {
+      type: Number,
+      required: true
+    } // Add this line
   },
   { _id: false }
 )
@@ -86,12 +90,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Product description is required'],
       maxlength: [500, 'Description cannot exceed 500 characters']
-    },
-    price: {
-      type: Number,
-      required: [true, 'Product price is required'],
-      min: [0, 'Price cannot be negative'],
-      max: [10000, 'Price cannot exceed 10000']
     },
     category: {
       type: String,
