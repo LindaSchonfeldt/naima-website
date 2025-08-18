@@ -66,7 +66,7 @@ export const getProductsByCategory = async (req, res) => {
   }
 }
 
-// Admin routes
+// Create new product
 export const createProduct = async (req, res) => {
   try {
     const product = new Product(req.body)

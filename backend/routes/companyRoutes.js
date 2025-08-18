@@ -1,5 +1,7 @@
 import express from 'express'
 
+import { authenticate, authorize } from '../middleware/auth.js'
+
 const router = express.Router()
 
 import {
@@ -15,9 +17,9 @@ router.post('/register', registerCompany)
 router.post('/login', loginCompany)
 
 // Admin routes
-router.get('/', getAllCompanies)
-router.get('/:id', getCompanyById)
-router.put('/:id', updateCompany)
-router.delete('/:id', deleteCompany)
+router.get('/', authenticate, authorize(['admin']), getAllCompanies)
+router.get('/:id', authenticate, authorize(['admin']), getCompanyById)
+router.put('/:id', authenticate, authorize(['admin']), updateCompany)
+router.delete('/:id', authenticate, authorize(['admin']), deleteCompany)
 
 export default router
