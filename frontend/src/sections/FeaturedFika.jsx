@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import { FeaturedProduct } from '../components/FeaturedProduct'
-import { SectionTitle } from '../components/SectionTitle'
+import { PageTitle } from '../components/PageTitle'
 import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 
@@ -81,7 +81,7 @@ export const FeaturedFika = () => {
   if (loading && (!featuredProducts || featuredProducts.length === 0)) {
     return (
       <StyledFeaturedFika>
-        <SectionTitle>Featured Treats</SectionTitle>
+        <PageTitle>Featured Treats</PageTitle>
         <LoadingMessage>Loading featured products...</LoadingMessage>
       </StyledFeaturedFika>
     )
@@ -92,7 +92,7 @@ export const FeaturedFika = () => {
     return (
       <StyledFeaturedFika>
         <InfoSection>
-          <SectionTitle>Featured Treats</SectionTitle>
+          <PageTitle>Featured Treats</PageTitle>
         </InfoSection>
         <ErrorMessage>
           Error loading products: {error}
@@ -116,7 +116,7 @@ export const FeaturedFika = () => {
   return (
     <StyledFeaturedFika>
       <InfoSection>
-        <SectionTitle>Featured Treats</SectionTitle>
+        <PageTitle>Featured Treats</PageTitle>
         <Description>
           Every bite tells a story of wellness. Our handcrafted treats combine
           traditional Swedish fika culture with modern superfoods.

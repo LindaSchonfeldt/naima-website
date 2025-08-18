@@ -1,10 +1,12 @@
+import ContactUsForm from '../components/ContactUsForm'
 import { PageContainer } from '../components/PageContainer'
+import { PageTitle } from '../components/PageTitle'
 
 const ContactUs = () => {
   return (
     <PageContainer>
-      <h1>Contact Us</h1>
-      <p>Get in touch...</p>
+      <PageTitle align='center'>contact us</PageTitle>
+      <ContactUsForm />
     </PageContainer>
   )
 }
