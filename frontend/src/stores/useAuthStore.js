@@ -1,8 +1,13 @@
 import { create } from 'zustand'
 
+const initialToken = localStorage.getItem('companyToken')
+
 export const useAuthStore = create((set) => ({
-  companyToken: null,
-  isLoggedIn: false,
+  companyToken: initialToken,
+  isLoggedIn: !!initialToken,
   setAuth: (token) => set({ companyToken: token, isLoggedIn: !!token }),
-  logout: () => set({ companyToken: null, isLoggedIn: false })
+  logout: () => {
+    localStorage.removeItem('companyToken')
+    set({ companyToken: null, isLoggedIn: false })
+  }
 }))

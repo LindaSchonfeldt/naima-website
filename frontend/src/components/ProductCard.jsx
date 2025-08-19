@@ -7,32 +7,30 @@ import { Button } from './Button'
 import { DropdownMenu } from './DropdownMenu'
 
 const StyledProductCard = styled.div`
-  text-align: left;
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 250px;
+  background: #fff;
+  overflow: hidden;
+  min-width: 0;
+  height: 100%; // fill grid row height
   padding-bottom: ${(props) => props.theme.spacing.md};
-  ${({ $variant }) => $variant === 'featured' && css``}
-
-  ${media.sm} {
-    align-items: flex-start;
-  }
-
-  ${media.md} {
-    width: 300px;
   }
 `
 
 const ProductImage = styled.img`
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  object-fit: cover; // Ensures images fill the area and are cropped if needed
 
   ${media.sm} {
-    height: 350px;
+    height: 300px; // Keep height consistent on small screens
+  }
+
+  ${media.md} {
+    height: 300px; // Keep height consistent on medium screens
+  }
+
+  ${media.lg} {
+    height: 400px; // Keep height consistent on large screens
   }
 `
 
