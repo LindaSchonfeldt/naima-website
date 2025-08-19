@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+
 import { api } from '../services/api'
 
 const useProductStore = create(
@@ -12,11 +13,16 @@ const useProductStore = create(
       loading: false,
       error: null,
       filters: {},
+      selectedSizes: {},
 
       // Actions - Add useCallback equivalent for Zustand
       setLoading: (loading) => set({ loading }),
       setError: (error) => set({ error }),
       setFilters: (filters) => set({ filters }),
+      setSelectedSize: (productId, size) =>
+        set((state) => ({
+          selectedSizes: { ...state.selectedSizes, [productId]: size }
+        })),
 
       // Fetch all products
       fetchProducts: async (filters = {}) => {

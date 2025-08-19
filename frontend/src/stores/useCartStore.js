@@ -1,49 +1,52 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
-export const useCartStore = create(
-  persist(
-    (set) => ({
-      isOpen: false,
-      items: [],
-      openCart: () => set({ isOpen: true }),
-      closeCart: () => set({ isOpen: false }),
-      toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
-      addToCart: (product, selectedSize) =>
-        set((state) => {
-          const existing = state.items.find((item) => item._id === product._id)
-          if (existing) {
-            return {
-              items: state.items.map((item) =>
-                item._id === product._id
-                  ? { ...item, quantity: (item.quantity || 1) + 1 }
-                  : item
-              ),
-              isOpen: true
-            }
-          }
-          return {
-            items: [...state.items, { ...product, quantity: 1, selectedSize }],
-            isOpen: true
-          }
-        }),
-      updateQuantity: (productId, quantity) =>
-        set((state) => ({
+export const useCartStore = create((set) => ({
+  items: [],
+  isOpen: false,
+  toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
+  closeCart: () => set({ isOpen: false }),
+  addToCart: (product, selectedSize) =>
+    set((state) => {
+      const sizeId = String(
+        selectedSize._id || product.sizes.findIndex((s) => s === selectedSize)
+      )
+      const cartKey = `${product._id}-${sizeId}`
+      const existingItem = state.items.find((item) => item.cartKey === cartKey)
+
+      if (existingItem) {
+        // Increase quantity if already in cart
+        return {
           items: state.items.map((item) =>
-            item._id === productId
-              ? { ...item, quantity: Math.max(1, quantity) }
+            item.cartKey === cartKey
+              ? { ...item, quantity: item.quantity + 1 }
               : item
           )
-        })),
-      removeFromCart: (productId) =>
-        set((state) => ({
-          items: state.items.filter((item) => item._id !== productId)
-        })),
-      clearCart: () => set({ items: [] })
+        }
+      } else {
+        // Add new item
+        return {
+          items: [
+            ...state.items,
+            {
+              ...product,
+              selectedSize,
+              quantity: 1,
+              cartKey
+            }
+          ]
+        }
+      }
     }),
-    {
-      name: 'cart-storage', // key in localStorage
-      partialize: (state) => ({ items: state.items }) // only persist items
-    }
-  )
-)
+  removeFromCart: (cartKey) =>
+    set((state) => ({
+      items: state.items.filter((item) => item.cartKey !== cartKey)
+    })),
+  updateQuantity: (cartKey, quantity) =>
+    set((state) => ({
+      items: state.items.map((item) =>
+        item.cartKey === cartKey
+          ? { ...item, quantity: Math.max(1, quantity) }
+          : item
+      )
+    }))
+}))

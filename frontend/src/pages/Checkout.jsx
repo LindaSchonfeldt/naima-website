@@ -136,12 +136,17 @@ const Checkout = () => {
         <CartItems>
           <StyledH3>Cart items:</StyledH3>
           {items.map((item) => (
-            <div key={item._id}>
+            <div key={item.cartKey}>
               <StyledH4>{item.name}</StyledH4>
               <ItemDetails>
-                <QuantitySelector key={item._id} item={item} />
-                <p>à {item.formattedPrice || `$${item.price}`}</p>
-                <DeleteButton onClick={() => removeFromCart(item._id)}>
+                <QuantitySelector key={item.cartKey} item={item} />
+                <p>
+                  à $
+                  {item.selectedSize?.price
+                    ? item.selectedSize.price
+                    : item.price}
+                </p>
+                <DeleteButton onClick={() => removeFromCart(item.cartKey)}>
                   Remove
                 </DeleteButton>
               </ItemDetails>
@@ -149,12 +154,16 @@ const Checkout = () => {
           ))}
           <StyledTotal>
             <h3>
-              Total: {''}
-              {items.reduce(
-                (total, item) => total + item.price * (item.quantity || 1),
-                0
-              )}
-              $
+              Total: $
+              {items
+                .reduce(
+                  (total, item) =>
+                    total +
+                    (item.selectedSize?.price || item.price) *
+                      (item.quantity || 1),
+                  0
+                )
+                .toFixed(2)}
             </h3>
           </StyledTotal>
         </CartItems>

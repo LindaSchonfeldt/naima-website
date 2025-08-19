@@ -28,9 +28,9 @@ export const DropdownMenu = ({
       onChange={(e) => onChange(e.target.value)}
       {...props}
     >
-      {options.map((option, idx) => (
-        <option key={getValue(option)} value={getValue(option)}>
-          {getLabel(option)}
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
         </option>
       ))}
     </DropdownSelect>

@@ -3,41 +3,48 @@ export const cateringPartners = [
     id: 1,
     name: 'Martin & Servera',
     logo: 'https://martinservera.se/wp-content/uploads/2020/01/logo-martin-servera.svg',
-    alt: 'Martin & Servera'
+    alt: 'Martin & Servera',
+    website: 'https://www.martinservera.se/sokresultat?q=naima+'
   },
   {
     id: 2,
     name: 'Svensk Cater',
     logo: 'https://svenskcater.se/wp-content/uploads/2020/01/logo-svensk-cater.svg',
-    alt: 'Svensk Cater'
+    alt: 'Svensk Cater',
+    website: 'https://shop.svenskcater.se/sortiment/?q=naima&sb=0'
   },
   //Menigo
   {
     id: 3,
     name: 'Menigo',
     logo: 'https://menigo.se/wp-content/uploads/2020/01/logo-menigo.svg',
-    alt: 'Menigo'
+    alt: 'Menigo',
+    website:
+      'https://www.menigo.se/sok?infinitescroll=1&q=naima&sortBy=popularity'
   },
   //Switsbake
   {
     id: 4,
     name: 'Switsbake',
     logo: 'https://switsbake.se/wp-content/uploads/2020/01/logo-switsbake.svg',
-    alt: 'Switsbake'
+    alt: 'Switsbake',
+    website: 'https://switsbake.se/'
   },
   //outofhome
   {
     id: 5,
     name: 'outofhome',
     logo: 'https://outofhome.se/wp-content/uploads/2020/01/logo-outofhome.svg',
-    alt: 'Out of Home'
+    alt: 'Out of Home',
+    website: 'https://outofhome.se/p?search=naima%20'
   },
   //CaterBee
   {
     id: 6,
     name: 'CaterBee',
     logo: 'https://caterbee.se/wp-content/uploads/2020/01/logo-caterbee.svg',
-    alt: 'CaterBee'
+    alt: 'CaterBee',
+    website: 'https://caterbee.com/catering/stockholm/company/naimassuperfood'
   }
 ]
 

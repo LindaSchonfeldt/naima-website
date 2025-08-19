@@ -173,9 +173,14 @@ export const Cart = () => {
               <p>Your cart is empty.</p>
             ) : (
               items.map((item) => {
-                const primaryImage = item.images?.find((img) => img.isPrimary)
+                const primaryImage = item.primaryImage?.url
+                  ? item.primaryImage
+                  : item.images?.find((img) => img.isPrimary) ||
+                    item.images?.[0] ||
+                    null
+
                 return (
-                  <CartItem key={item._id}>
+                  <CartItem key={item.cartKey}>
                     {primaryImage && (
                       <StyledImg
                         src={primaryImage.url}
@@ -196,12 +201,10 @@ export const Cart = () => {
                           : item.formattedPrice || `$${item.price}`}
                       </CartItemPrice>
                     </CartItemInfo>
-
                     <QuantitySelector item={item} />
-
                     <Button
                       variant='icon'
-                      onClick={() => removeFromCart(item._id)}
+                      onClick={() => removeFromCart(item.cartKey)}
                       aria-label='Remove item from cart'
                     >
                       <DeleteButton />

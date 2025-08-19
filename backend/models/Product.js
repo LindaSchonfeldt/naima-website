@@ -199,7 +199,13 @@ productSchema.virtual('primaryImage').get(function () {
 
 // Virtual for formatted price
 productSchema.virtual('formattedPrice').get(function () {
-  return `$${this.price.toFixed(2)}`
+  // Use the first size's price if available
+  const price =
+    this.price ??
+    (Array.isArray(this.sizes) && this.sizes.length > 0
+      ? this.sizes[0].price
+      : undefined)
+  return price !== undefined ? `$${price.toFixed(2)}` : ''
 })
 
 // Virtual for checking if product is available

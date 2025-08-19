@@ -49,8 +49,18 @@ const seedProducts = async () => {
           }
         },
         sizes: [
-          { weight: '34g', packaging: '35 x 34g', price: 20.99 },
-          { weight: '20g', packaging: '60 x 20g', price: 20.99 }
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '34g',
+            packaging: '35 x 34g',
+            price: 20.99
+          },
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '20g',
+            packaging: '60 x 20g',
+            price: 20.99
+          }
         ],
         keywords: ['glutenfree', 'lactosefree', 'plantbased'],
         featured: false,
@@ -112,8 +122,18 @@ const seedProducts = async () => {
           }
         },
         sizes: [
-          { weight: '55g', packaging: '35 x 55g', price: 8.99 },
-          { weight: '30g', packaging: '60 x 30g', price: 8.99 }
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '55g',
+            packaging: '35 x 55g',
+            price: 20.99
+          },
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '30g',
+            packaging: '60 x 30g',
+            price: 15.99
+          }
         ],
         keywords: ['glutenfree', 'plantbased', 'superfoods'],
         featured: true,
@@ -173,8 +193,18 @@ const seedProducts = async () => {
           }
         },
         sizes: [
-          { weight: '55g', packaging: '35 x 55g', price: 20.99 },
-          { weight: '30g', packaging: '60 x 30g', price: 20.99 }
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '55g',
+            packaging: '35 x 55g',
+            price: 20.99
+          },
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '30g',
+            packaging: '60 x 30g',
+            price: 20.99
+          }
         ],
         keywords: ['glutenfree', 'plantbased', 'superfoods'],
         featured: false,
@@ -239,8 +269,18 @@ const seedProducts = async () => {
           }
         },
         sizes: [
-          { weight: '55g', packaging: '35 x 55g', price: 20.99 },
-          { weight: '30g', packaging: '60 x 30g', price: 20.99 }
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '55g',
+            packaging: '35 x 55g',
+            price: 20.99
+          },
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '30g',
+            packaging: '60 x 30g',
+            price: 20.99
+          }
         ],
         keywords: ['glutenfree', 'plantbased', 'superfoods'],
         featured: false,
@@ -286,8 +326,18 @@ const seedProducts = async () => {
           }
         },
         sizes: [
-          { weight: '34g', packaging: '35 x 34g', price: 20.99 },
-          { weight: '20g', packaging: '60 x 20g', price: 20.99 }
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '34g',
+            packaging: '35 x 34g',
+            price: 20.99
+          },
+          {
+            _id: new mongoose.Types.ObjectId(),
+            weight: '20g',
+            packaging: '60 x 20g',
+            price: 20.99
+          }
         ],
         keywords: ['glutenfree', 'lactosefree', 'plantbased'],
         featured: true,
@@ -300,7 +350,7 @@ const seedProducts = async () => {
         category: 'limited',
         images: [
           {
-            url: '/images/limited.webp', // ✅ Already correct
+            url: '/images/limited.webp',
             alt: 'Limited Edition Treats',
             isPrimary: true
           }
@@ -335,7 +385,7 @@ const seedProducts = async () => {
 
 const runSeed = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_URL$, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })

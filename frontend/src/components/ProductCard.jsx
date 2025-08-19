@@ -62,6 +62,14 @@ const ProductPrice = styled.span`
   margin-bottom: ${(props) => props.theme.spacing.sm};
 `
 
+const LowerSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${(props) => props.theme.spacing.sm};
+  padding: ${(props) => props.theme.spacing.sm};
+  margin-top: auto; // ensures this section is at the bottom of the card
+`
+
 const ButtonContainer = styled.div`
   width: 100%;
   margin-top: auto; // pushes the button to the bottom if you want
@@ -94,10 +102,20 @@ export const ProductCard = ({ product, onOrder, variant }) => {
     return product.name
   }
 
-  const sizeOptions = product.sizes.map((size) => ({
+  const sizeOptions = product.sizes.map((size, idx) => ({
     label: `${size.packaging} (${size.weight}g)`,
-    value: size._id || size.id
+    value: String(size._id || idx) // fallback to index if _id is missing
   }))
+
+  const validPrices = product.sizes
+    .map((s) => s.price)
+    .filter((p) => typeof p === 'number' && p > 0)
+  const lowestPrice =
+    validPrices.length > 0 ? Math.min(...validPrices).toFixed(2) : 'N/A'
+
+  const sizeId = selectedSize
+    ? String(selectedSize._id || product.sizes.findIndex((s) => s === selectedSize))
+    : ''
 
   return (
     <StyledProductCard>
@@ -117,28 +135,42 @@ export const ProductCard = ({ product, onOrder, variant }) => {
           <ProductPrice>
             {selectedSize?.price
               ? `$${selectedSize.price}`
-              : product.formattedPrice || `$${product.price}`}
+              : `from $${lowestPrice}`}
           </ProductPrice>
         </ProductInformation>
       </ProductContent>
-      <DropdownMenu
-        options={sizeOptions}
-        value={selectedSize?._id || selectedSize?.id}
-        onChange={(val) => {
-          const size = product.sizes.find((s) => (s._id || s.id) === val)
-          setSelectedSize(product._id, size)
-        }}
-      />
-      <ButtonContainer>
-        <Button
-          variant='primary'
-          onClick={() =>
-            addToCart({ ...product, selectedSize, price: selectedSize.price })
+      <LowerSection>
+        <DropdownMenu
+          options={[{ label: 'Select size...', value: '' }, ...sizeOptions]}
+          value={
+            selectedSize
+              ? String(
+                  selectedSize._id ||
+                    product.sizes.findIndex((s) => s === selectedSize)
+                )
+              : ''
           }
-        >
-          Add to Cart
-        </Button>
-      </ButtonContainer>
+          onChange={(val) => {
+            const size = product.sizes.find(
+              (s, idx) => String(s._id || idx) === val
+            )
+            setSelectedSize(product._id, size || null)
+          }}
+        />
+        <ButtonContainer>
+          <Button
+            variant='primary'
+            onClick={() => {
+              if (selectedSize) {
+                addToCart(product, selectedSize)
+              }
+            }}
+            disabled={!selectedSize}
+          >
+            Add to Cart
+          </Button>
+        </ButtonContainer>
+      </LowerSection>
     </StyledProductCard>
   )
 }

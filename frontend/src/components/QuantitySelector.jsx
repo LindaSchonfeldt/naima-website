@@ -31,14 +31,14 @@ export const QuantitySelector = ({ item }) => {
   return (
     <StyledQuantitySelector>
       <button
-        onClick={() => updateQuantity(item._id, (item.quantity || 1) - 1)}
+        onClick={() => updateQuantity(item.cartKey, (item.quantity || 1) - 1)}
         disabled={item.quantity <= 1}
       >
-        –
+        -
       </button>
-      <span>{item.quantity || 1}</span>
+      <span>{item.quantity}</span>
       <button
-        onClick={() => updateQuantity(item._id, (item.quantity || 1) + 1)}
+        onClick={() => updateQuantity(item.cartKey, (item.quantity || 1) + 1)}
       >
         +
       </button>
