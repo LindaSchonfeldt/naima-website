@@ -121,7 +121,7 @@ export const Carousel = ({
   }, [memoizedItems.length])
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => 
+    setCurrentSlide((prev) =>
       prev === 0 ? memoizedItems.length - 1 : prev - 1
     )
   }, [memoizedItems.length])

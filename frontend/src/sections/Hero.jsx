@@ -86,7 +86,7 @@ export const Hero = ({
           items={carouselItems}
           autoPlay={true}
           autoPlayInterval={5000}
-          showArrows={true}
+          showArrows={false}
           showIndicators={true}
           slidesToShow={1}
         />
