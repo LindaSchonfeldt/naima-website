@@ -17,6 +17,7 @@ import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Login } from './pages/Login'
+import CompanyProfile from './pages/CompanyProfile'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -54,6 +55,7 @@ function App() {
               <Route path='/checkout' element={<Checkout />} />
               <Route path='/company' element={<CompanyPortal />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/profile' element={<CompanyProfile />} />
             </Routes>
           </MainContent>
           <Footer />

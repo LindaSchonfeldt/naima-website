@@ -1,15 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Route } from 'react-router-dom'
-
-import { media } from '../styles/media'
 import { Cart } from './Cart'
 import { HamburgerMenu } from './HamburgerMenu'
-import { MdLockOutline } from 'react-icons/md'
-import { ProtectedRoute } from './ProtectedRoute'
-import Shop from '../pages/Shop'
-import { Login } from '../pages/Login' // Import the Login component
+import { MdLockOutline, MdPerson } from 'react-icons/md'
 import { useAuthStore } from '../stores/useAuthStore'
+import { media } from '../styles/media'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -100,6 +95,7 @@ const NavSection = styled.div`
     flex: 0 0 auto;
     justify-content: flex-end;
     order: 3;
+    gap: ${(props) => props.theme.spacing.sm};
   }
 
   ${media.md} {
@@ -129,6 +125,18 @@ const LoginIcon = styled(MdLockOutline)`
   }
 `
 
+const ProfileIcon = styled(MdPerson)`
+  font-size: 24px;
+  color: ${(props) => props.theme.colors.text.secondary};
+  cursor: pointer;
+  transition: color 0.2s;
+  margin: ${(props) => props.theme.spacing.sm};
+
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+  }
+`
+
 export const Nav = () => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const navigate = useNavigate()
@@ -142,7 +150,8 @@ export const Nav = () => {
         <Logo to='/'>naima</Logo>
       </NavSection>
       <NavSection className='right'>
-        <LoginIcon onClick={() => navigate('/login')} />
+        {!isLoggedIn && <LoginIcon onClick={() => navigate('/login')} />}
+        {isLoggedIn && <ProfileIcon onClick={() => navigate('/profile')} />}
         {isLoggedIn && <Cart />}
       </NavSection>
       <Links>

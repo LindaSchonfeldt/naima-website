@@ -16,9 +16,11 @@ const LoginContainer = styled.div`
   border: 1px solid #eee;
   border-radius: 8px;
   background: #fff;
+  padding: ${(props) => props.theme.spacing.sm};
 
   ${media.sm} {
     max-width: 300px;
+    padding: ${(props) => props.theme.spacing.md};
   }
 
   ${media.md} {
