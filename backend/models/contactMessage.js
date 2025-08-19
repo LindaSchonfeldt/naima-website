@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const MessageSchema = new mongoose.Schema(
+const contactMessageSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, lowercase: true, trim: true },
@@ -12,4 +12,4 @@ const MessageSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("Message", MessageSchema);
+export default mongoose.model("contactMessage", contactMessageSchema);
