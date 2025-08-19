@@ -15,6 +15,8 @@ import Shop from './pages/Shop'
 import { Footer } from './sections/Footer'
 import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
+import { ProtectedRoute } from './components/ProtectedRoute'
+import { Login } from './pages/Login'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -37,13 +39,21 @@ function App() {
           <MainContent>
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/shop' element={<Shop />} />
+              <Route
+                path='/shop'
+                element={
+                  <ProtectedRoute>
+                    <Shop />
+                  </ProtectedRoute>
+                }
+              />
               <Route path='/findus' element={<FindUs />} />
               <Route path='/ourstory' element={<OurStory />} />
               <Route path='/retreatclub' element={<ReTreatClub />} />
               <Route path='/contactus' element={<ContactUs />} />
               <Route path='/checkout' element={<Checkout />} />
               <Route path='/company' element={<CompanyPortal />} />
+              <Route path='/login' element={<Login />} />
             </Routes>
           </MainContent>
           <Footer />

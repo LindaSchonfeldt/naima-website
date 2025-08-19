@@ -27,7 +27,6 @@ const ProductContent = styled.div`
   padding: ${(props) => props.theme.spacing.sm};
 
   ${media.md} {
-    padding: ${(props) => props.theme.spacing.md};
   }
 `
 
@@ -59,7 +58,6 @@ const ProductPrice = styled.span`
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
   display: block;
-  margin-bottom: ${(props) => props.theme.spacing.sm};
 `
 
 const LowerSection = styled.div`
@@ -114,7 +112,9 @@ export const ProductCard = ({ product, onOrder, variant }) => {
     validPrices.length > 0 ? Math.min(...validPrices).toFixed(2) : 'N/A'
 
   const sizeId = selectedSize
-    ? String(selectedSize._id || product.sizes.findIndex((s) => s === selectedSize))
+    ? String(
+        selectedSize._id || product.sizes.findIndex((s) => s === selectedSize)
+      )
     : ''
 
   return (
@@ -132,14 +132,14 @@ export const ProductCard = ({ product, onOrder, variant }) => {
         <ProductTitle>{product.name}</ProductTitle>
         <ProductInformation>
           <ProductDescription>{product.description}</ProductDescription>
-          <ProductPrice>
-            {selectedSize?.price
-              ? `$${selectedSize.price}`
-              : `from $${lowestPrice}`}
-          </ProductPrice>
         </ProductInformation>
       </ProductContent>
       <LowerSection>
+        <ProductPrice>
+          {selectedSize?.price
+            ? `$${selectedSize.price}`
+            : `from $${lowestPrice}`}
+        </ProductPrice>
         <DropdownMenu
           options={[{ label: 'Select size...', value: '' }, ...sizeOptions]}
           value={
