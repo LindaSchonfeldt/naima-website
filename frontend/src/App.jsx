@@ -40,6 +40,13 @@ function App() {
           <MainContent>
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/findus' element={<FindUs />} />
+              <Route path='/ourstory' element={<OurStory />} />
+              <Route path='/retreatclub' element={<ReTreatClub />} />
+              <Route path='/contactus' element={<ContactUs />} />
+              <Route path='/checkout' element={<Checkout />} />
+              <Route path='/company' element={<CompanyPortal />} />
+              <Route path='/login' element={<Login />} />
               <Route
                 path='/shop'
                 element={
@@ -48,14 +55,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path='/findus' element={<FindUs />} />
-              <Route path='/ourstory' element={<OurStory />} />
-              <Route path='/retreatclub' element={<ReTreatClub />} />
-              <Route path='/contactus' element={<ContactUs />} />
-              <Route path='/checkout' element={<Checkout />} />
-              <Route path='/company' element={<CompanyPortal />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/profile' element={<CompanyProfile />} />
+              <Route
+                path='/profile'
+                element={
+                  <ProtectedRoute>
+                    <CompanyProfile />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </MainContent>
           <Footer />

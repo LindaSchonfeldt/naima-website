@@ -13,14 +13,27 @@ const StyledProductCard = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 250px;
   padding-bottom: ${(props) => props.theme.spacing.md};
   ${({ $variant }) => $variant === 'featured' && css``}
+
+  ${media.sm} {
+    align-items: flex-start;
+  }
+
+  ${media.md} {
+    width: 300px;
+  }
 `
 
 const ProductImage = styled.img`
   width: 100%;
-  height: 350px;
+  height: 200px;
   object-fit: cover;
+
+  ${media.sm} {
+    height: 350px;
+  }
 `
 
 const ProductContent = styled.div`
@@ -31,10 +44,15 @@ const ProductContent = styled.div`
 `
 
 const ProductTitle = styled.h3`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   margin: 0 0 ${(props) => props.theme.spacing.sm} 0;
   color: ${(props) => props.theme.colors.text.primary};
+
+  ${media.sm} {
+    font-size: 20px;
+    margin: 0 0 ${(props) => props.theme.spacing.sm} 0;
+  }
 
   ${media.md} {
     font-size: 28px;

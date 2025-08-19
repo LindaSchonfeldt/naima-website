@@ -22,22 +22,30 @@ const StyledProducts = styled.section`
 const StyledProductsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: ${(props) => props.theme.spacing.sm};
   max-width: 1200px;
+  margin: 0 auto; // Center the grid
+  justify-content: center;
 
-  /* Start centering immediately, not just at xs */
-  @media (min-width: 1px) {
-    margin: 0;
+  & > * {
+    flex: 1 1 160px;
+    max-width: 350px;
+    min-width: 160px;
+  }
+
+  ${media.sm} {
+    justify-content: flex-start;
+    gap: ${(props) => props.theme.spacing.sm};
+    & > * {
+      min-width: 200px;
+    }
+
   }
 
   ${media.lg} {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-
-  ${media.lg} {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    & > * {
+      min-width: 350px;
+    }
   }
 `
 

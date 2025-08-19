@@ -151,8 +151,13 @@ export const Nav = () => {
       </NavSection>
       <NavSection className='right'>
         {!isLoggedIn && <LoginIcon onClick={() => navigate('/login')} />}
-        {isLoggedIn && <ProfileIcon onClick={() => navigate('/profile')} />}
-        {isLoggedIn && <Cart />}
+        {isLoggedIn && (
+          <>
+            <ProfileIcon onClick={() => navigate('/profile')} />
+            <Link to='/shop'>Shop</Link>
+            <Cart />
+          </>
+        )}
       </NavSection>
       <Links>
         <Link to='/findus'>Find us</Link>
