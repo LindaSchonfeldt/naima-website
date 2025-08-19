@@ -66,9 +66,7 @@ const StyledButton = styled.button`
   }};
 
   /* Common styles */
-  padding: 
-    ${(props) => props.theme.spacing.sm},
-    ${(props) => props.theme.spacing.lg};
+  padding: ${(props) => props.theme.spacing.md};
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
