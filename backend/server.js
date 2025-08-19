@@ -56,6 +56,7 @@ app.use('/api/partners', partnerRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/customers', customerRoutes)
 app.use('/api/companies', companyRoutes)
+app.use('/api/contact', contactRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'Naima API is running!' })
