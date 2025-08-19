@@ -4,12 +4,17 @@ import express from 'express'
 import mongoose from 'mongoose'
 
 import companyRoutes from './routes/companyRoutes.js'
+import contactRoutes from './routes/contactRoutes.js'
 import customerRoutes from './routes/customerRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import partnerRoutes from './routes/partnerRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 
 dotenv.config()
+
+// Increase listeners limit
+import { EventEmitter } from 'events';
+EventEmitter.defaultMaxListeners = 20;
 
 const mongoUrl = process.env.MONGO_URL
 const port = process.env.PORT || 3001

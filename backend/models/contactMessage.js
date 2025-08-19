@@ -7,8 +7,8 @@ const contactMessageSchema = new mongoose.Schema(
     subject: { type: String, trim: true },
     phone: { type: String, trim: true },
     message: { type: String, required: true, trim: true },
-    status: { type: String, enum: ["new","read","archived"], default: "new" },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    // status: { type: String, enum: ["new","read","archived"], default: "new" },
   },
 );
 

@@ -20,9 +20,25 @@ const StyledForm = styled.form`
 const ContactUsForm = () => {
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // Replace with API call to backend
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch('/api/contact', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+    if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
+
+    alert('Your message has been sent successfully!');    
     reset();
+
+    } catch (error) {
+      console.error(error);
+      alert('Failed to send your message. Please try again later.')
+    }
   };
 
   return (
@@ -36,6 +52,16 @@ const ContactUsForm = () => {
         type="email"
         placeholder="Your Email"
         {...register('email', { required: true })}
+      />
+      <input
+        type="phone"
+        placeholder="Your Phone"
+        {...register('phone', { required: false })}
+      />
+      <input
+        type="text"
+        placeholder="Subject"
+        {...register('subject', { required: false })}
       />
       <textarea
         placeholder="Your Message"
