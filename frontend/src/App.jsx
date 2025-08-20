@@ -14,6 +14,7 @@ import FindUs from './pages/FindUs'
 import Home from './pages/Home'
 import { Login } from './pages/Login'
 import OurStory from './pages/OurStory'
+import Products from './pages/Products'
 import ReTreatClub from './pages/ReTreatClub'
 import Shop from './pages/Shop'
 import { Footer } from './sections/Footer'
@@ -41,8 +42,7 @@ function App() {
           <MainContent>
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/colordemo' element={<ColorDemo />} />
-              {/* colordemo site to preview new color palette from client*/}
+              <Route path='/products' element={<Products />} />
               <Route path='/findus' element={<FindUs />} />
               <Route path='/ourstory' element={<OurStory />} />
               <Route path='/retreatclub' element={<ReTreatClub />} />
