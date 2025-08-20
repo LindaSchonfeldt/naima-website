@@ -12,7 +12,7 @@ export const PageContainer = styled.div`
   margin: 0 auto;
 
   ${media.sm} {
-    /* align-items: flex-start; */
+    align-items: flex-start;
     padding: ${(props) => props.theme.spacing.lg};
   }
 

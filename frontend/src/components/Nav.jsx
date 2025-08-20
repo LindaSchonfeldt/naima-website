@@ -1,10 +1,11 @@
+import { MdLockOutline, MdPerson } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Cart } from './Cart'
-import { HamburgerMenu } from './HamburgerMenu'
-import { MdLockOutline, MdPerson } from 'react-icons/md'
+
 import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
+import { Cart } from './Cart'
+import { HamburgerMenu } from './HamburgerMenu'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -160,6 +161,7 @@ export const Nav = () => {
         )}
       </NavSection>
       <Links>
+        <Link to='/products'>Products</Link>
         <Link to='/findus'>Find us</Link>
         <Link to='/ourstory'>Our story</Link>
         <Link to='/contactus'>Contact us</Link>
