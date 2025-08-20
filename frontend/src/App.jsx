@@ -57,9 +57,10 @@ function App() {
                 path='/company'
                 element={
                   <ProtectedRoute>
-                    <CompanyDashboard/>
+                    <CompanyDashboard />
                   </ProtectedRoute>
                 }
+              />
               <Route
                 path='/company/profile'
                 element={
