@@ -50,7 +50,7 @@ export const CompanyNav = () => {
     <CompanyNavBar>
       <NavSection className='left' />
       <NavSection className='center'>
-        <Link to='/company'>Dashboard</Link>
+        <Link to='/company/dashboard'>Dashboard</Link>
         <Link to='/company/shop'>Shop</Link>
         <Link to='/company/orders'>Orders</Link>
         <Link to='/company/profile'>Profile</Link>
