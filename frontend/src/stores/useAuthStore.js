@@ -5,6 +5,7 @@ const initialToken = localStorage.getItem('companyToken')
 export const useAuthStore = create((set) => ({
   companyToken: initialToken,
   isLoggedIn: !!initialToken,
+  user: null,
   setAuth: (token) => set({ companyToken: token, isLoggedIn: !!token }),
   logout: () => {
     localStorage.removeItem('companyToken')

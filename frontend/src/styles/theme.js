@@ -5,6 +5,7 @@ const theme = {
   colors: {
     primary: '#2563eb',
     secondary: '#7c3aed',
+    accent: '#f59e0b',
     background: '#ffffff',
     surface: '#f8fafc',
     text: {

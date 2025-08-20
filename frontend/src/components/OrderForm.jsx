@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
 import { api } from '../services/api'
+import { useAuthStore } from '../stores/useAuthStore'
 import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
@@ -47,9 +48,12 @@ const FeedbackMessage = styled.div`
 export const OrderForm = ({ cartItems, title = '', ...props }) => {
   const { register, handleSubmit, formState, reset } = useForm()
   const [success, setSuccess] = useState(false)
+  const user = useAuthStore((state) => state.user)
+  const [name, setName] = useState(user?.name || '')
+  const [email, setEmail] = useState(user?.email || '')
 
   const onSubmit = async (data) => {
-    const orderData = { ...data, items: cartItems }
+    const orderData = { ...data, items: cartItems, userId: user?.id }
     try {
       await api.orders.submitOrder(orderData)
       reset()
@@ -81,11 +85,15 @@ export const OrderForm = ({ cartItems, title = '', ...props }) => {
         type='text'
         placeholder='Name'
         {...register('name', { required: true })}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <input
         type='email'
         placeholder='Email'
         {...register('email', { required: true })}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type='text'
