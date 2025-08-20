@@ -48,9 +48,11 @@ export const loginCompany = async (req, res) => {
     const valid = await bcrypt.compare(password, company.password)
     if (!valid) return res.status(401).json({ error: 'Invalid credentials' })
 
-    const token = jwt.sign({ companyId: company._id }, process.env.JWT_SECRET, {
-      expiresIn: '1d'
-    })
+    const token = jwt.sign(
+      { id: company._id, role: 'company', companyId: company._id },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    )
     const customer = await Customer.findOne({ company: company._id })
     res.json({ token, company, customer })
   } catch (error) {
