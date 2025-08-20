@@ -8,6 +8,7 @@ import { Button } from './Button'
 
 const CompanyNavBar = styled.nav`
   width: 100%;
+  height: 50px;
   background: ${(props) =>
     props.theme.colors.background.secondary || '#f6f6f6'};
   font-family: ${(props) => props.theme.fonts.body};
