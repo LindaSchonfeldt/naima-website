@@ -9,7 +9,7 @@ export const companyLogos = [
   {
     id: 2,
     name: 'Radisson Hotels',
-    logo: '/public/partners/radisson.svg',
+    logo: '/public/partners/radisson_2_logo.svg',
     alt: 'Radisson Hotels'
   },
   {

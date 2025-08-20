@@ -64,7 +64,7 @@ const LogoGrid = styled.div`
   width: 50%;
   justify-content: space-around;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
+  /* gap: ${({ theme }) => theme.spacing.md}; */
   padding: 0 ${({ theme }) => theme.spacing.md};
 `
 
@@ -115,7 +115,7 @@ export const SocialProof = () => {
             ))}
           </LogoGrid>
           {/* Duplicate grid for animation */}
-          <LogoGrid>
+          {/* <LogoGrid>
             {servedAtPartners.map((partner) => (
               <LogoItem key={`${partner._id}-duplicate`}>
                 <Logo
@@ -125,7 +125,7 @@ export const SocialProof = () => {
                 />
               </LogoItem>
             ))}
-          </LogoGrid>
+          </LogoGrid> */}
         </LogoTrack>
       </Container>
     </StyledSocialProof>
