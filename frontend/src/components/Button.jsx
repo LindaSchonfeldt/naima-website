@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { media } from '../styles/media'
+
 const buttonSizes = {
   small: '0.9rem',
   medium: '1rem',
@@ -8,26 +10,29 @@ const buttonSizes = {
 
 const buttonVariants = {
   primary: {
-    background: (theme) => theme.colors.primary,
-    color: 'white',
+    background: (theme) => theme.colors.brand.primary,
+    color: (theme) => theme.colors.text.primary,
     border: 'none',
     opacity: '1',
     transform: 'translateY(0)',
-    hoverBackground: (theme) => theme.colors.secondary
+    hoverBackground: (theme) => theme.colors.brand.primary,
+    hoverColor: (theme) => theme.colors.text.primary
   },
   secondary: {
     background: 'transparent',
-    color: (theme) => theme.colors.primary,
+    color: (theme) => theme.colors.text.primary,
     border: (theme) => `2px solid ${theme.colors.primary}`,
     opacity: '1',
     transform: 'translateY(0)',
-    hoverBackground: (theme) => theme.colors.primary
+    hoverBackground: (theme) => theme.colors.brand.blush,
+    hoverColor: (theme) => theme.colors.text.primary
   },
   icon: {
     background: 'transparent',
     color: (theme) => theme.colors.primary,
     border: 'none',
-    hoverBackground: 'none'
+    hoverBackground: 'none',
+    hoverColor: (theme) => theme.colors.text.primary
   }
 }
 
@@ -66,7 +71,7 @@ const StyledButton = styled.button`
   }};
 
   /* Common styles */
-  padding: ${(props) => props.theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.md};
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -95,7 +100,7 @@ const StyledButton = styled.button`
             : variant.hoverBackground || theme.colors.primary
         };
         color: white;
-        opacity: 1;
+        filter: brightness(0.95);
         transform: translateY(-1px);
       `
     }}
@@ -106,6 +111,11 @@ const StyledButton = styled.button`
     cursor: not-allowed;
     transform: none;
   }
+
+ /* Respect user motion preferences */
+ @media (prefers-reduced-motion: reduce) {
+  transition: none;
+}
 `
 
 export const Button = ({

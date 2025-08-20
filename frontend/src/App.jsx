@@ -42,6 +42,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/colordemo' element={<ColorDemo />} />
+              {/* colordemo site to preview new color palette from client*/}
               <Route path='/findus' element={<FindUs />} />
               <Route path='/ourstory' element={<OurStory />} />
               <Route path='/retreatclub' element={<ReTreatClub />} />
