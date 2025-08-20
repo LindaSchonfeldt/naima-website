@@ -8,15 +8,24 @@ const theme = {
     accent: '#f59e0b',
     background: '#ffffff',
     surface: '#f8fafc',
+    border: '#e2e8f0',
     text: {
       primary: '#1e293b',
       secondary: '#64748b',
       muted: '#94a3b8',
       hero: '#ffffff'
     },
-    border: '#e2e8f0',
     error: '#ef4444',
-    success: '#10b981'
+    success: '#10b981',
+
+     // 👇 client palette
+     brand: {
+      primary:  '#F4A6A3', // CTA, active states
+      blush:    '#F7CDD0', // soft highlight/hero band
+      sky:      '#B3D9F3', // info tint, tags
+      lavender: '#D0C3F1', // secondary tint, cards
+      mint:     '#BCE8C2'  // success tint / positive
+    }
   },
   fonts: {
     // Semantic font naming

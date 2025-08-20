@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 import { media } from '../styles/media'
@@ -95,11 +95,11 @@ const Indicator = styled.button`
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
-  background: ${(props) => (props.$active ? '#333' : '#ccc')};
+  background: ${(props) => (props.$active ? props.theme.colors.brand.blush : props.theme.colors.brand.sky)};
 
   &:hover {
-    background: #666;
-  }
+    background: ${({ theme }) => theme.colors.brand.lavender}
+  };
 `
 // Uses its own internal (local) state, independent on Zustand stores
 export const Carousel = ({

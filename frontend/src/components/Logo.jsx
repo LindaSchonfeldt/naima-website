@@ -4,7 +4,7 @@ const StyledLogo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${(props) => props.theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.md};
   opacity: 0.7;
   transition: opacity 0.3s ease;
 
@@ -22,7 +22,7 @@ const LogoImage = styled.img`
 const LogoText = styled.span`
   font-size: 1rem;
   font-weight: 600;
-  color: ${(props) => props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   text-align: center;
 `
 

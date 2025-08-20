@@ -8,15 +8,14 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: ${(props) => props.theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.md};
   margin-top: auto;
   min-height: auto;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: white;
+  background-color: ${({ theme }) => theme.colors.brand.primary};
   text-align: left;
 
   ${media.md} {
-    padding: ${(props) => props.theme.spacing.xl};
+    padding: ${({ theme }) => theme.spacing.xl};
     min-height: auto;
   }
 
@@ -41,11 +40,7 @@ const FooterContent = styled.div`
 
 const FooterSection = styled.div`
   justify-content: flex-start;
-  margin-bottom: ${(props) => props.theme.spacing.md};
-
-  ${media.lg} {
-    margin-bottom: 0;
-  }
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `
 
 export const Footer = () => {

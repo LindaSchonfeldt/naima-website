@@ -12,8 +12,8 @@ const GlobalStyles = createGlobalStyle`
 
   /* Base typography */
   body {
-    font-family: ${(props) => props.theme.fonts.body};
-    font-weight: ${(props) => props.theme.fonts.weights.normal};
+    font-family: ${({ theme }) => theme.fonts.body};
+    font-weight: ${({ theme }) => theme.fonts.weights.normal};
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -38,9 +38,20 @@ const GlobalStyles = createGlobalStyle`
 
   /* Links */
   a {
-    color: inherit;
+    color: ${({theme}) => theme.colors.brand.primary};
     text-decoration: none;
   }
+
+  ::selection {
+  background: ${({theme}) => theme.colors.brand.sky};
+  color: ${({theme}) => theme.colors.text.primary};
+}
+
+/* strong focus ring for accessibility */
+:focus-visible {
+  outline: 3px solid ${({theme}) => theme.colors.primary};
+  outline-offset: 2px;
+}
 
   /* Button reset */
   button {
