@@ -6,6 +6,7 @@ const router = express.Router()
 
 import {
   loginCompany,
+  logoutCompany,
   registerCompany,
   getAllCompanies,
   getCompanyById,
@@ -15,6 +16,7 @@ import {
 
 router.post('/register', registerCompany)
 router.post('/login', loginCompany)
+router.post('logout', logoutCompany)
 
 // Admin routes
 router.get('/', authenticate, authorize(['admin']), getAllCompanies)

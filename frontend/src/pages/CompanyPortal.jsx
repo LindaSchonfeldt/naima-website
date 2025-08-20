@@ -1,16 +1,16 @@
 import { CompanyLogin } from '../components/CompanyLogin'
-import CompanyShop from './CompanyShop'
+import CompanyDashboard from '../pages/CompanyDashboard'
 import { useAuthStore } from '../stores/useAuthStore'
 
 const CompanyPortal = () => {
-  const token = useAuthStore((state) => state.token)
-  const setToken = useAuthStore((state) => state.setToken)
+  const companyToken = useAuthStore((state) => state.companyToken)
+  const setAuth = useAuthStore((state) => state.setAuth)
 
-  if (!token) {
-    return <CompanyLogin onLogin={setToken} />
+  if (!companyToken) {
+    return <CompanyLogin onLogin={setAuth} />
   }
 
-  return <CompanyShop token={token} />
+  return <CompanyDashboard token={companyToken} />
 }
 
 export default CompanyPortal
