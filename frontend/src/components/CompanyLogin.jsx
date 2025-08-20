@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { api } from '../services/api'
 import { PageContainer } from './PageContainer'
@@ -62,13 +63,15 @@ export const CompanyLogin = () => {
   const { register, handleSubmit, formState } = useForm()
   const [error, setError] = useState('')
   const setAuth = useAuthStore((state) => state.setAuth)
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     setError('')
     try {
       const res = await api.companies.login(data)
-      setAuth(res.token) // Store token in Zustand
-      // Optionally, redirect or show company dashboard here
+      const token = res.token
+      setAuth(token) // Store token in Zustand
+      navigate('/company/dashboard') // redirect after login
     } catch (err) {
       setError('Login failed. Please check your credentials.')
     }

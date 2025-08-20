@@ -1,11 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
+import { useBreakpoint } from '../hooks/useBreakpoint'
 import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
+import { DropdownMenu } from './DropdownMenu'
 
 const CompanyNavBar = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 50px;
   background: ${(props) =>
@@ -13,47 +19,93 @@ const CompanyNavBar = styled.nav`
   font-family: ${(props) => props.theme.fonts.body};
   font-size: 14px;
   color: ${(props) => props.theme.colors.text.primary || '#333'};
-  padding: 12px 0;
-  display: flex;
-  align-items: center;
+  padding: 12px;
   border-bottom: 1px solid #eee;
+  position: sticky;
 `
 
 const NavSection = styled.div`
   display: flex;
-  align-items: center;
+  align-items: space-between;
 
-  &.left {
-    flex: 1 1 0%;
-  }
-  &.center {
-    flex: 0 1 auto;
-    justify-content: center;
-    gap: 32px;
-  }
-  &.right {
-    flex: 1 1 0%;
-    justify-content: flex-end;
+  ${media.sm} {
+    &.left {
+      flex: 1 1 0%;
+    }
+    &.center {
+      flex: 0 1 auto;
+      justify-content: center;
+      gap: 32px;
+    }
+    &.right {
+      flex: 1 1 0%;
+      justify-content: flex-end;
+    }
   }
 `
 
+const StyledNavLink = styled(Link)`
+  color: ${(props) =>
+    props.$active ? props.theme.colors.brand.red : 'inherit'};
+  font-weight: ${(props) => (props.$active ? 'bold' : 'normal')};
+  text-decoration: ${(props) => (props.$active ? 'underline' : 'none')};
+  text-decoration-thickness: ${(props) => (props.$active ? '1px' : 'auto')};
+  text-underline-offset: 4px;
+  text-decoration-color: ${(props) =>
+    props.$active ? props.theme.colors.brand.red : 'inherit'};
+  margin: 0 12px;
+  transition: color 0.2s;
+`
+
+const navOptions = [
+  { label: 'Dashboard', value: '/company/dashboard' },
+  { label: 'Shop', value: '/company/shop' },
+  { label: 'Orders', value: '/company/orders' },
+  { label: 'Profile', value: '/company/profile' }
+]
+
 export const CompanyNav = () => {
   const navigate = useNavigate()
-  const logout = useAuthStore((state) => state.logout) // or setToken(null) if that's your logout
+  const location = useLocation()
+  const logout = useAuthStore((state) => state.logout)
+  const breakpoint = useBreakpoint()
+  const isMobile = breakpoint === 'mobile'
 
   const handleLogout = () => {
-    logout() // Clears token and updates state
-    navigate('/company/login') // Redirect to login
+    logout()
+    navigate('/company/login')
+  }
+
+  const handleNavChange = (value) => {
+    if (value && value !== location.pathname) navigate(value)
   }
 
   return (
     <CompanyNavBar>
-      <NavSection className='left' />
+      <NavSection className='left'>
+        {isMobile && (
+          <DropdownMenu
+            options={navOptions}
+            value={location.pathname}
+            onChange={handleNavChange}
+            placeholder='Navigate...'
+          />
+        )}
+      </NavSection>
       <NavSection className='center'>
-        <Link to='/company/dashboard'>Dashboard</Link>
-        <Link to='/company/shop'>Shop</Link>
-        <Link to='/company/orders'>Orders</Link>
-        <Link to='/company/profile'>Profile</Link>
+        {!isMobile && (
+          <>
+            {navOptions.map((opt) => (
+              <StyledNavLink
+                key={opt.value}
+                to={opt.value}
+                $active={location.pathname === opt.value}
+              >
+                {opt.label}
+              </StyledNavLink>
+            ))}
+          </>
+        )}
       </NavSection>
       <NavSection className='right'>
         <Button onClick={handleLogout}>Logout</Button>

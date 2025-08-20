@@ -7,6 +7,7 @@ import { CompanyNav } from './components/CompanyNav'
 import { Nav } from './components/Nav'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import Checkout from './pages/Checkout'
+import CompanyDashboard from './pages/CompanyDashboard'
 import CompanyOrders from './pages/CompanyOrders'
 import CompanyPortal from './pages/CompanyPortal'
 import CompanyProfile from './pages/CompanyProfile'
@@ -21,7 +22,6 @@ import { Footer } from './sections/Footer'
 import { useAuthStore } from './stores/useAuthStore'
 import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
-import CompanyDashboard from './pages/CompanyDashboard'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -34,6 +34,7 @@ const MainContent = styled.main`
 `
 
 function App() {
+  const companyToken = useAuthStore((state) => state.companyToken)
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
 
   return (
@@ -56,10 +57,10 @@ function App() {
               <Route path='/checkout' element={<Checkout />} />
               <Route path='/company/login' element={<CompanyPortal />} />
               <Route
-                path='/company'
+                path='/company/dashboard'
                 element={
                   <ProtectedRoute>
-                    <CompanyDashboard />
+                    <CompanyDashboard token={companyToken} />
                   </ProtectedRoute>
                 }
               />

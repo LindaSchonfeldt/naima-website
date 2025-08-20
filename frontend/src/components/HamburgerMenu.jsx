@@ -1,8 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
-import { media } from '../styles/media'
-import { useMenuStore } from '../stores/useMenuStore'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+import { useMenuStore } from '../stores/useMenuStore'
+import { media } from '../styles/media'
 
 const HamburgerButton = styled.button`
   display: block;
@@ -68,9 +69,6 @@ export const HamburgerMenu = () => {
       </HamburgerButton>
       {isOpen && (
         <Menu>
-          <Link to='/shop' onClick={closeMenu}>
-            Shop
-          </Link>
           <Link to='/findus' onClick={closeMenu}>
             Find us
           </Link>
