@@ -6,7 +6,7 @@ import usePartnerStore from '../stores/usePartnerStore'
 import { media } from '../styles/media'
 
 const StyledSocialProof = styled.section`
-  background: ${(props) => props.theme.colors.surface};
+  background: ${({ theme }) => theme.colors.brand.blush};
   width: 100%;
   overflow: hidden;
   margin: 0;
@@ -25,9 +25,9 @@ const Container = styled.div`
 const SectionTitle = styled.h2`
   font-size: 1.2rem;
   text-align: left;
-  color: ${(props) => props.theme.colors.text.secondary};
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-weight: ${(props) => props.theme.fonts.weights.normal};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-weight: ${({ theme }) => theme.fonts.weights.normal};
   margin-left: ${(props) => props.theme.spacing.md};
   margin-bottom: ${(props) => props.theme.spacing.sm};
   text-transform: lowercase;
@@ -35,7 +35,7 @@ const SectionTitle = styled.h2`
 
   ${media.md} {
     font-size: 1.5rem;
-    margin-left: ${(props) => props.theme.spacing.md};
+    margin-left: ${({ theme }) => theme.spacing.md};
   }
 `
 
@@ -64,8 +64,8 @@ const LogoGrid = styled.div`
   width: 50%;
   justify-content: space-around;
   align-items: center;
-  gap: ${(props) => props.theme.spacing.xxl};
-  padding: 0 ${(props) => props.theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing.md};
+  padding: 0 ${({ theme }) => theme.spacing.md};
 `
 
 const LogoItem = styled.div`
