@@ -18,7 +18,7 @@ const StyledBody = styled.div`
 export const AboutFounder = () => {
   return (
     <PageContainer>
-      <StyledTitle>Meet our founder</StyledTitle>
+      <StyledTitle>meet our founder</StyledTitle>
         <StyledBody>
             <p> Hi there! My name is Sophie Jahn 👋 </p>
             <p> You might know me from <em>Nattryttarna</em> or as the author of <em>Pappas flicka på Hästgärden</em>, but my personal journey with food began long before that. I grew up with a complicated relationship to eating. Food was tied to shame, guilt, control. I spent years chasing the “perfect diet”, believing health was about restriction and willpower.</p>
