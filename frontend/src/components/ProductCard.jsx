@@ -1,10 +1,14 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { useCartStore } from '../stores/useCartStore'
 import { useProductSelectionStore } from '../stores/useProductSelectionStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
 import { DropdownMenu } from './DropdownMenu'
+import { Image } from './Image'
+import { QuantitySelector } from './QuantitySelector'
+
+// <-- import the Image component
 
 const StyledProductCard = styled.div`
   display: flex;
@@ -17,21 +21,13 @@ const StyledProductCard = styled.div`
   }
 `
 
-const ProductImage = styled.img`
+const ProductImageWrapper = styled.div`
   width: 100%;
-  object-fit: cover; // Ensures images fill the area and are cropped if needed
-
-  ${media.sm} {
-    height: 300px; // Keep height consistent on small screens
-  }
-
-  ${media.md} {
-    height: 300px; // Keep height consistent on medium screens
-  }
-
-  ${media.lg} {
-    height: 400px; // Keep height consistent on large screens
-  }
+  height: 250px; // Set a fixed height for all images
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const ProductContent = styled.div`
@@ -85,19 +81,34 @@ const LowerSection = styled.div`
 `
 
 const ButtonContainer = styled.div`
-  width: 100%;
-  margin-top: auto; // pushes the button to the bottom if you want
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin-top: auto; // pushes the container to the bottom if you want
 `
 
-export const ProductCard = ({ product, onOrder, variant }) => {
+const StyledButton = styled(Button)`
+  flex: 1;
+  margin-left: ${(props) => props.theme.spacing.xs};
+  color: ${(props) => props.theme.colors.text.primary};
+`
+
+export const ProductCard = ({ product }) => {
   const addToCart = useCartStore((state) => state.addToCart)
   const selectedSize = useProductSelectionStore(
     (state) => state.selectedSizes[product._id]
   )
   const setSelectedSize = useProductSelectionStore(
     (state) => state.setSelectedSize
+  )
+  const cartItem = useCartStore((state) =>
+    state.items.find(
+      (i) =>
+        i.productId === product._id && i.selectedSize?._id === selectedSize?._id
+    )
   )
 
   if (!product) {
@@ -110,6 +121,11 @@ export const ProductCard = ({ product, onOrder, variant }) => {
     return '/images/placeholder.png'
   }
 
+  const getHoverImage = () => {
+    if (product.images?.[1]?.url) return product.images[1].url
+    return null
+  }
+
   const getImageAlt = () => {
     if (product.primaryImage?.alt) return product.primaryImage.alt
     if (product.images?.[0]?.alt) return product.images[0].alt
@@ -118,7 +134,7 @@ export const ProductCard = ({ product, onOrder, variant }) => {
 
   const sizeOptions = product.sizes.map((size, idx) => ({
     label: `${size.packaging} (${size.weight}g)`,
-    value: String(size._id || idx) // fallback to index if _id is missing
+    value: String(size._id || idx)
   }))
 
   const validPrices = product.sizes
@@ -127,23 +143,17 @@ export const ProductCard = ({ product, onOrder, variant }) => {
   const lowestPrice =
     validPrices.length > 0 ? Math.min(...validPrices).toFixed(2) : 'N/A'
 
-  const sizeId = selectedSize
-    ? String(
-        selectedSize._id || product.sizes.findIndex((s) => s === selectedSize)
-      )
-    : ''
-
   return (
     <StyledProductCard>
-      <ProductImage
-        src={getProductImage()}
-        alt={getImageAlt()}
-        loading='lazy'
-        onError={(e) => {
-          console.log('Image failed to load:', e.target.src)
-          e.target.src = '/images/placeholder.jpg'
-        }}
-      />
+      <ProductImageWrapper>
+        <Image
+          src={getProductImage()}
+          hoverSrc={getHoverImage()}
+          alt={getImageAlt()}
+          loading='lazy'
+          className='product-image'
+        />
+      </ProductImageWrapper>
       <ProductContent>
         <ProductTitle>{product.name}</ProductTitle>
         <ProductInformation>
@@ -174,7 +184,19 @@ export const ProductCard = ({ product, onOrder, variant }) => {
           }}
         />
         <ButtonContainer>
-          <Button
+          <QuantitySelector
+            variant='card'
+            item={{
+              productId: product._id,
+              name: product.name,
+              selectedSize,
+              price: selectedSize?.price || lowestPrice,
+              images: product.images,
+              cartKey: product._id,
+              quantity: cartItem?.quantity || 1
+            }}
+          />
+          <StyledButton
             variant='primary'
             onClick={() => {
               if (selectedSize) {
@@ -184,7 +206,7 @@ export const ProductCard = ({ product, onOrder, variant }) => {
             disabled={!selectedSize}
           >
             Add to Cart
-          </Button>
+          </StyledButton>
         </ButtonContainer>
       </LowerSection>
     </StyledProductCard>

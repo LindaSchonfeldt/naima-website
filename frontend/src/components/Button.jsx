@@ -72,8 +72,8 @@ const StyledButton = styled.button`
 
   /* Common styles */
   padding: ${({ theme }) => theme.spacing.md};
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: ${({ size = 'medium' }) => buttonSizes[size]};
@@ -112,10 +112,10 @@ const StyledButton = styled.button`
     transform: none;
   }
 
- /* Respect user motion preferences */
- @media (prefers-reduced-motion: reduce) {
-  transition: none;
-}
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 export const Button = ({

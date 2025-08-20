@@ -201,7 +201,7 @@ export const Cart = () => {
                           : item.formattedPrice || `$${item.price}`}
                       </CartItemPrice>
                     </CartItemInfo>
-                    <QuantitySelector item={item} />
+                    <QuantitySelector variant='cart' item={item} />
                     <Button
                       variant='icon'
                       onClick={() => removeFromCart(item.cartKey)}
