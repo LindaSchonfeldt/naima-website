@@ -1,10 +1,11 @@
+import { MdLockOutline } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Cart } from './Cart'
-import { HamburgerMenu } from './HamburgerMenu'
-import { MdLockOutline, MdPerson } from 'react-icons/md'
+
 import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
+import { Cart } from './Cart'
+import { HamburgerMenu } from './HamburgerMenu'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -125,18 +126,6 @@ const LoginIcon = styled(MdLockOutline)`
   }
 `
 
-const ProfileIcon = styled(MdPerson)`
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.text.secondary};
-  cursor: pointer;
-  transition: color 0.2s;
-  margin: ${(props) => props.theme.spacing.sm};
-
-  &:hover {
-    color: ${(props) => props.theme.colors.primary};
-  }
-`
-
 export const Nav = () => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const navigate = useNavigate()
@@ -150,14 +139,10 @@ export const Nav = () => {
         <Logo to='/'>naima</Logo>
       </NavSection>
       <NavSection className='right'>
-        {!isLoggedIn && <LoginIcon onClick={() => navigate('/login')} />}
-        {isLoggedIn && (
-          <>
-            <ProfileIcon onClick={() => navigate('/profile')} />
-            <Link to='/shop'>Shop</Link>
-            <Cart />
-          </>
+        {!isLoggedIn && (
+          <LoginIcon onClick={() => navigate('/company/login')} />
         )}
+        <Cart />
       </NavSection>
       <Links>
         <Link to='/findus'>Find us</Link>

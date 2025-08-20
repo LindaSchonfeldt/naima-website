@@ -6,6 +6,7 @@ import { api } from '../services/api'
 import { PageContainer } from './PageContainer'
 import { media } from '../styles/media'
 import { Button } from './Button'
+import { useAuthStore } from '../stores/useAuthStore'
 
 const LoginContainer = styled.div`
   display: flex;
@@ -57,15 +58,17 @@ const LoginContainer = styled.div`
   }
 `
 
-export const CompanyLogin = ({ onLogin }) => {
+export const CompanyLogin = () => {
   const { register, handleSubmit, formState } = useForm()
   const [error, setError] = useState('')
+  const setAuth = useAuthStore((state) => state.setAuth)
 
   const onSubmit = async (data) => {
     setError('')
     try {
       const res = await api.companies.login(data)
-      onLogin(res.token) // Pass token to parent or store in Zustand
+      setAuth(res.token) // Store token in Zustand
+      // Optionally, redirect or show company dashboard here
     } catch (err) {
       setError('Login failed. Please check your credentials.')
     }
@@ -80,7 +83,7 @@ export const CompanyLogin = ({ onLogin }) => {
             Company Email
             <input
               type='email'
-              autoComplete='email' // Auto-complete for email
+              autoComplete='email'
               {...register('email', { required: true })}
             />
           </label>
@@ -88,7 +91,7 @@ export const CompanyLogin = ({ onLogin }) => {
             Password
             <input
               type='password'
-              autoComplete='current-password' // Auto-complete for password
+              autoComplete='current-password'
               {...register('password', { required: true })}
             />
           </label>
