@@ -8,11 +8,9 @@ const StyledProducts = styled.section`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text.primary};
   text-align: left;
-
-  ${media.sm} {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    padding: ${(props) => props.theme.spacing.md};
-  }
+  padding: 0 8px;
+  max-width: 1200px;
+  margin: 0 auto;
 
   ${media.md} {
     padding: ${(props) => props.theme.spacing.xl};
@@ -21,11 +19,19 @@ const StyledProducts = styled.section`
 
 const StyledProductsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: ${(props) => props.theme.spacing.md};
-  max-width: 1200px;
   margin: 0 auto;
-  align-items: stretch; // ensures all cards are equal height
+  align-items: stretch;
+  padding: 0 8px;
+
+  ${media.sm} {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  ${media.md} {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
 `
 
 export const Products = ({ products = [], onOrder }) => {
