@@ -215,16 +215,16 @@ export const Cart = () => {
             )}
             {/* Only show button if there are items in the cart */}
             {items.length > 0 && (
-              <Link to='/checkout' onClick={closeCart}>
-                <Button as='a' variant='primary' aria-label='Proceed to order'>
-                  Proceed to Order Form
+              <Link to='/company/checkout' onClick={closeCart}>
+                <Button variant='primary' aria-label='Proceed to order' as='button'>
+                  Proceed to order
                 </Button>
               </Link>
             )}
             {/* Else show the button as disabled */}
             {items.length === 0 && (
               <Button variant='primary' disabled>
-                Proceed to Order Form
+                Proceed to order
               </Button>
             )}
           </MenuContent>

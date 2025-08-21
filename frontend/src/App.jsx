@@ -6,7 +6,7 @@ import { CompanyNav } from './components/CompanyNav'
 // import ErrorBoundary from './components/ErrorBoundary' // ❌ Temporarily disable
 import { Nav } from './components/Nav'
 import { ProtectedRoute } from './components/ProtectedRoute'
-import Checkout from './pages/Checkout'
+import CompanyCheckout from './pages/CompanyCheckout'
 import CompanyDashboard from './pages/CompanyDashboard'
 import CompanyOrders from './pages/CompanyOrders'
 import CompanyPortal from './pages/CompanyPortal'
@@ -14,6 +14,7 @@ import CompanyProfile from './pages/CompanyProfile'
 import ContactUs from './pages/ContactUs'
 import FindUs from './pages/FindUs'
 import Home from './pages/Home'
+import OrderDetailsPage from './pages/OrderDetailsPage'
 import OurStory from './pages/OurStory'
 import Products from './pages/Products'
 import ReTreatClub from './pages/ReTreatClub'
@@ -22,7 +23,6 @@ import { Footer } from './sections/Footer'
 import { useAuthStore } from './stores/useAuthStore'
 import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
-import OrderDetailsPage from './pages/OrderDetailsPage'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -56,7 +56,6 @@ function App() {
               <Route path='/ourstory' element={<OurStory />} />
               <Route path='/retreatclub' element={<ReTreatClub />} />
               <Route path='/contactus' element={<ContactUs />} />
-              <Route path='/checkout' element={<Checkout />} />
               <Route path='/company/login' element={<CompanyPortal />} />
               <Route
                 path='/company/dashboard'
@@ -98,6 +97,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Shop />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/company/checkout'
+                element={
+                  <ProtectedRoute>
+                    <CompanyCheckout />
                   </ProtectedRoute>
                 }
               />

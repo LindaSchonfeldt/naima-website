@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { PageTitle } from '../components/PageTitle'
+import { useAuthStore } from '../stores/useAuthStore'
 
 const DashboardContainer = styled.div`
   max-width: 900px;
@@ -20,14 +21,16 @@ const Info = styled.div`
   text-align: left;
 `
 
-const CompanyDashboard = ({ token, companyName }) => {
-  if (!token) {
+const CompanyDashboard = () => {
+  const { company, companyToken } = useAuthStore()
+  if (!companyToken) {
     return <div>No token provided. Please log in.</div>
   }
+  console.log('company:', company)
 
   return (
     <DashboardContainer>
-      <PageTitle>Welcome, {companyName}!</PageTitle>
+      <PageTitle>Welcome, {company?.name || 'Company'}!</PageTitle>
       {/* Add dashboard widgets, stats, links, etc. here */}
       <Info>
         <p>Your company dashboard is under construction.</p>
