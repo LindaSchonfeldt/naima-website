@@ -1,13 +1,13 @@
-import { useForm } from 'react-hook-form'
-import styled from 'styled-components'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { api } from '../services/api'
-import { PageContainer } from './PageContainer'
+import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
-import { useAuthStore } from '../stores/useAuthStore'
+import { PageContainer } from './PageContainer'
 
 const LoginContainer = styled.div`
   display: flex;
@@ -62,18 +62,22 @@ const LoginContainer = styled.div`
 export const CompanyLogin = () => {
   const { register, handleSubmit, formState } = useForm()
   const [error, setError] = useState('')
-  const setAuth = useAuthStore((state) => state.setAuth)
   const navigate = useNavigate()
 
-  const onSubmit = async (data) => {
-    setError('')
+  const handleLogin = async (formData) => {
     try {
-      const res = await api.companies.login(data)
-      const token = res.token
-      setAuth(token) // Store token in Zustand
-      navigate('/company/dashboard') // redirect after login
+      const response = await api.companies.login(formData)
+      useAuthStore.setState({
+        company: response.company,
+        companyToken: response.token,
+        isLoggedIn: true
+      })
+      // Redirect to dashboard or wherever you want
+      navigate('/company/dashboard')
     } catch (err) {
-      setError('Login failed. Please check your credentials.')
+      // Handle login error
+      console.error('Login error:', err)
+      setError('Invalid email or password. Please try again.')
     }
   }
 
@@ -81,7 +85,7 @@ export const CompanyLogin = () => {
     <PageContainer>
       <LoginContainer>
         <h2>Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleLogin)}>
           <label>
             Company Email
             <input

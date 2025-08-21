@@ -26,7 +26,9 @@ router.get(
     const companyId = req.user.companyId || req.user.id
     console.log('Resolved companyId:', companyId)
     try {
-      const orders = await Order.find({ company: companyId }).populate('customer')
+      const orders = await Order.find({ company: companyId }).populate(
+        'customer'
+      )
       console.log('Orders found:', orders)
       res.json(orders)
     } catch (error) {

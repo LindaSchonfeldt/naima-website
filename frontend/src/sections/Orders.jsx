@@ -43,6 +43,8 @@ export const Orders = () => {
     navigate(`/orders/${orderId}`)
   }
 
+  console.log('Company token:', token)
+
   if (loading) return <div>Loading orders...</div>
   if (error) return <div style={{ color: 'red' }}>{error}</div>
   if (!orders.length) return <div>No orders found.</div>
