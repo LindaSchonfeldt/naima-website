@@ -39,33 +39,29 @@ const SectionTitle = styled.h2`
   }
 `
 
-// Rolling animation keyframes
+// Rolling animation keyframes- Animate the track by the width of one list (half of the doubled content) */
 const roll = keyframes`
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%); /* Move by half width to create seamless loop */
-  }
+  to { transform: translateX(-50%); }
 `
 
 const LogoTrack = styled.div`
   display: flex;
-  width: 200%;
-  animation: ${roll} 20s linear infinite; /* Adjust speed as needed */
+  width: max-content;
+  animation: ${roll} 15s linear infinite; /* Adjust speed as needed */
 
   &:hover {
     animation-play-state: paused; /* Pause on hover */
   }
+
+  @media (prefers-reduced-motion: reduce) { animation: none; }
 `
 
 const LogoGrid = styled.div`
   display: flex;
   width: 50%;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
-  /* gap: ${({ theme }) => theme.spacing.md}; */
-  padding: 0 ${({ theme }) => theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing.md};
 `
 
 const LogoItem = styled.div`
@@ -74,7 +70,7 @@ const LogoItem = styled.div`
   justify-content: center;
   opacity: 0.6;
   transition: opacity 0.3s ease;
-  flex-shrink: 0;
+  flex: 0 0 auto;
   min-width: 120px;
 
   &:hover {
@@ -115,7 +111,7 @@ export const SocialProof = () => {
             ))}
           </LogoGrid>
           {/* Duplicate grid for animation */}
-          {/* <LogoGrid>
+          <LogoGrid>
             {servedAtPartners.map((partner) => (
               <LogoItem key={`${partner._id}-duplicate`}>
                 <Logo
@@ -125,7 +121,7 @@ export const SocialProof = () => {
                 />
               </LogoItem>
             ))}
-          </LogoGrid> */}
+          </LogoGrid>
         </LogoTrack>
       </Container>
     </StyledSocialProof>
