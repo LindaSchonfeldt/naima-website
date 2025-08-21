@@ -20,11 +20,11 @@ const theme = {
 
      // 👇 client palette
      brand: {
-      primary:  '#F4A6A3', // CTA, active states
+      primary:  '#BCE8C2', // CTA, active states
       blush:    '#F7CDD0', // soft highlight/hero band
-      sky:      '#B3D9F3', // info tint, tags
+      salmon:   '#F4A6A3', // info tint, tags
       lavender: '#D0C3F1', // secondary tint, cards
-      mint:     '#BCE8C2'  // success tint / positive
+      sky:     '#B3D9F3'  // success tint / positive
     }
   },
   fonts: {
