@@ -36,6 +36,7 @@ const MainContent = styled.main`
 function App() {
   const companyToken = useAuthStore((state) => state.companyToken)
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+  const companyName = useAuthStore((state) => state.companyName)
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,7 +61,10 @@ function App() {
                 path='/company/dashboard'
                 element={
                   <ProtectedRoute>
-                    <CompanyDashboard token={companyToken} />
+                    <CompanyDashboard
+                      token={companyToken}
+                      companyName={companyName}
+                    />
                   </ProtectedRoute>
                 }
               />

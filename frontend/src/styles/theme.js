@@ -18,13 +18,13 @@ const theme = {
     error: '#ef4444',
     success: '#10b981',
 
-     // 👇 client palette
-     brand: {
-      primary:  '#BCE8C2', // CTA, active states
-      blush:    '#F7CDD0', // soft highlight/hero band
-      salmon:   '#F4A6A3', // info tint, tags
+    // 👇 client palette
+    brand: {
+      primary: '#BCE8C2', // CTA, active states
+      blush: '#F7CDD0', // soft highlight/hero band
+      salmon: '#F4A6A3', // info tint, tags
       lavender: '#D0C3F1', // secondary tint, cards
-      sky:     '#B3D9F3'  // success tint / positive
+      sky: '#B3D9F3' // success tint / positive
     }
   },
   fonts: {
@@ -64,7 +64,7 @@ const theme = {
       lineHeight: 1.4
     },
     h1: {
-      fontSize: '2.5rem',
+      fontSize: '3rem',
       fontWeight: 900, // heavy weight
       lineHeight: 1.2
     },

@@ -1,11 +1,14 @@
 import { PageContainer } from '../components/PageContainer'
+import { PageTitle } from '../components/PageTitle'
+import styled from 'styled-components'
+import { CompanySettings } from '../sections/CompanySettings'
 
 const CompanyProfile = () => {
   return (
     <PageContainer>
-      <h1>Company Profile</h1>
+      <PageTitle> Company Profile</PageTitle>
       <p>Manage your company profile here.</p>
-      {/* Add more content or components as needed */}
+      <CompanySettings />
     </PageContainer>
   )
 }

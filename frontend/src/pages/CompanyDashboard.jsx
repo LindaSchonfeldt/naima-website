@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { PageTitle } from '../components/PageTitle'
+
 const DashboardContainer = styled.div`
   max-width: 900px;
   margin: 40px auto;
@@ -9,25 +11,28 @@ const DashboardContainer = styled.div`
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 `
 
-const SectionTitle = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 16px;
-  color: ${(props) => props.theme.colors.primary};
+const Info = styled.div`
+  font-size: 16px;
+  color: ${(props) => props.theme.colors.text.secondary};
+  text-align: left;
 `
 
-const CompanyDashboard = ({ token }) => {
+const CompanyDashboard = ({ token, companyName }) => {
   if (!token) {
     return <div>No token provided. Please log in.</div>
   }
 
   return (
     <DashboardContainer>
-      <SectionTitle>Company Dashboard</SectionTitle>
+      <PageTitle>Welcome, {companyName}!</PageTitle>
       {/* Add dashboard widgets, stats, links, etc. here */}
-      <div>Welcome! Here are your company stats and actions.</div>
+      <Info>
+        <p>Your company dashboard is under construction.</p>
+        <p>Use the navigation above to explore other sections.</p>
+      </Info>
     </DashboardContainer>
   )
 }

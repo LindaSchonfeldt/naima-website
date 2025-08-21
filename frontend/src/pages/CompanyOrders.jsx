@@ -1,14 +1,15 @@
-import { Orders } from '../components/Orders'
+import styled from 'styled-components'
+
 import { PageContainer } from '../components/PageContainer'
+import { Orders } from '../sections/Orders'
 import { useAuthStore } from '../stores/useAuthStore'
+import { PageTitle } from '../components/PageTitle'
 
 const CompanyOrders = () => {
   return (
     <PageContainer>
-      <h1>Company Orders</h1>
-      <p>Order details will be displayed here.</p>
+      <PageTitle>Company Orders</PageTitle>
       <Orders />
-      <p>More information about orders can be added here.</p>
     </PageContainer>
   )
 }

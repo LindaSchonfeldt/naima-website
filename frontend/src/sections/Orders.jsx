@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useAuthStore } from '../stores/useAuthStore'
-import { api } from '../services/api'
 import { useNavigate } from 'react-router-dom'
+
+import { OrderItem } from '../components/OrderItem'
+import { api } from '../services/api'
+import { useAuthStore } from '../stores/useAuthStore'
 
 export const Orders = () => {
   const [orders, setOrders] = useState([])
@@ -37,20 +39,21 @@ export const Orders = () => {
     fetchOrders()
   }, [token])
 
+  const handleOrderClick = (orderId) => {
+    navigate(`/orders/${orderId}`)
+  }
+
   if (loading) return <div>Loading orders...</div>
   if (error) return <div style={{ color: 'red' }}>{error}</div>
   if (!orders.length) return <div>No orders found.</div>
 
   return (
-    <div>
-      <h2>Your Orders</h2>
+    <section>
       <ul>
         {orders.map((order) => (
-          <li key={order._id}>
-            Order #{order._id} - {order.totalCost} SEK
-          </li>
+          <OrderItem key={order._id} order={order} onClick={handleOrderClick} />
         ))}
       </ul>
-    </div>
+    </section>
   )
 }
