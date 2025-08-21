@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 import { useCartStore } from '../stores/useCartStore'
@@ -110,6 +111,7 @@ export const ProductCard = ({ product }) => {
         i.productId === product._id && i.selectedSize?._id === selectedSize?._id
     )
   )
+  const [desiredQuantity, setDesiredQuantity] = useState(1)
 
   if (!product) {
     return <div>No product data</div>
@@ -192,15 +194,16 @@ export const ProductCard = ({ product }) => {
               selectedSize,
               price: selectedSize?.price || lowestPrice,
               images: product.images,
-              cartKey: product._id,
-              quantity: cartItem?.quantity || 1
+              cartKey: cartItem?.cartKey, // only if in cart
+              quantity: desiredQuantity,
+              setQuantity: setDesiredQuantity
             }}
           />
           <StyledButton
             variant='primary'
             onClick={() => {
               if (selectedSize) {
-                addToCart(product, selectedSize)
+                addToCart(product, selectedSize, desiredQuantity)
               }
             }}
             disabled={!selectedSize}

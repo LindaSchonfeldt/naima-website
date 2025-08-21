@@ -45,14 +45,10 @@ const NavSection = styled.div`
 `
 
 const StyledNavLink = styled(Link)`
+  font-family: ${(props) => props.theme.fonts.body};
   color: ${(props) =>
     props.$active ? props.theme.colors.brand.red : 'inherit'};
   font-weight: ${(props) => (props.$active ? 'bold' : 'normal')};
-  text-decoration: ${(props) => (props.$active ? 'underline' : 'none')};
-  text-decoration-thickness: ${(props) => (props.$active ? '1px' : 'auto')};
-  text-underline-offset: 4px;
-  text-decoration-color: ${(props) =>
-    props.$active ? props.theme.colors.brand.red : 'inherit'};
   margin: 0 12px;
   transition: color 0.2s;
 `

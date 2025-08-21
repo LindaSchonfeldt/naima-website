@@ -5,9 +5,15 @@ import { useCartStore } from '../stores/useCartStore'
 const StyledQuantitySelector = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
   justify-content: center;
   gap: 8px;
+  width: 100%;
+  flex: 1;
+
+  button,
+  span {
+    flex: 1 1 0;
+  }
 
   button {
     background: none;
@@ -33,6 +39,7 @@ const StyledQuantitySelector = styled.div`
   }
 
   span {
+    text-align: center;
     font-size: 1rem;
     font-family: 'Neuzeit S LT Std Medium', sans-serif;
     color: ${(props) => props.theme.colors.text.primary};
@@ -53,23 +60,33 @@ const StyledQuantitySelector = styled.div`
 
 export const QuantitySelector = ({ item, variant = 'cart' }) => {
   const updateQuantity = useCartStore((state) => state.updateQuantity)
+  const { setQuantity, cartKey, quantity } = item
 
-  if (!item) return null // Prevent errors if item is undefined
+  if (!item) return null
+
+  const handleDecrement = () => {
+    if (setQuantity) {
+      setQuantity(Math.max(1, quantity - 1))
+    } else if (cartKey) {
+      updateQuantity(cartKey, Math.max(1, quantity - 1))
+    }
+  }
+
+  const handleIncrement = () => {
+    if (setQuantity) {
+      setQuantity(quantity + 1)
+    } else if (cartKey) {
+      updateQuantity(cartKey, quantity + 1)
+    }
+  }
 
   return (
     <StyledQuantitySelector variant={variant}>
-      <button
-        onClick={() => updateQuantity(item.cartKey, (item.quantity || 1) - 1)}
-        disabled={item.quantity <= 1}
-      >
+      <button onClick={handleDecrement} disabled={quantity <= 1}>
         -
       </button>
-      <span>{item.quantity}</span>
-      <button
-        onClick={() => updateQuantity(item.cartKey, (item.quantity || 1) + 1)}
-      >
-        +
-      </button>
+      <span>{quantity}</span>
+      <button onClick={handleIncrement}>+</button>
     </StyledQuantitySelector>
   )
 }
