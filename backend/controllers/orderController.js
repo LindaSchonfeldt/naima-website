@@ -26,10 +26,11 @@ export const createOrder = async (req, res) => {
       (sum, item) => sum + item.price * item.quantity,
       0
     )
-    // Create order with reference to customer
+    // Create order with reference to customer and company
     const order = new Order({
       ...req.body,
       customer: customer._id,
+      company: req.user.companyId || req.user.id, // Reference to company
       totalCost
     })
     await order.save()

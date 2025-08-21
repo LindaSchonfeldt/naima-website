@@ -13,8 +13,8 @@ import productRoutes from './routes/productRoutes.js'
 dotenv.config()
 
 // Increase listeners limit
-import { EventEmitter } from 'events';
-EventEmitter.defaultMaxListeners = 20;
+import { EventEmitter } from 'events'
+EventEmitter.defaultMaxListeners = 20
 
 const mongoUrl = process.env.MONGO_URL
 const port = process.env.PORT || 3001
@@ -65,6 +65,12 @@ app.use('/api/contact', contactRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'Naima API is running!' })
+})
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err)
+  res.status(500).json({ error: err.message })
 })
 
 app.listen(port, () => {

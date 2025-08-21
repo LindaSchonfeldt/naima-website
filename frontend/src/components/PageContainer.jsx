@@ -15,8 +15,9 @@ export const PageContainer = styled.div`
     align-items: flex-start;
     padding: ${(props) => props.theme.spacing.lg};
   }
-
   ${media.md} {
+    align-items: flex-start;
+
     padding: ${(props) => props.theme.spacing.xl};
   }
 `

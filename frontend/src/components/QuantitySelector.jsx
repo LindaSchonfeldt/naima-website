@@ -20,14 +20,14 @@ const StyledQuantitySelector = styled.div`
     color: ${(props) => props.theme.colors.text.primary};
     cursor: pointer;
     ${(props) =>
-      props.variant === 'card' &&
+      props.$variant === 'card' &&
       css`
         font-size: 1.5rem;
         padding: ${(props) => props.theme.spacing.sm}
           ${(props) => props.theme.spacing.sm};
       `}
     ${(props) =>
-      props.variant === 'cart' &&
+      props.$variant === 'cart' &&
       css`
         border: 1px solid black;
         border-radius: 4px;
@@ -46,12 +46,12 @@ const StyledQuantitySelector = styled.div`
     padding: ${(props) => props.theme.spacing.sm}
       ${(props) => props.theme.spacing.xs};
     ${(props) =>
-      props.variant === 'card' &&
+      props.$variant === 'card' &&
       css`
         font-size: 1.2rem;
       `}
     ${(props) =>
-      props.variant === 'cart' &&
+      props.$variant === 'cart' &&
       css`
         font-size: 1rem;
       `}
@@ -81,7 +81,7 @@ export const QuantitySelector = ({ item, variant = 'cart' }) => {
   }
 
   return (
-    <StyledQuantitySelector variant={variant}>
+    <StyledQuantitySelector $variant={variant}>
       <button onClick={handleDecrement} disabled={quantity <= 1}>
         -
       </button>

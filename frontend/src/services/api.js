@@ -90,13 +90,15 @@ export const api = {
     },
 
     // Submit a new order
-    submitOrder: async (data) => {
-      const response = await fetch(`${API_BASE}/orders`, {
+    submitOrder: async (orderData, token) => {
+      const response = await fetch('/api/orders', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(orderData)
       })
-      if (!response.ok) throw new Error('Failed to submit order')
       return response.json()
     }
   },

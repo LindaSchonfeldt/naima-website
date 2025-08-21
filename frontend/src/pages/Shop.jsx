@@ -7,7 +7,6 @@ import useProductStore from '../stores/useProductStore'
 const StyledShop = styled.section`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text.primary};
-  padding: ${(props) => props.theme.spacing.lg};
 
   ${media.sm} {
     display: flex;

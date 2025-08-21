@@ -5,6 +5,7 @@ import Company from '../models/Company.js'
 import Customer from '../models/Customer.js'
 
 export const authenticate = async (req, res, next) => {
+  console.log('Authenticate middleware hit')
   const token = req.headers.authorization?.split(' ')[1]
   if (!token) return res.status(401).json({ error: 'No token provided' })
   try {

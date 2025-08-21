@@ -6,7 +6,7 @@ import { CompanyNav } from './components/CompanyNav'
 // import ErrorBoundary from './components/ErrorBoundary' // ❌ Temporarily disable
 import { Nav } from './components/Nav'
 import { ProtectedRoute } from './components/ProtectedRoute'
-import Checkout from './pages/Checkout'
+import CompanyCheckout from './pages/CompanyCheckout'
 import CompanyDashboard from './pages/CompanyDashboard'
 import CompanyOrders from './pages/CompanyOrders'
 import CompanyPortal from './pages/CompanyPortal'
@@ -14,6 +14,7 @@ import CompanyProfile from './pages/CompanyProfile'
 import ContactUs from './pages/ContactUs'
 import FindUs from './pages/FindUs'
 import Home from './pages/Home'
+import OrderDetailsPage from './pages/OrderDetailsPage'
 import OurStory from './pages/OurStory'
 import Products from './pages/Products'
 import ReTreatClub from './pages/ReTreatClub'
@@ -36,6 +37,7 @@ const MainContent = styled.main`
 function App() {
   const companyToken = useAuthStore((state) => state.companyToken)
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+  const companyName = useAuthStore((state) => state.companyName)
 
   return (
     <ThemeProvider theme={theme}>
@@ -54,13 +56,15 @@ function App() {
               <Route path='/ourstory' element={<OurStory />} />
               <Route path='/retreatclub' element={<ReTreatClub />} />
               <Route path='/contactus' element={<ContactUs />} />
-              <Route path='/checkout' element={<Checkout />} />
               <Route path='/company/login' element={<CompanyPortal />} />
               <Route
                 path='/company/dashboard'
                 element={
                   <ProtectedRoute>
-                    <CompanyDashboard token={companyToken} />
+                    <CompanyDashboard
+                      token={companyToken}
+                      companyName={companyName}
+                    />
                   </ProtectedRoute>
                 }
               />
@@ -81,10 +85,26 @@ function App() {
                 }
               />
               <Route
+                path='/orders/:orderId'
+                element={
+                  <ProtectedRoute>
+                    <OrderDetailsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path='/company/shop'
                 element={
                   <ProtectedRoute>
                     <Shop />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/company/checkout'
+                element={
+                  <ProtectedRoute>
+                    <CompanyCheckout />
                   </ProtectedRoute>
                 }
               />
