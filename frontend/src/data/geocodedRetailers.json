@@ -1,0 +1,677 @@
+[
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Drottninggatan 90B",
+    "street": "Drottninggatan 90B",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "90B, Drottninggatan, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 36, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0588188,
+        59.3367324
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Götgatan 90",
+    "street": "Götgatan 90",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "90, Götgatan, Skanstull, Södermalm, Södermalms stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 118 62, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0749826,
+        59.3102855
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Regeringsgatan 54",
+    "street": "Regeringsgatan 54",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "54, Regeringsgatan, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 56, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0678265,
+        59.335141
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Sveavägen 55",
+    "street": "Sveavägen 55",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "55, Sveavägen, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 59, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.058462,
+        59.3405686
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Sveavägen 71",
+    "street": "Sveavägen 71",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "71, Sveavägen, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 50, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0557634,
+        59.3432833
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Odengatan 22 (Birger Jarlsgatan)",
+    "street": "Odengatan 22",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "22, Odengatan, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 51, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0620223,
+        59.3457683
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Odengatan 32 (Tulegatan)",
+    "street": "Odengatan 32",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "32, Odengatan, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 55, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0598249,
+        59.3452247
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Drottning Kristinas väg 9 (KTH)",
+    "street": "Drottning Kristinas väg 9",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "9, Drottning Kristinas Väg, Ruddammen, Norra Djurgården, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 114 28, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0717982,
+        59.3465424
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Vasagatan 44",
+    "street": "Vasagatan 44",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "44, Vasagatan, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 20, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0568699,
+        59.3336408
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Hornsbruksgatan 28",
+    "street": "Hornsbruksgatan 28",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "28, Hornsbruksgatan, Hornstull, Södermalm, Södermalms stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 117 34, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0345027,
+        59.3161104
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Sturegatan 9",
+    "street": "Sturegatan 9",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "9, Sturegatan, Villastaden, Östermalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 114 36, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0762633,
+        59.3407835
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Rörstrandsgatan 10",
+    "street": "Rörstrandsgatan 10",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "10, Rörstrandsgatan, Rörstrand, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 40, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0342217,
+        59.3400268
+      ]
+    }
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Västerlånggatan 38",
+    "street": "Västerlånggatan 38",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "38, Västerlånggatan, Gamla stan, Södermalms stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 29, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0698815,
+        59.3244842
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Linköping",
+    "street": "Ågatan 21",
+    "city": "Linköping",
+    "country": "Sweden",
+    "fullAddress": "Moccadeli, 21, Ågatan, Innerstaden, Linköpings Sankt Lars, Linköping, Linköpings kommun, Östergötland County, 582 22, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        15.6263508,
+        58.4119846
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Västervik",
+    "street": "Fiskaretorget 1",
+    "city": "Västervik",
+    "country": "Sweden",
+    "fullAddress": "Vikens Food & Friends, 1, Fiskaretorget, Reginelund, Ludvigsborg, Västervik, Västerviks kommun, Kalmar County, 593 30, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        16.6390801,
+        57.7592454
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Eskilstuna",
+    "street": "Fristadstorget 4",
+    "city": "Eskilstuna",
+    "country": "Sweden",
+    "fullAddress": "Fristadstorget, Söder, Eskilstuna, Eskilstuna kommun, Södermanland County, 632 18, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        16.513925,
+        59.3707345
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Skövde",
+    "street": "Storgatan 12B",
+    "city": "Skövde",
+    "country": "Sweden",
+    "fullAddress": "12B, Storgatan, Vasastaden, Skövde, Skövde kommun, Västra Götaland County, 541 30, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        13.8448467,
+        58.3896963
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Örebro",
+    "street": "Stortorget 7",
+    "city": "Örebro",
+    "country": "Sweden",
+    "fullAddress": "Stortorget, Eklunda, Örebro, Örebro kommun, Örebro County, 702 12, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        15.214789,
+        59.2715472
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Norrköping",
+    "street": "Tunnbindaregatan 3",
+    "city": "Norrköping",
+    "country": "Sweden",
+    "fullAddress": "Mocca Deli, 3, Tunnbindaregatan, Mjölnaren, Nordantill, Norrköping, Norrköpings kommun, Östergötland County, 602 21, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        16.1804993,
+        58.590035
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Västerås",
+    "street": "Stora torget 2",
+    "city": "Västerås",
+    "country": "Sweden",
+    "fullAddress": "2, Stora torget, Kyrkbacken, Västerås, Västerås kommun, Västmanland County, 722 15, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        16.5432668,
+        59.6107377
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Lidköping",
+    "street": "Nya Stadens Torg 1",
+    "city": "Lidköping",
+    "country": "Sweden",
+    "fullAddress": "Nya Stadens torg, Gamla staden, Lidköping distrikt, Lidköping, Lidköpings kommun, Västra Götaland County, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        13.1572925,
+        58.5038249
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Borås",
+    "street": "Västerbrogatan 5",
+    "city": "Borås",
+    "country": "Sweden",
+    "fullAddress": "Västerbrogatan, Norrby, Borås, Borås kommun, Västra Götaland County, 503 30, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        12.9371291,
+        57.7211513
+      ]
+    }
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Kalmar",
+    "street": "Storgatan 21",
+    "city": "Kalmar",
+    "country": "Sweden",
+    "fullAddress": "21, Storgatan, Kvarnholmen, Kalmar, Kalmar kommun, Kalmar County, 392 32, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        16.3633499,
+        56.663523
+      ]
+    }
+  },
+  {
+    "brand": "PBX",
+    "name": "PBX Sveavägen 67A",
+    "street": "Sveavägen 67A",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "67A, Sveavägen, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 50, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0567707,
+        59.3421661
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Odenplan",
+    "street": "Norrtullsgatan 9",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "9, Norrtullsgatan, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 29, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0519259,
+        59.3417797
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Medborgarplatsen",
+    "street": "Folkungagatan 43",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "43, Folkungagatan, Södermalm, Södermalms stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 118 26, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0722778,
+        59.3141715
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Sveavägen 51",
+    "street": "Sveavägen 51",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "51, Sveavägen, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 113 59, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0590015,
+        59.3399961
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Humlegården",
+    "street": "Humlegårdsgatan 20",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "20, Humlegårdsgatan, Villastaden, Östermalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 114 46, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0747907,
+        59.3368854
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Garnisonen",
+    "street": "Karlavägen 100",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "100, Karlavägen, Östermalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 115 26, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0963301,
+        59.3361407
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Mäster Samuelsgatan 9",
+    "street": "Mäster Samuelsgatan 9",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "9, Mäster Samuelsgatan, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 46, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0720428,
+        59.3342298
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Sveavägen 31",
+    "street": "Sveavägen 31",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "31, Sveavägen, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 37, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0621907,
+        59.3366104
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Gallerian",
+    "street": "Hamngatan 37",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "37, Hamngatan, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 53, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0671567,
+        59.3324687
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Centralstationen",
+    "street": "Centralplan 15",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "Centralens huvudentré, 15, Centralplan, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 64, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.058744,
+        59.330381
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Åhléns City",
+    "street": "Sergels torg",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "Sergels torg, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 51, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0640247,
+        59.3321933
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Stockholm Quality Outlet",
+    "street": "Flyginfarten 4",
+    "city": "Järfälla",
+    "country": "Sweden",
+    "fullAddress": "Samsøe Samsøe, 4, Flyginfarten, Barkarbystaden, Söderhöjden, Järfälla kommun, Sollentuna kommun, Stockholm County, 177 38, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        17.858617,
+        59.4170361
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Kungsbron 8B",
+    "street": "Kungsbron 8B",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "Kungsbron, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 112 24, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0512998,
+        59.332258
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Tyresö Centrum",
+    "street": "Östangränd 18",
+    "city": "Tyresö",
+    "country": "Sweden",
+    "fullAddress": "Östangränd, Bollmora, Tyresö kommun, Stockholm County, 135 38, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.230101,
+        59.2458764
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Mörby Centrum",
+    "street": "Mörbyleden 182",
+    "city": "Danderyd",
+    "country": "Sweden",
+    "fullAddress": "Mörbyleden, Ösby, Klingsta, Djursholm, Danderyds kommun, Stockholm County, 182 17, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0412507,
+        59.3981567
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Mall of Scandinavia",
+    "street": "Stjärntorget 2 (Plan 1 bredvid SATS)",
+    "city": "Solna",
+    "country": "Sweden",
+    "fullAddress": "Westfield Mall of Scandinavia, 2, Stjärntorget, Arenastaden, Ritorp, Solna, Solna kommun, Stockholm County, 169 79, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0030108,
+        59.3704371
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Arlanda T5",
+    "street": "Terminal 5",
+    "city": "Arlanda",
+    "country": "Sweden",
+    "fullAddress": "7-Eleven, Arlandaleden, Sigtuna kommun, Stockholm County, 190 45, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        17.9310876,
+        59.6514205
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Brunkebergstorg 12",
+    "street": "Brunkebergstorg 12",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "fullAddress": "Hawaii poké, 12, Brunkebergstorg, Klara, Norrmalm, Norra innerstadens stadsdelsområde, Stockholm, Stockholm Municipality, Stockholm County, 111 51, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        18.0668659,
+        59.3317707
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Signalfabriken",
+    "street": "Sundbybergs torg 1",
+    "city": "Sundbyberg",
+    "country": "Sweden",
+    "fullAddress": "Bistro Berg, 1, Sundbybergs torg, Centrala Sundbyberg, Sundbybergs kommun, Stockholm County, 172 65, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        17.9666432,
+        59.3616324
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Uppsala Centrum",
+    "street": "Dragarbrunnsgatan 44",
+    "city": "Uppsala",
+    "country": "Sweden",
+    "fullAddress": "Royal, 44, Dragarbrunnsgatan, Höganäs, Centrum, Uppsala, Uppsala kommun, Uppsala County, 753 20, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        17.6413531,
+        59.8588918
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Malmö Södertull",
+    "street": "Södra Vallgatan 3",
+    "city": "Malmö",
+    "country": "Sweden",
+    "fullAddress": "Vibliotek, 3, Södra Vallgatan, Old Town, Norr, Malmö, Malmö kommun, Skåne County, 211 40, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        13.0012344,
+        55.6015232
+      ]
+    }
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Göteborg Femman",
+    "street": "Postgatan 26",
+    "city": "Göteborg",
+    "country": "Sweden",
+    "fullAddress": "Cervera, 26-32, Postgatan, North Town, Inom Vallgraven, Centrum, Gothenburg, Göteborgs Stad, Västra Götaland County, 411 06, Sweden",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        11.9702305,
+        57.7090971
+      ]
+    }
+  }
+]
