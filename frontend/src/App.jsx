@@ -22,6 +22,7 @@ import { Footer } from './sections/Footer'
 import { useAuthStore } from './stores/useAuthStore'
 import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
+import OrderDetailsPage from './pages/OrderDetailsPage'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -81,6 +82,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <CompanyOrders />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/orders/:orderId'
+                element={
+                  <ProtectedRoute>
+                    <OrderDetailsPage />
                   </ProtectedRoute>
                 }
               />
