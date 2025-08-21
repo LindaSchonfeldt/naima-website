@@ -4,6 +4,7 @@ import Order from '../models/Order.js'
 // Create a new order
 // This will also create a customer if they don't exist
 export const createOrder = async (req, res) => {
+  console.log('Order POST body:', req.body)
   try {
     // Find or create customer
     let customer = await Customer.findOne({ email: req.body.email })
