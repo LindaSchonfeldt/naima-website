@@ -6,7 +6,7 @@ import { CompanySettings } from '../sections/CompanySettings'
 const CompanyProfile = () => {
   return (
     <PageContainer>
-      <PageTitle> Company Profile</PageTitle>
+      <PageTitle> Company profile</PageTitle>
       <p>Manage your company profile here.</p>
       <CompanySettings />
     </PageContainer>

@@ -7,7 +7,7 @@ import { ImageMasonry } from '../sections/ImageMasonry'
 
 const Products = () => (
   <PageContainer>
-    <PageTitle>Fika Selection</PageTitle>
+    <PageTitle>Fika selection</PageTitle>
     <ImageMasonry masonryImages={masonryImages} />
   </PageContainer>
 )
