@@ -9,7 +9,15 @@ import { DropdownMenu } from './DropdownMenu'
 import { Image } from './Image'
 import { QuantitySelector } from './QuantitySelector'
 
-// <-- import the Image component
+const ProductImageWrapper = styled.div`
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+`
 
 const StyledProductCard = styled.div`
   display: flex;
@@ -17,18 +25,9 @@ const StyledProductCard = styled.div`
   background: #fff;
   overflow: hidden;
   min-width: 0;
-  height: 100%; // fill grid row height
+  height: 100%;
   padding-bottom: ${(props) => props.theme.spacing.md};
   }
-`
-
-const ProductImageWrapper = styled.div`
-  width: 100%;
-  height: 250px; // Set a fixed height for all images
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `
 
 const ProductContent = styled.div`
@@ -38,19 +37,37 @@ const ProductContent = styled.div`
   }
 `
 
+const ProductTitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${(props) => props.theme.spacing.xs};
+  margin-bottom: ${(props) => props.theme.spacing.sm};
+  width: 100%;
+  height: 2rem;
+  overflow: hidden;
+
+  ${media.sm} {
+    height: 2rem;
+  }
+
+  ${media.md} {
+    height: 2.9rem;
+  }
+`
+
 const ProductTitle = styled.h3`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0 0 ${(props) => props.theme.spacing.sm} 0;
   color: ${(props) => props.theme.colors.text.primary};
 
   ${media.sm} {
-    font-size: 20px;
+    font-size: 18px;
     margin: 0 0 ${(props) => props.theme.spacing.sm} 0;
   }
 
   ${media.md} {
-    font-size: 28px;
+    font-size: 20px;
     margin: 0 0 ${(props) => props.theme.spacing.md} 0;
   }
 `
@@ -157,7 +174,9 @@ export const ProductCard = ({ product }) => {
         />
       </ProductImageWrapper>
       <ProductContent>
-        <ProductTitle>{product.name}</ProductTitle>
+        <ProductTitleContainer>
+          <ProductTitle>{product.name}</ProductTitle>
+        </ProductTitleContainer>
         <ProductInformation>
           <ProductDescription>{product.description}</ProductDescription>
         </ProductInformation>
