@@ -1,13 +1,14 @@
-import { useEffect, useMemo, useState } from 'react'
-import styled, { useTheme } from 'styled-components'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-
-// Optional: keep Leaflet's default icon working if fall back needed
+// Keep Leaflet default icon working if a brand icon is missing
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png'
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
+import { useEffect, useMemo, useState } from 'react'
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import styled, { useTheme } from 'styled-components'
+
+import 'leaflet/dist/leaflet.css'
+
 // @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl })
@@ -15,7 +16,6 @@ L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl })
 const Wrap = styled.section`
   width: min(1200px, 92vw);
   margin: 0 auto;
-
   .leaflet-container {
     width: 100%;
     height: clamp(320px, 60vh, 600px);
@@ -35,6 +35,7 @@ const FitBounds = ({ points }) => {
   return null
 }
 
+// Inline SVG pin generator
 const makeSvgPin = ({ label = '•', fill = '#F7CDD0', text = '#1e293b' }) => {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" viewBox="0 0 32 48">
@@ -43,12 +44,15 @@ const makeSvgPin = ({ label = '•', fill = '#F7CDD0', text = '#1e293b' }) => {
             font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="700">${label}</text>
     </svg>`
   const url = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg)
-  return L.icon({
-    iconUrl: url,
-    iconSize: [32, 48],
-    iconAnchor: [16, 46],
-    popupAnchor: [0, -38]
-  })
+  return L.icon({ iconUrl: url, iconSize: [32, 48], iconAnchor: [16, 46], popupAnchor: [0, -38] })
+}
+
+// Pick black/white text for contrast against light pastels
+const getTextOn = (hex) => {
+  const h = (hex || '#ffffff').replace('#','')
+  const r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16)
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255
+  return luminance > 0.6 ? '#1e293b' : '#ffffff'
 }
 
 const RetailerMap = () => {
@@ -56,22 +60,38 @@ const RetailerMap = () => {
   const theme = useTheme()
 
   useEffect(() => {
+    // Ensure file exists at frontend/public/data/geocodedRetailers.json
     fetch('/data/geocodedRetailers.json')
       .then((r) => r.json())
       .then((data) => setItems(Array.isArray(data) ? data : (data.items ?? [])))
       .catch(() => setItems([]))
   }, [])
 
-  // memoize icons; use theme colors with safe fallbacks
+  // Brand → color mapping using Naima palette
   const brandIcons = useMemo(() => {
-    const defFill = theme?.colors?.brand?.blush || '#F7CDD0'
-    const defText = theme?.colors?.text?.primary || '#1e293b'
+    const palette = {
+      primary:  theme?.colors?.brand?.primary  || '#BCE8C2',
+      blush:    theme?.colors?.brand?.blush    || '#F7CDD0',
+      salmon:   theme?.colors?.brand?.salmon   || '#F4A6A3',
+      lavender: theme?.colors?.brand?.lavender || '#D0C3F1',
+      sky:      theme?.colors?.brand?.sky      || '#B3D9F3',
+    }
+
+    const fills = {
+      '7-Eleven':    palette.primary,
+      'Hawaii Poké': palette.sky,
+      'Mocca Deli':  palette.salmon,
+      'PBX':         palette.lavender
+    }
+
+    const pin = (label, fillHex) => makeSvgPin({ label, fill: fillHex, text: getTextOn(fillHex) })
+
     return {
-      default: makeSvgPin({ label: '•', fill: defFill, text: defText }),
-      '7-Eleven': makeSvgPin({ label: '7',  fill: '#007A33', text: '#ffffff' }),
-      'Hawaii Poké': makeSvgPin({ label: 'HP', fill: '#0EA5B3', text: '#ffffff' }),
-      'Mocca Deli': makeSvgPin({ label: 'M',  fill: '#6B4F4F', text: '#ffffff' }),
-      'PBX': makeSvgPin({ label: 'P',        fill: '#1E293B', text: '#ffffff' })
+      default: pin('•', palette.blush),
+      '7-Eleven':    pin('7',  fills['7-Eleven']),
+      'Hawaii Poké': pin('HP', fills['Hawaii Poké']),
+      'Mocca Deli':  pin('M',  fills['Mocca Deli']),
+      'PBX':         pin('P',  fills['PBX'])
     }
   }, [theme])
 
