@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-import { PageTitle } from '../components/PageTitle'
 import { SocialIcons } from '../components/SocialIcons'
 import { media } from '../styles/media'
 
@@ -48,8 +47,8 @@ export const Footer = () => {
     <StyledFooter>
       <FooterContent>
         <FooterSection>
-          <PageTitle align='left'>Join the community</PageTitle>
-          <p>© 2025 Naima. All rights reserved.</p>
+          <h2>Join the community</h2>
+          <p>© 2025 naima. All rights reserved.</p>
         </FooterSection>
         <FooterSection></FooterSection>
         <FooterSection>

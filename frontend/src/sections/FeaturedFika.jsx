@@ -2,12 +2,18 @@ import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import { FeaturedProduct } from '../components/FeaturedProduct'
-import { PageTitle } from '../components/PageTitle'
 import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
   background: ${(props) => props.theme.colors.background || '#f9f9f9'};
+`
+
+const StyledH2 = styled.h2`
+  font-size: ${(props) => props.theme.typography.h2.fontSize};
+  font-weight: ${(props) => props.theme.typography.h2.fontWeight};
+  line-height: ${(props) => props.theme.typography.h2.lineHeight};
+  margin-bottom: ${(props) => props.theme.spacing.md};
 `
 
 const InfoSection = styled.div`
@@ -81,7 +87,7 @@ export const FeaturedFika = () => {
   if (loading && (!featuredProducts || featuredProducts.length === 0)) {
     return (
       <StyledFeaturedFika>
-        <PageTitle>Featured Treats</PageTitle>
+        <StyledH2>Featured treats</StyledH2>
         <LoadingMessage>Loading featured products...</LoadingMessage>
       </StyledFeaturedFika>
     )
@@ -92,7 +98,7 @@ export const FeaturedFika = () => {
     return (
       <StyledFeaturedFika>
         <InfoSection>
-          <PageTitle>Featured Treats</PageTitle>
+          <StyledH2>Featured treats</StyledH2>
         </InfoSection>
         <ErrorMessage>
           Error loading products: {error}
@@ -116,7 +122,7 @@ export const FeaturedFika = () => {
   return (
     <StyledFeaturedFika>
       <InfoSection>
-        <PageTitle>Featured Treats</PageTitle>
+        <StyledH2>Featured treats</StyledH2>
         <Description>
           Every bite tells a story of wellness. Our handcrafted treats combine
           traditional Swedish fika culture with modern superfoods.

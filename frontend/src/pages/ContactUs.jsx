@@ -5,7 +5,7 @@ import { PageTitle } from '../components/PageTitle'
 const ContactUs = () => {
   return (
     <PageContainer>
-      <PageTitle $align="center">contact us</PageTitle>
+      <PageTitle>Contact us</PageTitle>
       <ContactUsForm />
     </PageContainer>
   )

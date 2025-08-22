@@ -8,7 +8,7 @@ import { media } from '../styles/media'
 const FindUs = () => {
   return (
     <PageContainer>
-      <PageTitle>find us</PageTitle>
+      <PageTitle>Find us</PageTitle>
       <RetailerMap />
     </PageContainer>
   )

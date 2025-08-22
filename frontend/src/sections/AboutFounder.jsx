@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-const StyledBody = styled.div`
+const StyledBody = styled.section`
   p {
     margin-bottom: ${(props) => props.theme.spacing.md};
   }
 
   p:last-child {
-    margin-bottom: 0;
+    margin-bottom: ${(props) => props.theme.spacing.lg};
   }
 `
 

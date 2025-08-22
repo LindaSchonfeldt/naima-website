@@ -69,7 +69,7 @@ const theme = {
       lineHeight: 1.2
     },
     h2: {
-      fontSize: '1.5rem',
+      fontSize: '2rem',
       fontWeight: 700,
       lineHeight: 1.2
     }

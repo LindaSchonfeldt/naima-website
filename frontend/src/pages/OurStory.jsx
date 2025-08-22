@@ -6,7 +6,7 @@ import { AboutMission } from '../sections/AboutMission'
 const OurStory = () => {
   return (
     <PageContainer>
-      <PageTitle>meet our founder</PageTitle>
+      <PageTitle>Meet our founder</PageTitle>
       <AboutFounder />
       <AboutMission />
     </PageContainer>
