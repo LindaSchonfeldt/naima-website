@@ -1,5 +1,4 @@
 import express from 'express'
-import Order from '../models/Order.js'
 
 import {
   createOrder,
@@ -8,6 +7,7 @@ import {
   getOrdersForCustomer
 } from '../controllers/orderController.js'
 import { authenticate, authorize } from '../middleware/auth.js'
+import Order from '../models/Order.js'
 
 const router = express.Router()
 

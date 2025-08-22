@@ -127,7 +127,7 @@ const ItemControlsLeft = styled.div`
 `
 
 const Checkout = () => {
-  const { items, removeFromCart } = useCartStore()
+  const { items, removeFromCart, totalCost } = useCartStore()
   const { company, companyToken } = useAuthStore()
 
   const handleSubmitOrder = async () => {
@@ -146,19 +146,20 @@ const Checkout = () => {
 
     // Build orderData from cart items and customer info
     const orderData = {
-      ...customerInfo,
-      items: items.map((item) => ({
-        productId: item.productId,
-        name: item.name,
-        quantity: item.quantity,
-        price: item.selectedSize?.price || item.price
-      }))
+      name: company.name,
+      email: company.email,
+      address: company.address,
+      phone: company.phone,
+      company: company._id, // ObjectId string
+      items: items,
+      totalCost: totalCost,
+      status: 'pending'
     }
 
     console.log('Company token:', companyToken)
     console.log('Order data:', orderData)
 
-    const result = await api.submitOrder(orderData, companyToken)
+    const result = await api.orders.submitOrder(orderData, companyToken)
     // Clear cart after successful order
     useCartStore.getState().clearCart()
     // Show FeedbackMessage or redirect to success page
