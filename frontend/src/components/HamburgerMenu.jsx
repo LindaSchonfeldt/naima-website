@@ -69,6 +69,9 @@ export const HamburgerMenu = () => {
       </HamburgerButton>
       {isOpen && (
         <Menu>
+          <Link to='/products' onClick={closeMenu}>
+            Products
+          </Link>
           <Link to='/findus' onClick={closeMenu}>
             Find us
           </Link>
@@ -77,9 +80,6 @@ export const HamburgerMenu = () => {
           </Link>
           <Link to='/contactus' onClick={closeMenu}>
             Contact us
-          </Link>
-          <Link to='/retreatclub' onClick={closeMenu}>
-            Re:treat Club
           </Link>
         </Menu>
       )}
