@@ -4,12 +4,20 @@ import Admin from '../models/Admin.js'
 import Company from '../models/Company.js'
 import Customer from '../models/Customer.js'
 
+const getJwtSecret = () => {
+  const secret = process.env.JWT_SECRET
+  if (!secret || !secret.trim()) {
+    throw new Error('Missing JWT_SECRET env var')
+  }
+  return secret
+}
+
 export const authenticate = async (req, res, next) => {
   console.log('Authenticate middleware hit')
   const token = req.headers.authorization?.split(' ')[1]
   if (!token) return res.status(401).json({ error: 'No token provided' })
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify(token, getJwtSecret)
     let user
     if (decoded.role === 'admin') {
       user = await Admin.findById(decoded.id)

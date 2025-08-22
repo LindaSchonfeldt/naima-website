@@ -12,6 +12,8 @@ import productRoutes from './routes/productRoutes.js'
 import retailerRoutes from './routes/retailerRoutes.js'
 
 dotenv.config()
+console.log('JWT_SECRET set:', Boolean(process.env.JWT_SECRET))
+
 
 // Increase listeners limit
 import { EventEmitter } from 'events'
