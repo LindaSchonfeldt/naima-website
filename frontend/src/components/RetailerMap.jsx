@@ -46,7 +46,8 @@ const RetailerMap = () => {
 
   useEffect(() => {
     // Fastest: serve the file from frontend/public/data/retailers.geocoded.json
-    fetch('src/data/geocodedRetailers.json')
+    fetch('/data/geocodedRetailers.json')
+
       .then((r) => r.json())
       .then((data) => setItems(Array.isArray(data) ? data : (data.items ?? [])))
       .catch(() => setItems([]))
