@@ -1,0 +1,327 @@
+[
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Drottninggatan 90B",
+    "street": "Drottninggatan 90B",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Götgatan 90",
+    "street": "Götgatan 90",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Regeringsgatan 54",
+    "street": "Regeringsgatan 54",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Sveavägen 55",
+    "street": "Sveavägen 55",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Sveavägen 71",
+    "street": "Sveavägen 71",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Odengatan 22 (Birger Jarlsgatan)",
+    "street": "Odengatan 22",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Odengatan 32 (Tulegatan)",
+    "street": "Odengatan 32",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Drottning Kristinas väg 9 (KTH)",
+    "street": "Drottning Kristinas väg 9",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Vasagatan 44",
+    "street": "Vasagatan 44",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Hornsbruksgatan 28",
+    "street": "Hornsbruksgatan 28",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Sturegatan 9",
+    "street": "Sturegatan 9",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Rörstrandsgatan 10",
+    "street": "Rörstrandsgatan 10",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "7-Eleven",
+    "name": "7-Eleven Västerlånggatan 38",
+    "street": "Västerlånggatan 38",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Linköping",
+    "street": "Ågatan 21",
+    "city": "Linköping",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Västervik",
+    "street": "Fiskaretorget 1",
+    "city": "Västervik",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Eskilstuna",
+    "street": "Fristadstorget 4",
+    "city": "Eskilstuna",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Skövde",
+    "street": "Storgatan 12B",
+    "city": "Skövde",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Örebro",
+    "street": "Stortorget 7",
+    "city": "Örebro",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Norrköping",
+    "street": "Tunnbindaregatan 3",
+    "city": "Norrköping",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Västerås",
+    "street": "Stora torget 2",
+    "city": "Västerås",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Lidköping",
+    "street": "Nya Stadens Torg 1",
+    "city": "Lidköping",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Borås",
+    "street": "Västerbrogatan 5",
+    "city": "Borås",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Mocca Deli",
+    "name": "Mocca Deli Kalmar",
+    "street": "Storgatan 21",
+    "city": "Kalmar",
+    "country": "Sweden"
+  },
+
+  {
+    "brand": "PBX",
+    "name": "PBX Sveavägen 67A",
+    "street": "Sveavägen 67A",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Odenplan",
+    "street": "Norrtullsgatan 9",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Medborgarplatsen",
+    "street": "Folkungagatan 43",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Sveavägen 51",
+    "street": "Sveavägen 51",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Humlegården",
+    "street": "Humlegårdsgatan 20",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Garnisonen",
+    "street": "Karlavägen 100",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Mäster Samuelsgatan 9",
+    "street": "Mäster Samuelsgatan 9",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Sveavägen 31",
+    "street": "Sveavägen 31",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Gallerian",
+    "street": "Hamngatan 37",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Centralstationen",
+    "street": "Centralplan 15",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Åhléns City",
+    "street": "Sergels torg",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Stockholm Quality Outlet",
+    "street": "Flyginfarten 4",
+    "city": "Järfälla",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Solna Centrum",
+    "street": "Bibliotekstorget 4",
+    "city": "Solna",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Kungsbron 8B",
+    "street": "Kungsbron 8B",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Tyresö Centrum",
+    "street": "Östangränd 18",
+    "city": "Tyresö",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Mörby Centrum",
+    "street": "Mörbyleden 182",
+    "city": "Danderyd",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Mall of Scandinavia",
+    "street": "Stjärntorget 2 (Plan 1 bredvid SATS)",
+    "city": "Solna",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Arlanda T5",
+    "street": "Terminal 5",
+    "city": "Arlanda",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Brunkebergstorg 12",
+    "street": "Brunkebergstorg 12",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Signalfabriken",
+    "street": "Sundbybergs torg 1",
+    "city": "Sundbyberg",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Uppsala Centrum",
+    "street": "Dragarbrunnsgatan 44",
+    "city": "Uppsala",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Malmö Södertull",
+    "street": "Södra Vallgatan 3",
+    "city": "Malmö",
+    "country": "Sweden"
+  },
+  {
+    "brand": "Hawaii Poké",
+    "name": "Hawaii Poké Göteborg Femman",
+    "street": "Postgatan 26",
+    "city": "Göteborg",
+    "country": "Sweden"
+  }
+]
