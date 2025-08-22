@@ -1,11 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { PageContainer } from "../components/PageContainer";
-
-const MissionSection = styled(PageContainer)`
+const MissionSection = styled.section`
   display: flex;
   flex-direction: column;
-  gap: ${({theme}) => theme.spacing.lg};
+  gap: ${({ theme }) => theme.spacing.lg};
 `
 export const Row = styled.div`
   display: grid;
@@ -15,8 +13,8 @@ export const Row = styled.div`
 
   /* Mobile: stack */
   grid-template-areas:
-    "text"
-    "media";
+    'text'
+    'media';
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
@@ -54,7 +52,8 @@ export const Hashtag = styled.h2`
   font-size: clamp(2rem, 9vw, 6rem);
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: ${({ theme }) => theme.fonts.weights.heavy};
-  margin: ${({ theme }) => theme.spacing.xl} 0 ${({ theme }) => theme.spacing.lg};
+  margin: ${({ theme }) => theme.spacing.xl} 0
+    ${({ theme }) => theme.spacing.lg};
 `
 
 export const AboutMission = () => {
@@ -66,12 +65,12 @@ export const AboutMission = () => {
           <p>Became a mission to change fika — for good.</p>
         </Text>
         <Media>
-        <Img src="/images/naima-founder.webp" alt="Founder" />
+          <Img src='/images/naima-founder.webp' alt='Founder' />
         </Media>
       </Row>
       <Row $reverse>
-      <Media>
-          <Img src="/images/naima-team.webp" alt="Team" />
+        <Media>
+          <Img src='/images/naima-team.webp' alt='Team' />
         </Media>
         <Text>
           <h2>OUR MISSION</h2>

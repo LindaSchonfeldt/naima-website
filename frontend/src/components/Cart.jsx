@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useCartStore } from '../stores/useCartStore'
+import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
 import { QuantitySelector } from './QuantitySelector'
@@ -143,8 +144,20 @@ const StyledImg = styled.img`
 `
 
 export const Cart = () => {
-  const { isOpen, items, closeCart, toggleCart, removeFromCart, addToCart } =
-    useCartStore()
+  const {
+    isOpen,
+    items,
+    closeCart,
+    toggleCart,
+    removeFromCart,
+    addToCart,
+  } = useCartStore()
+
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+  const companyToken = useAuthStore((state) => state.companyToken)
+
+  // Only show cart if logged in as company
+  if (!isLoggedIn || !companyToken) return null
 
   if (!isOpen)
     return (

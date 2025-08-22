@@ -5,7 +5,7 @@ import { media } from '../styles/media'
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; // <--- Change to flex-start for left alignment
 
   padding: ${(props) => props.theme.spacing.md};
   max-width: 1200px;
@@ -17,7 +17,6 @@ export const PageContainer = styled.div`
   }
   ${media.md} {
     align-items: flex-start;
-
     padding: ${(props) => props.theme.spacing.xl};
   }
 `

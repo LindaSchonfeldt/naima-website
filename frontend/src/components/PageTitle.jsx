@@ -8,8 +8,7 @@ const StyledPageTitle = styled.h1`
   line-height: ${(props) => props.theme.typography.heading.lineHeight};
   color: inherit;
   margin-bottom: ${(props) => props.theme.spacing.md};
-  text-align: ${(props) =>
-    props.$align || 'left'}; /* Use $align instead of align */
+  text-align: left; /* Always align left */
   font-size: 2rem;
 
   ${media.md} {
@@ -21,6 +20,6 @@ const StyledPageTitle = styled.h1`
   }
 `
 
-export const PageTitle = ({ children, align }) => {
-  return <StyledPageTitle $align={align}>{children}</StyledPageTitle>
+export const PageTitle = ({ children }) => {
+  return <StyledPageTitle>{children}</StyledPageTitle>
 }
