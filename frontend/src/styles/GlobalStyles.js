@@ -38,18 +38,23 @@ const GlobalStyles = createGlobalStyle`
 
   /* Links */
   a {
-    color: ${({theme}) => theme.colors.brand.primary};
+    color: ${({ theme }) => theme.colors.text.primary};
     text-decoration: none;
   }
 
+  a.active,
+  a[aria-current="page"] {
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
+
   ::selection {
-  background: ${({theme}) => theme.colors.brand.sky};
-  color: ${({theme}) => theme.colors.text.primary};
+  background: ${({ theme }) => theme.colors.brand.sky};
+  color: ${({ theme }) => theme.colors.text.primary};
 }
 
 /* strong focus ring for accessibility */
 :focus-visible {
-  outline: 3px solid ${({theme}) => theme.colors.primary};
+  outline: 3px solid ${({ theme }) => theme.colors.primary};
   outline-offset: 2px;
 }
 

@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import { PageContainer } from '../components/PageContainer'
 import { PageTitle } from '../components/PageTitle'
 import masonryImages from '../data/masonryImages'
-import { ImageMasonry } from '../sections/ImageMasonry'
+import { ImageGrid } from '../components/ImageGrid'
 
 const Products = () => (
   <PageContainer>
     <PageTitle>Fika selection</PageTitle>
-    <ImageMasonry masonryImages={masonryImages} />
+    <ImageGrid images={masonryImages}></ImageGrid>
   </PageContainer>
 )
 

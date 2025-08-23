@@ -35,7 +35,7 @@ const Logo = styled(Link)`
   color: ${(props) => props.theme.colors.text.primary};
 
   &:hover {
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.brand.sky};
   }
 `
 
@@ -145,10 +145,18 @@ export const Nav = () => {
         <Cart />
       </NavSection>
       <Links>
-        <Link to='/products'>Products</Link>
-        <Link to='/findus'>Find us</Link>
-        <Link to='/ourstory'>Our story</Link>
-        <Link to='/contactus'>Contact us</Link>
+        <Link to='/products' aria-current='page'>
+          Products
+        </Link>
+        <Link to='/findus' aria-current='page'>
+          Find us
+        </Link>
+        <Link to='/ourstory' aria-current='page'>
+          Our story
+        </Link>
+        <Link to='/contactus' aria-current='page'>
+          Contact us
+        </Link>
       </Links>
     </StyledNav>
   )

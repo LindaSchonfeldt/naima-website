@@ -7,6 +7,7 @@ import { media } from '../styles/media'
 import { Button } from './Button'
 import { DropdownMenu } from './DropdownMenu'
 import { Image } from './Image'
+import { ProductCardNotification } from './ProductCardNotification'
 import { QuantitySelector } from './QuantitySelector'
 
 const ProductImageWrapper = styled.div`
@@ -20,6 +21,7 @@ const ProductImageWrapper = styled.div`
 `
 
 const StyledProductCard = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -27,7 +29,6 @@ const StyledProductCard = styled.div`
   min-width: 0;
   height: 100%;
   padding-bottom: ${(props) => props.theme.spacing.md};
-  }
 `
 
 const ProductContent = styled.div`
@@ -129,6 +130,7 @@ export const ProductCard = ({ product }) => {
     )
   )
   const [desiredQuantity, setDesiredQuantity] = useState(1)
+  const [showNotification, setShowNotification] = useState(false)
 
   if (!product) {
     return <div>No product data</div>
@@ -161,6 +163,14 @@ export const ProductCard = ({ product }) => {
     .filter((p) => typeof p === 'number' && p > 0)
   const lowestPrice =
     validPrices.length > 0 ? Math.min(...validPrices).toFixed(2) : 'N/A'
+
+  const handleAddToCart = () => {
+    if (selectedSize) {
+      addToCart(product, selectedSize, desiredQuantity)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 2000)
+    }
+  }
 
   return (
     <StyledProductCard>
@@ -220,17 +230,16 @@ export const ProductCard = ({ product }) => {
           />
           <StyledButton
             variant='primary'
-            onClick={() => {
-              if (selectedSize) {
-                addToCart(product, selectedSize, desiredQuantity)
-              }
-            }}
+            onClick={handleAddToCart}
             disabled={!selectedSize}
           >
             Add to Cart
           </StyledButton>
         </ButtonContainer>
       </LowerSection>
+      {showNotification && (
+        <ProductCardNotification>Added to cart!</ProductCardNotification>
+      )}
     </StyledProductCard>
   )
 }
