@@ -20,6 +20,12 @@ const StyledNav = styled.nav`
   height: ${({ theme }) => theme.layout?.navHeight || '80px'};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
+   /* 🌈 Nav color tokens */
+  --nav-link-color: ${({ theme }) => theme.colors.text.primary};
+  --nav-link-hover: ${({ theme }) => theme.colors.brand.salmon};
+  --nav-icon-color: ${({ theme }) => theme.colors.text.secondary};
+  --nav-icon-hover: ${({ theme }) => theme.colors.brand.salmon};
+
   ${media.md} {
     justify-content: space-between;
     padding: ${({ theme }) => theme.spacing.md};
@@ -33,8 +39,8 @@ const Logo = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text.primary};
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+  &:hover, &:focus-visible { 
+    color: var(--nav-icon-hover);
   }
 `
 
@@ -63,17 +69,14 @@ const Links = styled.div`
   }
 
   a {
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.text.primary};
-    font-family: ${({ theme }) => theme.fonts.body};
-    font-weight: ${(props) => props.theme.fonts.weights.medium};
-    padding: ${(props) => props.theme.spacing.sm};
+    color: var(--nav-link-color);
+    padding: ${({ theme }) => theme.spacing.sm};
     font-size: 14px;
     border-radius: 4px;
     white-space: nowrap;
 
     &:hover {
-      color: ${(props) => props.theme.colors.primary};
+      color: var(--nav-link-hover);
     }
   }
 `
@@ -115,13 +118,13 @@ const NavSection = styled.div`
 
 const LoginIcon = styled(MdLockOutline)`
   font-size: 20px;
-  color: ${(props) => props.theme.colors.text.secondary};
+  color: var(--nav-icon-color);
   cursor: pointer;
   transition: color 0.2s;
   margin: 0 ${(props) => props.theme.spacing.sm} 0;
 
-  &:hover {
-    color: ${(props) => props.theme.colors.primary};
+  &:hover, &:focus-visible { 
+    color: var(--nav-icon-hover); 
   }
 `
 
