@@ -5,6 +5,21 @@ import styled from 'styled-components'
 import { useMenuStore } from '../stores/useMenuStore'
 import { media } from '../styles/media'
 
+/* Bar before HamburgerButton to reference it in :hover rules */
+const Bar = styled.span`
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--nav-icon-color); 
+  margin: ${(p) => p.theme.spacing.xs} 0;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s, background-color 0.2s;
+
+  &:nth-child(1) { transform: ${({ $isOpen }) => ($isOpen ? 'rotate(45deg) translateY(9px)' : 'none')}; }
+  &:nth-child(2) { opacity: ${({ $isOpen }) => ($isOpen ? 0 : 1)}; }
+  &:nth-child(3) { transform: ${({ $isOpen }) => ($isOpen ? 'rotate(-45deg) translateY(-10px)' : 'none')}; }
+`
+
 const HamburgerButton = styled.button`
   display: block;
   background: none;
@@ -12,49 +27,42 @@ const HamburgerButton = styled.button`
   cursor: pointer;
   padding: 0;
   position: absolute;
-  left: ${(props) => props.theme.spacing.md};
+  left: ${(p) => p.theme.spacing.md};
 
-  ${media.md} {
-    display: none;
-  }
+  /* on hover, tints the bars to the hover token */
+  &:hover ${Bar}, &:focus-visible ${Bar} { background: var(--nav-icon-hover); }
+
+  ${media.md} { display: none; }
 `
 
-const Bar = styled.span`
-  display: block;
-  width: 25px;
-  height: 3px;
-  background: ${(props) => props.theme.colors.text.primary};
-  margin: ${(props) => props.theme.spacing.xs} 0;
-  border-radius: 2px;
-  transition: 0.3s;
-
-  &:nth-child(1) {
-    transform: ${({ $isOpen }) =>
-      $isOpen ? 'rotate(45deg) translateY(9px)' : 'none'};
-  }
-  &:nth-child(2) {
-    opacity: ${({ $isOpen }) => ($isOpen ? 0 : 1)};
-  }
-  &:nth-child(3) {
-    transform: ${({ $isOpen }) =>
-      $isOpen ? 'rotate(-45deg) translateY(-10px)' : 'none'};
-  }
-`
-
-const Menu = styled.div`
+const Menu = styled.nav`
   position: fixed;
   top: 80px;
   left: 0;
   width: 100vw;
   height: calc(100vh - 80px);
-  background: ${(props) => props.theme.colors.background};
+  background: ${(p) => p.theme.colors.background};
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: flex-start;
   justify-content: flex-start;
-  padding: ${(props) => props.theme.spacing.md};
-  gap: ${(props) => props.theme.spacing.md};
+  padding: ${(p) => p.theme.spacing.md};
+  gap: ${(p) => p.theme.spacing.md};
+  border-top: 1px solid ${(p) => p.theme.colors.border};
+
+  a {
+    color: ${({ theme }) => `var(--nav-link-color, ${theme.colors.text.primary})`};
+    text-decoration: none;
+    font-weight: ${(p) => p.theme.fonts.weights.medium};
+    font-size: 16px;
+    padding: 6px 0;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: ${({ theme }) => `var(--nav-link-hover, ${theme.colors.brand.salmon})`};
+  }
 `
 
 export const HamburgerMenu = () => {
@@ -62,25 +70,18 @@ export const HamburgerMenu = () => {
 
   return (
     <>
-      <HamburgerButton onClick={toggleMenu}>
+      <HamburgerButton onClick={toggleMenu} aria-expanded={isOpen} aria-label="Toggle menu">
         <Bar $isOpen={isOpen} />
         <Bar $isOpen={isOpen} />
         <Bar $isOpen={isOpen} />
       </HamburgerButton>
+
       {isOpen && (
         <Menu>
-          <Link to='/products' onClick={closeMenu}>
-            Products
-          </Link>
-          <Link to='/findus' onClick={closeMenu}>
-            Find us
-          </Link>
-          <Link to='/ourstory' onClick={closeMenu}>
-            Our story
-          </Link>
-          <Link to='/contactus' onClick={closeMenu}>
-            Contact us
-          </Link>
+          <Link to="/products" className='link-underline' onClick={closeMenu}>Products</Link>
+          <Link to="/findus" className='link-underline' onClick={closeMenu}>Find us</Link>
+          <Link to="/ourstory" className='link-underline' onClick={closeMenu}>Our story</Link>
+          <Link to="/contactus" className='link-underline' onClick={closeMenu}>Contact us</Link>
         </Menu>
       )}
     </>
