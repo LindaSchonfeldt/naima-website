@@ -1,15 +1,17 @@
-import styled from 'styled-components'
-
+import MotionReveal from '../components/MotionReveal'
 import { PageContainer } from '../components/PageContainer'
 import { PageTitle } from '../components/PageTitle'
 import RetailerMap from '../components/RetailerMap'
-import { media } from '../styles/media'
 
 const FindUs = () => {
   return (
     <PageContainer>
-      <PageTitle>Find us</PageTitle>
-      <RetailerMap />
+      <MotionReveal>
+        <PageTitle $align="center">find Naima near you</PageTitle>
+      </MotionReveal>
+      <MotionReveal delay={0.1}>
+        <RetailerMap />
+      </MotionReveal>
     </PageContainer>
   )
 }
