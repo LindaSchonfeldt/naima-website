@@ -42,6 +42,22 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
+  a.link-underline {
+  position: relative;
+  text-decoration: none;
+  }
+  
+  a.link-underline::after {
+    content: '';
+    position: absolute; left: 0; bottom: -2px;
+    width: 100%; height: 2px;
+    background: ${({ theme }) => theme.colors.brand.primary};
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 180ms ease;
+  }
+  a.link-underline:hover::after,
+  a.link-underline:focus-visible::after { transform: scaleX(1); }
+
   ::selection {
   background: ${({theme}) => theme.colors.brand.sky};
   color: ${({theme}) => theme.colors.text.primary};
@@ -65,6 +81,11 @@ const GlobalStyles = createGlobalStyle`
   img {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Motion safety */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 `
 

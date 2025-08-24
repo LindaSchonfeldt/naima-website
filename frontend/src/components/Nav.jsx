@@ -12,30 +12,29 @@ const StyledNav = styled.nav`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: ${(props) => props.theme.spacing.md};
-  background: ${(props) => props.theme.colors.background};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.background};
   position: sticky;
   top: 0;
   z-index: 100;
-  height: ${(props) => props.theme.layout?.navHeight || '80px'};
-  border-bottom: 1px solid ${(props) => props.theme.colors.border};
+  height: ${({ theme }) => theme.layout?.navHeight || '80px'};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
   ${media.md} {
     justify-content: space-between;
-    padding: ${(props) => props.theme.spacing.md}
-      ${(props) => props.theme.spacing.md};
+    padding: ${({ theme }) => theme.spacing.md};
   }
 `
 
 const Logo = styled(Link)`
   font-size: 1.5rem;
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-weight: ${(props) => props.theme.fonts.weights.bold};
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
   text-decoration: none;
-  color: ${(props) => props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 
   &:hover {
-    color: ${(props) => props.theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `
 
@@ -44,7 +43,7 @@ const Links = styled.div`
 
   ${media.md} {
     display: flex;
-    gap: ${(props) => props.theme.spacing.sm};
+    gap: ${({ theme }) => theme.spacing.sm};
     position: absolute;
     left: 50%;
     top: 50%; /* ✅ Center vertically */
@@ -56,17 +55,17 @@ const Links = styled.div`
   }
 
   ${media.lg} {
-    gap: ${(props) => props.theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing.lg};
   }
 
   ${media.xl} {
-    gap: ${(props) => props.theme.spacing.xl};
+    gap: ${({ theme }) => theme.spacing.xl};
   }
 
   a {
     text-decoration: none;
-    color: ${(props) => props.theme.colors.text.primary};
-    font-family: ${(props) => props.theme.fonts.body};
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-family: ${({ theme }) => theme.fonts.body};
     font-weight: ${(props) => props.theme.fonts.weights.medium};
     padding: ${(props) => props.theme.spacing.sm};
     font-size: 14px;
@@ -145,10 +144,10 @@ export const Nav = () => {
         <Cart />
       </NavSection>
       <Links>
-        <Link to='/products'>Products</Link>
-        <Link to='/findus'>Find us</Link>
-        <Link to='/ourstory'>Our story</Link>
-        <Link to='/contactus'>Contact us</Link>
+        <Link to='/products' className='link-underline'>Products</Link>
+        <Link to='/findus' className='link-underline'>Find us</Link>
+        <Link to='/ourstory' className='link-underline'>Our story</Link>
+        <Link to='/contactus' className='link-underline'>Contact us</Link>
       </Links>
     </StyledNav>
   )
