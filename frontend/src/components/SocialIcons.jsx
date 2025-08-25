@@ -1,4 +1,4 @@
-import { FaInstagram } from 'react-icons/fa'
+import { FaInstagram, FaSpotify } from 'react-icons/fa'
 import { FaFacebook } from 'react-icons/fa'
 import { FaYoutube } from 'react-icons/fa'
 import { FaTiktok } from 'react-icons/fa6'
@@ -8,8 +8,8 @@ import { media } from '../styles/media'
 
 const SocialIconsContainer = styled.div`
   display: flex;
-  gap: ${(props) => props.theme.spacing.sm};
-  margin-top: ${(props) => props.theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-top: ${({ theme }) => theme.spacing.md};
 
   ${media.lg} {
     margin-top: 0;
@@ -17,27 +17,28 @@ const SocialIconsContainer = styled.div`
 `
 
 const SocialIconLink = styled.a`
-  color: black;
+  color: currentColor;
   font-size: 1.5rem;
   transition: all 0.3s ease;
-  padding: ${(props) => props.theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.xs};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    color: ${(props) => props.theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.brand.salmon};
     transform: scale(1.1);
   }
 `
 
 // Define social media links
 const socialLinks = [
-  { icon: FaFacebook, url: 'https://facebook.com', label: 'Facebook' },
-  { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram' },
-  { icon: FaTiktok, url: 'https://tiktok.com', label: 'TikTok' },
-  { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' }
+  { icon: FaFacebook, url: 'https://facebook.com/resetwithnaima', label: 'Facebook' },
+  { icon: FaInstagram, url: 'https://instagram.com/resetwithnaima', label: 'Instagram' },
+  { icon: FaTiktok, url: 'https://www.tiktok.com/@resetwithnaima', label: 'TikTok' },
+  { icon: FaSpotify, url: 'https://open.spotify.com/show/5EfXKBnLhAToIhZjACKSZz?si=69463996f8304ba7', label: 'Spotify' },
+  // { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' },
 ]
 
 export const SocialIcons = ({ links }) => {

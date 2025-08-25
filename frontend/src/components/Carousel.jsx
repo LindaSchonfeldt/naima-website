@@ -95,7 +95,7 @@ const Indicator = styled.button`
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
-  background: ${(props) => (props.$active ? props.theme.colors.brand.blush : props.theme.colors.brand.sky)};
+  background: ${(props) => (props.$active ? props.theme.colors.brand.salmon : props.theme.colors.surface)};
 
   &:hover {
     background: ${({ theme }) => theme.colors.brand.lavender}
