@@ -17,7 +17,7 @@ const StyledFooter = styled.footer`
     inset: 0;
     background-image: url('/images/footer-vert.jpg');
     background-size: cover;
-    background-position: 70% 62%; /* tune like Option A */
+    background-position: 70% 62%;
     background-repeat: no-repeat;
     z-index: 0;
   }
@@ -45,12 +45,12 @@ const StyledFooter = styled.footer`
     &::before { background-position: 65% 60%; }
   }
   ${media.lg} {
-    &::before { background-position: 75% 55%; }
+    &::before { background-position: 75% 64%; }
   }
 `
 
 const FooterContent = styled.div`
-  position: relative; z-index: 1; /* above image/overlay */
+  position: relative; z-index: 1;
   margin: 0 auto; width: 100%;
 
   ${media.lg} {
