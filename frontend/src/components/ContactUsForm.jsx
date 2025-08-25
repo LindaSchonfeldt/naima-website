@@ -1,10 +1,37 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import styled, { keyframes } from 'styled-components'
 
 import { media } from '../styles/media'
-// import { Button } from '../styles/media';
-import { Button } from './Button';
+import { Button } from './Button'
+
+/* === micro-animations === */
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+`
+
+const shakeX = keyframes`
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+`
+
+const spin = keyframes` to { transform: rotate(360deg); }`
+
+/* === layout === */
+const FormShell = styled.section`
+  width: 100%;
+  display: grid;
+  place-items: center;
+  animation: ${fadeUp} 420ms ease both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`
 
 const StyledForm = styled.form`
   display: flex;
@@ -14,107 +41,170 @@ const StyledForm = styled.form`
   max-width: 400px;
   margin: 0 auto;
 
-  input, textarea {
-    padding: ${({ theme }) => theme.spacing.sm};
-  }
-
   ${media.md} {
     max-width: 600px;
     padding: ${({ theme }) => theme.spacing.md};
   }
-`;
+`
+
+/* inputs/textarea share styles; no underline effect */
+const BaseInput = styled.input`
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.sm};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  font-size: 1rem;
+  background: ${({ theme }) => theme.colors.surface};
+
+  &[aria-invalid="true"] {
+    border-color: ${({ theme }) => theme.colors.error};
+    animation: ${shakeX} 160ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &[aria-invalid="true"] { animation: none; }
+  }
+`
+
+const Textarea = styled(BaseInput).attrs({ as: 'textarea' })`
+  resize: vertical;
+  min-height: 140px;
+`
 
 const FeedbackMessage = styled.div`
   color: ${({ theme }) => theme.colors.success};
   margin: ${({ theme }) => theme.spacing.md} 0;
-`;
+  animation: ${fadeUp} 320ms ease both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`
 
 const ErrorText = styled.p`
   color: ${({ theme }) => theme.colors.error};
   font-size: 0.9rem;
-`;
+  margin-top: 6px;
+  animation: ${fadeUp} 200ms ease both;
+`
+
+const Spinner = styled.span`
+  display: inline-block;
+  width: 1em; height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: -2px;
+  animation: ${spin} 700ms linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    border-right-color: currentColor; /* becomes a solid dot */
+  }
+`
 
 const ContactUsForm = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, setError } = useForm();
-  const [ success, setSuccess ] = useState(false);
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, setError } = useForm()
+  const [success, setSuccess] = useState(false)
+  const successRef = useRef(null)
+
+  useEffect(() => {
+    if (success) successRef.current?.focus()
+  }, [success])
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/contact`, { 
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-    if (!response.ok) {
-      throw new Error('Failed to send message');
+        body: JSON.stringify(data)
+      })
+      if (!res.ok) throw new Error('Failed to send message')
+      reset()
+      setSuccess(true)
+    } catch (err) {
+      setError('root', { message: 'Failed to send your message. Please try again later.' })
+      setSuccess(false)
     }
-
-    alert('Your message has been sent successfully!');    
-    reset();
-    setSuccess(true);
-
-    } catch (error) {
-      console.error(error);
-      setError('root', { message: 'Failed to send your message. Please try again later.'});
-      alert('Failed to send your message. Please try again later.');
-      setSuccess(false);
-    }
-  };
+  }
 
   if (success) {
     return (
-      <FeedbackMessage>
+      <FeedbackMessage
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+      >
         <h2>Thanks! 🎉</h2>
         <p>Your message has been sent. We’ll get back to you soon.</p>
       </FeedbackMessage>
-    );
+    )
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="Your Name"
-        {...register('name', { required: 'Name is required' })}
-      />
-      {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
+    <FormShell>
+      <StyledForm onSubmit={handleSubmit(onSubmit)} noValidate aria-live="polite">
+        <div>
+          <BaseInput
+            type="text"
+            placeholder="Your Name"
+            aria-invalid={!!errors.name}
+            {...register('name', { required: 'Name is required' })}
+          />
+          {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
+        </div>
 
-      <input
-        type='email'
-        placeholder='Your Email'
-        {...register("email", {
-          required: 'Email is required',
-          pattern: { value: /\S+@\S+\.\S+/, message: 'Enter a valid email' }
-        })}
-      />
-      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+        <div>
+          <BaseInput
+            type="email"
+            placeholder="Your Email"
+            aria-invalid={!!errors.email}
+            {...register('email', {
+              required: 'Email is required',
+              pattern: { value: /\S+@\S+\.\S+/, message: 'Enter a valid email' }
+            })}
+          />
+          {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+        </div>
 
-      <input
-        type='phone'
-        placeholder='Your Phone'
-        {...register('phone', { required: false })}
-      />
-      {errors.root && <ErrorText>{errors.root.message}</ErrorText>}
+        <div>
+          <BaseInput
+            type="tel"
+            placeholder="Your Phone"
+            aria-invalid={!!errors.phone}
+            {...register('phone')}
+          />
+        </div>
 
-      <input
-        type='text'
-        placeholder='Subject'
-        {...register('subject', { required: false })}
-      />
+        <div>
+          <BaseInput
+            type="text"
+            placeholder="Subject"
+            aria-invalid={!!errors.subject}
+            {...register('subject')}
+          />
+        </div>
 
-      <textarea
-        placeholder='Your Message'
-        rows={6}
-        {...register('message', { required: 'Please write a message' })}
-      />
-      {errors.message && <ErrorText>{errors.message.message}</ErrorText>}
+        <div>
+          <Textarea
+            placeholder="Your Message"
+            rows={6}
+            aria-invalid={!!errors.message}
+            {...register('message', { required: 'Please write a message' })}
+          />
+          {errors.message && <ErrorText>{errors.message.message}</ErrorText>}
+        </div>
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Sending..." : "Send message"}
-      </Button>
-    </StyledForm>
-  );
-};
+        {errors.root && <ErrorText role="alert">{errors.root.message}</ErrorText>}
 
-export default ContactUsForm;
+        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+          {isSubmitting && <Spinner />} {isSubmitting ? 'Sending...' : 'Send message'}
+        </Button>
+      </StyledForm>
+    </FormShell>
+  )
+}
+
+export default ContactUsForm
