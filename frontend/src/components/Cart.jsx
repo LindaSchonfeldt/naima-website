@@ -4,10 +4,11 @@ import { TiShoppingCart } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useCartStore } from '../stores/useCartStore'
 import { useAuthStore } from '../stores/useAuthStore'
+import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
+import { CartNotification } from './CartNotification'
 import { QuantitySelector } from './QuantitySelector'
 
 const StyledH2 = styled.h2`
@@ -17,6 +18,7 @@ const StyledH2 = styled.h2`
 `
 
 const CartIconButton = styled.button`
+  position: relative;
   background: none;
   border: none;
   padding: 0;
@@ -94,7 +96,7 @@ const CartMenu = styled.div`
   ${media.md} {
     left: auto; // Remove left anchor
     right: 0; // Anchor to the right
-    width: 350px; // Fixed width for desktop
+    width: 450px; // Fixed width for desktop
     height: 100vh; // Full height
     top: 0; // Align with the top of the viewport
     border-radius: 0;
@@ -136,6 +138,11 @@ const CartItemPrice = styled.span`
   color: ${(props) => props.theme.colors.text.secondary};
 `
 
+const StyledQuantitySelector = styled(QuantitySelector)`
+  margin: 0 ${(props) => props.theme.spacing.sm};
+  width: 85px;
+`
+
 const StyledImg = styled.img`
   width: 60px;
   height: 60px;
@@ -144,14 +151,8 @@ const StyledImg = styled.img`
 `
 
 export const Cart = () => {
-  const {
-    isOpen,
-    items,
-    closeCart,
-    toggleCart,
-    removeFromCart,
-    addToCart,
-  } = useCartStore()
+  const { isOpen, items, closeCart, toggleCart, removeFromCart, addToCart } =
+    useCartStore()
 
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const companyToken = useAuthStore((state) => state.companyToken)
@@ -162,6 +163,7 @@ export const Cart = () => {
   if (!isOpen)
     return (
       <CartIconButton onClick={toggleCart} aria-label='Open cart'>
+        <CartNotification count={items.length} />
         <CartIcon />
       </CartIconButton>
     )
@@ -169,6 +171,7 @@ export const Cart = () => {
   return (
     <>
       <CartIconButton onClick={toggleCart} aria-label='Open cart'>
+        <CartNotification count={items.length} />
         <CartIcon />
       </CartIconButton>
       <CartMenuOverlay onClick={closeCart}>
@@ -214,7 +217,7 @@ export const Cart = () => {
                           : item.formattedPrice || `$${item.price}`}
                       </CartItemPrice>
                     </CartItemInfo>
-                    <QuantitySelector variant='cart' item={item} />
+                    <StyledQuantitySelector variant='cart' item={item} />
                     <Button
                       variant='icon'
                       onClick={() => removeFromCart(item.cartKey)}
@@ -229,7 +232,11 @@ export const Cart = () => {
             {/* Only show button if there are items in the cart */}
             {items.length > 0 && (
               <Link to='/company/checkout' onClick={closeCart}>
-                <Button variant='primary' aria-label='Proceed to order' as='button'>
+                <Button
+                  variant='primary'
+                  aria-label='Proceed to order'
+                  as='button'
+                >
                   Proceed to order
                 </Button>
               </Link>

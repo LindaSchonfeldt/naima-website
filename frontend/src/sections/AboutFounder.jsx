@@ -10,6 +10,23 @@ const StyledBody = styled.section`
   }
 `
 
+const Background = styled.div`
+  background-color: ${(props) => props.theme.colors.brand.primary};
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: ${(props) => props.theme.spacing.md};
+  padding-top: ${(props) => props.theme.spacing.md};
+  padding-bottom: ${(props) => props.theme.spacing.md};
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+`
+
 export const AboutFounder = () => {
   return (
     <StyledBody>
@@ -17,25 +34,29 @@ export const AboutFounder = () => {
       <p>
         {' '}
         You might know me from <em>Nattryttarna</em> or as the author of{' '}
-        <em>Pappas flicka på Hästgärden</em>, but my personal journey with food
+        <em>Pappas flicka på Hästgården</em>, but my personal journey with food
         began long before that. I grew up with a complicated relationship to
         eating. Food was tied to shame, guilt, control. I spent years chasing
         the “perfect diet”, believing health was about restriction and
         willpower.
       </p>
       <p> But as I began to heal, I learned something different.</p>
-      <p>
-        {' '}
-        When we nourish ourselves with natural, clean foods, everything changes.
-        Brain fog lifts. Energy returns. Anxiety fades. We feel good. Not just
-        physically, but emotionally. And this is where naima began. In my
-        kitchen, with a simple mission.
-      </p>
-      <p>
-        {' '}
-        To help people feel better through the food they eat. Naima was born
-        from a need to feel better.
-      </p>
+      <Background>
+        <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 1rem' }}>
+          <p>
+            {' '}
+            When we nourish ourselves with natural, clean foods, everything
+            changes. Brain fog lifts. Energy returns. Anxiety fades. We feel
+            good. Not just physically, but emotionally. And this is where naima
+            began. In my kitchen, with a simple mission.
+          </p>
+          <p>
+            {' '}
+            To help people feel better through the food they eat. Naima was born
+            from a need to feel better.
+          </p>
+        </div>
+      </Background>
       <p>
         Walk into any grocery store and try to find a snack without a long
         processed ingredient list. We couldn’t. And we looked everywhere.

@@ -37,6 +37,16 @@ const FooterContent = styled.div`
   }
 `
 
+const StyledH2 = styled.h2`
+  font-size: 2rem;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  font-weight: 300;
+
+  ${media.md} {
+    font-size: 3rem;
+  }
+`
+
 const FooterSection = styled.div`
   justify-content: flex-start;
   margin-bottom: ${({ theme }) => theme.spacing.md};
@@ -47,7 +57,7 @@ export const Footer = () => {
     <StyledFooter>
       <FooterContent>
         <FooterSection>
-          <h2>Join the community</h2>
+          <StyledH2>Join the community</StyledH2>
           <p>© 2025 naima. All rights reserved.</p>
         </FooterSection>
         <FooterSection></FooterSection>

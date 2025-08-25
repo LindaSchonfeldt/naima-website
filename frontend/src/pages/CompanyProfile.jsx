@@ -1,6 +1,7 @@
+import styled from 'styled-components'
+
 import { PageContainer } from '../components/PageContainer'
 import { PageTitle } from '../components/PageTitle'
-import styled from 'styled-components'
 import { CompanySettings } from '../sections/CompanySettings'
 
 const CompanyProfile = () => {

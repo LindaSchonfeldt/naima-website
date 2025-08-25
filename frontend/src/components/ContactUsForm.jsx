@@ -53,7 +53,10 @@ const BaseInput = styled.input`
   padding: ${({ theme }) => theme.spacing.sm};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
+  font-family: ${({ theme }) => theme.fonts.body};
   font-size: 1rem;
+  font-weight: ${({ theme }) => theme.fonts.weights.normal};
+  line-height: 1.6;
   background: ${({ theme }) => theme.colors.surface};
 
   &[aria-invalid="true"] {

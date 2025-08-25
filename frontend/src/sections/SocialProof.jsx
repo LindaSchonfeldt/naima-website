@@ -25,7 +25,7 @@ const Container = styled.div`
 const SectionTitle = styled.h2`
   font-size: 1.2rem;
   text-align: left;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: ${({ theme }) => theme.fonts.weights.normal};
   margin: ${({ theme }) => theme.spacing.md};
@@ -52,7 +52,9 @@ const LogoTrack = styled.div`
     animation-play-state: paused; /* Pause on hover */
   }
 
-  @media (prefers-reduced-motion: reduce) { animation: none; }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `
 
 const LogoGrid = styled.div`
