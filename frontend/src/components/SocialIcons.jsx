@@ -1,4 +1,4 @@
-import { FaInstagram } from 'react-icons/fa'
+import { FaInstagram, FaSpotify } from 'react-icons/fa'
 import { FaFacebook } from 'react-icons/fa'
 import { FaYoutube } from 'react-icons/fa'
 import { FaTiktok } from 'react-icons/fa6'
@@ -27,17 +27,18 @@ const SocialIconLink = styled.a`
   justify-content: center;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.brand.salmon};
     transform: scale(1.1);
   }
 `
 
 // Define social media links
 const socialLinks = [
-  { icon: FaFacebook, url: 'https://facebook.com', label: 'Facebook' },
-  { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram' },
-  { icon: FaTiktok, url: 'https://tiktok.com', label: 'TikTok' },
-  { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' }
+  { icon: FaFacebook, url: 'https://facebook.com/resetwithnaima', label: 'Facebook' },
+  { icon: FaInstagram, url: 'https://instagram.com/resetwithnaima', label: 'Instagram' },
+  { icon: FaTiktok, url: 'https://www.tiktok.com/@resetwithnaima', label: 'TikTok' },
+  { icon: FaSpotify, url: 'https://open.spotify.com/show/5EfXKBnLhAToIhZjACKSZz?si=69463996f8304ba7', label: 'Spotify' },
+  // { icon: FaYoutube, url: 'https://youtube.com', label: 'YouTube' },
 ]
 
 export const SocialIcons = ({ links }) => {

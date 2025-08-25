@@ -28,8 +28,7 @@ const SectionTitle = styled.h2`
   color: ${({ theme }) => theme.colors.text.secondary};
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: ${({ theme }) => theme.fonts.weights.normal};
-  margin-left: ${(props) => props.theme.spacing.md};
-  margin-bottom: ${(props) => props.theme.spacing.sm};
+  margin: ${({ theme }) => theme.spacing.md};
   text-transform: lowercase;
   letter-spacing: 2px;
 
@@ -97,7 +96,7 @@ export const SocialProof = () => {
   return (
     <StyledSocialProof>
       <Container>
-        <SectionTitle>Served at</SectionTitle>
+        <SectionTitle>Served at:</SectionTitle>
         <LogoTrack>
           <LogoGrid>
             {servedAtPartners.map((partner) => (
