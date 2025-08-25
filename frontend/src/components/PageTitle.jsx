@@ -10,6 +10,7 @@ const StyledPageTitle = styled.h1`
   margin-bottom: ${(props) => props.theme.spacing.md};
   text-align: left; /* Always align left */
   font-size: 2rem;
+  padding: 0;
 
   ${media.md} {
     font-size: 2rem;
