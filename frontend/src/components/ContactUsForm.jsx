@@ -14,7 +14,12 @@ const StyledForm = styled.form`
   max-width: 400px;
   margin: 0 auto;
 
-  input, textarea {
+  input, textarea, button {
+    font-family: ${({ theme }) => theme.fonts.body};
+    font-size: ${({ theme }) => theme.typography.body.fontSize || '1rem'};
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-weight: ${({ theme }) => theme.fonts.weights.normal};
+    line-height: 1.6;
     padding: ${({ theme }) => theme.spacing.sm};
   }
 
