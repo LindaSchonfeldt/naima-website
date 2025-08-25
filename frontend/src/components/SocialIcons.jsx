@@ -17,7 +17,7 @@ const SocialIconsContainer = styled.div`
 `
 
 const SocialIconLink = styled.a`
-  color: white;
+  color: black;
   font-size: 1.5rem;
   transition: all 0.3s ease;
   padding: ${(props) => props.theme.spacing.xs};

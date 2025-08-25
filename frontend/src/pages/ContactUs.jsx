@@ -33,7 +33,7 @@ const ContactUs = () => {
       <PageTitle>Contact us</PageTitle>
       <Container>
         <ContactUsForm />
-        <StyledImage src='/images/sparkles.jpg' alt='' />
+        <StyledImage src='/images/contactImage.JPG' alt='' />
       </Container>
     </PageContainer>
   )
