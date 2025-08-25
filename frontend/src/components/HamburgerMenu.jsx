@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect }  from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -67,6 +67,14 @@ const Menu = styled.nav`
 
 export const HamburgerMenu = () => {
   const { isOpen, toggleMenu, closeMenu } = useMenuStore()
+
+  useEffect(() => {
+    if (!isOpen) return
+    const original = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = original }
+  }, [isOpen])
+
 
   return (
     <>
