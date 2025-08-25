@@ -8,8 +8,8 @@ import { media } from '../styles/media'
 
 const SocialIconsContainer = styled.div`
   display: flex;
-  gap: ${(props) => props.theme.spacing.sm};
-  margin-top: ${(props) => props.theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-top: ${({ theme }) => theme.spacing.md};
 
   ${media.lg} {
     margin-top: 0;
@@ -17,17 +17,17 @@ const SocialIconsContainer = styled.div`
 `
 
 const SocialIconLink = styled.a`
-  color: white;
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 1.5rem;
   transition: all 0.3s ease;
-  padding: ${(props) => props.theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.xs};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    color: ${(props) => props.theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.secondary};
     transform: scale(1.1);
   }
 `
