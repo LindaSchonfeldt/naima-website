@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import { FeaturedProduct } from '../components/FeaturedProduct'
+import Reveal from '../components/Reveal'
 import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 
@@ -36,13 +37,36 @@ const Description = styled.p`
   }
 `
 
-const FeaturedGrid = styled.div`
+const FeaturedGrid = styled(Reveal)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin: 0 auto;
 
   ${media.md} {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  /* Animate only the direct children (your <FeaturedProduct />) */
+  & > * {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fg-card-in 420ms ease both;
+    animation-play-state: paused; /* wait until grid is in view */
+    will-change: transform;
+  }
+
+  /* Start animations when Reveal sets data-inview="true" */
+  &[data-inview="true"] > * { animation-play-state: running; }
+
+  /* Simple repeating stagger (works for 1–n columns) */
+  &[data-inview="true"] > *:nth-child(3n + 1) { animation-delay: 0ms; }
+  &[data-inview="true"] > *:nth-child(3n + 2) { animation-delay: 80ms; }
+  &[data-inview="true"] > *:nth-child(3n + 3) { animation-delay: 160ms; }
+
+  @keyframes fg-card-in { to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    & > * { animation: none; opacity: 1; transform: none; }
   }
 `
 
