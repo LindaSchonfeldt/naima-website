@@ -10,6 +10,10 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* Base typography */
   body {
     font-family: ${({ theme }) => theme.fonts.body};
