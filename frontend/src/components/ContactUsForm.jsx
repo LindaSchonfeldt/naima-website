@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
 
 import { media } from '../styles/media'
 // import { Button } from '../styles/media';
-import { Button } from './Button';
+import { Button } from './Button'
 
 const StyledForm = styled.form`
   display: flex;
@@ -14,7 +14,9 @@ const StyledForm = styled.form`
   max-width: 400px;
   margin: 0 auto;
 
-  input, textarea, button {
+  input,
+  textarea,
+  button {
     font-family: ${({ theme }) => theme.fonts.body};
     font-size: ${({ theme }) => theme.typography.body.fontSize || '1rem'};
     color: ${({ theme }) => theme.colors.text.primary};
@@ -25,47 +27,57 @@ const StyledForm = styled.form`
 
   ${media.md} {
     max-width: 600px;
-    padding: ${({ theme }) => theme.spacing.md};
+    padding: 0;
   }
-`;
+`
 
 const FeedbackMessage = styled.div`
   color: ${({ theme }) => theme.colors.success};
   margin: ${({ theme }) => theme.spacing.md} 0;
-`;
+`
 
 const ErrorText = styled.p`
   color: ${({ theme }) => theme.colors.error};
   font-size: 0.9rem;
-`;
+`
 
 const ContactUsForm = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, setError } = useForm();
-  const [ success, setSuccess ] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    setError
+  } = useForm()
+  const [success, setSuccess] = useState(false)
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/contact`, { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE}/api/contact`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }
+      )
 
-    if (!response.ok) {
-      throw new Error('Failed to send message');
-    }
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
 
-    alert('Your message has been sent successfully!');    
-    reset();
-    setSuccess(true);
-
+      alert('Your message has been sent successfully!')
+      reset()
+      setSuccess(true)
     } catch (error) {
-      console.error(error);
-      setError('root', { message: 'Failed to send your message. Please try again later.'});
-      alert('Failed to send your message. Please try again later.');
-      setSuccess(false);
+      console.error(error)
+      setError('root', {
+        message: 'Failed to send your message. Please try again later.'
+      })
+      alert('Failed to send your message. Please try again later.')
+      setSuccess(false)
     }
-  };
+  }
 
   if (success) {
     return (
@@ -73,14 +85,14 @@ const ContactUsForm = () => {
         <h2>Thanks! 🎉</h2>
         <p>Your message has been sent. We’ll get back to you soon.</p>
       </FeedbackMessage>
-    );
+    )
   }
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <input
-        type="text"
-        placeholder="Your Name"
+        type='text'
+        placeholder='Your Name'
         {...register('name', { required: 'Name is required' })}
       />
       {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
@@ -88,7 +100,7 @@ const ContactUsForm = () => {
       <input
         type='email'
         placeholder='Your Email'
-        {...register("email", {
+        {...register('email', {
           required: 'Email is required',
           pattern: { value: /\S+@\S+\.\S+/, message: 'Enter a valid email' }
         })}
@@ -115,11 +127,11 @@ const ContactUsForm = () => {
       />
       {errors.message && <ErrorText>{errors.message.message}</ErrorText>}
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Sending..." : "Send message"}
+      <Button type='submit' disabled={isSubmitting}>
+        {isSubmitting ? 'Sending...' : 'Send message'}
       </Button>
     </StyledForm>
-  );
-};
+  )
+}
 
-export default ContactUsForm;
+export default ContactUsForm

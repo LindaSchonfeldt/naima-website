@@ -9,6 +9,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: ${(props) => props.theme.spacing.md};
   gap: ${(props) => props.theme.spacing.lg};
   width: 100%;
   height: 100%;
@@ -33,7 +34,7 @@ const ContactUs = () => {
       <PageTitle>Contact us</PageTitle>
       <Container>
         <ContactUsForm />
-        <StyledImage src='/images/contactImage.JPG' alt='' />
+        <StyledImage src='/images/contact.jpg' alt='' />
       </Container>
     </PageContainer>
   )
