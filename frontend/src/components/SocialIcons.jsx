@@ -22,6 +22,8 @@ const SocialIconLink = styled.a`
   transition: all 0.3s ease;
   padding: ${({ theme }) => theme.spacing.xs};
   border-radius: 50%;
+  inline-size: 48px;
+  block-size: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,6 +31,10 @@ const SocialIconLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.colors.brand.salmon};
     transform: scale(1.1);
+  }
+
+  &:focus-visible { 
+    outline: 2px solid ${({ theme }) => theme.colors.brand.salmon}; outline-offset: 2px; 
   }
 `
 

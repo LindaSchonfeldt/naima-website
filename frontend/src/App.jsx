@@ -24,6 +24,7 @@ import { Footer } from './sections/Footerv2'
 import { useAuthStore } from './stores/useAuthStore'
 import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
+import SkipLink from './components/SkipLink'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -46,6 +47,7 @@ function App() {
       <Router>
         {/* <ErrorBoundary> */} {/* ❌ Temporarily disable */}
         <AppContainer>
+          <SkipLink />
           <Nav />
           {isLoggedIn && <CompanyNav />}{' '}
           {/* <-- Only visible to logged-in companies */}

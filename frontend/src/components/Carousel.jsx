@@ -55,8 +55,8 @@ const Navigation = styled.div`
   background: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,23 +89,40 @@ const Indicators = styled.div`
 `
 
 const Indicator = styled.button`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  background: ${(props) => (props.$active ? props.theme.colors.brand.salmon : props.theme.colors.surface)};
+   /* Big tappable area for a11y */
+   --tap: 48px;
+   inline-size: var(--tap);
+   block-size: var(--tap);
+   padding: 0;
+   border: 0;
+   border-radius: 999px;
+   background: transparent;
+   position: relative;
+   cursor: pointer;
 
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
-    outline-offset: 2px;
-  }
+   /* Small visual dot centered inside */
+   &::before {
+     content: '';
+     inline-size: 14px;
+     block-size: 14px;
+     border-radius: 50%;
+     position: absolute;
+     inset: 0;
+     margin: auto;
+     background: ${({ $active, theme }) =>
+       $active ? theme.colors.brand.salmon : theme.colors.surface};
+     transition: background-color .2s ease;
+     box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.border} inset;
+   }
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.brand.lavender}
-  };
-`
+   &:hover::before { background: ${({ theme }) => theme.colors.brand.lavender}; }
+   
+   &:focus-visible {
+     outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
+     outline-offset: 2px;
+   }
+ `
+
 // Uses its own internal (local) state, independent on Zustand stores
 export const Carousel = ({
   items = [],

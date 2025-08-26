@@ -23,6 +23,8 @@ const Bar = styled.span`
 
 const HamburgerButton = styled.button`
   display: block;
+  inline-size: 48px;
+  block-size: 48px;
   background: none;
   border: none;
   cursor: pointer;
