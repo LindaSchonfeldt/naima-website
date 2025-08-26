@@ -92,6 +92,7 @@ const theme = {
     xxxl: '1920px' // Extra large desktop
   },
   layout: {
+    contentMax: '800px',
     navHeight: '80px',
     heroHeight: 'calc(100vh - 80px)'
   }

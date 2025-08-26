@@ -22,6 +22,7 @@ const Wrap = styled.section`
     border-radius: 12px;
     border: 1px solid ${({ theme }) => theme.colors.border};
     overflow: hidden;
+    z-index: 0;
   }
 `
 
