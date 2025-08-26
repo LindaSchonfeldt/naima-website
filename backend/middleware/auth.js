@@ -13,27 +13,48 @@ const getJwtSecret = () => {
 }
 
 export const authenticate = async (req, res, next) => {
-  console.log('Authenticate middleware hit')
-  const token = req.headers.authorization?.split(' ')[1]
-  if (!token) return res.status(401).json({ error: 'No token provided' })
   try {
-    const decoded = jwt.verify(token, getJwtSecret)
-    let user
-    if (decoded.role === 'admin') {
-      user = await Admin.findById(decoded.id)
-    } else if (decoded.role === 'company') {
-      user = await Company.findById(decoded.id)
-    } else if (decoded.role === 'customer') {
-      user = await Customer.findById(decoded.id)
+    console.log('Authorization header:', req.headers.authorization) // <-- debug
+
+    const token = req.headers.authorization?.split(' ')[1]
+    if (!token) {
+      console.log('No token provided')
+      return res.status(401).json({ error: 'No token provided' })
     }
+
+    let decoded
+    try {
+      decoded = jwt.verify(token, getJwtSecret())
+      console.log('Decoded JWT:', decoded) // <-- debug
+    } catch (err) {
+      console.error('JWT verify error:', err.name, err.message) // <-- debug
+      if (err.name === 'TokenExpiredError') {
+        return res.status(401).json({ error: 'Token expired' })
+      }
+      return res.status(401).json({ error: 'Invalid token' })
+    }
+
+    // user lookup
+    let user
+    if (decoded.role === 'admin') user = await Admin.findById(decoded.id)
+    else if (decoded.role === 'company')
+      user = await Company.findById(decoded.id)
+    else if (decoded.role === 'customer')
+      user = await Customer.findById(decoded.id)
+
+    console.log(
+      'User found:',
+      !!user,
+      user ? { _id: user._id, role: user.role } : null
+    ) // <-- debug
+
     if (!user) return res.status(401).json({ error: 'User not found' })
+
     req.user = { id: user._id, role: user.role, companyId: user.companyId }
     next()
   } catch (err) {
-    if (err.name === 'TokenExpiredError') {
-      return res.status(401).json({ error: 'Token expired' })
-    }
-    res.status(401).json({ error: 'Invalid token' })
+    console.error('Authenticate middleware unexpected error:', err)
+    res.status(500).json({ error: 'Server error' })
   }
 }
 

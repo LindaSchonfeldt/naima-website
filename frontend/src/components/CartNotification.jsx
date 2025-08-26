@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import { useCartStore } from '../stores/useCartStore'
-import { media } from '../styles/media'
 
 const StyledCartNotification = styled(motion.div)`
   display: flex;

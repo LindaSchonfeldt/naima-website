@@ -1,5 +1,7 @@
 import { MdDelete } from 'react-icons/md'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Button } from '../components/Button'
 import { PageContainer } from '../components/PageContainer'
@@ -9,6 +11,12 @@ import { api } from '../services/api'
 import { useAuthStore } from '../stores/useAuthStore'
 import { useCartStore } from '../stores/useCartStore'
 import { media } from '../styles/media'
+
+/* === micro-animations === */
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+`
 
 const StyledLink = styled.a`
   color: ${(props) => props.theme.colors.primary};
@@ -125,49 +133,122 @@ const ItemControlsLeft = styled.div`
   align-items: center;
   gap: 0.5rem;
 `
+const FeedbackMessage = styled.div`
+  color: ${({ theme }) => theme.colors.success};
+  margin: ${({ theme }) => theme.spacing.md} 0;
+  animation: ${fadeUp} 320ms ease both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`
 
 const Checkout = () => {
-  const { items, removeFromCart, totalCost } = useCartStore()
-  const { company, companyToken } = useAuthStore()
+  const { items, removeFromCart, totalCost, clearCart } = useCartStore()
+  const { company, companyToken, setAuth, setCompany } = useAuthStore()
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const [loadingCompany, setLoadingCompany] = useState(false)
+
+  console.log('company', company, 'companyToken', companyToken)
+
+  // If token exists but company is not loaded, fetch company profile and set it in the auth store
+  useEffect(() => {
+    let mounted = true
+    const loadProfile = async () => {
+      if (!company && companyToken) {
+        setLoadingCompany(true)
+        try {
+          const profile = await api.companies.getProfile(companyToken)
+          if (mounted && profile) {
+            // either set company only or persist token+company
+            if (typeof setAuth === 'function') {
+              setAuth(companyToken, profile)
+            } else if (typeof setCompany === 'function') {
+              setCompany(profile)
+            } else {
+              useAuthStore.getState().setCompany?.(profile)
+            }
+          }
+        } catch (err) {
+          console.error('Failed to load company profile:', err)
+        } finally {
+          mounted && setLoadingCompany(false)
+        }
+      }
+    }
+    loadProfile()
+    return () => {
+      mounted = false
+    }
+  }, [company, companyToken, setAuth, setCompany])
 
   const handleSubmitOrder = async () => {
-    if (!company) {
-      // Show an error message or prevent order submission
-      alert('Company info is missing. Please log in again.')
+    if (!companyToken) {
+      alert('You need to be logged in as a company.')
       return
     }
 
-    const customerInfo = {
-      company: company.name,
-      email: company.email,
-      address: company.address,
-      phone: company.phone || ''
+    if (!company) {
+      alert('Company profile is still loading. Please wait a moment and try again.')
+      return
     }
 
-    // Build orderData from cart items and customer info
+    if (!items || items.length === 0) {
+      alert('Your cart is empty.')
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+
+    // Map cart items to the backend Order schema
+    const mappedItems = items.map((it) => ({
+      productId: it._id || it.productId || null,
+      name: it.name,
+      quantity: it.quantity || 1,
+      price: it.selectedSize?.price || it.price || 0
+    }))
+
     const orderData = {
       name: company.name,
       email: company.email,
       address: company.address,
-      phone: company.phone,
+      phone: company.phone || '',
       company: company._id, // ObjectId string
-      items: items,
-      totalCost: totalCost,
+      items: mappedItems,
+      totalCost:
+        Number(totalCost) ||
+        mappedItems.reduce((s, i) => s + i.price * i.quantity, 0),
       status: 'pending'
     }
 
-    console.log('Company token:', companyToken)
-    console.log('Order data:', orderData)
-
-    const result = await api.orders.submitOrder(orderData, companyToken)
-    // Clear cart after successful order
-    useCartStore.getState().clearCart()
-    // Show FeedbackMessage or redirect to success page
+    try {
+      const result = await api.orders.submitOrder(orderData, companyToken)
+      // Clear cart and show confirmation
+      if (typeof clearCart === 'function') clearCart()
+      setShowFeedback(true)
+      // auto-redirect after short delay so the user can see the message
+      setTimeout(() => navigate('/company/orders'), 2500)
+    } catch (err) {
+      console.error('Order submission failed:', err)
+      setError(err.message || 'Failed to submit order.')
+      alert('Failed to submit order. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   // Map through items to display them
   return (
     <PageContainer>
+      {showFeedback && (
+        <FeedbackMessage>
+          Order placed successfully. Your cart has been cleared.
+        </FeedbackMessage>
+      )}
       <StyledIntro>
         <PageTitle>Order Your Fika</PageTitle>
         <p>
@@ -221,7 +302,16 @@ const Checkout = () => {
                   .toFixed(2)}
               </h3>
             </StyledTotal>
-            <Button onClick={handleSubmitOrder}>Place order</Button>
+            <Button
+              onClick={handleSubmitOrder}
+              disabled={loading || loadingCompany || showFeedback}
+            >
+              {loading
+                ? 'Placing order...'
+                : showFeedback
+                ? 'Order placed'
+                : 'Place order'}
+            </Button>
           </BottomPart>
         </CartItems>
       </CheckoutContainer>

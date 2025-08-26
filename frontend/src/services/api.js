@@ -6,17 +6,30 @@ const apiRequest = async (url, options = {}) => {
   console.log('📡 Making API request to:', fullUrl)
 
   try {
-    const response = await fetch(fullUrl, {
+    // build final options so headers/body aren't accidentally overwritten
+    const requestOptions = {
+      ...options,
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers
-      },
-      ...options
-    })
+        ...(options.headers || {})
+      }
+    }
+
+    console.log('📡 Request options:', requestOptions) // <-- new: log what will be sent
+
+    const response = await fetch(fullUrl, requestOptions)
 
     console.log('📡 Response status:', response.status)
 
     if (!response.ok) {
+      // attempt to parse error body for more info
+      let errBody = null
+      try {
+        errBody = await response.json()
+      } catch (e) {
+        /* ignore */
+      }
+      console.error('📡 Response error body:', errBody)
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
@@ -91,7 +104,7 @@ export const api = {
 
     // Submit a new order
     submitOrder: async (orderData, token) => {
-      const response = await fetch('/api/orders', {
+      return apiRequest('/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +112,16 @@ export const api = {
         },
         body: JSON.stringify(orderData)
       })
-      return response.json()
+    },
+
+    // Get company orders
+    getCompanyOrders: async (token) => {
+      return apiRequest('/orders/company', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
     }
   },
 
@@ -122,6 +144,17 @@ export const api = {
       })
       if (!response.ok) throw new Error('Logout failed')
       return response.json()
+    },
+
+    // Fetch current company profile using token
+    getProfile: async (token) => {
+      return apiRequest('/companies/me', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      })
     }
   }
 }

@@ -24,11 +24,7 @@ export const Orders = () => {
       setLoading(true)
       setError('')
       try {
-        const data = await api.get('/orders/company', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        const data = await api.orders.getCompanyOrders(token)
         setOrders(data)
       } catch (err) {
         setError('Failed to fetch orders')
@@ -36,7 +32,7 @@ export const Orders = () => {
         setLoading(false)
       }
     }
-    fetchOrders()
+    if (token) fetchOrders()
   }, [token])
 
   const handleOrderClick = (orderId) => {

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { ImageGrid } from '../components/ImageGrid'
 import { PageContainer } from '../components/PageContainer'
+import PageFade from '../components/PageFade'
 import { PageTitle } from '../components/PageTitle'
 import useProductStore from '../stores/useProductStore'
 
@@ -16,10 +17,12 @@ const Products = () => {
   const productImages = products.map((p) => p.images?.[0])
 
   return (
-    <PageContainer>
-      <PageTitle>fika selection</PageTitle>
-      <ImageGrid images={productImages} products={products} />
-    </PageContainer>
+    <PageFade>
+      <PageContainer>
+        <PageTitle>fika selection</PageTitle>
+        <ImageGrid images={productImages} products={products} />
+      </PageContainer>
+    </PageFade>
   )
 }
 

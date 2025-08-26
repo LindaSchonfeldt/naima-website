@@ -52,7 +52,8 @@ export const useCartStore = create(
               ? { ...item, quantity: Math.max(1, quantity) }
               : item
           )
-        }))
+        })),
+      clearCart: () => set({ items: [] })
     }),
     {
       name: 'cart-store', // key in localStorage
