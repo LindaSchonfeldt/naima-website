@@ -64,6 +64,12 @@ const BaseInput = styled.input`
     animation: ${shakeX} 160ms ease;
   }
 
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.brand.lavender};
+    border-width: 3px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     &[aria-invalid='true'] {
       animation: none;
