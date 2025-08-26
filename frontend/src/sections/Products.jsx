@@ -1,8 +1,7 @@
-import styled from 'styled-components'
-
 import { PageTitle } from '../components/PageTitle'
 import { ProductCard } from '../components/ProductCard'
 import { media } from '../styles/media'
+import styled from 'styled-components'
 
 const StyledProducts = styled.section`
   background-color: ${(props) => props.theme.colors.background};
