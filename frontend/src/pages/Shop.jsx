@@ -10,6 +10,7 @@ const StyledShop = styled.section`
 
   ${media.sm} {
     display: flex;
+  }
 `
 
 const Shop = () => {

@@ -34,7 +34,7 @@ const StyledImage = styled(Image)`
 
 const ContactUs = () => {
   return (
-    <PageContainer>
+    <PageContainer id="main" tabIndex={-1}>
       <PageTitle>contact us</PageTitle>
       <Container>
         <ContactUsForm />
