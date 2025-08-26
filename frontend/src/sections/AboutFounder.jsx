@@ -43,10 +43,10 @@ const DropCap = styled.p`
 `
 
 const NoteCard = styled.aside`
-  background: ${({ theme }) => theme.colors.brand.blush};
+  background: ${({ theme }) => theme.colors.brand.lavender};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  border-left: 4px solid ${({ theme }) => theme.colors.brand.salmon};
-  border-radius: 12px;
+  border-left: 4px solid rgba(159, 124, 233, 0.8);
+  border-radius: 4px;
   padding: ${({ theme }) => theme.spacing.lg};
   margin: ${({ theme }) => theme.spacing.lg} 0;
   p {

@@ -8,6 +8,7 @@ import { media } from '../styles/media'
 
 const StyledFeaturedFika = styled.section`
   background: ${(props) => props.theme.colors.background || '#f9f9f9'};
+  margin-bottom: ${(props) => props.theme.spacing.xxl};
 `
 
 const StyledH2 = styled.h2`
@@ -56,17 +57,34 @@ const FeaturedGrid = styled(Reveal)`
   }
 
   /* Start animations when Reveal sets data-inview="true" */
-  &[data-inview="true"] > * { animation-play-state: running; }
+  &[data-inview='true'] > * {
+    animation-play-state: running;
+  }
 
   /* Simple repeating stagger (works for 1–n columns) */
-  &[data-inview="true"] > *:nth-child(3n + 1) { animation-delay: 0ms; }
-  &[data-inview="true"] > *:nth-child(3n + 2) { animation-delay: 80ms; }
-  &[data-inview="true"] > *:nth-child(3n + 3) { animation-delay: 160ms; }
+  &[data-inview='true'] > *:nth-child(3n + 1) {
+    animation-delay: 0ms;
+  }
+  &[data-inview='true'] > *:nth-child(3n + 2) {
+    animation-delay: 80ms;
+  }
+  &[data-inview='true'] > *:nth-child(3n + 3) {
+    animation-delay: 160ms;
+  }
 
-  @keyframes fg-card-in { to { opacity: 1; transform: none; } }
+  @keyframes fg-card-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    & > * { animation: none; opacity: 1; transform: none; }
+    & > * {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 `
 

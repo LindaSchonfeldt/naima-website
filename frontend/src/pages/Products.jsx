@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
+
+import { ImageGrid } from '../components/ImageGrid'
 import { PageContainer } from '../components/PageContainer'
 import { PageTitle } from '../components/PageTitle'
-import { ImageGrid } from '../components/ImageGrid'
 import useProductStore from '../stores/useProductStore'
 
 const Products = () => {
@@ -16,7 +17,7 @@ const Products = () => {
 
   return (
     <PageContainer>
-      <PageTitle>Fika selection</PageTitle>
+      <PageTitle>fika selection</PageTitle>
       <ImageGrid images={productImages} products={products} />
     </PageContainer>
   )

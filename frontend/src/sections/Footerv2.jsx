@@ -29,48 +29,62 @@ const StyledFooter = styled.footer`
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(0,0,0,0.55) 0%,
-      rgba(0,0,0,0.40) 40%,
-      rgba(0,0,0,0.25) 100%
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.25) 100%
     );
     z-index: 0;
   }
 
   /* content spacing */
   padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
-  ${media.md} { padding: ${({ theme }) => theme.spacing.xxl}; }
+  ${media.md} {
+    padding: ${({ theme }) => theme.spacing.xxl};
+  }
 
   /* responsive crop nudges */
   @media (max-width: 480px) {
-    &::before { background-position: 65% 60%; }
+    &::before {
+      background-position: 65% 60%;
+    }
   }
   ${media.lg} {
-    &::before { background-position: 75% 64%; }
+    &::before {
+      background-position: 75% 64%;
+    }
   }
 `
 
 const FooterContent = styled.div`
-  position: relative; z-index: 1;
-  margin: 0 auto; width: 100%;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  width: 100%;
 
   ${media.lg} {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `
 
 const FooterSection = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.md};
-  ${media.lg} { margin-bottom: 0; }
+  ${media.lg} {
+    margin-bottom: 0;
+  }
 
   h2 {
+    font-size: 2.5rem;
     font-family: ${({ theme }) => theme.fonts.heading};
     font-weight: ${({ theme }) => theme.fonts.weights.heavy};
     text-transform: lowercase;
     color: #fff;
   }
-  p { color: rgba(255,255,255,0.92); }
+  p {
+    color: rgba(255, 255, 255, 0.92);
+  }
 `
-
 
 export const Footer = () => {
   return (

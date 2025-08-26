@@ -28,6 +28,11 @@ const FormShell = styled.section`
   place-items: center;
   animation: ${fadeUp} 420ms ease both;
 
+  @media (min-width: 768px) {
+    place-items: start; // Align form to the left on larger screens
+    justify-items: start;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
@@ -39,7 +44,7 @@ const StyledForm = styled.form`
   gap: ${({ theme }) => theme.spacing.md};
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0;
 
   ${media.md} {
     max-width: 600px;
