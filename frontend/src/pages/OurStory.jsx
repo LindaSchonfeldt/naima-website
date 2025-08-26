@@ -10,7 +10,7 @@ import { AboutMission } from '../sections/AboutMission'
 const Measure = styled.div`
   max-width: ${({ theme }) => theme.layout?.contentMax || '800px'};
   margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.md};
+  padding: 0;
 `
 const OurStory = () => {
   return (

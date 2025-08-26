@@ -7,7 +7,7 @@ const FindUs = () => {
   return (
     <PageContainer>
       <MotionReveal>
-        <PageTitle $align="center">find Naima near you</PageTitle>
+        <PageTitle $align='center'>find naima near you</PageTitle>
       </MotionReveal>
       <MotionReveal delay={0.1}>
         <RetailerMap />
