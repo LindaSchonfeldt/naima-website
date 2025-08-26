@@ -41,6 +41,11 @@ const CheckoutContainer = styled.div`
   }
 `
 
+const StyledH3 = styled.h3`
+  font-size: 1.25rem;
+  margin-bottom: ${(props) => props.theme.spacing.sm};
+`
+
 const CartItems = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,45 +136,35 @@ const Checkout = () => {
   const { company, companyToken } = useAuthStore()
 
   const handleSubmitOrder = async () => {
-    if (!company) {
-      // Show an error message or prevent order submission
-      alert('Company info is missing. Please log in again.')
+    if (!company || !company._id || !companyToken || !items.length) {
+      alert(
+        'Company info or cart is missing. Please log in and add items to your cart.'
+      )
       return
     }
 
-    const customerInfo = {
-      company: company.name,
-      email: company.email,
-      address: company.address,
-      phone: company.phone || ''
-    }
-
-    // Build orderData from cart items and customer info
     const orderData = {
       name: company.name,
       email: company.email,
       address: company.address,
-      phone: company.phone,
-      company: company._id, // ObjectId string
-      items: items,
-      totalCost: totalCost,
+      phone: company.phone || '',
+      company: company._id,
+      customer: company._id,
+      items,
+      totalCost,
       status: 'pending'
     }
 
-    console.log('Company token:', companyToken)
     console.log('Order data:', orderData)
-
     const result = await api.orders.submitOrder(orderData, companyToken)
-    // Clear cart after successful order
     useCartStore.getState().clearCart()
-    // Show FeedbackMessage or redirect to success page
   }
 
   // Map through items to display them
   return (
     <PageContainer>
       <StyledIntro>
-        <PageTitle>Order Your Fika</PageTitle>
+        <PageTitle>Order your fika</PageTitle>
         <p>
           By submitting this form you are placing an order for the items below.
         </p>
@@ -186,7 +181,7 @@ const Checkout = () => {
       </StyledIntro>
       <CheckoutContainer>
         <CartItems>
-          <h3>Cart items:</h3>
+          <StyledH3>Cart items:</StyledH3>
           {items.map((item) => (
             <div key={item.cartKey}>
               <ItemDetails>

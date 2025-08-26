@@ -91,15 +91,13 @@ export const api = {
 
     // Submit a new order
     submitOrder: async (orderData, token) => {
-      const response = await fetch('/api/orders', {
+      return apiRequest('/orders', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(orderData)
       })
-      return response.json()
     }
   },
 

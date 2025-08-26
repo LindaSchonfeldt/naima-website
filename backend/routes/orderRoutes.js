@@ -21,14 +21,14 @@ router.get(
   authenticate,
   authorize(['company']),
   async (req, res) => {
-    console.log('--- /api/orders/company route hit ---')
-    console.log('User object:', req.user)
     const companyId = req.user.companyId || req.user.id
-    console.log('Resolved companyId:', companyId)
     try {
       const orders = await Order.find({ company: companyId }).populate(
         'customer'
       )
+      orders.forEach((order) => {
+        console.log(order.customer?.name)
+      })
       console.log('Orders found:', orders)
       res.json(orders)
     } catch (error) {
