@@ -181,9 +181,13 @@ export const Cart = () => {
           <MenuContent>
             <CartHeader>
               <StyledH2>Your Cart</StyledH2>
-              <button onClick={closeCart} aria-label='Close cart'>
+              <Button
+                variant='icon'
+                onClick={closeCart}
+                aria-label='Close cart'
+              >
                 <CloseButton />
-              </button>
+              </Button>
             </CartHeader>
             {items.length === 0 ? (
               <p>Your cart is empty.</p>
