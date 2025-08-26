@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import useProductStore from '../stores/useProductStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
-import { Link } from 'react-router-dom'
 
 const StyledImageGrid = styled.div`
   display: grid;
