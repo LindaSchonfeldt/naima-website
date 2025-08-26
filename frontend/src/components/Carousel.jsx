@@ -97,6 +97,11 @@ const Indicator = styled.button`
   transition: background-color 0.2s;
   background: ${(props) => (props.$active ? props.theme.colors.brand.salmon : props.theme.colors.surface)};
 
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
+    outline-offset: 2px;
+  }
+
   &:hover {
     background: ${({ theme }) => theme.colors.brand.lavender}
   };
@@ -111,6 +116,7 @@ export const Carousel = ({
   slidesToShow = 1
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const slideId = (i) => `hero-slide-${i}`
 
   // ✅ Memoize items to prevent unnecessary re-renders
   const memoizedItems = useMemo(() => items, [items])
@@ -130,6 +136,14 @@ export const Carousel = ({
     setCurrentSlide(index)
   }, [])
 
+  // Keyboard support
+  const onKeyDown = useCallback((e) => {
+      if (e.key === 'ArrowRight') nextSlide()
+      else if (e.key === 'ArrowLeft') prevSlide()
+      else if (e.key === 'Home') goToSlide(0)
+      else if (e.key === 'End') goToSlide(memoizedItems.length - 1)
+   }, [nextSlide, prevSlide, goToSlide, memoizedItems.length])
+
   // ✅ Optimize autoplay effect
   useEffect(() => {
     if (!autoPlay || memoizedItems.length <= 1) return
@@ -144,10 +158,24 @@ export const Carousel = ({
   }
 
   return (
-    <CarouselContainer>
+    <CarouselContainer
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Hero carousel"
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+    >
       <CarouselTrack $currentSlide={currentSlide}>
         {memoizedItems.map((item, index) => (
-          <CarouselItem key={item.id || index} $slidesToShow={slidesToShow}>
+          <CarouselItem
+            key={item.id || index}
+            $slidesToShow={slidesToShow}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${memoizedItems.length}`}
+            aria-hidden={index !== currentSlide}
+            id={slideId(index)}
+          >
             <CarouselImage
               src={item.image}
               alt={item.alt}
@@ -164,10 +192,10 @@ export const Carousel = ({
 
       {showArrows && memoizedItems.length > 1 && (
         <>
-          <Navigation className='prev' onClick={prevSlide}>
+          <Navigation className='prev' onClick={prevSlide} aria-label="Previous slide" type="button">
             ‹
           </Navigation>
-          <Navigation className='next' onClick={nextSlide}>
+          <Navigation className='next' onClick={nextSlide} aria-label="Next slide" type="button">
             ›
           </Navigation>
         </>
@@ -180,7 +208,11 @@ export const Carousel = ({
               key={index}
               $active={index === currentSlide}
               onClick={() => goToSlide(index)}
-            />
+              type="button"
+              aria-label={`Go to slide ${index + 1} of ${memoizedItems.length}`}
+              aria-controls={slideId(index)}
+              aria-current={index === currentSlide ? 'true' : undefined}
+             />
           ))}
         </Indicators>
       )}
