@@ -107,20 +107,9 @@ export const api = {
       return apiRequest('/orders', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(orderData)
-      })
-    },
-
-    // Get company orders
-    getCompanyOrders: async (token) => {
-      return apiRequest('/orders/company', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
       })
     }
   },

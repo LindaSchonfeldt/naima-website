@@ -19,18 +19,19 @@ router.get(
   authenticate,
   authorize(['company']),
   async (req, res) => {
+    const companyId = req.user.companyId || req.user.id
     try {
-      console.log('GET /api/orders/company - req.user:', req.user)
-      const companyId = req.user.companyId || req.user.id
-      const orders = await Order.find({ company: companyId })
-        .populate('customer')
-        .lean()
-      return res.json(orders)
-    } catch (err) {
-      console.error('Error in GET /api/orders/company:', err.stack || err)
-      return res
-        .status(500)
-        .json({ error: 'Server error fetching company orders' })
+      const orders = await Order.find({ company: companyId }).populate(
+        'customer'
+      )
+      orders.forEach((order) => {
+        console.log(order.customer?.name)
+      })
+      console.log('Orders found:', orders)
+      res.json(orders)
+    } catch (error) {
+      console.error('Error in /api/orders/company:', error)
+      res.status(500).json({ error: error.message })
     }
   }
 )

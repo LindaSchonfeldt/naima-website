@@ -49,6 +49,11 @@ const CheckoutContainer = styled.div`
   }
 `
 
+const StyledH3 = styled.h3`
+  font-size: 1.25rem;
+  margin-bottom: ${(props) => props.theme.spacing.sm};
+`
+
 const CartItems = styled.div`
   display: flex;
   flex-direction: column;
@@ -186,59 +191,28 @@ const Checkout = () => {
   }, [company, companyToken, setAuth, setCompany])
 
   const handleSubmitOrder = async () => {
-    if (!companyToken) {
-      alert('You need to be logged in as a company.')
+    if (!company || !company._id || !companyToken || !items.length) {
+      alert(
+        'Company info or cart is missing. Please log in and add items to your cart.'
+      )
       return
     }
-
-    if (!company) {
-      alert('Company profile is still loading. Please wait a moment and try again.')
-      return
-    }
-
-    if (!items || items.length === 0) {
-      alert('Your cart is empty.')
-      return
-    }
-
-    setLoading(true)
-    setError(null)
-
-    // Map cart items to the backend Order schema
-    const mappedItems = items.map((it) => ({
-      productId: it._id || it.productId || null,
-      name: it.name,
-      quantity: it.quantity || 1,
-      price: it.selectedSize?.price || it.price || 0
-    }))
 
     const orderData = {
       name: company.name,
       email: company.email,
       address: company.address,
       phone: company.phone || '',
-      company: company._id, // ObjectId string
-      items: mappedItems,
-      totalCost:
-        Number(totalCost) ||
-        mappedItems.reduce((s, i) => s + i.price * i.quantity, 0),
+      company: company._id,
+      customer: company._id,
+      items,
+      totalCost,
       status: 'pending'
     }
 
-    try {
-      const result = await api.orders.submitOrder(orderData, companyToken)
-      // Clear cart and show confirmation
-      if (typeof clearCart === 'function') clearCart()
-      setShowFeedback(true)
-      // auto-redirect after short delay so the user can see the message
-      setTimeout(() => navigate('/company/orders'), 2500)
-    } catch (err) {
-      console.error('Order submission failed:', err)
-      setError(err.message || 'Failed to submit order.')
-      alert('Failed to submit order. Please try again.')
-    } finally {
-      setLoading(false)
-    }
+    console.log('Order data:', orderData)
+    const result = await api.orders.submitOrder(orderData, companyToken)
+    useCartStore.getState().clearCart()
   }
 
   // Map through items to display them
@@ -250,7 +224,7 @@ const Checkout = () => {
         </FeedbackMessage>
       )}
       <StyledIntro>
-        <PageTitle>Order Your Fika</PageTitle>
+        <PageTitle>Order your fika</PageTitle>
         <p>
           By submitting this form you are placing an order for the items below.
         </p>
@@ -267,7 +241,7 @@ const Checkout = () => {
       </StyledIntro>
       <CheckoutContainer>
         <CartItems>
-          <h3>Cart items:</h3>
+          <StyledH3>Cart items:</StyledH3>
           {items.map((item) => (
             <div key={item.cartKey}>
               <ItemDetails>

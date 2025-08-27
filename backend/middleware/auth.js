@@ -13,44 +13,26 @@ const getJwtSecret = () => {
 }
 
 export const authenticate = async (req, res, next) => {
+  console.log('Authenticate middleware hit')
+  const token = req.headers.authorization?.split(' ')[1]
+  if (!token) return res.status(401).json({ error: 'No token provided' })
   try {
-    console.log('Authorization header:', req.headers.authorization) // <-- debug
-
-    const token = req.headers.authorization?.split(' ')[1]
-    if (!token) {
-      console.log('No token provided')
-      return res.status(401).json({ error: 'No token provided' })
-    }
-
-    let decoded
-    try {
-      decoded = jwt.verify(token, getJwtSecret())
-      console.log('Decoded JWT:', decoded) // <-- debug
-    } catch (err) {
-      console.error('JWT verify error:', err.name, err.message) // <-- debug
-      if (err.name === 'TokenExpiredError') {
-        return res.status(401).json({ error: 'Token expired' })
-      }
-      return res.status(401).json({ error: 'Invalid token' })
-    }
-
-    // user lookup
+    const decoded = jwt.verify(token, getJwtSecret())
+    console.log('Decoded JWT:', decoded)
     let user
-    if (decoded.role === 'admin') user = await Admin.findById(decoded.id)
-    else if (decoded.role === 'company')
+    if (decoded.role === 'company') {
       user = await Company.findById(decoded.id)
-    else if (decoded.role === 'customer')
+      req.user = { id: user._id, role: user.role, companyId: user._id }
+    } else if (decoded.role === 'admin') {
+      user = await Admin.findById(decoded.id)
+      req.user = { id: user._id, role: user.role }
+    } else if (decoded.role === 'customer') {
       user = await Customer.findById(decoded.id)
-
-    console.log(
-      'User found:',
-      !!user,
-      user ? { _id: user._id, role: user.role } : null
-    ) // <-- debug
-
+      req.user = { id: user._id, role: user.role }
+    }
+    console.log('User found:', user)
     if (!user) return res.status(401).json({ error: 'User not found' })
-
-    req.user = { id: user._id, role: user.role, companyId: user.companyId }
+    console.log('Decoded user in authenticate:', req.user)
     next()
   } catch (err) {
     console.error('Authenticate middleware unexpected error:', err)
@@ -59,6 +41,7 @@ export const authenticate = async (req, res, next) => {
 }
 
 export const authorize = (roles) => (req, res, next) => {
+  console.log('User role in authorize:', req.user.role)
   if (!roles.includes(req.user.role)) {
     return res.status(403).json({ error: 'Forbidden' })
   }
