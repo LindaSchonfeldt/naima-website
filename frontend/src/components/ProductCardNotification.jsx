@@ -6,8 +6,10 @@ const Toast = styled.div`
   right: 0px;
   background: ${(props) => props.theme.colors.brand.primary};
   color: ${(props) => props.theme.colors.text.primary};
+  opacity: 0.9;
+  border-radius: 4px;
   padding: 10px 20px;
-  font-weight: bold;
+  font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 10;
 `

@@ -269,16 +269,17 @@ export const ImageGrid = () => {
                 <h2>Limited Edition Treats</h2>
               </Header>
               <p>
-                Straciatella & Coal / Matcha & Lime / Semla / Chocolate &
-                Saffron / Lingonberry & Gingerbread and more variants depending
-                on season and collaboration.{' '}
+                Discover our exclusive seasonal creations — from bold
+                collaborations to festive favorites. Flavors change with the
+                season, ensuring there’s always something new to surprise your
+                taste buds. Whether you’re looking to enjoy or co-create,{' '}
                 <Link
                   to='/contact'
                   style={{ color: '#1976d2', fontWeight: 600 }}
                 >
-                  Contact us
+                  get in touch{' '}
                 </Link>{' '}
-                for more information.
+                to find out what’s baking now..
               </p>
               <Ingredients>
                 <div>

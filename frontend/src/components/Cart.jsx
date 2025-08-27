@@ -86,7 +86,7 @@ const CartMenu = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: ${(props) => props.theme.spacing.md};
   border-radius: 0;
-  z-index: 2000;
+  z-index: 50000;
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
@@ -119,33 +119,47 @@ const CartHeader = styled.div`
 const CartItem = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: center; /* center children vertically */
   justify-content: space-between;
   width: 100%;
+  gap: ${(props) =>
+    props.theme.spacing.sm}; /* consistent gap between children */
+  padding: ${(props) => props.theme.spacing.xs} 0; /* vertical padding */
   margin-bottom: ${(props) => props.theme.spacing.md};
 `
 const CartItemInfo = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto; /* take available horizontal space */
+  min-width: 0; /* allow children to truncate/wrap */
 `
 
 const CartItemName = styled.span`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.text.primary};
+  display: block;
+  margin-bottom: 4px;
+  word-break: break-word; /* avoid overflow when long names */
 `
+
 const CartItemPrice = styled.span`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.text.secondary};
+  margin-top: 6px;
 `
 
 const StyledQuantitySelector = styled(QuantitySelector)`
+  flex: 0 0 100px; /* fixed width so layout is stable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px; /* consistent height matching images/buttons */
   margin: 0 ${(props) => props.theme.spacing.sm};
-  width: 85px;
 `
 
 const StyledImg = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 72px; /* slightly larger so it aligns with selector */
+  height: 72px;
   object-fit: cover;
   margin-right: 8px;
 `
