@@ -13,10 +13,13 @@ const Skip = styled.a`
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   transform: translateY(-140%);
   transition: transform 0.2s ease;
+  pointer-events: none; 
+
   &:focus {
     transform: translateY(0);
     outline: 2px solid #111;
     outline-offset: 2px;
+    pointer-events: auto;
   }
 `;
 

@@ -8,6 +8,8 @@ import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
 import { PageContainer } from './PageContainer'
+import MotionReveal from './MotionReveal'
+import { PageTitle } from './PageTitle'
 
 const LoginContainer = styled.div`
   display: flex;
@@ -83,33 +85,35 @@ export const CompanyLogin = () => {
 
   return (
     <PageContainer>
-      <LoginContainer>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit(handleLogin)}>
-          <label>
-            Company Email
-            <input
-              type='email'
-              autoComplete='email'
-              {...register('email', { required: true })}
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type='password'
-              autoComplete='current-password'
-              {...register('password', { required: true })}
-            />
-          </label>
-          <Button type='submit' disabled={formState.isSubmitting}>
-            {formState.isSubmitting ? 'Logging in...' : 'Login'}
-          </Button>
-          {error && (
-            <div style={{ color: 'red', marginTop: '1rem' }}>{error}</div>
-          )}
-        </form>
-      </LoginContainer>
+      <MotionReveal>
+        <LoginContainer>
+          <PageTitle $align="center">Login</PageTitle>
+          <form onSubmit={handleSubmit(handleLogin)}>
+            <label>
+              Company Email
+              <input
+                type='email'
+                autoComplete='email'
+                {...register('email', { required: true })}
+                />
+            </label>
+            <label>
+              Password
+              <input
+                type='password'
+                autoComplete='current-password'
+                {...register('password', { required: true })}
+                />
+            </label>
+            <Button type='submit' disabled={formState.isSubmitting}>
+              {formState.isSubmitting ? 'Logging in...' : 'Login'}
+            </Button>
+            {error && (
+              <div style={{ color: 'red', marginTop: '1rem' }}>{error}</div>
+            )}
+          </form>
+        </LoginContainer>
+      </MotionReveal>
     </PageContainer>
   )
 }

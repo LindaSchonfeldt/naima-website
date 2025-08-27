@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import { PageTitle } from '../components/PageTitle'
 import { useAuthStore } from '../stores/useAuthStore'
+import MotionReveal from '../components/MotionReveal'
 
 const DashboardContainer = styled.div`
   max-width: 900px;
@@ -30,12 +31,14 @@ const CompanyDashboard = () => {
 
   return (
     <DashboardContainer>
-      <PageTitle>Welcome, {company?.name || 'Company'}!</PageTitle>
-      {/* Add dashboard widgets, stats, links, etc. here */}
-      <Info>
-        <p>Your company dashboard is under construction.</p>
-        <p>Use the navigation above to explore other sections.</p>
-      </Info>
+      <MotionReveal>
+        <PageTitle>Welcome, {company?.name || 'Company'}!</PageTitle>
+        {/* Add dashboard widgets, stats, links, etc. here */}
+        <Info>
+          <p>Your company dashboard is under construction.</p>
+          <p>Use the navigation above to explore other sections.</p>
+        </Info>
+      </MotionReveal>
     </DashboardContainer>
   )
 }

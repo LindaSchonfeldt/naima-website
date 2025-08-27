@@ -30,7 +30,7 @@ const Shop = () => {
   }
 
   return (
-    <StyledShop>
+    <StyledShop id="main" tabIndex={-1}>
       <Products
         products={products}
         loading={loading}
