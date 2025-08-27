@@ -30,14 +30,9 @@ const NavSection = styled.div`
   &.left   { justify-content: flex-start; }
   &.center { justify-content: center; }
   &.right  { justify-content: flex-end; }
-
-  ${media.sm} {
-    /* layout stays the same; gap scales if you want */
-  }
 `
 
 const StyledNavLink = styled(NavLink)`
-  /* ≥44px tap target without blowing up layout */
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -53,6 +48,7 @@ const StyledNavLink = styled(NavLink)`
   transition: color .2s ease, background-color .2s ease;
 
   &:hover { color: ${({ theme }) => theme.colors.brand.salmon}; }
+  
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
     outline-offset: 2px;
@@ -139,7 +135,7 @@ export const CompanyNav = () => {
         )}
       </NavSection>
 
-      <NavSection className="center" aria-label="Primary company pages">
+      <NavSection className="center">
         {!isMobile && navOptions.map(opt => (
           <StyledNavLink key={opt.value} to={opt.value}>
             {opt.label}
