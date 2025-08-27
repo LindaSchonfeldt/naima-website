@@ -41,5 +41,25 @@ export const useOrderStore = create((set) => ({
     } catch (error) {
       set({ error: error.message || 'Failed to fetch orders', loading: false }) // Store error, stop loading
     }
+  },
+
+  // Single order details
+  order: null,
+  // Setter for single order
+  setOrder: (order) => set({ order }),
+  // Fetch a single order by ID
+  fetchOrderById: async (orderId, token) => {
+    set({ loading: true, error: null })
+    try {
+      // use api.orders.getById to hit backend with token
+      const order = await api.orders.getById(orderId, token)
+      set({ order, loading: false })
+    } catch (err) {
+      set({
+        error: err.message || 'Failed to load order',
+        order: null,
+        loading: false
+      })
+    }
   }
 }))

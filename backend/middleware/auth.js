@@ -36,7 +36,8 @@ export const authenticate = async (req, res, next) => {
     next()
   } catch (err) {
     console.error('Authenticate middleware unexpected error:', err)
-    res.status(500).json({ error: 'Server error' })
+    // Return 401 for JWT errors, not 500
+    return res.status(401).json({ error: 'Invalid or expired token' })
   }
 }
 

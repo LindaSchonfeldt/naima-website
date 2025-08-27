@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { media } from '../styles/media'
-
 const buttonSizes = {
   small: '0.9rem',
   medium: '1rem',
@@ -16,7 +14,14 @@ const buttonVariants = {
     opacity: '1',
     transform: 'translateY(0)',
     hoverBackground: (theme) => theme.colors.brand.primary,
-    hoverColor: (theme) => theme.colors.text.primary
+    hoverColor: (theme) => theme.colors.text.primary,
+    // padding can be a function(theme, size) or a plain value
+    padding: (theme, size) =>
+      size === 'small'
+        ? `${theme.spacing.sm}`
+        : size === 'large'
+        ? `${theme.spacing.md} ${theme.spacing.lg || theme.spacing.md}`
+        : `${theme.spacing.sm} ${theme.spacing.md}`
   },
   secondary: {
     background: 'transparent',
@@ -25,14 +30,23 @@ const buttonVariants = {
     opacity: '1',
     transform: 'translateY(0)',
     hoverBackground: (theme) => theme.colors.brand.blush,
-    hoverColor: (theme) => theme.colors.text.primary
+    hoverColor: (theme) => theme.colors.text.primary,
+    padding: (theme, size) =>
+      size === 'small'
+        ? `${theme.spacing.xs || '6px'} ${theme.spacing.sm}`
+        : `${theme.spacing.sm} ${theme.spacing.md}`
   },
   icon: {
     background: 'transparent',
     color: (theme) => theme.colors.primary,
     border: 'none',
     hoverBackground: 'none',
-    hoverColor: (theme) => theme.colors.text.primary
+    hoverColor: (theme) => theme.colors.text.primary,
+    // icon buttons are small by default
+    padding: (theme, size) =>
+      size === 'large'
+        ? `${theme.spacing.sm} ${theme.spacing.md}`
+        : `${theme.spacing.xs || '4px'} ${theme.spacing.xs || '4px'}`
   }
 }
 
@@ -70,8 +84,18 @@ const StyledButton = styled.button`
     return variant.transform || 'translateY(0)'
   }};
 
+  /* Use variant-specific padding when available */
+  padding: ${({ theme, $variant = 'primary', size = 'medium' }) => {
+    const variant = buttonVariants[$variant] || buttonVariants.primary
+    if (variant.padding) {
+      return typeof variant.padding === 'function'
+        ? variant.padding(theme, size)
+        : variant.padding
+    }
+    return `${theme.spacing.sm} ${theme.spacing.md}`
+  }};
+
   /* Common styles */
-  padding: ${({ theme }) => theme.spacing.md};
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
