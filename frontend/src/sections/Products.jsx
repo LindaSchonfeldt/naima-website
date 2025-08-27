@@ -45,7 +45,7 @@ export const Products = ({ products = [], onOrder }) => {
 
   return (
     <StyledProducts>
-      <PageTitle>Fika Selection</PageTitle>
+      <PageTitle>Fika selection</PageTitle>
       <StyledProductsGrid>
         {products.map((product) => (
           <ProductCard key={product._id} product={product} onOrder={onOrder} />
