@@ -16,7 +16,13 @@ const orderSchema = new mongoose.Schema({
       price: Number
     }
   ],
-  totalCost: { type: Number },
+
+  // changed: keep Number stored, but add a getter that rounds to 2 decimals for output
+  totalCost: {
+    type: Number,
+    get: (v) => (v == null ? v : Math.round(v * 100) / 100)
+  },
+
   status: {
     type: String,
     enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
@@ -24,6 +30,10 @@ const orderSchema = new mongoose.Schema({
   },
   createdAt: { type: Date, default: Date.now }
 })
+
+// ensure getters run when converting to JSON / objects
+orderSchema.set('toJSON', { getters: true, virtuals: false })
+orderSchema.set('toObject', { getters: true, virtuals: false })
 
 const Order = mongoose.model('Order', orderSchema)
 export default Order

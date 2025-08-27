@@ -38,14 +38,14 @@ router.get(
 
 // Admin routes
 router.get('/', authenticate, authorize(['admin']), getAllOrders)
+
+// Mixed routes (move param route last so it doesn't shadow static routes)
 router.get(
   '/customer/:id',
   authenticate,
   authorize(['admin', 'company']),
   getOrdersForCustomer
 )
-
-// Mixed routes (move param route last so it doesn't shadow static routes)
 router.get('/:id', authenticate, authorize(['admin', 'company']), getOrderById) // Allow admin and company
 
 export default router

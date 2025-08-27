@@ -15,7 +15,7 @@ import CompanyProfile from './pages/CompanyProfile'
 import ContactUs from './pages/ContactUs'
 import FindUs from './pages/FindUs'
 import Home from './pages/Home'
-import OrderDetailsPage from './pages/OrderDetailsPage'
+import CompanyOrderDetails from './pages/CompanyOrderDetails'
 import OurStory from './pages/OurStory'
 import Products from './pages/Products'
 import ReTreatClub from './pages/ReTreatClub'
@@ -45,7 +45,8 @@ function App() {
       ;(async () => {
         try {
           const profile = await api.companies.getProfile(companyToken)
-          if (profile) setAuth ? setAuth(companyToken, profile) : setCompany?.(profile)
+          if (profile)
+            setAuth ? setAuth(companyToken, profile) : setCompany?.(profile)
         } catch (err) {
           console.error('Failed to hydrate company profile on app start', err)
         }
@@ -105,7 +106,7 @@ function App() {
                 path='/orders/:orderId'
                 element={
                   <ProtectedRoute>
-                    <OrderDetailsPage />
+                    <CompanyOrderDetails />
                   </ProtectedRoute>
                 }
               />

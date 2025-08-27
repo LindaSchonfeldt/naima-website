@@ -97,18 +97,21 @@ export const api = {
 
   // Orders API
   orders: {
-    // Get all orders
-    getAll: async () => {
-      return apiRequest('/orders')
+    getAll: async (token) => {
+      return apiRequest('/orders/company', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
     },
-
-    // Submit a new order
+    getById: async (id, token) => {
+      return apiRequest(`/orders/${id}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    },
     submitOrder: async (orderData, token) => {
       return apiRequest('/orders', {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: JSON.stringify(orderData)
       })
     }
