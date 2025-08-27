@@ -30,13 +30,12 @@ const ArrowIcon = styled.div`
 `
 
 export const OrderItem = ({ order, onClick }) => (
-  <StyledOrderItem onClick={() => onClick(order)}>
+  <StyledOrderItem onClick={() => onClick(order._id)}>
     <div>
       <strong>Order #{order._id}</strong>
       <div>Date: {new Date(order.createdAt).toLocaleDateString()}</div>
       <div>Status: {order.status}</div>
-      <div>Total: {order.totalCost} SEK</div>
-      {/* Add more order details here */}
+      <div>Total: ${order.totalCost}</div>
     </div>
     <ArrowIcon>
       <IoIosArrowForward />

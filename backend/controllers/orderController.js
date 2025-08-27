@@ -5,33 +5,37 @@ import Order from '../models/Order.js'
 // This will also create a customer if they don't exist
 export const createOrder = async (req, res) => {
   console.log('Order POST body:', req.body)
+
+  let customer = null
+
   try {
     // Find or create customer
-    let customer = await Customer.findOne({ email: req.body.email })
+    customer = await Customer.findOne({ email: req.body.email })
     if (!customer) {
       customer = new Customer({
         name: req.body.name,
         email: req.body.email,
         address: req.body.address,
-        phone: req.body.phone
+        phone: req.body.phone,
+        company: req.body.company || undefined
       })
       await customer.save()
     }
   } catch (error) {
     return res.status(400).json({ error: error.message })
   }
+
   try {
     // Calculate totalCost from items
     const items = req.body.items || []
     const totalCost = items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + (item.price || 0) * (item.quantity || 0),
       0
     )
-    // Create order with reference to customer and company
+
     const order = new Order({
       ...req.body,
       customer: customer._id,
-      company: req.user.companyId || req.user.id, // Reference to company
       totalCost
     })
     await order.save()

@@ -11,24 +11,22 @@ import Order from '../models/Order.js'
 
 const router = express.Router()
 
-// Mixed routes
-router.get('/:id', authenticate, authorize(['admin', 'company']), getOrderById) // Allow admin and company
-
 // Company routes
 router.post('/', authenticate, authorize(['company']), createOrder)
+
 router.get(
   '/company',
   authenticate,
   authorize(['company']),
   async (req, res) => {
-    console.log('--- /api/orders/company route hit ---')
-    console.log('User object:', req.user)
     const companyId = req.user.companyId || req.user.id
-    console.log('Resolved companyId:', companyId)
     try {
       const orders = await Order.find({ company: companyId }).populate(
         'customer'
       )
+      orders.forEach((order) => {
+        console.log(order.customer?.name)
+      })
       console.log('Orders found:', orders)
       res.json(orders)
     } catch (error) {
@@ -39,12 +37,15 @@ router.get(
 )
 
 // Admin routes
-router.get('/', authenticate, authorize(['admin']), getAllOrders) // Get all orders with customer details
+router.get('/', authenticate, authorize(['admin']), getAllOrders)
 router.get(
   '/customer/:id',
   authenticate,
   authorize(['admin', 'company']),
   getOrdersForCustomer
-) // Get orders for a specific customer
+)
+
+// Mixed routes (move param route last so it doesn't shadow static routes)
+router.get('/:id', authenticate, authorize(['admin', 'company']), getOrderById) // Allow admin and company
 
 export default router

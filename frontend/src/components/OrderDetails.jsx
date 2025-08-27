@@ -50,7 +50,7 @@ export const OrderDetails = ({ order }) => (
           <span>
             {item.name} x {item.quantity}
           </span>
-          <span>{item.price} SEK</span>
+          <span>${item.price}</span>
         </div>
       ))}
     </div>

@@ -69,12 +69,21 @@ export const CompanyLogin = () => {
   const handleLogin = async (formData) => {
     try {
       const response = await api.companies.login(formData)
-      useAuthStore.setState({
-        company: response.company,
-        companyToken: response.token,
-        isLoggedIn: true
-      })
-      // Redirect to dashboard or wherever you want
+      const token = response.token || response.accessToken
+      let company = response.company || response.profile
+
+      // if company not returned, fetch it using the token
+      if (token && !company) {
+        try {
+          company = await api.companies.getProfile(token)
+        } catch (err) {
+          console.warn('Could not fetch profile after login:', err)
+        }
+      }
+
+      // Persist token + company
+      const setAuth = useAuthStore.getState().setAuth
+      if (typeof setAuth === 'function') setAuth(token, company)
       navigate('/company/dashboard')
     } catch (err) {
       // Handle login error

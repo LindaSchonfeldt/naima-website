@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import styled from 'styled-components'
+import { useEffect } from 'react'
 
 import { CompanyNav } from './components/CompanyNav'
 // import ErrorBoundary from './components/ErrorBoundary' // ❌ Temporarily disable
@@ -26,6 +27,8 @@ import GlobalStyles from './styles/GlobalStyles'
 import theme from './styles/theme'
 import SkipLink from './components/SkipLink'
 
+import { api } from './services/api'
+
 const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -37,7 +40,21 @@ const MainContent = styled.main`
 `
 
 function App() {
-  const companyToken = useAuthStore((state) => state.companyToken)
+  const { company, companyToken, setAuth, setCompany } = useAuthStore()
+
+  useEffect(() => {
+    if (!company && companyToken) {
+      ;(async () => {
+        try {
+          const profile = await api.companies.getProfile(companyToken)
+          if (profile) setAuth ? setAuth(companyToken, profile) : setCompany?.(profile)
+        } catch (err) {
+          console.error('Failed to hydrate company profile on app start', err)
+        }
+      })()
+    }
+  }, [company, companyToken, setAuth, setCompany])
+
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const companyName = useAuthStore((state) => state.companyName)
 
