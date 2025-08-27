@@ -1,9 +1,18 @@
-import express from 'express';
+import express from 'express'
+import rateLimit from 'express-rate-limit'
 
-import { submitContactForm } from '../controllers/contactController.js';
+import { submitContactForm, validateContact } from '../controllers/contactController.js'
 
-const router = express.Router();
+export const router = express.Router()
 
-router.post('/', submitContactForm);
+// 🛡️ basic rate limit for spam bursts
+const limiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
 
-export default router;
+router.post('/', limiter, validateContact, submitContactForm)
+
+export default router
