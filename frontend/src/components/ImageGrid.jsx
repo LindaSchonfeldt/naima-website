@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -9,8 +9,10 @@ import { Button } from './Button'
 
 const StyledImageGrid = styled.div`
   display: grid;
+  position: relative; /* make this the positioning context for the overlay */
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 200px);
+  /* mobile: allow rows to size to their content so InlineInfoBox can expand */
+  grid-auto-rows: min-content;
   grid-template-areas:
     'div1'
     'div2'
@@ -20,9 +22,14 @@ const StyledImageGrid = styled.div`
     'div6';
   grid-gap: 10px;
   width: 100%;
+  /* give cells a comfortable minimum height on very short content */
+  & > div {
+    min-height: 140px;
+  }
 
   ${media.sm} {
     grid-template-columns: 2fr 1fr; // First column is wider
+    /* keep stable row height on tablet */
     grid-template-rows: repeat(2, 200px);
     grid-template-areas:
       'div1 div2'
@@ -127,27 +134,42 @@ const LimitedImageOverlay = styled.div`
 `
 
 const InfoOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  display: none; // hidden by default
+  ${media.md} {
+    /* cover the image grid area by being absolutely positioned inside StyledImageGrid */
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; — fills the grid */
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 0.6rem; /* small inset so InfoBox has breathing room */
+
+    /* keep same behavior across sizes (it will be bounded by the grid area) */
+  }
 `
 
 const InfoBox = styled.div`
-  background: #fff;
-  padding: 1.6rem;
-  border-radius: 4px;
-  max-width: 500px;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
-  text-align: left;
+  /* fill the overlay (which itself is limited to the grid area) */
+  width: 100%;
+  height: 100%;
+  background: ${({ theme }) => theme.colors.background};
+  box-sizing: border-box;
+  padding: 1rem;
+  overflow: auto;
   position: relative;
-  opacity: 0.95;
+  opacity: 1;
+
+  ${media.md} {
+    /* on larger screens keep the content centered inside the grid overlay */
+    max-width: 900px;
+    max-height: 90%;
+    width: 90%;
+    height: auto;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+    text-align: left;
+  }
 `
 
 const CloseButtonWrapper = styled.div`
@@ -199,13 +221,37 @@ const Ingredients = styled.div`
   }
 `
 
+const InlineInfoBox = styled(InfoBox)`
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  padding: 1rem;
+
+  background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text.primary};
+  border-radius: 0;
+  box-shadow: none;
+`
+
 export const ImageGrid = () => {
   const [selectedIdx, setSelectedIdx] = useState(null)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
   const products = useProductStore((state) => state.products)
 
   const productImages = products.map((p) => p.images?.[0]) // Get first image of each product
 
-  const handleImageClick = (idx) => setSelectedIdx(idx)
+  // Update isMobile state on window resize
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  // toggle selection: click image again closes it on all sizes
+  const handleImageClick = (idx) =>
+    setSelectedIdx((prev) => (prev === idx ? null : idx))
   const handleClose = () => setSelectedIdx(null)
 
   console.log('products:', products)
@@ -216,7 +262,41 @@ export const ImageGrid = () => {
       <StyledImageGrid>
         {[Div1, Div2, Div3, Div4, Div5, Div6].map((Div, idx) => (
           <Div key={idx}>
-            {productImages?.[idx] ? (
+            {selectedIdx === idx && isMobile ? (
+              // inline info box replaces the image on mobile (or small screens)
+              <InlineInfoBox onClick={handleClose}>
+                {idx === 5 ? (
+                  <>
+                    <Header>
+                      <h2>Limited Edition Treats</h2>
+                    </Header>
+                    <p>
+                      Discover our exclusive seasonal creations — from bold
+                      collaborations to festive favorites. Flavors change with
+                      the season, ensuring there’s always something new to
+                      surprise your taste buds.
+                    </p>
+                  </>
+                ) : (
+                  products[idx] && (
+                    <>
+                      <Header>
+                        <h2>{products[idx].name}</h2>
+                      </Header>
+                      <p>{products[idx].description}</p>
+                      <Ingredients>
+                        {Array.isArray(products[idx].ingredients) && (
+                          <div>
+                            <strong>Ingredients:</strong>{' '}
+                            {products[idx].ingredients.join(', ')}
+                          </div>
+                        )}
+                      </Ingredients>
+                    </>
+                  )
+                )}
+              </InlineInfoBox>
+            ) : productImages?.[idx] ? (
               <ImageWrapper
                 onClick={() => handleImageClick(idx)}
                 style={{ cursor: 'pointer' }}
@@ -251,7 +331,9 @@ export const ImageGrid = () => {
           </Div>
         ))}
       </StyledImageGrid>
+      {/* desktop / large screens: overlay that covers the grid area */}
       {selectedIdx !== null &&
+        !isMobile &&
         (selectedIdx === 5 ? (
           <InfoOverlay onClick={handleClose}>
             <InfoBox onClick={(e) => e.stopPropagation()}>
