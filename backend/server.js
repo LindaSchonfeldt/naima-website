@@ -1,6 +1,7 @@
 import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
+import listEndpoints from 'express-list-endpoints'
 import mongoose from 'mongoose'
 
 import companyRoutes from './routes/companyRoutes.js'
@@ -67,9 +68,13 @@ app.use('/api/companies', companyRoutes)
 app.use('/api/contact', contactRoutes)
 app.use('/api/retailers', retailerRoutes)
 
-
-app.get('/', (req, res) => {
-  res.json({ message: 'Naima API is running!' })
+// List Endpoints API
+app.get("/", (req, res) => {
+  const endpoints = listEndpoints(app)
+  res.json({
+    message: 'Naima API is running!',
+    endpoints: endpoints
+  })
 })
 
 // Global error handler
