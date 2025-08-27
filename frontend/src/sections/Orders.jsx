@@ -25,14 +25,17 @@ export const Orders = () => {
     navigate(`/orders/${orderId}`)
   }
 
+  // defensive: ensure orders is an array before reading .length / mapping
+  const list = Array.isArray(orders) ? orders : []
+
   if (loading) return <div>Loading orders...</div>
   if (error) return <div style={{ color: 'red' }}>{error}</div>
-  if (!orders.length) return <div>No orders found.</div>
+  if (!list.length) return <div>No orders found.</div>
 
   return (
     <section>
       <ul>
-        {orders.map((order) => (
+        {list.map((order) => (
           <OrderItem key={order._id} order={order} onClick={handleOrderClick} />
         ))}
       </ul>

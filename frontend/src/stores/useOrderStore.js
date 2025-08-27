@@ -29,9 +29,17 @@ export const useOrderStore = create((set) => ({
           Authorization: `Bearer ${token}` // Pass JWT token for authentication
         }
       })
-      set({ orders: data.data, loading: false }) // Store orders, stop loading
+
+      // Accept either an array response or { data: [...] } shape
+      const orders = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.data)
+        ? data.data
+        : []
+
+      set({ orders, loading: false }) // Store orders, stop loading
     } catch (error) {
-      set({ error: error.message, loading: false }) // Store error, stop loading
+      set({ error: error.message || 'Failed to fetch orders', loading: false }) // Store error, stop loading
     }
   }
 }))
