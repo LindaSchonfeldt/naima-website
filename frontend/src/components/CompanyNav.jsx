@@ -135,7 +135,7 @@ export const CompanyNav = () => {
         )}
       </NavSection>
 
-      <NavSection className="center" aria-label="Primary company pages">
+      <NavSection className="center">
         {!isMobile && navOptions.map(opt => (
           <StyledNavLink key={opt.value} to={opt.value}>
             {opt.label}
