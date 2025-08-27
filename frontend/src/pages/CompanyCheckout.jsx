@@ -1,7 +1,7 @@
-import { MdDelete } from 'react-icons/md'
-import styled, { keyframes } from 'styled-components'
 import { useEffect, useState } from 'react'
+import { MdDelete } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
+import styled, { keyframes } from 'styled-components'
 
 import { Button } from '../components/Button'
 import { PageContainer } from '../components/PageContainer'
@@ -139,7 +139,7 @@ const ItemControlsLeft = styled.div`
   gap: 0.5rem;
 `
 const FeedbackMessage = styled.div`
-  color: ${({ theme }) => theme.colors.success};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: ${({ theme }) => theme.spacing.md} 0;
   animation: ${fadeUp} 320ms ease both;
 
@@ -211,18 +211,25 @@ const Checkout = () => {
     }
 
     console.log('Order data:', orderData)
-    const result = await api.orders.submitOrder(orderData, companyToken)
-    useCartStore.getState().clearCart()
+    setLoading(true)
+    setError(null)
+    try {
+      await api.orders.submitOrder(orderData, companyToken)
+      // clear cart but show a success message instead of the empty cart view
+      clearCart()
+      setShowFeedback(true)
+      // optionally keep the user on this page and let them continue shopping via CTA
+    } catch (err) {
+      console.error('Order submission failed:', err)
+      setError(err?.message || 'Failed to place order')
+    } finally {
+      setLoading(false)
+    }
   }
 
   // Map through items to display them
   return (
     <PageContainer>
-      {showFeedback && (
-        <FeedbackMessage>
-          Order placed successfully. Your cart has been cleared.
-        </FeedbackMessage>
-      )}
       <StyledIntro>
         <PageTitle>Order your fika</PageTitle>
         <p>
@@ -239,55 +246,87 @@ const Checkout = () => {
           </a>
         </p>
       </StyledIntro>
-      <CheckoutContainer>
-        <CartItems>
-          <StyledH3>Cart items:</StyledH3>
-          {items.map((item) => (
-            <div key={item.cartKey}>
-              <ItemDetails>
-                <h4 style={{ margin: 0 }}>{item.name}</h4>
-                <ItemControlsRow>
-                  <ItemControlsLeft>
-                    <QuantitySelector key={item.cartKey} item={item} />
-                    <p style={{ margin: 0 }}>
-                      à $
-                      {item.selectedSize?.price
-                        ? item.selectedSize.price
-                        : item.price}
-                    </p>
-                  </ItemControlsLeft>
-                  <DeleteButton onClick={() => removeFromCart(item.cartKey)} />
-                </ItemControlsRow>
-              </ItemDetails>
-            </div>
-          ))}
-          <BottomPart>
-            <StyledTotal>
-              <h3>
-                Total: $
-                {items
-                  .reduce(
-                    (total, item) =>
-                      total +
-                      (item.selectedSize?.price || item.price) *
-                        (item.quantity || 1),
-                    0
-                  )
-                  .toFixed(2)}
-              </h3>
-            </StyledTotal>
+      {/* Show a prominent success message after placing an order */}
+      {showFeedback && (
+        <FeedbackMessage role='status' aria-live='polite'>
+          <div>Order placed successfully. Your cart has been cleared.</div>
+          <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem' }}>
             <Button
-              onClick={handleSubmitOrder}
-              disabled={loading || loadingCompany || showFeedback}
+              onClick={() => {
+                // go back to company shop (adjust route if needed)
+                setShowFeedback(false)
+                navigate('/company/shop')
+              }}
             >
-              {loading
-                ? 'Placing order...'
-                : showFeedback
-                ? 'Order placed'
-                : 'Place order'}
+              Continue shopping
             </Button>
-          </BottomPart>
-        </CartItems>
+            <Button
+              variant='secondary'
+              onClick={() => {
+                // close feedback and stay on page (maybe view order history)
+                setShowFeedback(false)
+                navigate('/company/orders')
+              }}
+            >
+              View orders
+            </Button>
+          </div>
+        </FeedbackMessage>
+      )}
+      <CheckoutContainer>
+        {/* hide the cart items area when showing positive feedback */}
+        {!showFeedback && (
+          <CartItems>
+            <StyledH3>Cart items:</StyledH3>
+            {items.map((item) => (
+              <div key={item.cartKey}>
+                <ItemDetails>
+                  <h4 style={{ margin: 0 }}>{item.name}</h4>
+                  <ItemControlsRow>
+                    <ItemControlsLeft>
+                      <QuantitySelector key={item.cartKey} item={item} />
+                      <p style={{ margin: 0 }}>
+                        à $
+                        {item.selectedSize?.price
+                          ? item.selectedSize.price
+                          : item.price}
+                      </p>
+                    </ItemControlsLeft>
+                    <DeleteButton
+                      onClick={() => removeFromCart(item.cartKey)}
+                    />
+                  </ItemControlsRow>
+                </ItemDetails>
+              </div>
+            ))}
+            <BottomPart>
+              <StyledTotal>
+                <h3>
+                  Total: $
+                  {items
+                    .reduce(
+                      (total, item) =>
+                        total +
+                        (item.selectedSize?.price || item.price) *
+                          (item.quantity || 1),
+                      0
+                    )
+                    .toFixed(2)}
+                </h3>
+              </StyledTotal>
+              <Button
+                onClick={handleSubmitOrder}
+                disabled={loading || loadingCompany || showFeedback}
+              >
+                {loading
+                  ? 'Placing order...'
+                  : showFeedback
+                  ? 'Order placed'
+                  : 'Place order'}
+              </Button>
+            </BottomPart>
+          </CartItems>
+        )}
       </CheckoutContainer>
 
       <p>

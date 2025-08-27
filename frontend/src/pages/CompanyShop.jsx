@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import MotionReveal from '../components/MotionReveal'
 import { PageContainer } from '../components/PageContainer'
 import { Products } from '../sections/Products'
 import useProductStore from '../stores/useProductStore'
@@ -21,16 +22,18 @@ const CompanyShop = () => {
   }
 
   return (
-    <PageContainer>
-      <Products
-        products={products}
-        loading={loading}
-        error={error}
-        onOrder={handleOrder}
-        onFilterChange={handleFilterChange}
-        filters={filters}
-      />
-    </PageContainer>
+    <MotionReveal>
+      <PageContainer>
+        <Products
+          products={products}
+          loading={loading}
+          error={error}
+          onOrder={handleOrder}
+          onFilterChange={handleFilterChange}
+          filters={filters}
+        />
+      </PageContainer>
+    </MotionReveal>
   )
 }
 

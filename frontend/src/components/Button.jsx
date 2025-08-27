@@ -26,10 +26,10 @@ const buttonVariants = {
   secondary: {
     background: 'transparent',
     color: (theme) => theme.colors.text.primary,
-    border: (theme) => `2px solid ${theme.colors.primary}`,
+    border: (theme) => `2px solid ${theme.colors.brand.lavender}`,
     opacity: '1',
     transform: 'translateY(0)',
-    hoverBackground: (theme) => theme.colors.brand.blush,
+    hoverBackground: (theme) => theme.colors.brand.lavender,
     hoverColor: (theme) => theme.colors.text.primary,
     padding: (theme, size) =>
       size === 'small'

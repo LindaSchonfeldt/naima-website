@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+
+import MotionReveal from '../components/MotionReveal'
+import { OrderDetails } from '../components/OrderDetails'
+import { PageContainer } from '../components/PageContainer'
 import { useAuthStore } from '../stores/useAuthStore'
 import { useOrderStore } from '../stores/useOrderStore'
-import { OrderDetails } from '../components/OrderDetails'
 
 export const CompanyOrderDetails = () => {
   const { orderId } = useParams()
@@ -23,7 +26,13 @@ export const CompanyOrderDetails = () => {
   if (error) return <div style={{ color: 'red' }}>{error}</div>
   if (!order) return <div>No order found.</div>
 
-  return <OrderDetails order={order} />
+  return (
+    <MotionReveal>
+      <PageContainer>
+        <OrderDetails order={order} />
+      </PageContainer>
+    </MotionReveal>
+  )
 }
 
 export default CompanyOrderDetails

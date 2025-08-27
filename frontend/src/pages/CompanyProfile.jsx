@@ -1,16 +1,17 @@
-import styled from 'styled-components'
-
+import MotionReveal from '../components/MotionReveal'
 import { PageContainer } from '../components/PageContainer'
 import { PageTitle } from '../components/PageTitle'
 import { CompanySettings } from '../sections/CompanySettings'
 
 const CompanyProfile = () => {
   return (
-    <PageContainer>
-      <PageTitle> Company profile</PageTitle>
-      <p>Manage your company profile here.</p>
-      <CompanySettings />
-    </PageContainer>
+    <MotionReveal>
+      <PageContainer>
+        <PageTitle> Company profile</PageTitle>
+        <p>Manage your company profile here.</p>
+        <CompanySettings />
+      </PageContainer>
+    </MotionReveal>
   )
 }
 

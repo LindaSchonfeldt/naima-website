@@ -25,8 +25,12 @@ const CartIconButton = styled.button`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  z-index: 10001; /* stays above most UI */
-  transition: transform 120ms;
+  z-index: 8000; /* stays above most UI */
+
+  ${media.md} {
+    /* ensure hamburger / other nav sits below cart button on desktop if needed */
+    z-index: 10001;
+  }
 
   &:focus {
     outline: 2px solid ${(props) => props.theme.colors.primary};
@@ -74,12 +78,20 @@ const CartMenuOverlay = styled.div`
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9998; /* overlay under the menu */
-  background: rgba(0, 0, 0, 0.32);
   display: flex;
-  justify-content: flex-end; /* push menu to right on desktop */
+  justify-content: flex-end; /* keep menu right-anchored on desktop */
+  z-index: 10001;
+
+  /* mobile: full-screen menu already covers content so keep overlay subtle */
+  background: rgba(0, 0, 0, 0.08);
+
+  ${media.md} {
+    /* desktop: darker backdrop for the drawer */
+    background: rgba(0, 0, 0, 0.32);
+  }
 `
 
+/* cart menu: mobile = full-screen; md+ = right-side drawer (old behaviour) */
 const CartMenu = styled.div`
   box-sizing: border-box;
   position: fixed;
@@ -90,16 +102,20 @@ const CartMenu = styled.div`
   background: ${(props) => props.theme.colors.background};
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   padding: ${(props) => props.theme.spacing.md};
-  z-index: 9999; /* ensure cart menu is above the hamburger */
+  z-index: 99999;
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
   overflow-y: auto;
 
   ${media.md} {
-    width: 420px; /* desktop width */
-    left: auto;
+    /* old desktop drawer */
+    width: 420px;
+    height: 100vh;
+    border-radius: 0;
     right: 0;
+    left: auto;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
   }
 `
 
@@ -134,12 +150,18 @@ const CartItem = styled.div`
   margin-bottom: ${(props) => props.theme.spacing.md};
   box-sizing: border-box;
 
+  /* mobile: stack controls under the info for better spacing */
   ${media.sm} {
-    /* mobile: stack controls under the info for better spacing */
     grid-template-columns: 64px 1fr;
     grid-template-rows: auto auto;
     grid-auto-flow: row;
     align-items: start;
+  }
+
+  /* desktop / large: keep a stable horizontal layout */
+  ${media.md} {
+    grid-template-columns: 64px 1fr 120px 48px; /* image | info | qty | remove */
+    align-items: center;
   }
 `
 
@@ -154,6 +176,11 @@ const CartItemInfo = styled.div`
   ${media.sm} {
     grid-column: 2 / 3;
   }
+
+  ${media.md} {
+    /* ensure info uses the full middle column and text wraps nicely */
+    padding-right: ${(p) => p.theme.spacing.sm};
+  }
 `
 
 const CartItemName = styled.span`
@@ -162,7 +189,9 @@ const CartItemName = styled.span`
   display: block;
   margin-bottom: 4px;
   line-height: 1.15;
-  max-width: 100%; /* ensure it doesn't overflow */
+  max-width: 100%;
+  word-break: break-word;
+  white-space: normal;
 `
 
 const CartItemPrice = styled.span`
@@ -182,7 +211,10 @@ const StyledQuantitySelector = styled(QuantitySelector)`
   align-self: flex-start;
 
   ${media.md} {
-    align-self: center;
+    align-self: center; /* center vertically on larger screens */
+    width: 92px;
+    flex: 0 0 92px;
+    margin: 0;
   }
 `
 
