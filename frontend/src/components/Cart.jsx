@@ -25,6 +25,8 @@ const CartIconButton = styled.button`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  z-index: 10001; /* stays above most UI */
+  transition: transform 120ms;
 
   &:focus {
     outline: 2px solid ${(props) => props.theme.colors.primary};
@@ -69,69 +71,89 @@ const DeleteButton = styled(MdDelete)`
 
 const CartMenuOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1999;
-  background: rgba(0, 0, 0, 0.2);
+  z-index: 9998; /* overlay under the menu */
+  background: rgba(0, 0, 0, 0.32);
+  display: flex;
+  justify-content: flex-end; /* push menu to right on desktop */
 `
 
 const CartMenu = styled.div`
+  box-sizing: border-box;
   position: fixed;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background: ${(props) => props.theme.colors.background};
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   padding: ${(props) => props.theme.spacing.md};
-  border-radius: 0;
-  z-index: 50000;
+  z-index: 9999; /* ensure cart menu is above the hamburger */
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.md};
   overflow-y: auto;
-  justify-content: flex-start;
 
   ${media.md} {
-    left: auto; // Remove left anchor
-    right: 0; // Anchor to the right
-    width: 450px; // Fixed width for desktop
-    height: 100vh; // Full height
-    top: 0; // Align with the top of the viewport
-    border-radius: 0;
-    justify-content: flex-start;
-    align-items: flex-start;
+    width: 420px; /* desktop width */
+    left: auto;
+    right: 0;
   }
 `
 
 const MenuContent = styled.div`
   width: 100%;
+  box-sizing: border-box;
 `
 
 const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: ${(p) => p.theme.spacing.sm};
   margin-bottom: ${(props) => props.theme.spacing.sm};
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* avoid overlapping header titles */
+  }
 `
 
+/* Use grid so control widths are stable and text gets the remaining space */
 const CartItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center; /* center children vertically */
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 64px 1fr 92px 40px;
+  gap: ${(props) => props.theme.spacing.sm};
+  align-items: center;
   width: 100%;
-  gap: ${(props) =>
-    props.theme.spacing.sm}; /* consistent gap between children */
-  padding: ${(props) => props.theme.spacing.xs} 0; /* vertical padding */
   margin-bottom: ${(props) => props.theme.spacing.md};
+  box-sizing: border-box;
+
+  ${media.sm} {
+    /* mobile: stack controls under the info for better spacing */
+    grid-template-columns: 64px 1fr;
+    grid-template-rows: auto auto;
+    grid-auto-flow: row;
+    align-items: start;
+  }
 `
+
 const CartItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto; /* take available horizontal space */
-  min-width: 0; /* allow children to truncate/wrap */
+  min-width: 0; /* important for truncation/wrapping */
+  grid-column: 2 / 3;
+  width: 100%;
+  box-sizing: border-box;
+
+  ${media.sm} {
+    grid-column: 2 / 3;
+  }
 `
 
 const CartItemName = styled.span`
@@ -139,7 +161,8 @@ const CartItemName = styled.span`
   color: ${(props) => props.theme.colors.text.primary};
   display: block;
   margin-bottom: 4px;
-  word-break: break-word; /* avoid overflow when long names */
+  line-height: 1.15;
+  max-width: 100%; /* ensure it doesn't overflow */
 `
 
 const CartItemPrice = styled.span`
@@ -149,19 +172,31 @@ const CartItemPrice = styled.span`
 `
 
 const StyledQuantitySelector = styled(QuantitySelector)`
-  flex: 0 0 100px; /* fixed width so layout is stable */
+  flex: 0 0 92px; /* stable width so layout doesn't jump */
+  width: 92px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px; /* consistent height matching images/buttons */
-  margin: 0 ${(props) => props.theme.spacing.sm};
+  margin: 4px 0;
+  align-self: flex-start;
+
+  ${media.md} {
+    align-self: center;
+  }
 `
 
 const StyledImg = styled.img`
-  width: 72px; /* slightly larger so it aligns with selector */
-  height: 72px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
   margin-right: 8px;
+  flex: 0 0 auto;
+
+  ${media.md} {
+    width: 60px;
+    height: 60px;
+  }
 `
 
 export const Cart = () => {
