@@ -80,7 +80,6 @@ const ProductInformation = styled.div`
 `
 
 const ProductDescription = styled.p`
-  margin-bottom: ${(props) => props.theme.spacing.sm};
   line-height: 1.5;
 `
 
@@ -102,17 +101,29 @@ const LowerSection = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: stretch; /* stretch children to same height */
+  justify-content: flex-start;
+  gap: ${({ theme }) => theme.spacing.xs};
   width: 100%;
-  height: 100%;
-  margin-top: auto; // pushes the container to the bottom if you want
+  margin-top: auto;
+`
+
+/* wrapper to give the quantity selector a stable width */
+const QuantityWrapper = styled.div`
+  flex: 0 0 auto; /* do not grow, keep intrinsic / fixed size */
+  display: flex;
+  align-items: center;
+  min-width: 88px; /* adjust to match your QuantitySelector UI */
 `
 
 const StyledButton = styled(Button)`
-  flex: 1;
-  margin-left: ${(props) => props.theme.spacing.xs};
-  color: ${(props) => props.theme.colors.text.primary};
+  flex: 1 1 auto; /* grow to fill remaining space */
+  min-width: 0; /* allow shrinking inside flex */
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 `
 
 export const ProductCard = ({ product }) => {
@@ -215,19 +226,22 @@ export const ProductCard = ({ product }) => {
           }}
         />
         <ButtonContainer>
-          <QuantitySelector
-            variant='card'
-            item={{
-              productId: product._id,
-              name: product.name,
-              selectedSize,
-              price: selectedSize?.price || lowestPrice,
-              images: product.images,
-              cartKey: cartItem?.cartKey, // only if in cart
-              quantity: desiredQuantity,
-              setQuantity: setDesiredQuantity
-            }}
-          />
+          <QuantityWrapper>
+            <QuantitySelector
+              variant='card'
+              item={{
+                productId: product._id,
+                name: product.name,
+                selectedSize,
+                price: selectedSize?.price || lowestPrice,
+                images: product.images,
+                cartKey: cartItem?.cartKey, // only if in cart
+                quantity: desiredQuantity,
+                setQuantity: setDesiredQuantity
+              }}
+            />
+          </QuantityWrapper>
+
           <StyledButton
             variant='primary'
             onClick={handleAddToCart}

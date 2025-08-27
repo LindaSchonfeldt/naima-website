@@ -104,7 +104,9 @@ export const CompanyNav = () => {
         )}
       </NavSection>
       <NavSection className='right'>
-        <Button onClick={handleLogout}>Logout</Button>
+        <Button size='small' onClick={handleLogout}>
+          Logout
+        </Button>
       </NavSection>
     </CompanyNavBar>
   )
