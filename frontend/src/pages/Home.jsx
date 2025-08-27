@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <Hero />
       <SocialProof />
-      <FeaturedFika />
+      <FeaturedFika id="main" tabIndex={-1}/>
       <InstagramGrid />
     </>
   )

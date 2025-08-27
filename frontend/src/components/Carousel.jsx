@@ -55,8 +55,8 @@ const Navigation = styled.div`
   background: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,18 +89,40 @@ const Indicators = styled.div`
 `
 
 const Indicator = styled.button`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  background: ${(props) => (props.$active ? props.theme.colors.brand.salmon : props.theme.colors.surface)};
+   /* Big tappable area for a11y */
+   --tap: 48px;
+   inline-size: var(--tap);
+   block-size: var(--tap);
+   padding: 0;
+   border: 0;
+   border-radius: 999px;
+   background: transparent;
+   position: relative;
+   cursor: pointer;
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.brand.lavender}
-  };
-`
+   /* Small visual dot centered inside */
+   &::before {
+     content: '';
+     inline-size: 14px;
+     block-size: 14px;
+     border-radius: 50%;
+     position: absolute;
+     inset: 0;
+     margin: auto;
+     background: ${({ $active, theme }) =>
+       $active ? theme.colors.brand.salmon : theme.colors.surface};
+     transition: background-color .2s ease;
+     box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.border} inset;
+   }
+
+   &:hover::before { background: ${({ theme }) => theme.colors.brand.lavender}; }
+   
+   &:focus-visible {
+     outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
+     outline-offset: 2px;
+   }
+ `
+
 // Uses its own internal (local) state, independent on Zustand stores
 export const Carousel = ({
   items = [],
@@ -111,6 +133,7 @@ export const Carousel = ({
   slidesToShow = 1
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const slideId = (i) => `hero-slide-${i}`
 
   // ✅ Memoize items to prevent unnecessary re-renders
   const memoizedItems = useMemo(() => items, [items])
@@ -130,6 +153,14 @@ export const Carousel = ({
     setCurrentSlide(index)
   }, [])
 
+  // Keyboard support
+  const onKeyDown = useCallback((e) => {
+      if (e.key === 'ArrowRight') nextSlide()
+      else if (e.key === 'ArrowLeft') prevSlide()
+      else if (e.key === 'Home') goToSlide(0)
+      else if (e.key === 'End') goToSlide(memoizedItems.length - 1)
+   }, [nextSlide, prevSlide, goToSlide, memoizedItems.length])
+
   // ✅ Optimize autoplay effect
   useEffect(() => {
     if (!autoPlay || memoizedItems.length <= 1) return
@@ -144,10 +175,24 @@ export const Carousel = ({
   }
 
   return (
-    <CarouselContainer>
+    <CarouselContainer
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Hero carousel"
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+    >
       <CarouselTrack $currentSlide={currentSlide}>
         {memoizedItems.map((item, index) => (
-          <CarouselItem key={item.id || index} $slidesToShow={slidesToShow}>
+          <CarouselItem
+            key={item.id || index}
+            $slidesToShow={slidesToShow}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${memoizedItems.length}`}
+            aria-hidden={index !== currentSlide}
+            id={slideId(index)}
+          >
             <CarouselImage
               src={item.image}
               alt={item.alt}
@@ -164,10 +209,10 @@ export const Carousel = ({
 
       {showArrows && memoizedItems.length > 1 && (
         <>
-          <Navigation className='prev' onClick={prevSlide}>
+          <Navigation className='prev' onClick={prevSlide} aria-label="Previous slide" type="button">
             ‹
           </Navigation>
-          <Navigation className='next' onClick={nextSlide}>
+          <Navigation className='next' onClick={nextSlide} aria-label="Next slide" type="button">
             ›
           </Navigation>
         </>
@@ -180,7 +225,11 @@ export const Carousel = ({
               key={index}
               $active={index === currentSlide}
               onClick={() => goToSlide(index)}
-            />
+              type="button"
+              aria-label={`Go to slide ${index + 1} of ${memoizedItems.length}`}
+              aria-controls={slideId(index)}
+              aria-current={index === currentSlide ? 'true' : undefined}
+             />
           ))}
         </Indicators>
       )}

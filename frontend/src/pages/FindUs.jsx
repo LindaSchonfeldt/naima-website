@@ -5,7 +5,7 @@ import RetailerMap from '../components/RetailerMap'
 
 const FindUs = () => {
   return (
-    <PageContainer>
+    <PageContainer id="main" tabIndex={-1}>
       <MotionReveal>
         <PageTitle $align='center'>find naima near you</PageTitle>
       </MotionReveal>

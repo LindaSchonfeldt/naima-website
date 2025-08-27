@@ -15,7 +15,7 @@ const Measure = styled.div`
 const OurStory = () => {
   return (
     <PageFade>
-      <PageContainer>
+      <PageContainer id="main" tabIndex={-1}>
         <Reveal delay={0}>
           <Measure>
             <PageTitle>meet our founder</PageTitle>

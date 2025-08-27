@@ -10,6 +10,7 @@ const StyledShop = styled.section`
 
   ${media.sm} {
     display: flex;
+  }
 `
 
 const Shop = () => {
@@ -29,7 +30,7 @@ const Shop = () => {
   }
 
   return (
-    <StyledShop>
+    <StyledShop id="main" tabIndex={-1}>
       <Products
         products={products}
         loading={loading}
