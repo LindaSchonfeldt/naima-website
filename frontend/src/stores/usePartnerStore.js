@@ -1,6 +1,20 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+
 import { api } from '../services/api'
+
+// map the local data shape → API shape
+const normalize = (rows = []) =>
+  rows.map((r) => ({
+    _id: r._id || r.id || `${r.name}-${r.website || 'local'}`,
+    name: r.name,
+    type: 'catering_partner',
+    website: r.website || r.url || '',
+    isActive: true,
+    logo: r.logo
+      ? { url: r.logo, alt: r.alt || r.name } // local file uses `logo` string
+      : { url: '', alt: r.alt || r.name }
+  }))
 
 const usePartnerStore = create(
   devtools(
@@ -55,20 +69,26 @@ const usePartnerStore = create(
       // Fetch catering partners
       fetchCateringPartners: async () => {
         set({ loading: true, error: null })
-        try {
-          const data = await api.partners.getCatering()
-          set({
-            cateringPartners: data,
-            loading: false
-          })
-        } catch (error) {
-          set({
-            error: error.message,
-            loading: false
-          })
-          console.error('Failed to fetch catering partners:', error)
+        // try {
+        //   const data = await api.partners.getCatering() // /api/partners/catering
+        //   if (Array.isArray(data) && data.length > 0) {
+        //     set({ cateringPartners: data, loading: false })
+        //     return
+        //   }
+        //   throw new Error('Empty catering list from API')
+        // } catch (error) {
+        //   console.warn('Falling back to local cateringpartners.js', error)
+          try {
+            // dynamic import so it’s only bundled if needed
+            const mod = await import('../data/cateringpartners')
+        
+            const local = normalize(mod.cateringPartners || [])
+            set({ cateringPartners: local, loading: false })
+          } catch (error2) {
+            set({ error: error2.message, loading: false })
+          }
         }
-      },
+      ,
 
       // Clear error
       clearError: () => set({ error: null }),
