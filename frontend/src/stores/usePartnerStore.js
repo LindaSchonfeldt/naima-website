@@ -3,7 +3,7 @@ import { devtools } from 'zustand/middleware'
 
 import { api } from '../services/api'
 
-// map the local data shape → API shape
+// Map the local data shape → API shape
 const normalize = (rows = []) =>
   rows.map((r) => ({
     _id: r._id || r.id || `${r.name}-${r.website || 'local'}`,
@@ -72,11 +72,12 @@ const usePartnerStore = create(
         try {
           // dynamic import so it’s only bundled if needed
           const mod = await import('../data/cateringPartners')
-
-          const local = normalize(mod.cateringPartners || [])
-          set({ cateringPartners: local, loading: false })
-        } catch (error2) {
-          set({ error: error2.message, loading: false })
+          const partners = mod?.cateringPartners ?? mod?.default ?? []
+          // update your store/state with partners
+          set({ partners })
+        } catch (err) {
+          console.error('Failed to load catering partners:', err)
+          set({ partners: [] })
         }
       },
       // Clear error

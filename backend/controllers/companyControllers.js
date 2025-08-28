@@ -3,38 +3,16 @@ import jwt from 'jsonwebtoken'
 
 import Company from '../models/Company.js'
 import Customer from '../models/Customer.js'
+import * as companyService from '../services/companyService.js'
 
-// Register a new company
 export const registerCompany = async (req, res) => {
   try {
-    const { name, email, password, address, contactPerson } = req.body
-    if (!password) {
-      return res.status(400).json({ error: 'Password is required' })
-    }
-    const hashedPassword = await bcrypt.hash(password, 10)
-    const company = new Company({
-      name,
-      email,
-      password: hashedPassword,
-      address,
-      contactPerson,
-      role: 'company' // Set role explicitly
-    })
-    await company.save()
-
-    // Create linked customer profile
-    const customer = new Customer({
-      name,
-      email,
-      address,
-      phone: req.body.phone,
-      company: company._id // Link to company
-    })
-    await customer.save()
-
-    res.status(201).json({ message: 'Company registered!', company, customer })
-  } catch (error) {
-    res.status(400).json({ error: error.message })
+    const created = await companyService.createCompany(req.body)
+    return res.status(201).json(created)
+  } catch (err) {
+    if (err.code === 'ALREADY_EXISTS')
+      return res.status(409).json({ error: err.message })
+    return res.status(400).json({ error: err.message })
   }
 }
 
