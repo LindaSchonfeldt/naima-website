@@ -1,7 +1,41 @@
-const API_BASE =
+// Normalize API base: prefer env, strip trailing slash, ensure /api present when used for requests
+const rawBase = (
   import.meta.env.VITE_API_BASE ||
   import.meta.env.VITE_API_URL ||
-  'http://localhost:3001/api'
+  'http://localhost:3001'
+).trim()
+const baseNoSlash = rawBase.replace(/\/+$/, '')
+const API_BASE = baseNoSlash.includes('/api')
+  ? baseNoSlash
+  : `${baseNoSlash}/api`
+
+async function request(path, opts = {}) {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  const url = `${API_BASE}${normalizedPath}`
+  console.log('📡 Making API request to:', url)
+  console.log('📡 Request options:', opts)
+  const res = await fetch(url, {
+    headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) },
+    ...opts
+  })
+  if (!res.ok) {
+    const bodyText = await res.text().catch(() => null)
+    console.log('📡 Response status:', res.status)
+    console.log('📡 Response error body:', bodyText)
+    throw new Error(`HTTP error! status: ${res.status}`)
+  }
+  const text = await res.text().catch(() => '')
+  try {
+    return text ? JSON.parse(text) : null
+  } catch (e) {
+    return text
+  }
+}
+
+// example exported helpers (adapt to your file's exports)
+export const partners = {
+  getServedAt: () => request('/partners/served-at')
+}
 
 // ✅ Add generic get method
 const apiRequest = async (url, options = {}) => {
