@@ -1,13 +1,7 @@
-// Normalize API base: prefer env, strip trailing slash, ensure /api present when used for requests
-const rawBase = (
-  import.meta.env.VITE_API_BASE ||
-  import.meta.env.VITE_API_URL ||
-  'http://localhost:3001'
-).trim()
+// Normalize API base and expose request helpers
+const rawBase = (import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL || 'http://localhost:3001').trim()
 const baseNoSlash = rawBase.replace(/\/+$/, '')
-const API_BASE = baseNoSlash.includes('/api')
-  ? baseNoSlash
-  : `${baseNoSlash}/api`
+const API_BASE = baseNoSlash.includes('/api') ? baseNoSlash : `${baseNoSlash}/api`
 
 async function request(path, opts = {}) {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`
@@ -32,9 +26,14 @@ async function request(path, opts = {}) {
   }
 }
 
-// example exported helpers (adapt to your file's exports)
 export const partners = {
-  getServedAt: () => request('/partners/served-at')
+  getServedAt: () => request('/partners/served-at'),
+  getAll: () => request('/partners'),
+  getCatering: () => request('/partners/catering')
+}
+
+export const products = {
+  list: () => request('/products')
 }
 
 // ✅ Add generic get method
