@@ -69,27 +69,16 @@ const usePartnerStore = create(
       // Fetch catering partners
       fetchCateringPartners: async () => {
         set({ loading: true, error: null })
-        // try {
-        //   const data = await api.partners.getCatering() // /api/partners/catering
-        //   if (Array.isArray(data) && data.length > 0) {
-        //     set({ cateringPartners: data, loading: false })
-        //     return
-        //   }
-        //   throw new Error('Empty catering list from API')
-        // } catch (error) {
-        //   console.warn('Falling back to local cateringpartners.js', error)
-          try {
-            // dynamic import so it’s only bundled if needed
-            const mod = await import('../data/cateringpartners')
-        
-            const local = normalize(mod.cateringPartners || [])
-            set({ cateringPartners: local, loading: false })
-          } catch (error2) {
-            set({ error: error2.message, loading: false })
-          }
-        }
-      ,
+        try {
+          // dynamic import so it’s only bundled if needed
+          const mod = await import('../data/cateringPartners')
 
+          const local = normalize(mod.cateringPartners || [])
+          set({ cateringPartners: local, loading: false })
+        } catch (error2) {
+          set({ error: error2.message, loading: false })
+        }
+      },
       // Clear error
       clearError: () => set({ error: null }),
 
