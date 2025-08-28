@@ -10,6 +10,7 @@ import { media } from '../styles/media'
 import { Button } from './Button'
 import { CartNotification } from './CartNotification'
 import { QuantitySelector } from './QuantitySelector'
+import { calcCartTotal, formatCurrency } from '../utils/cart.js'
 
 const StyledH2 = styled.h2`
   font-size: 1.5rem;
@@ -231,12 +232,34 @@ const StyledImg = styled.img`
   }
 `
 
+const TotalRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${(p) => p.theme.spacing.sm} 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  margin-top: ${(p) => p.theme.spacing.md};
+`
+
+const TotalLabel = styled.span`
+  font-weight: 600;
+  color: ${(p) => p.theme.colors.text.primary};
+`
+
+const TotalValue = styled.span`
+  font-weight: 700;
+  color: ${(p) => p.theme.colors.primary};
+`
+
 export const Cart = () => {
   const { isOpen, items, closeCart, toggleCart, removeFromCart, addToCart } =
     useCartStore()
 
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const companyToken = useAuthStore((state) => state.companyToken)
+
+  const total = calcCartTotal(items)
+  const format = (v) => formatCurrency(v, { currency: 'USD' })
 
   // Only show cart if logged in as company
   if (!isLoggedIn || !companyToken) return null
@@ -314,6 +337,15 @@ export const Cart = () => {
                 )
               })
             )}
+
+            {/* Total row shown when there are items */}
+            {items.length > 0 && (
+              <TotalRow>
+                <TotalLabel>Total</TotalLabel>
+                <TotalValue>{format(total)}</TotalValue>
+              </TotalRow>
+            )}
+
             {/* Only show button if there are items in the cart */}
             {items.length > 0 && (
               <Link to='/company/checkout' onClick={closeCart}>
