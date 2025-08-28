@@ -10,7 +10,7 @@ const Section = styled.section`
 `;
 
 const Wrap = styled.div`
-  width: min(1100px, 92vw);
+  width: min( 92vw);
   margin: 0 auto;
 `;
 
@@ -27,6 +27,12 @@ const Intro = styled.p`
   color: ${({ theme }) => theme.colors.text.secondary};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   max-width: 60ch;
+
+  ${media.lg} {
+    max-width: none; 
+  }
+
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const Grid = styled.div`
@@ -43,12 +49,15 @@ const Grid = styled.div`
 /* --- IMAGES: square edges, subtle elevation on hover --- */
 const Figure = styled.figure`
   margin: 0;
+  position: relative;
   display: grid;
   gap: ${({ theme }) => theme.spacing.sm};
 
   .stack {
     display: grid;
     gap: ${({ theme }) => theme.spacing.sm};
+    height: 100%;
+
     ${media.md} {
       grid-template-columns: 1fr 1fr;
       align-items: end;
@@ -58,6 +67,7 @@ const Figure = styled.figure`
   /* Mobile: consistent card crop with aspect-ratio */
   img {
     width: 100%;
+    height: 100%;
     aspect-ratio: 4 / 3;
     height: auto;
     object-fit: cover;
@@ -98,7 +108,6 @@ const Item = styled.li`
   display: grid;
   grid-template-columns: 10px 1fr;
   gap: ${({ theme }) => theme.spacing.md};
-  /* border: 1px solid ${({ theme }) => theme.colors.border}; */
   background: ${({ theme }) => theme.colors.surface};
   border-radius: 0;
   padding: ${({ theme }) => theme.spacing.md};
@@ -144,7 +153,7 @@ const ItemText = styled.p`
 const cardA = {
   rest: {
     x: 0,
-    y: 0,
+    y: -40,
     rotate: 0,
     zIndex: 1,
     boxShadow: "0 6px 14px rgba(0,0,0,.08)",
@@ -162,7 +171,7 @@ const cardA = {
 const cardB = {
   rest: {
     x: 0,
-    y: 0,
+    y: 40,
     rotate: 0,
     zIndex: 2,
     boxShadow: "0 6px 14px rgba(0,0,0,.08)",
