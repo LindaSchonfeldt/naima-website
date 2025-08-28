@@ -55,13 +55,23 @@ const Figure = styled.figure`
     }
   }
 
+  /* Mobile: consistent card crop with aspect-ratio */
   img {
     width: 100%;
-    height: clamp(220px, 40vw, 420px);
+    aspect-ratio: 4 / 3;
+    height: auto;
     object-fit: cover;
-    border-radius: 0; /* ← sharp edges */
+    border-radius: 0;
     display: block;
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Desktop/tablet: allow flexible height again */
+  ${media.md} {
+    img {
+      aspect-ratio: auto;
+      height: clamp(260px, 40vw, 420px);
+    }
   }
 
   .img--secondary {
@@ -130,12 +140,12 @@ const ItemText = styled.p`
   line-height: 1.55;
 `;
 
-// motion variants (not hooks)
+// motion variants (only tilt on hover)
 const cardA = {
   rest: {
-    x: -6,
-    y: -4,
-    rotate: -2,
+    x: 0,
+    y: 0,
+    rotate: 0,
     zIndex: 1,
     boxShadow: "0 6px 14px rgba(0,0,0,.08)",
   },
@@ -148,11 +158,12 @@ const cardA = {
     transition: { type: "spring", stiffness: 280, damping: 22 },
   },
 };
+
 const cardB = {
   rest: {
-    x: 6,
-    y: 4,
-    rotate: 2,
+    x: 0,
+    y: 0,
+    rotate: 0,
     zIndex: 2,
     boxShadow: "0 6px 14px rgba(0,0,0,.08)",
   },
@@ -220,7 +231,10 @@ const Benefits = () => {
                   decoding="async"
                   draggable={false}
                   variants={cardA}
-                  style={{ willChange: "transform" }}
+                  style={{
+                    willChange: "transform",
+                    objectPosition: "center 70%",
+                  }} // top-ish
                 />
                 <motion.img
                   className="img--secondary"
@@ -230,7 +244,10 @@ const Benefits = () => {
                   decoding="async"
                   draggable={false}
                   variants={cardB}
-                  style={{ willChange: "transform" }}
+                  style={{
+                    willChange: "transform",
+                    objectPosition: "center 15%",
+                  }} // centered
                 />
               </motion.div>
               <figcaption>Clean, plant-based ingredients.</figcaption>
