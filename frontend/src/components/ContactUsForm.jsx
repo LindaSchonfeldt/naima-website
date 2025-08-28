@@ -120,6 +120,14 @@ const Spinner = styled.span`
     border-right-color: currentColor; /* becomes a solid dot */
   }
 `
+const Honeypot = styled.input.attrs({ name: 'botField', autoComplete: 'off', tabIndex: -1 })`
+  position: absolute !important;
+  left: -10000px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+`
 
 const ContactUsForm = () => {
   const {
@@ -143,13 +151,14 @@ const ContactUsForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
-      if (!res.ok) throw new Error('Failed to send message')
+      if (!res.ok) {
+        const err = await res.json().catch(() => null)
+        throw new Error(err?.error || 'Failed to send message')
+      }
       reset()
       setSuccess(true)
     } catch (err) {
-      setError('root', {
-        message: 'Failed to send your message. Please try again later.'
-      })
+      setError('root', { message: err.message || 'Failed to send your message. Please try again later.' })
       setSuccess(false)
     }
   }
@@ -175,20 +184,23 @@ const ContactUsForm = () => {
         noValidate
         aria-live='polite'
       >
+        <Honeypot {...register('botField')} />
+        {/* name */}
         <div>
           <BaseInput
-            type='text'
-            placeholder='Your Name'
+            type="text"
+            placeholder="Your Name"
             aria-invalid={!!errors.name}
-            {...register('name', { required: 'Name is required' })}
+            {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })}
           />
           {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
         </div>
 
+        {/* email */}
         <div>
           <BaseInput
-            type='email'
-            placeholder='Your Email'
+            type="email"
+            placeholder="Your Email"
             aria-invalid={!!errors.email}
             {...register('email', {
               required: 'Email is required',
@@ -198,41 +210,52 @@ const ContactUsForm = () => {
           {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
         </div>
 
+        {/* phone (optional, format checked) */}
         <div>
           <BaseInput
-            type='tel'
-            placeholder='Your Phone'
+            type="tel"
+            placeholder="Your Phone (optional)"
             aria-invalid={!!errors.phone}
-            {...register('phone')}
+            {...register('phone', {
+              pattern: {
+                value: /^[+()\d\s-]{7,20}$/,
+                message: 'Use digits, spaces, (), +, - (7–20 chars)'
+              }
+            })}
           />
+          {errors.phone && <ErrorText>{errors.phone.message}</ErrorText>}
         </div>
 
+        {/* subject (optional) */}
         <div>
           <BaseInput
-            type='text'
-            placeholder='Subject'
+            type="text"
+            placeholder="Subject (optional)"
             aria-invalid={!!errors.subject}
-            {...register('subject')}
+            {...register('subject', { maxLength: { value: 120, message: 'Max 120 characters' } })}
           />
+          {errors.subject && <ErrorText>{errors.subject.message}</ErrorText>}
         </div>
 
+        {/* message */}
         <div>
           <Textarea
-            placeholder='Your Message'
+            placeholder="Your Message"
             rows={6}
             aria-invalid={!!errors.message}
-            {...register('message', { required: 'Please write a message' })}
+            maxLength={2000}
+            {...register('message', {
+              required: 'Please write a message',
+              minLength: { value: 10, message: 'Min 10 characters' }
+            })}
           />
           {errors.message && <ErrorText>{errors.message.message}</ErrorText>}
         </div>
 
-        {errors.root && (
-          <ErrorText role='alert'>{errors.root.message}</ErrorText>
-        )}
+        {errors.root && <ErrorText role="alert">{errors.root.message}</ErrorText>}
 
-        <Button type='submit' disabled={isSubmitting} aria-busy={isSubmitting}>
-          {isSubmitting && <Spinner />}{' '}
-          {isSubmitting ? 'Sending...' : 'Send message'}
+        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+          {isSubmitting ? <><Spinner /> Sending…</> : 'Send message'}
         </Button>
       </StyledForm>
     </FormShell>
