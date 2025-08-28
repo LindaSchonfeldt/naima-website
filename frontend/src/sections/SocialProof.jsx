@@ -127,29 +127,35 @@ export const SocialProof = () => {
         <LogoTrack>
           <LogoGrid>
             {(repeated.length ? repeated : servedAtPartners).map(
-              (partner, idx) => (
-                <LogoItem key={partner._id}>
-                  <Logo
-                    logo={partner.logo?.url}
-                    name={partner.name}
-                    alt={partner.logo?.alt || partner.name}
-                  />
-                </LogoItem>
-              )
+              (partner, idx) => {
+                const base = partner?._id ?? partner?.name ?? String(idx)
+                return (
+                  <LogoItem key={`${base}-${idx}`}>
+                    <Logo
+                      logo={partner.logo?.url}
+                      name={partner.name}
+                      alt={partner.logo?.alt || partner.name}
+                    />
+                  </LogoItem>
+                )
+              }
             )}
           </LogoGrid>
           {/* Duplicate grid for animation */}
           <LogoGrid>
             {(repeated.length ? repeated : servedAtPartners).map(
-              (partner, idx) => (
-                <LogoItem key={`${partner._id}-dup-${idx}`}>
-                  <Logo
-                    logo={partner.logo?.url}
-                    name={partner.name}
-                    alt={partner.logo?.alt || partner.name}
-                  />
-                </LogoItem>
-              )
+              (partner, idx) => {
+                const base = partner?._id ?? partner?.name ?? `dup-${idx}`
+                return (
+                  <LogoItem key={`${base}-dup-${idx}`}>
+                    <Logo
+                      logo={partner.logo?.url}
+                      name={partner.name}
+                      alt={partner.logo?.alt || partner.name}
+                    />
+                  </LogoItem>
+                )
+              }
             )}
           </LogoGrid>
         </LogoTrack>
