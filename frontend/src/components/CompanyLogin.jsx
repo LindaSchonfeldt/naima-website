@@ -7,8 +7,8 @@ import { api } from '../services/api'
 import { useAuthStore } from '../stores/useAuthStore'
 import { media } from '../styles/media'
 import { Button } from './Button'
-import { PageContainer } from './PageContainer'
 import MotionReveal from './MotionReveal'
+import { PageContainer } from './PageContainer'
 import { PageTitle } from './PageTitle'
 
 const LoginContainer = styled.div`
@@ -61,6 +61,17 @@ const LoginContainer = styled.div`
   }
 `
 
+const ContactSales = styled.div`
+  margin-top: ${(props) => props.theme.spacing.md};
+  font-size: 0.9rem;
+
+  a {
+    color: ${(props) => props.theme.colors.primary || '#007bff'};
+    text-decoration: none;
+    font-weight: bold;
+  }
+`
+
 export const CompanyLogin = () => {
   const { register, handleSubmit, formState } = useForm()
   const [error, setError] = useState('')
@@ -96,15 +107,15 @@ export const CompanyLogin = () => {
     <PageContainer>
       <MotionReveal>
         <LoginContainer>
-          <PageTitle $align="center">Login</PageTitle>
+          <PageTitle $align='center'>Partner login</PageTitle>
           <form onSubmit={handleSubmit(handleLogin)}>
             <label>
-              Company Email
+              Email
               <input
                 type='email'
                 autoComplete='email'
                 {...register('email', { required: true })}
-                />
+              />
             </label>
             <label>
               Password
@@ -112,7 +123,7 @@ export const CompanyLogin = () => {
                 type='password'
                 autoComplete='current-password'
                 {...register('password', { required: true })}
-                />
+              />
             </label>
             <Button type='submit' disabled={formState.isSubmitting}>
               {formState.isSubmitting ? 'Logging in...' : 'Login'}
@@ -121,6 +132,14 @@ export const CompanyLogin = () => {
               <div style={{ color: 'red', marginTop: '1rem' }}>{error}</div>
             )}
           </form>
+          Not a partner yet?{' '}
+          <a
+            href='mailto: hey@resetwithnaima.com'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Contact sales
+          </a>
         </LoginContainer>
       </MotionReveal>
     </PageContainer>
