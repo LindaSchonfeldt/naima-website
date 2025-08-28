@@ -18,7 +18,6 @@ import Home from './pages/Home'
 import CompanyOrderDetails from './pages/CompanyOrderDetails'
 import OurStory from './pages/OurStory'
 import Products from './pages/Products'
-import ReTreatClub from './pages/ReTreatClub'
 import Shop from './pages/Shop'
 // import { Footer } from './sections/Footer'
 import { Footer } from './sections/Footerv2'
@@ -75,7 +74,6 @@ function App() {
               <Route path='/products' element={<Products />} />
               <Route path='/findus' element={<FindUs />} />
               <Route path='/ourstory' element={<OurStory />} />
-              <Route path='/retreatclub' element={<ReTreatClub />} />
               <Route path='/contactus' element={<ContactUs />} />
               <Route path='/company/login' element={<CompanyPortal />} />
               <Route
