@@ -84,6 +84,25 @@ const FooterSection = styled.div`
   p {
     color: rgba(255, 255, 255, 0.92);
   }
+
+  &.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: ${({ theme }) => theme.spacing.md};
+
+    p {
+      margin: 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.92);
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
 `
 
 export const Footer = () => {
@@ -94,8 +113,13 @@ export const Footer = () => {
           <h2>join the community</h2>
           <p>© 2025 naima. All rights reserved.</p>
         </FooterSection>
-
-        <FooterSection />
+        <FooterSection className='footer-links' style={{ color: '#fff' }}>
+          <p>Press</p>
+          <p>Terms</p>
+          <p>Privacy</p>
+          <p>Cookie</p>
+          <p>FAQ</p>
+        </FooterSection>
 
         <FooterSection style={{ color: '#fff' }}>
           <SocialIcons />
