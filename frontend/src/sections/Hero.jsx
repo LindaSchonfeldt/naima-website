@@ -26,6 +26,25 @@ const StyledHero = styled.section`
   }
 `
 
+/* 👇 gradient overlay for contrast */
+const Shade = styled.div`
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  /* bottom-up darkening + slight side vignette */
+  background:
+    radial-gradient(120% 90% at 100% 50%, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(120% 90% at 0% 50%,   rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 60%),
+    linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.30) 35%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0) 100%);
+  mix-blend-mode: multiply;
+
+  @media (prefers-contrast: more) {
+    background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  }
+`
+
 const StyledH1 = styled.h1`
   position: absolute;
   font-size: 2rem;
@@ -37,6 +56,7 @@ const StyledH1 = styled.h1`
   transform: none;
   font-family: ${(props) => props.theme.fonts.heading};
   font-weight: ${(props) => props.theme.fonts.weights.heavy};
+  text-shadow: 0 0.6px 1px rgba(0, 0, 0, 0.55);
 
   ${media.sm} {
     font-size: 3rem;
@@ -159,6 +179,7 @@ export const Hero = ({
           slidesToShow={1}
         />
       )}
+      <Shade aria-hidden="true" />
       <StyledH1>
         {title.includes('benefits') ? (
           <>
