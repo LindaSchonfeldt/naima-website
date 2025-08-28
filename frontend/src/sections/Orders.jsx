@@ -26,7 +26,19 @@ export const Orders = () => {
   }
 
   // defensive: ensure orders is an array before reading .length / mapping
-  const list = Array.isArray(orders) ? orders : []
+  const getTimestamp = (o) => {
+    if (!o) return 0
+    if (o.createdAt) return new Date(o.createdAt).getTime()
+    if (o._id && typeof o._id === 'string' && o._id.length >= 8) {
+      // ObjectId first 8 chars are Unix seconds in hex
+      return parseInt(o._id.slice(0, 8), 16) * 1000
+    }
+    return 0
+  }
+
+  const list = Array.isArray(orders)
+    ? [...orders].sort((a, b) => getTimestamp(b) - getTimestamp(a))
+    : []
 
   if (loading) return <div>Loading orders...</div>
   if (error) return <div style={{ color: 'red' }}>{error}</div>
