@@ -15,7 +15,6 @@ import retailerRoutes from './routes/retailerRoutes.js'
 dotenv.config()
 console.log('JWT_SECRET loaded length:', (process.env.JWT_SECRET || '').length)
 
-
 // Increase listeners limit
 import { EventEmitter } from 'events'
 EventEmitter.defaultMaxListeners = 20
@@ -38,16 +37,31 @@ mongoose
 const app = express()
 
 // CORS configuration
+// allow only your frontend origin (recommended):
+const FRONTEND_ORIGIN =
+  process.env.FRONTEND_ORIGIN ||
+  'https://resetwithnaima.netlify.app' ||
+  process.env.FRONTEND_URL ||
+  'http://localhost:5173'
+
+// Build a list of allowed origins, prefer env vars and fall back to sensible defaults
+const allowedOrigins = [
+  process.env.FRONTEND_ORIGIN,
+  process.env.FRONTEND_URL,
+  'https://resetwithnaima.netlify.app',
+  'http://localhost:5173'
+].filter(Boolean)
+
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'http://localhost:3000',
-      'http://127.0.0.1:5173'
-    ],
-    credentials: true,
+    origin: (origin, callback) => {
+      // allow non-browser requests like curl/postman (no origin)
+      if (!origin) return callback(null, true)
+      if (allowedOrigins.includes(origin)) return callback(null, true)
+      callback(new Error('CORS: origin not allowed'))
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    credentials: true
   })
 )
 
@@ -69,13 +83,16 @@ app.use('/api/contact', contactRoutes)
 app.use('/api/retailers', retailerRoutes)
 
 // List Endpoints API
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   const endpoints = listEndpoints(app)
   res.json({
     message: 'Naima API is running!',
     endpoints: endpoints
   })
 })
+
+// health-check example
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
 
 // Global error handler
 app.use((err, req, res, next) => {
