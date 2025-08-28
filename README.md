@@ -57,6 +57,7 @@ Main layers:
 
 Architecture patterns used: MVC, 3-Tier, Layered, and Clean Architecture.
 
-## View it live (pending)
+## View it live 
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://naima-website.onrender.com/
+https://resetwithnaima.netlify.app/
