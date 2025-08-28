@@ -359,7 +359,7 @@ export const ImageGrid = () => {
                     your taste buds. Whether you’re looking to enjoy or
                     co-create,{' '}
                     <Link
-                      to='/contact'
+                      to='/contactus'
                       style={{ color: '#1976d2', fontWeight: 600 }}
                     >
                       get in touch
