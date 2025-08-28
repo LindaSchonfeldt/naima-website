@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { IoCloseOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -136,17 +137,16 @@ const LimitedImageOverlay = styled.div`
 const InfoOverlay = styled.div`
   display: none; // hidden by default
   ${media.md} {
-    /* cover the image grid area by being absolutely positioned inside StyledImageGrid */
-    position: absolute;
-    inset: 0; /* top:0; right:0; bottom:0; left:0; — fills the grid */
+    /* cover the viewport and center the InfoBox so it appears
+       in the middle of the user's current scroll position */
+    position: fixed;
+    inset: 0; /* fills the viewport */
     background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2000;
     padding: 0.6rem; /* small inset so InfoBox has breathing room */
-
-    /* keep same behavior across sizes (it will be bounded by the grid area) */
   }
 `
 
@@ -331,76 +331,74 @@ export const ImageGrid = () => {
           </Div>
         ))}
       </StyledImageGrid>
-      {/* desktop / large screens: overlay that covers the grid area */}
+      {/* desktop / large screens: overlay that covers the viewport (portal) */}
       {selectedIdx !== null &&
         !isMobile &&
-        (selectedIdx === 5 ? (
+        createPortal(
           <InfoOverlay onClick={handleClose}>
             <InfoBox onClick={(e) => e.stopPropagation()}>
-              <CloseButtonWrapper>
-                <Button
-                  variant='icon'
-                  size='small'
-                  onClick={handleClose}
-                  aria-label='Close info overlay'
-                >
-                  <CloseButton size={32} />
-                </Button>
-              </CloseButtonWrapper>
-              <Header>
-                <h2>Limited Edition Treats</h2>
-              </Header>
-              <p>
-                Discover our exclusive seasonal creations — from bold
-                collaborations to festive favorites. Flavors change with the
-                season, ensuring there’s always something new to surprise your
-                taste buds. Whether you’re looking to enjoy or co-create,{' '}
-                <Link
-                  to='/contact'
-                  style={{ color: '#1976d2', fontWeight: 600 }}
-                >
-                  get in touch{' '}
-                </Link>{' '}
-                to find out what’s baking now..
-              </p>
-              <Ingredients>
-                <div>
-                  <strong>Ingredients:</strong> Varies by variant - contact for
-                  specific information.
-                </div>
-              </Ingredients>
+              {selectedIdx === 5 ? (
+                <>
+                  <CloseButtonWrapper>
+                    <Button
+                      variant='icon'
+                      size='small'
+                      onClick={handleClose}
+                      aria-label='Close info overlay'
+                    >
+                      <CloseButton size={32} />
+                    </Button>
+                  </CloseButtonWrapper>
+                  <Header>
+                    <h2>Limited Edition Treats</h2>
+                  </Header>
+                  <p>
+                    Discover our exclusive seasonal creations — from bold
+                    collaborations to festive favorites. Flavors change with the
+                    season, ensuring there’s always something new to surprise
+                    your taste buds. Whether you’re looking to enjoy or
+                    co-create,{' '}
+                    <Link
+                      to='/contact'
+                      style={{ color: '#1976d2', fontWeight: 600 }}
+                    >
+                      get in touch
+                    </Link>{' '}
+                    to find out what’s baking now..
+                  </p>
+                </>
+              ) : (
+                products[selectedIdx] && (
+                  <>
+                    <CloseButtonWrapper>
+                      <Button
+                        variant='icon'
+                        size='small'
+                        onClick={handleClose}
+                        aria-label='Close info overlay'
+                      >
+                        <CloseButton size={32} />
+                      </Button>
+                    </CloseButtonWrapper>
+                    <Header>
+                      <h2>{products[selectedIdx].name}</h2>
+                    </Header>
+                    <p>{products[selectedIdx].description}</p>
+                    <Ingredients>
+                      {Array.isArray(products[selectedIdx].ingredients) && (
+                        <div>
+                          <strong>Ingredients:</strong>{' '}
+                          {products[selectedIdx].ingredients.join(', ')}
+                        </div>
+                      )}
+                    </Ingredients>
+                  </>
+                )
+              )}
             </InfoBox>
-          </InfoOverlay>
-        ) : (
-          products[selectedIdx] && (
-            <InfoOverlay onClick={handleClose}>
-              <InfoBox onClick={(e) => e.stopPropagation()}>
-                <CloseButtonWrapper>
-                  <Button
-                    variant='icon'
-                    size='small'
-                    onClick={handleClose}
-                    aria-label='Close info overlay'
-                  >
-                    <CloseButton size={32} />
-                  </Button>
-                </CloseButtonWrapper>
-                <Header>
-                  <h2>{products[selectedIdx].name}</h2>
-                </Header>
-                <p>{products[selectedIdx].description}</p>
-                <Ingredients>
-                  {Array.isArray(products[selectedIdx].ingredients) && (
-                    <div>
-                      <strong>Ingredients:</strong>{' '}
-                      {products[selectedIdx].ingredients.join(', ')}
-                    </div>
-                  )}
-                </Ingredients>
-              </InfoBox>
-            </InfoOverlay>
-          )
-        ))}
+          </InfoOverlay>,
+          document.body
+        )}
     </>
   )
 }
