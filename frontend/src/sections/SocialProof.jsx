@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { Logo } from '../components/Logo'
@@ -83,6 +83,7 @@ export const SocialProof = () => {
   const { servedAtPartners, loading, error, fetchServedAtPartners } =
     usePartnerStore()
   const hasFetched = useRef(false)
+  const [repeated, setRepeated] = useState([])
 
   useEffect(() => {
     if (!hasFetched.current) {
@@ -90,6 +91,30 @@ export const SocialProof = () => {
       hasFetched.current = true
     }
   }, [])
+
+  // repeat partners so the track width >= 2x viewport to avoid gaps
+  useEffect(() => {
+    if (!servedAtPartners || servedAtPartners.length === 0) {
+      setRepeated([])
+      return
+    }
+
+    const createRepeated = () => {
+      const itemApproxWidth = 160 // px — adjust to match LogoItem size including gap
+      const needed = Math.ceil(
+        (window.innerWidth * 2) / (servedAtPartners.length * itemApproxWidth)
+      )
+      const arr = []
+      for (let i = 0; i < Math.max(2, needed); i++) {
+        arr.push(...servedAtPartners)
+      }
+      setRepeated(arr)
+    }
+
+    createRepeated()
+    window.addEventListener('resize', createRepeated)
+    return () => window.removeEventListener('resize', createRepeated)
+  }, [servedAtPartners])
 
   if (loading && servedAtPartners.length === 0)
     return <div>Loading partners...</div>
@@ -101,27 +126,31 @@ export const SocialProof = () => {
         <SectionTitle>Served at:</SectionTitle>
         <LogoTrack>
           <LogoGrid>
-            {servedAtPartners.map((partner) => (
-              <LogoItem key={partner._id}>
-                <Logo
-                  logo={partner.logo?.url}
-                  name={partner.name}
-                  alt={partner.logo?.alt || partner.name}
-                />
-              </LogoItem>
-            ))}
+            {(repeated.length ? repeated : servedAtPartners).map(
+              (partner, idx) => (
+                <LogoItem key={partner._id}>
+                  <Logo
+                    logo={partner.logo?.url}
+                    name={partner.name}
+                    alt={partner.logo?.alt || partner.name}
+                  />
+                </LogoItem>
+              )
+            )}
           </LogoGrid>
           {/* Duplicate grid for animation */}
           <LogoGrid>
-            {servedAtPartners.map((partner) => (
-              <LogoItem key={`${partner._id}-duplicate`}>
-                <Logo
-                  logo={partner.logo?.url}
-                  name={partner.name}
-                  alt={partner.logo?.alt || partner.name}
-                />
-              </LogoItem>
-            ))}
+            {(repeated.length ? repeated : servedAtPartners).map(
+              (partner, idx) => (
+                <LogoItem key={`${partner._id}-dup-${idx}`}>
+                  <Logo
+                    logo={partner.logo?.url}
+                    name={partner.name}
+                    alt={partner.logo?.alt || partner.name}
+                  />
+                </LogoItem>
+              )
+            )}
           </LogoGrid>
         </LogoTrack>
       </Container>
