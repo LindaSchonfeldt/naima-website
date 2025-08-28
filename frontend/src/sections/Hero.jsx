@@ -70,28 +70,41 @@ const CursiveText = styled.span`
 
 const StyledSlogan = styled.p`
   position: absolute;
-  font-size: 1.3rem;
+  font-size: 1.15rem; /* slightly smaller */
   font-weight: 600;
   color: ${(props) => props.theme.colors.text.hero};
   text-align: left;
   z-index: 10;
   left: ${(props) => props.theme.spacing.md};
   bottom: ${(props) => props.theme.spacing.xxl};
-  /* Accessibility improvements: more contrast + readable over images */
+
+  /* subtler panel: reduced opacity + smaller padding */
   color: #fff;
-  background: rgba(0, 0, 0, 0.52); /* semi-opaque panel */
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+
+  /* softer shadow */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 0.6px 1px rgba(0, 0, 0, 0.55);
+
+  /* lighter backdrop blur */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
   outline: none;
-  transition: box-shadow 160ms ease, transform 160ms ease;
+  transition: box-shadow 160ms ease, transform 160ms ease, background 200ms ease;
+
+  &:hover {
+    /* a subtle lift on hover so it's discoverable but not loud */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
 
   &:focus {
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6),
-      0 0 0 3px rgba(255, 255, 255, 0.06);
+    /* keep strong focus ring for accessibility, but not visually loud */
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.36),
+      0 0 0 3px rgba(255, 255, 255, 0.04);
     transform: translateY(-1px);
   }
 
@@ -109,13 +122,17 @@ const StyledSlogan = styled.p`
   }
 
   ${media.sm} {
-    font-size: 2rem;
+    font-size: 1.9rem;
     left: ${(props) => props.theme.spacing.xxl};
     bottom: ${(props) => props.theme.spacing.lg};
+    padding: 0.45rem 0.8rem;
+    background: rgba(0, 0, 0, 0.36);
   }
+
   ${media.md} {
-    font-size: 3rem;
+    font-size: 2.2rem;
     bottom: ${(props) => props.theme.spacing.xxl};
+    background: rgba(0, 0, 0, 0.38);
   }
 `
 
