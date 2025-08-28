@@ -176,6 +176,18 @@ export const Hero = ({
       <StyledSlogan>
         just hits <CursiveText>different</CursiveText>
       </StyledSlogan>
+      {/* replace or ensure your hero image uses these attributes */}
+      <img
+        src='/images/carousel-1.webp'
+        srcSet='/images/carousel-1.webp 1200w, /images/carousel-1-720.webp 720w'
+        sizes='(min-width: 1024px) 1200px, 100vw'
+        alt='Hero'
+        width='1200'
+        height='700'
+        loading='eager'
+        fetchpriority='high'
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      />
     </StyledHero>
   )
 }

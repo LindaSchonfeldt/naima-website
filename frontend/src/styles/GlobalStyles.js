@@ -96,6 +96,15 @@ const GlobalStyles = createGlobalStyle`
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+
+  @font-face {
+  font-family: 'Neuzeit';
+  src: url('/fonts/neuzeit_s_lt_std_book.woff2') format('woff2'),
+       url('/fonts/neuzeit_s_lt_std_book.woff') format('woff');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap; /* show fallback text immediately, swap in webfont */
+}
 `
 
 export default GlobalStyles

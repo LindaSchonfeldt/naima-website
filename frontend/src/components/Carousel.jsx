@@ -79,7 +79,7 @@ const Navigation = styled.div`
 
 const Indicators = styled.div`
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -89,39 +89,41 @@ const Indicators = styled.div`
 `
 
 const Indicator = styled.button`
-   /* Big tappable area for a11y */
-   --tap: 48px;
-   inline-size: var(--tap);
-   block-size: var(--tap);
-   padding: 0;
-   border: 0;
-   border-radius: 999px;
-   background: transparent;
-   position: relative;
-   cursor: pointer;
+  /* Big tappable area for a11y */
+  --tap: 48px;
+  inline-size: var(--tap);
+  block-size: var(--tap);
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
 
-   /* Small visual dot centered inside */
-   &::before {
-     content: '';
-     inline-size: 14px;
-     block-size: 14px;
-     border-radius: 50%;
-     position: absolute;
-     inset: 0;
-     margin: auto;
-     background: ${({ $active, theme }) =>
-       $active ? theme.colors.brand.salmon : theme.colors.surface};
-     transition: background-color .2s ease;
-     box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.border} inset;
-   }
+  /* Small visual dot centered inside */
+  &::before {
+    content: '';
+    inline-size: 14px;
+    block-size: 14px;
+    border-radius: 50%;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background: ${({ $active, theme }) =>
+      $active ? theme.colors.brand.salmon : theme.colors.surface};
+    transition: background-color 0.2s ease;
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.border} inset;
+  }
 
-   &:hover::before { background: ${({ theme }) => theme.colors.brand.lavender}; }
-   
-   &:focus-visible {
-     outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
-     outline-offset: 2px;
-   }
- `
+  &:hover::before {
+    background: ${({ theme }) => theme.colors.brand.lavender};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.brand.salmon};
+    outline-offset: 2px;
+  }
+`
 
 // Uses its own internal (local) state, independent on Zustand stores
 export const Carousel = ({
@@ -154,12 +156,15 @@ export const Carousel = ({
   }, [])
 
   // Keyboard support
-  const onKeyDown = useCallback((e) => {
+  const onKeyDown = useCallback(
+    (e) => {
       if (e.key === 'ArrowRight') nextSlide()
       else if (e.key === 'ArrowLeft') prevSlide()
       else if (e.key === 'Home') goToSlide(0)
       else if (e.key === 'End') goToSlide(memoizedItems.length - 1)
-   }, [nextSlide, prevSlide, goToSlide, memoizedItems.length])
+    },
+    [nextSlide, prevSlide, goToSlide, memoizedItems.length]
+  )
 
   // ✅ Optimize autoplay effect
   useEffect(() => {
@@ -176,9 +181,9 @@ export const Carousel = ({
 
   return (
     <CarouselContainer
-      role="region"
-      aria-roledescription="carousel"
-      aria-label="Hero carousel"
+      role='region'
+      aria-roledescription='carousel'
+      aria-label='Hero carousel'
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
@@ -187,8 +192,8 @@ export const Carousel = ({
           <CarouselItem
             key={item.id || index}
             $slidesToShow={slidesToShow}
-            role="group"
-            aria-roledescription="slide"
+            role='group'
+            aria-roledescription='slide'
             aria-label={`${index + 1} of ${memoizedItems.length}`}
             aria-hidden={index !== currentSlide}
             id={slideId(index)}
@@ -209,10 +214,20 @@ export const Carousel = ({
 
       {showArrows && memoizedItems.length > 1 && (
         <>
-          <Navigation className='prev' onClick={prevSlide} aria-label="Previous slide" type="button">
+          <Navigation
+            className='prev'
+            onClick={prevSlide}
+            aria-label='Previous slide'
+            type='button'
+          >
             ‹
           </Navigation>
-          <Navigation className='next' onClick={nextSlide} aria-label="Next slide" type="button">
+          <Navigation
+            className='next'
+            onClick={nextSlide}
+            aria-label='Next slide'
+            type='button'
+          >
             ›
           </Navigation>
         </>
@@ -225,11 +240,11 @@ export const Carousel = ({
               key={index}
               $active={index === currentSlide}
               onClick={() => goToSlide(index)}
-              type="button"
+              type='button'
               aria-label={`Go to slide ${index + 1} of ${memoizedItems.length}`}
               aria-controls={slideId(index)}
               aria-current={index === currentSlide ? 'true' : undefined}
-             />
+            />
           ))}
         </Indicators>
       )}
