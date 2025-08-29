@@ -198,6 +198,15 @@ const Checkout = () => {
       return
     }
 
+    // --- changed code: normalize items so backend receives `price` and `productId` ---
+    const mappedItems = items.map((it) => ({
+      productId: it.productId || it._id || null,
+      name: it.name,
+      quantity: Number(it.quantity || 1),
+      // prefer selectedSize price, fallback to top-level price, ensure Number
+      price: Number(it.selectedSize?.price ?? it.price ?? 0)
+    }))
+
     const orderData = {
       name: company.name,
       email: company.email,
@@ -205,10 +214,16 @@ const Checkout = () => {
       phone: company.phone || '',
       company: company._id,
       customer: company._id,
-      items,
-      totalCost,
+      items: mappedItems,
+      totalCost: Number(
+        mappedItems.reduce(
+          (sum, i) => sum + (i.price || 0) * (i.quantity || 0),
+          0
+        )
+      ).toFixed(2),
       status: 'pending'
     }
+    // --- end changed code ---
 
     console.log('Order data:', orderData)
     setLoading(true)
