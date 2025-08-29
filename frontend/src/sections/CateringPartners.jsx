@@ -45,7 +45,7 @@ const Card = styled.a`
 const LogoBox = styled.div`
   width: 100%;
   max-width: 220px;
-  aspect-ratio: 4 / 1.25;
+  aspect-ratio: 3 / 2;
   display: grid; place-items: center;
   overflow: hidden;
   img { max-width: 100%; max-height: 100%; display: block; }
