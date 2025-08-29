@@ -46,7 +46,7 @@ const roll = keyframes`
 const LogoTrack = styled.div`
   display: flex;
   width: max-content;
-  animation: ${roll} 15s linear infinite; /* Adjust speed as needed */
+  animation: ${roll} 55s linear infinite; /* Adjust speed as needed */
 
   &:hover {
     animation-play-state: paused; /* Pause on hover */
@@ -62,7 +62,7 @@ const LogoGrid = styled.div`
   width: 50%;
   justify-content: flex-start;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing.xxl};
 `
 
 const LogoItem = styled.div`
