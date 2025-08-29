@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { media } from '../styles/media'
 
 const StyledOrderDetails = styled.div`
@@ -43,6 +44,24 @@ const StyledOrderDetails = styled.div`
   }
 `
 
+const TotalCost = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-weight: bold;
+  margin-top: ${(props) => props.theme.spacing.md};
+  font-size: 18px;
+
+  .label {
+    text-align: left;
+  }
+
+  .value {
+    text-align: right;
+  }
+`
+
 export const OrderDetails = ({ order }) => (
   <StyledOrderDetails>
     <h2>Order #{order._id}</h2>
@@ -67,6 +86,10 @@ export const OrderDetails = ({ order }) => (
           <span>${item.price}</span>
         </div>
       ))}
+      <TotalCost>
+        <span className='label'>Total</span>
+        <span className='value'>${order.totalCost}</span>
+      </TotalCost>
     </div>
   </StyledOrderDetails>
 )
