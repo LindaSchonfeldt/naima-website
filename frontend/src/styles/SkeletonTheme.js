@@ -3,17 +3,18 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
-export default function SkeletonTheme({
+const SkeletonTheme = ({
   children,
   baseColor = '#202020',
   highlightColor = '#444'
-}) {
+}) => {
   return (
     <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
       {children}
     </SkeletonTheme>
   )
 }
+export default SkeletonTheme
 
 // optional named export for quick skeleton usage
 export const SimpleSkeleton = ({ count = 5, height }) => (
