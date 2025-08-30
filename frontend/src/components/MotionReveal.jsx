@@ -1,6 +1,6 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
-const MotionReveal = ({ children, delay = 0 }) => {
+const MotionReveal = motion.create(({ children, delay = 0 }) => {
   const reduce = useReducedMotion()
   const variants = reduce
     ? { hidden: { opacity: 1, y: 0 }, show: { opacity: 1, y: 0 } }
@@ -17,6 +17,6 @@ const MotionReveal = ({ children, delay = 0 }) => {
       {children}
     </motion.div>
   )
-}
+})
 
 export default MotionReveal

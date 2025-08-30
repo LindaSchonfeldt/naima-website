@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import { media } from '../styles/media'
+
 import { Products } from '../sections/Products'
 import useProductStore from '../stores/useProductStore'
+import { media } from '../styles/media'
 
 const StyledShop = styled.section`
   background-color: ${(props) => props.theme.colors.background};
