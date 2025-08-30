@@ -13,12 +13,10 @@ const getJwtSecret = () => {
 }
 
 export const authenticate = async (req, res, next) => {
-  console.log('Authenticate middleware hit')
   const token = req.headers.authorization?.split(' ')[1]
   if (!token) return res.status(401).json({ error: 'No token provided' })
   try {
     const decoded = jwt.verify(token, getJwtSecret())
-    console.log('Decoded JWT:', decoded)
     let user
     if (decoded.role === 'company') {
       user = await Company.findById(decoded.id)
@@ -30,9 +28,7 @@ export const authenticate = async (req, res, next) => {
       user = await Customer.findById(decoded.id)
       req.user = { id: user._id, role: user.role }
     }
-    console.log('User found:', user)
     if (!user) return res.status(401).json({ error: 'User not found' })
-    console.log('Decoded user in authenticate:', req.user)
     next()
   } catch (err) {
     console.error('Authenticate middleware unexpected error:', err)
@@ -42,7 +38,6 @@ export const authenticate = async (req, res, next) => {
 }
 
 export const authorize = (roles) => (req, res, next) => {
-  console.log('User role in authorize:', req.user.role)
   if (!roles.includes(req.user.role)) {
     return res.status(403).json({ error: 'Forbidden' })
   }

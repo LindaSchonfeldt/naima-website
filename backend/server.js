@@ -13,7 +13,6 @@ import productRoutes from './routes/productRoutes.js'
 import retailerRoutes from './routes/retailerRoutes.js'
 
 dotenv.config()
-console.log('JWT_SECRET loaded length:', (process.env.JWT_SECRET || '').length)
 
 // Increase listeners limit
 import { EventEmitter } from 'events'
@@ -67,12 +66,6 @@ app.use(
 
 app.use(express.json())
 
-// Add logging
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`)
-  next()
-})
-
 // Register routes
 app.use('/api/products', productRoutes)
 app.use('/api/partners', partnerRoutes)
@@ -98,9 +91,4 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
 app.use((err, req, res, next) => {
   console.error('Global error handler:', err)
   res.status(500).json({ error: err.message })
-})
-
-app.listen(port, () => {
-  console.log(`🚀 Server running on http://localhost:${port}`)
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`)
 })

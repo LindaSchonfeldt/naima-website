@@ -24,10 +24,6 @@ router.get(
       const orders = await Order.find({ company: companyId }).populate(
         'customer'
       )
-      orders.forEach((order) => {
-        console.log(order.customer?.name)
-      })
-      console.log('Orders found:', orders)
       res.json(orders)
     } catch (error) {
       console.error('Error in /api/orders/company:', error)
