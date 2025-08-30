@@ -4,6 +4,61 @@ A full-stack MERN app for **Naima**, a Swedish fika brand. The site showcases pr
 
 ---
 
+## Quick start
+
+- Install dependencies
+
+  - cd frontend
+  - npm install
+
+- Run dev server
+
+  - npm run dev
+
+- Build for production
+  - npm run build
+  - npm run preview (serve the built app locally)
+
+---
+
+## Environment
+
+Create a `.env` in the frontend (if required) and in the backend with the following keys as needed:
+
+- VITE_API_BASE or API_BASE — base URL for the backend API (example: https://naima-api.example.com)
+- Other keys used by components or services (check `vite.config.js` and `src/services/api.js`)
+
+---
+
+## Folder structure (recommended reference)
+
+This is the current working layout; use it as a guide when adding files.
+
+- public/
+  - fonts/
+  - images/
+  - data/
+  - index.html
+- src/
+  - App.jsx
+  - main.jsx
+  - index.css
+  - pages/ — route-level pages (Home, Shop, Checkout, CompanyPortal, ...)
+  - sections/ — composable page sections (Hero, SocialProof, InstagramGrid, ...)
+  - components/ — smaller reusable components (Button, ProductCard, Nav, Cart, ...)
+    - primitives/ — low-level UI primitives (optional)
+    - layout/ — PageContainer, PageTitle, Footer
+  - stores/ — zustand stores (useCartStore, useUiStore, ...)
+  - services/ — API client (api.js) and domain helpers
+  - styles/ — theme.js, GlobalStyles, SkeletonTheme
+  - hooks/ — custom hooks (useBreakpoint, useInView)
+  - utils/ — helpers
+- build / dist
+
+Keep cross-cutting providers (theme, skeleton, stores) near `src/main.jsx` so they're applied globally.
+
+---
+
 ## ⭐ Highlights
 
 - **Modern stack:** React + Vite, Styled-Components theme system, Express + Mongoose, MongoDB Atlas.
