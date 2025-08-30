@@ -13,9 +13,7 @@ const CompanyShop = () => {
     fetchProducts(filters)
   }, [filters, fetchProducts])
 
-  const handleOrder = (product) => {
-    console.log('Ordering:', product)
-  }
+  const handleOrder = (product) => {}
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters)

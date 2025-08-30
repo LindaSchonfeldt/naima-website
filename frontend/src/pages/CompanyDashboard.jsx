@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
+import MotionReveal from '../components/MotionReveal'
 import { PageTitle } from '../components/PageTitle'
 import { useAuthStore } from '../stores/useAuthStore'
-import MotionReveal from '../components/MotionReveal'
 
 const DashboardContainer = styled.div`
   max-width: 900px;
@@ -27,7 +27,6 @@ const CompanyDashboard = () => {
   if (!companyToken) {
     return <div>No token provided. Please log in.</div>
   }
-  console.log('company:', company)
 
   return (
     <DashboardContainer>

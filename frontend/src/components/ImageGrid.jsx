@@ -254,9 +254,6 @@ export const ImageGrid = () => {
     setSelectedIdx((prev) => (prev === idx ? null : idx))
   const handleClose = () => setSelectedIdx(null)
 
-  console.log('products:', products)
-  console.log('productImages:', productImages)
-
   return (
     <>
       <StyledImageGrid>

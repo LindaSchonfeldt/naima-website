@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-export function useBreakpoint() {
+export const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState('desktop')
 
   useEffect(() => {
-    function handleResize() {
+    const handleResize = () => {
       const width = window.innerWidth
       if (width < 600) setBreakpoint('mobile')
       else if (width < 900) setBreakpoint('tablet')

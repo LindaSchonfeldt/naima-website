@@ -9,19 +9,15 @@ const API_BASE = baseNoSlash.includes('/api')
   ? baseNoSlash
   : `${baseNoSlash}/api`
 
-async function request(path, opts = {}) {
+const request = async (path, opts = {}) => {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`
   const url = `${API_BASE}${normalizedPath}`
-  console.log('📡 Making API request to:', url)
-  console.log('📡 Request options:', opts)
   const res = await fetch(url, {
     headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) },
     ...opts
   })
   if (!res.ok) {
     const bodyText = await res.text().catch(() => null)
-    console.log('📡 Response status:', res.status)
-    console.log('📡 Response error body:', bodyText)
     throw new Error(`HTTP error! status: ${res.status}`)
   }
   const text = await res.text().catch(() => '')
@@ -40,7 +36,6 @@ export const partners = {
 // ✅ Add generic get method
 const apiRequest = async (url, options = {}) => {
   const fullUrl = `${API_BASE}${url}`
-  console.log('📡 Making API request to:', fullUrl)
 
   try {
     // build final options so headers/body aren't accidentally overwritten
@@ -52,11 +47,7 @@ const apiRequest = async (url, options = {}) => {
       }
     }
 
-    console.log('📡 Request options:', requestOptions) // <-- new: log what will be sent
-
     const response = await fetch(fullUrl, requestOptions)
-
-    console.log('📡 Response status:', response.status)
 
     if (!response.ok) {
       // attempt to parse error body for more info
@@ -71,7 +62,6 @@ const apiRequest = async (url, options = {}) => {
     }
 
     const data = await response.json()
-    console.log('📡 Response data:', data)
     return data
   } catch (error) {
     console.error(`❌ API request failed for ${url}:`, error)

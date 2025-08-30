@@ -157,8 +157,6 @@ const Checkout = () => {
   const [showFeedback, setShowFeedback] = useState(false)
   const [loadingCompany, setLoadingCompany] = useState(false)
 
-  console.log('company', company, 'companyToken', companyToken)
-
   // If token exists but company is not loaded, fetch company profile and set it in the auth store
   useEffect(() => {
     let mounted = true
@@ -225,7 +223,6 @@ const Checkout = () => {
     }
     // --- end changed code ---
 
-    console.log('Order data:', orderData)
     setLoading(true)
     setError(null)
     try {
