@@ -24,6 +24,7 @@ import { Footer } from './sections/Footerv2'
 import { api } from './services/api'
 import { useAuthStore } from './stores/useAuthStore'
 import GlobalStyles from './styles/GlobalStyles'
+import SkeletonTheme from './styles/SkeletonTheme'
 import theme from './styles/theme'
 
 const AppContainer = styled.div`
@@ -73,77 +74,79 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {/* <ErrorBoundary> */} {/* ❌ Temporarily disable */}
-      <AppContainer>
-        <SkipLink />
-        <Nav />
-        {isLoggedIn && <CompanyNav />}{' '}
-        {/* <-- Only visible to logged-in companies */}
-        <MainContent>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/products' element={<Products />} />
-            <Route path='/findus' element={<FindUs />} />
-            <Route path='/ourstory' element={<OurStory />} />
-            <Route path='/contactus' element={<ContactUs />} />
-            <Route path='/company/login' element={<CompanyPortal />} />
-            <Route
-              path='/company/dashboard'
-              element={
-                <ProtectedRoute>
-                  <CompanyDashboard
-                    token={companyToken}
-                    companyName={companyName}
-                  />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/company/profile'
-              element={
-                <ProtectedRoute>
-                  <CompanyProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/company/orders'
-              element={
-                <ProtectedRoute>
-                  <CompanyOrders />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/orders/:orderId'
-              element={
-                <ProtectedRoute>
-                  <CompanyOrderDetails />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/company/shop'
-              element={
-                <ProtectedRoute>
-                  <Shop />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/company/checkout'
-              element={
-                <ProtectedRoute>
-                  <CompanyCheckout />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </MainContent>
-        <Footer />
-      </AppContainer>
-      {/* </ErrorBoundary> */} {/* ❌ Temporarily disable */}
+      <SkeletonTheme>
+        <GlobalStyles />
+        {/* <ErrorBoundary> */} {/* ❌ Temporarily disable */}
+        <AppContainer>
+          <SkipLink />
+          <Nav />
+          {isLoggedIn && <CompanyNav />}{' '}
+          {/* <-- Only visible to logged-in companies */}
+          <MainContent>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/products' element={<Products />} />
+              <Route path='/findus' element={<FindUs />} />
+              <Route path='/ourstory' element={<OurStory />} />
+              <Route path='/contactus' element={<ContactUs />} />
+              <Route path='/company/login' element={<CompanyPortal />} />
+              <Route
+                path='/company/dashboard'
+                element={
+                  <ProtectedRoute>
+                    <CompanyDashboard
+                      token={companyToken}
+                      companyName={companyName}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/company/profile'
+                element={
+                  <ProtectedRoute>
+                    <CompanyProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/company/orders'
+                element={
+                  <ProtectedRoute>
+                    <CompanyOrders />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/orders/:orderId'
+                element={
+                  <ProtectedRoute>
+                    <CompanyOrderDetails />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/company/shop'
+                element={
+                  <ProtectedRoute>
+                    <Shop />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/company/checkout'
+                element={
+                  <ProtectedRoute>
+                    <CompanyCheckout />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </MainContent>
+          <Footer />
+        </AppContainer>
+        {/* </ErrorBoundary> */} {/* ❌ Temporarily disable */}
+      </SkeletonTheme>
     </ThemeProvider>
   )
 }
