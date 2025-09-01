@@ -103,9 +103,8 @@ const ErrorText = styled.p`
 `
 
 const ErrorSummary = styled.div`
-  margin-top: .25rem;
+  margin: .25rem 0;
   padding: .5rem .75rem;
-  border: 1px solid ${({ theme }) => theme.colors.error};
   background: #fff5f5;
   border-radius: 6px;
   color: ${({ theme }) => theme.colors.error};

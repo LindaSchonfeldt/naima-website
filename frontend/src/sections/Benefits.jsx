@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react"
 import styled from "styled-components";
 
 import Reveal from "../components/Reveal";
@@ -10,7 +11,7 @@ const Section = styled.section`
 `;
 
 const Wrap = styled.div`
-  width: min( 92vw);
+  width: min(1200px, 92vw);
   margin: 0 auto;
 `;
 
@@ -84,12 +85,6 @@ const Figure = styled.figure`
     }
   }
 
-  .img--secondary {
-    ${media.md} {
-      transform: translateY(12%);
-    }
-  }
-
   figcaption {
     display: none;
   }
@@ -149,42 +144,44 @@ const ItemText = styled.p`
   line-height: 1.55;
 `;
 
-// motion variants (only tilt on hover)
-const cardA = {
-  rest: {
-    x: 0,
-    y: -40,
-    rotate: 0,
-    zIndex: 1,
-    boxShadow: "0 6px 14px rgba(0,0,0,.08)",
-  },
-  hover: {
-    x: -12,
-    y: -10,
-    rotate: -4,
-    zIndex: 3,
-    boxShadow: "0 12px 28px rgba(0,0,0,.18)",
-    transition: { type: "spring", stiffness: 280, damping: 22 },
-  },
-};
+// // motion variants (only tilt on hover)
+// const cardA = {
+//   rest: {
+//     x: 0,
+//     y: -40,
+//     rotate: 0,
+//     zIndex: 1,
+//     boxShadow: "0 6px 14px rgba(0,0,0,.08)",
+//   },
+//   hover: {
+//     x: -12,
+//     y: -10,
+//     rotate: -4,
+//     zIndex: 3,
+//     boxShadow: "0 12px 28px rgba(0,0,0,.18)",
+//     transition: { type: "spring", stiffness: 280, damping: 22 },
+//   },
+// };
 
-const cardB = {
-  rest: {
-    x: 0,
-    y: 40,
-    rotate: 0,
-    zIndex: 2,
-    boxShadow: "0 6px 14px rgba(0,0,0,.08)",
-  },
-  hover: {
-    x: 10,
-    y: 10,
-    rotate: 3,
-    zIndex: 2,
-    boxShadow: "0 12px 28px rgba(0,0,0,.18)",
-    transition: { delay: 0.06, type: "spring", stiffness: 280, damping: 22 },
-  },
-};
+// const cardB = {
+//   rest: {
+//     x: 0,
+//     y: 40,
+//     rotate: 0,
+//     zIndex: 2,
+//     boxShadow: "0 6px 14px rgba(0,0,0,.08)",
+//   },
+//   hover: {
+//     x: 10,
+//     y: 10,
+//     rotate: 3,
+//     zIndex: 2,
+//     boxShadow: "0 12px 28px rgba(0,0,0,.18)",
+//     transition: { delay: 0.06, type: "spring", stiffness: 280, damping: 22 },
+//   },
+// };
+
+
 
 // Framer wrapper + variants
 const MList = motion(List);
@@ -204,10 +201,60 @@ const listVariants = {
   },
 };
 
+// tiny hook to detect ≥ md
+const useIsMdUp = () => {
+  const query = "(min-width: 768px)"
+  const getMatch = () =>
+    typeof window !== "undefined" && window.matchMedia(query).matches
+  const [isMdUp, setIsMdUp] = useState(getMatch)
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const mql = window.matchMedia(query)
+    const onChange = (e) => setIsMdUp(e.matches)
+    mql.addEventListener?.("change", onChange)
+    return () => mql.removeEventListener?.("change", onChange)
+  }, [])
+  return isMdUp
+}
+
 const Benefits = () => {
-  const prefersReduced = useReducedMotion();
-  const img1 = "/images/pink-shrooms.jpg";
-  const img2 = "/images/contact.jpg";
+  const prefersReduced = useReducedMotion()
+  const isMdUp = useIsMdUp()   // 👈 use the hook
+  const img1 = "/images/pink-shrooms.jpg"
+  const img2 = "/images/contact.jpg"
+
+  // build variants based on breakpoint
+  const { cardA, cardB } = useMemo(() => {
+    if (!isMdUp) {
+      // mobile: no offset, no tilt (clean stack)
+      return {
+        cardA: { rest: { x: 0, y: 0, rotate: 0, zIndex: 1 },
+                 hover: { x: 0, y: 0, rotate: 0, zIndex: 1 } },
+        cardB: { rest: { x: 0, y: 0, rotate: 0, zIndex: 2 },
+                 hover: { x: 0, y: 0, rotate: 0, zIndex: 2 } }
+      }
+    }
+    // tablet+ : staggered look
+    return {
+      cardA: {
+        rest:  { x: -6, y: -44, rotate: 0, zIndex: 1,
+                 boxShadow: "0 6px 14px rgba(0,0,0,.08)" },
+        hover: { x: -12, y: -10, rotate: -4, zIndex: 3,
+                 boxShadow: "0 12px 28px rgba(0,0,0,.18)",
+                 transition: { type: "spring", stiffness: 280, damping: 22 } }
+      },
+      cardB: {
+        rest:  { x: 6, y: 34, rotate: 0, zIndex: 2,
+                 boxShadow: "0 6px 14px rgba(0,0,0,.08)" },
+        hover: { x: 10, y: 10, rotate: 3, zIndex: 2,
+                 boxShadow: "0 12px 28px rgba(0,0,0,.18)",
+                 transition: { delay: 0.06, type: "spring", stiffness: 280, damping: 22 } }
+      }
+    }
+  }, [isMdUp])
+
+  // only allow hover animation when md+ and user doesn’t prefer reduced motion
+  const hoverState = (!isMdUp || prefersReduced) ? "rest" : "hover"
 
   return (
     <Section aria-labelledby="benefits-title">
@@ -229,8 +276,8 @@ const Benefits = () => {
                 className="stack"
                 initial="rest"
                 animate="rest"
-                whileHover={prefersReduced ? "rest" : "hover"}
-                whileTap={prefersReduced ? "rest" : "hover"}
+                whileHover={hoverState}
+                whileTap={hoverState}
                 style={{ touchAction: "manipulation" }}
               >
                 <motion.img
@@ -246,7 +293,6 @@ const Benefits = () => {
                   }} // top-ish
                 />
                 <motion.img
-                  className="img--secondary"
                   src={img2}
                   alt="Naima’s clean, plant-based fika squares"
                   loading="lazy"
