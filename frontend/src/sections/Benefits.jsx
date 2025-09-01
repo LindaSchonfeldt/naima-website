@@ -237,14 +237,14 @@ const Benefits = () => {
     // tablet+ : staggered look
     return {
       cardA: {
-        rest:  { x: -6, y: -24, rotate: 0, zIndex: 1,
+        rest:  { x: -6, y: -44, rotate: 0, zIndex: 1,
                  boxShadow: "0 6px 14px rgba(0,0,0,.08)" },
         hover: { x: -12, y: -10, rotate: -4, zIndex: 3,
                  boxShadow: "0 12px 28px rgba(0,0,0,.18)",
                  transition: { type: "spring", stiffness: 280, damping: 22 } }
       },
       cardB: {
-        rest:  { x: 6, y: 24, rotate: 0, zIndex: 2,
+        rest:  { x: 6, y: 34, rotate: 0, zIndex: 2,
                  boxShadow: "0 6px 14px rgba(0,0,0,.08)" },
         hover: { x: 10, y: 10, rotate: 3, zIndex: 2,
                  boxShadow: "0 12px 28px rgba(0,0,0,.18)",
