@@ -29,12 +29,11 @@ export const Media = styled.div`
   grid-area: media;
   width: 100%;
   aspect-ratio: 4/5;
-  /* max-height: 60vh; */
   overflow: hidden;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    aspect-ratio: auto;
-    /* max-height: none; */
+    aspect-ratio: 1 / 1;
+    max-height: 100%;
   }
 `
 export const Img = styled.img`
