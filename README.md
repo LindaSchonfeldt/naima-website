@@ -66,5 +66,5 @@ https://resetwithnaima.netlify.app/
 
 ## Developers - Find us:
 
-Linda S
-Bianka R : https://github.com/Bianka2112
+Linda S: https://github.com/LindaSchonfeldt
+Bianka R: https://github.com/Bianka2112
