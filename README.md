@@ -66,6 +66,15 @@ https://resetwithnaima.netlify.app/
 
 ## Developers - Find us:
 
-<img src="https://github.com/LindaSchonfeldt.png" width="60px"/><br /><sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
-
-<img src="https://github.com/Bianka2112.png" width="60px"/><br /><sub><a href="https://github.com/Bianka2112"> Bianka R </a></sub>
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/LindaSchonfeldt.png" width="60px"/><br />
+      <sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/Bianka2112.png" width="60px"/><br />
+      <sub><a href="https://github.com/Bianka2112">Bianka R</a></sub>
+    </td>
+  </tr>
+</table>
