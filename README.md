@@ -67,8 +67,8 @@ Deployed Backenhttps://naima-website.onrender.com/
 
 ## 👩‍💻 Developers - Find us:
 
-      <img src="https://github.com/LindaSchonfeldt.png" width="60px"/><br />
-      <sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
+<img src="https://github.com/LindaSchonfeldt.png" width="80px"/><br />
+<sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
 
-      <img src="https://github.com/Bianka2112.png" width="60px"/><br />
-      <sub><a href="https://github.com/Bianka2112">Bianka R</a></sub>
+<img src="https://github.com/Bianka2112.png" width="80px"/><br />
+<sub><a href="https://github.com/Bianka2112">Bianka R</a></sub>
