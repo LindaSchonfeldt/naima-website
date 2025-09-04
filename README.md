@@ -67,13 +67,15 @@ Deployed Backend: https://naima-website.onrender.com/
 
 ## 👩‍💻 Developers - Find us:
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 40px;">
-  <div align="center">
-    <img src="https://github.com/LindaSchonfeldt.png" width="80px"/><br />
-    <sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
-  </div>
-  <div align="center">
-    <img src="https://github.com/Bianka2112.png" width="80px"/><br />
-    <sub><a href="https://github.com/Bianka2112">Bianka R</a></sub>
-  </div>
-</div>
+<table>
+  <tr>
+    <td align="center" width="150">
+      <img src="https://github.com/LindaSchonfeldt.png" width="80px"/><br />
+      <sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
+    </td>
+    <td align="center" width="150">
+      <img src="https://github.com/Bianka2112.png" width="80px"/><br />
+      <sub><a href="https://github.com/Bianka2112">Bianka R</a></sub>
+    </td>
+  </tr>
+</table>
