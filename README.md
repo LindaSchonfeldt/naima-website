@@ -1,3 +1,5 @@
+#![Naima_logo](https://github.com/user-attachments/assets/0087564e-2352-4c3d-b8ae-f44eab60acaf)
+
 # Naima — Fika with Benefits
 
 A full-stack MERN app for Naima, a Swedish fika brand. The site showcases products, the brand story, an interactive store map, and a company dashboard for wholesale partners.
