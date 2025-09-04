@@ -63,3 +63,8 @@ Architecture patterns used: MVC, 3-Tier, Layered, and Clean Architecture.
 
 https://naima-website.onrender.com/
 https://resetwithnaima.netlify.app/
+
+## Developers - Find us:
+
+Linda S
+Bianka R : https://github.com/Bianka2112
