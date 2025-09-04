@@ -59,12 +59,17 @@ Main layers:
 
 Architecture patterns used: MVC, 3-Tier, Layered, and Clean Architecture.
 
-## View it live 
+## View it live
 
 https://naima-website.onrender.com/
 https://resetwithnaima.netlify.app/
 
 ## Developers - Find us:
 
+[<img src="https://github.com/{{ LindaSchonfeldt }}.png" width="60px;"/><br /><sub><ahref="https://github.com/LindaSchonfeldt">{{ Linda Schonfeldt }}</a></sub>](https://github.com/{{ LindaSchonfeldt }}/)
+
 Linda S: https://github.com/LindaSchonfeldt
 Bianka R: https://github.com/Bianka2112
+
+[<img src="https://github.com/{{ Bianka2112 }}.png" width="60px;"/><br /><sub><ahref="https://github.com/{{ Bianka2112 }}">{{ Bianka R }}</a></sub>](https://github.com/{{ Bianka2112 }}
+)

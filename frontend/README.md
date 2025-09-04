@@ -111,7 +111,7 @@ Keep cross-cutting providers (theme, skeleton, stores) near `src/main.jsx` so th
 - [x] **Accessibility** — Skip link, focus styles, keyboard menu, ≥44px tap targets, improved carousel indicators
 - [x] **External service / API** — Leaflet + OpenStreetMap tiles, Nominatim geocoding _(IG Graph API planned)_
 - [x] **Collaboration workflow (Git)** — branching, PRs; see below
-- [ ] **Deployment** — ⏳ _(add links once live)_
+- [x] **Deployment** — ⏳
 - [ ] **Testing** — _(manual + Lighthouse done)_
 
 ---
