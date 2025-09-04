@@ -67,7 +67,7 @@ Deployed Backend: https://naima-website.onrender.com/
 
 ## 👩‍💻 Developers - Find us:
 
-<div style="display: flex; gap: 40px;">
+<div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 40px;">
   <div align="center">
     <img src="https://github.com/LindaSchonfeldt.png" width="80px"/><br />
     <sub><a href="https://github.com/LindaSchonfeldt">Linda Schonfeldt</a></sub>
