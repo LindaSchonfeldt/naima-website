@@ -1,4 +1,4 @@
-#![Naima_logo](https://github.com/user-attachments/assets/0087564e-2352-4c3d-b8ae-f44eab60acaf)
+![Naima_logo](https://github.com/user-attachments/assets/0087564e-2352-4c3d-b8ae-f44eab60acaf)
 
 # Naima — Fika with Benefits
 
