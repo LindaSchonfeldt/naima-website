@@ -139,9 +139,6 @@ export const Hero = ({
           </div>
         )}
       </StyledH1>
-      <StyledSlogan>
-        just hits <CursiveText>different</CursiveText>
-      </StyledSlogan>
       {/* replace or ensure your hero image uses these attributes */}
       <img
         src='/images/carousel-1.webp'
